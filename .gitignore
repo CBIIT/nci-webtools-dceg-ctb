@@ -1,0 +1,121 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[~cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+ssl/
+.ssl/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# PyInstaller
+#  Usually these files are written by a python script from a template
+#  before PyInstaller builds the exe, so as to inject date/other infos into it.
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+testbed.py
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Pycharm project files
+.idea
+.idea/*
+
+# Project ignorable files
+.DS_Store
+*.p12
+*.pem
+.sass-cache
+#*
+*.json
+*.patch
+.env
+*.env
+!sample.env
+scripts/metadata_featdef_tables.sql
+*secrets.txt
+
+# dummy datasets
+*.tsv
+*.csv
+*.xls
+*.txt
+!requirements.txt
+!LICENSE.txt
+!LICENSE_django_rest_framework.txt
+!sample_deployment_config.txt
+
+# Vagrant Files
+.vagrant/
+
+# NodeJS dev-dependencies etc
+bower_components
+bower_components/*
+node_modules
+node_modules/*
+
+certs/*
+saml/*
+*.key
+*.crt
+*.pem
+tmp*
+*.b64
+
+# Emacs
+\#*\#
+
+#ignore mock visualization data
+static/js/visualizations/mock_histogram_data.js
+
+# ignore Windows-related things
+.npmignore
+
+IDC-API
+IDC-API/
+
+IDC-Common
+IDC-Common/
+
+secure_files
+secure_files/

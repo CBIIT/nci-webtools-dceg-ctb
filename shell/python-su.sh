@@ -1,0 +1,2 @@
+#!/bin/bash
+sudo PYTHONPATH="$VM_PYTHONPATH" SECURE_LOCAL_PATH="$SECURE_LOCAL_PATH" /usr/bin/python3 "$@"
