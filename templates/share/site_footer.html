@@ -1,6 +1,6 @@
 {% load static %}
-<footer class="text-center text-lg-start">
-    <section class="d-flex justify-content-center justify-content-lg-between p-4">
+<footer class="text-center text-lg-start fixed-bottom">
+    <section class="d-flex justify-content-center pt-2">
         <div>
         <a href="/">Site Home</a>
         &nbsp; &nbsp; | &nbsp; &nbsp;
@@ -15,7 +15,7 @@
         <a href="https://www.hhs.gov/vulnerability-disclosure-policy/index.html" target="_blank" rel="noopener noreferrer">HHS Vulnerability Disclosure</a>
         </div>
     </section>
-    <section class="d-flex justify-content-center justify-content-lg-between p-4">
+    <section class="d-flex justify-content-center p-1">
         <div>
         <a href="https://www.hhs.gov/" target="_blank" rel="noopener noreferrer">U.S. Department of Health and Human Services</a>
         &nbsp; &nbsp; | &nbsp; &nbsp;
@@ -26,11 +26,10 @@
         <a href="https://www.usa.gov/" target="_blank" rel="noopener noreferrer">USA.gov</a>
         </div>
     </section>
-    <section class="d-flex justify-content-center justify-content-lg-between p-4">
+    <section class="d-flex justify-content-center p-1">
         <div>NIH... Turning Discovery Into Health ®</div>
     </section>
-    <section class="d-flex justify-content-center justify-content-lg-between p-4">
+    <section class="d-flex justify-content-center pb-2">
         <div><i><b>Application Version:</b> {{ APP_VERSION }}</i></div>
     </section>
 </footer>
-{% endwith %}

@@ -1,58 +1,41 @@
 {% load static %}
 {% load custom_tags %}
 
-<header class="navbar navbar-expand-lg site-header" role="menubar">
+{% is_allowed user as has_access %}
 
-    {% is_allowed user as has_access %}
-    <nav class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="crdc-nav">
-                <a target="_blank" rel="noopener noreferrer" href="https://datacommons.cancer.gov/">NCI Cancer Research Data Commons</a>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                            data-target="#main-navbar-collapse" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="{% url 'landing_page' %}" title="Home Page" >
-                        <img class="navbar-brand" src="" alt="NIH CTB Logo"/>
+<div class="jumbotron crdc-nav">
+    <a target="_blank" rel="noopener noreferrer" href="https://datacommons.cancer.gov/">NCI Cancer Research Data Commons</a>
+</div>
+<nav class="navbar navbar-expand-md fixed-top top-30-px">
+    <div class="container-fluid">
+        <a href="{% url 'landing_page' %}" title="Home Page" >
+            <img class="navbar-brand" src="{% static 'img/NIH_CTB_title.png' %}" alt="NIH CTB Logo"/>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link{% if 'search' in request.path %} active{% endif %}" href="{% url 'search' %}"
+                       title="Search the Biobank"><i class="fa-solid fa-magnifying-glass"
+                    ></i> Search</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link external-link" href="" url="https://learn.canceridc.dev"
+                       data-bs-toggle="modal" data-bs-target="#external-web-warning">
+                        &nbsp; <i class="fa-solid fa-book"></i> Documentation
+                        <i class="fa-solid fa-external-link external-link-icon" aria-hidden="true"></i>
                     </a>
-                </div>
-                <div class="collapse navbar-collapse" id="main-navbar-collapse">
-                <ul class="nav navbar-nav navbar-left">
-                    <li class="navbar-link navbar-item {% if 'collections' in request.path %}active-page{% endif %}">
-                        <a class="main-links" href="" title="A link"><i class="fa-solid fa-table-list"></i> An Internal Link</a>
-                    </li>
-                    <li class="navbar-link navbar-item {% if 'search' in request.path %}active-page{% endif %}">
-                        <a class="main-links" href="" title="Search"><i class="fa-solid fa-eye"></i> Search</a>
-                    </li>
-                    <li class="navbar-link navbar-item">
-                        <a class="external-link" href="" url="https://learn.canceridc.dev"
-                            data-toggle="modal" data-target="#external-web-warning">
-                           &nbsp; <i class="fa-solid fa-book"></i> <p class="navbar-label">Documentation</p>
-                            <i class="fa-solid fa-external-link external-link-icon" aria-hidden="true"></i>
-                        </a>
-                    </li>
-                    <li class="navbar-link navbar-item">
-                        <a class="main-links" href="{% url 'about_page' %}" title="Information about IDC"><i class="fa-solid fa-info-circle"></i> About</a>
-                    </li>
-<!--                    {% if user.is_authenticated %}-->
-<!--                    <li class="navbar-link navbar-item">-->
-<!--                        <a href="{% url 'cohort_list' %}" title="View Your Cohorts"><i class="fa-solid fa-archive"></i> Cohorts</a>-->
-<!--                    </li>-->
-<!--                    {% endif %}-->
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
-                    <li id="user-login" class="navbar-item navbar-signin">
+                <li id="user-login" class="nav-item navbar-signin">
+                    WOOOOOO
+                    <!--
                         <a class="avatar-link" href="{% url 'user_detail' user.id %}">
                             {% with avatar_url=user.socialaccount_set.all.0.get_avatar_url %}
                                 {% if avatar_url %}
@@ -71,18 +54,21 @@
                                 <li role="menuitem"><a href="#logout-modal" data-toggle="modal" data-target="#logout-modal" title="Sign Out">Sign Out <i class="fa-solid fa-sign-out"></i></a></li>
                             </ul>
                         </div>
-                    </li>
-                {% else %}
-                    <li class="navbar-item inline-block navbar-signin">
+-->
+                </li>
+            {% else %}
+                <li class="nav-item navbar-signin">
+                    WAAAAAAAH
+                    <!--
                         <div class="dropdown">
                             <a id="sign-in-dropdown" class="sign-in-dropdown dropdown-toggle navbar-item__text"
                                href="{% url 'account_login' %}" title="Sign In"><i class="fa fa-solid fa-sign-in"></i><p class="navbar-label">Sign In</p></a>
                         </div>
-                    </li>
-                {% endif %}
+-->
+                </li>
+            {% endif %}
             </ul>
-            </div>
         </div>
-        </div>
-    </nav>
-</header>
+    </div>
+</nav>
+

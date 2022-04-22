@@ -158,13 +158,15 @@ if IS_APP_ENGINE_FLEX or IS_APP_ENGINE:
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.admindocs',
+    'django.contrib.humanize',
     'anymail',
     'ctb',
     #'sharing',
@@ -580,6 +582,9 @@ CONN_MAX_AGE = 60
 ############################
 SITE_GOOGLE_ANALYTICS             = bool(os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', None) is not None)
 SITE_GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', '')
+
+# Rough max file size to allow for eg. barcode list upload, to prevent triggering RequestDataTooBig
+FILE_SIZE_UPLOAD_MAX = 1950000
 
 # Explicitly check for known problems in descrpitions and names provided by users
 BLACKLIST_RE = r'((?i)<script>|(?i)</script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|(?i)<iframe>|(?i)</iframe>)'

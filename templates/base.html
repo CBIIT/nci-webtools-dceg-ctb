@@ -31,7 +31,6 @@
     {% block extra_css_libs %}{% endblock %}
     <!--<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />-->
     <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
-    <script type="text/javascript" src="{% static 'js/libs/modernizr.js' %}"></script>
 
     {% block header %}{% endblock %}
 
@@ -187,7 +186,7 @@
 {% endblock %}
 
 {% block js_file %}
-    <script type="text/javascript" src="{% static 'js/libs/require.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/lib/require.js' %}"></script>
 {% endblock %}
 
 </body>

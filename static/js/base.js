@@ -22,10 +22,19 @@ require.config({
         jquery: 'lib/jquery-3.6.0.min',
         bootstrap: 'lib/bootstrap.min',
         utils: 'utils',
-        session_security: 'session_security/script'
+        session_security: 'session_security/script',
+        tippy: 'lib/tippy-bundle.umd.min',
+        '@popperjs/core': 'lib/popper.min'
     },
     shim: {
-        'bootstrap': ['jquery'],
+        '@popperjs/core': {
+            exports: "@popperjs/core"
+        },
+        'tippy': {
+            exports: 'tippy',
+            deps: ['@popperjs/core']
+        },
+        'bootstrap': ['jquery', '@popperjs/core'],
         'session_security': ['jquery'],
         'utils': ['jquery', 'bootstrap']
     }

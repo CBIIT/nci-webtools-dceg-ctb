@@ -7,13 +7,40 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700&subset=latin,latin-ext");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,700&subset=latin,latin-ext");
 
+.top-30-px {
+    top: 30px;
+}
+
+a, a:active, a:hover {
+    text-decoration: none;
+}
+
 .crdc-nav {
     text-align: center;
     background-color: rgb(241, 241, 241);
-    color: #333333;
-    margin-left: -15px;
-    margin-right: -15px;
+    font-weight: bold;
     padding: 5px 0px 5px 0px;
     border-bottom: 2px solid #737373;
     font-size: 12px;
+}
+.crdc-nav a, .crdc-nav a:hover, .crdc-nav a:active {
+    color: #333333;
+}
+.crdc-nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    margin-top: 70px;
+}
+
+footer {
+    background-color: #4d5869;
+    color: #fff;
+}
+footer a, footer a:active {
+    color: #fff;
+}
+footer a:hover {
+    color: #cacfcf;
 }

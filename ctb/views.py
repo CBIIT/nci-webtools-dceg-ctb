@@ -58,6 +58,11 @@ def privacy_policy(request):
     return render(request, 'ctb/privacy.html', {'request': request, })
 
 
+# Displays the privacy policy
+def search(request):
+    return render(request, 'ctb/search.html', {'request': request, })
+
+
 # User details page
 @login_required
 def user_detail(request, user_id):

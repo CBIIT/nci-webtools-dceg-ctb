@@ -42,6 +42,7 @@ urlpatterns = [
     url(r'^_ah/(vm_)?health$', views.health_check),
     url(r'^warning/', views.warn_page, name='warn'),
     url(r'^about/', views.about_page, name='about_page'),
+    url(r'^searcg/', views.search, name='search'),
     url(r'^extended_login/$', views.extended_login_view, name='extended_login'),
     url(r'^privacy/', views.privacy_policy, name='privacy'),
     # url(r'^share/', include('sharing.urls')),
