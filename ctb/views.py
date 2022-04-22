@@ -48,14 +48,14 @@ WEBAPP_LOGIN_LOG_NAME = settings.WEBAPP_LOGIN_LOG_NAME
 # The site's homepage
 @never_cache
 def landing_page(request):
-    return render(request, 'idc/landing.html', {
+    return render(request, 'ctb/landing.html', {
         'request': request,
     })
 
 
 # Displays the privacy policy
 def privacy_policy(request):
-    return render(request, 'idc/privacy.html', {'request': request, })
+    return render(request, 'ctb/privacy.html', {'request': request, })
 
 
 # User details page
@@ -85,7 +85,7 @@ def user_detail(request, user_id):
         # else:
         user_details['username'] = user.username
 
-        return render(request, 'idc/user_detail.html',
+        return render(request, 'ctb/user_detail.html',
                       {'request': request,
                        'user': user,
                        'user_details': user_details,

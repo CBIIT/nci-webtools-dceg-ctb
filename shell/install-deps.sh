@@ -126,7 +126,7 @@ fi
 # Create the application deployment version
 if [ -n "${CI}" ]; then
     if [ "$DEPLOYMENT_TIER" = "PROD" ]; then
-        TIER=canceridc
+        TIER=something
     else
         TIER=${DEPLOYMENT_TIER,,}
     fi

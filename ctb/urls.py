@@ -34,8 +34,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^$', views.landing_page, name='landing_page'),
-    url(r'^quota/', views.quota_page, name='quota_page'),
-#    url(r'^users/(?P<user_id>\d+)/$', views.user_detail, name='user_detail'),
+    url(r'^users/(?P<user_id>\d+)/$', views.user_detail, name='user_detail'),
 #    url(r'^cohorts/', include('cohorts.urls')),
     path('admin/', admin.site.urls),
     url(r'^accounts/', include('accounts.urls')),

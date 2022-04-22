@@ -6,7 +6,7 @@ else
     export HOMEROOT=/home/vagrant/www
 fi
 
-export PYTHONPATH=${HOMEROOT}:${HOMEROOT}/lib:${HOMEROOT}/IDC-Common
+export PYTHONPATH=${HOMEROOT}:${HOMEROOT}/lib
 echo "PYTHONPATH IS ${PYTHONPATH}"
 
 #python3 ./manage_unit_test.py test --noinput

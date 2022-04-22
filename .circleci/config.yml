@@ -105,32 +105,32 @@ jobs:
   build_job:
     environment:
       TZ: "/usr/share/zoneinfo/America/Los_Angeles"
-    working_directory: ~/IDC-WebApp
+    working_directory: ~/isb-cgc-ctb
     docker:
       - image: cimg/python:3.8
       - image: cimg/mysql:5.7
         environment:
           MYSQL_ROOT_HOST: "%"
           MYSQL_USER: ubuntu
-          MYSQL_PASSWORD: "idc"
-          MYSQL_ROOT_PASSWORD: "idc"
+          MYSQL_PASSWORD: "ctb"
+          MYSQL_ROOT_PASSWORD: "ctb"
           MYSQL_DATABASE: "build_database"
     steps:
       - checkout
       - run:
           name: Set Python Path
           command: |
-            echo "export PYTHONPATH=/home/circleci/${CIRCLE_PROJECT_REPONAME}:/home/circleci/${CIRCLE_PROJECT_REPONAME}/lib:/home/circleci/${CIRCLE_PROJECT_REPONAME}/IDC-Common" >> $BASH_ENV
+            echo "export PYTHONPATH=/home/circleci/${CIRCLE_PROJECT_REPONAME}:/home/circleci/${CIRCLE_PROJECT_REPONAME}/lib" >> $BASH_ENV
       - restore_cache:
           keys:
-            - idc-webapp-lib-{{ checksum "requirements.txt" }}
+            - ctb-webapp-lib-{{ checksum "requirements.txt" }}
       - deployment_setup
       - run:
           name: Install Dependencies
           command: |
             sudo -E /bin/bash ./shell/install-deps.sh
       - save_cache:
-          key: idc-webapp-lib-{{ checksum "requirements.txt" }}
+          key: ctb-webapp-lib-{{ checksum "requirements.txt" }}
           paths:
             - ./lib
       - auth
@@ -147,7 +147,7 @@ jobs:
             sudo -E /bin/bash ./shell/compareConfig.sh "gs://${DEPLOYMENT_BUCKET}/${ENV_FILE}"
             sudo -E /bin/bash ./shell/compareConfig.sh "gs://${DEPLOYMENT_BUCKET}/${WEBAPP_APP_YAML}"
       - save_cache:
-          key: idc-webapp-{{ .Branch }}-{{ .Revision }}-{{ epoch }}
+          key: ctb-webapp-{{ .Branch }}-{{ .Revision }}-{{ epoch }}
           paths:
             - ./adminrestrict
             - ./.git
@@ -180,7 +180,7 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - idc-webapp-{{ .Branch }}-{{ .Revision }}-
+            - ctb-webapp-{{ .Branch }}-{{ .Revision }}-
       - install_cloud_sdk
       - deployment_setup
       - auth
