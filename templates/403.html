@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n l10n %}
+{% comment %}
+
+   Copyright 2022, Institute for Systems Biology
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+{% endcomment %}
+
+
+{% block title %}Forbidden{% endblock %}
+
+{% block content %}
+    <div class="col-lg-12 short-inner-content-no-header">
+        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-2"></div>
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8 accounts-col">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h1>{% trans "Access Forbidden" %}</h1>
+                    </div>
+                    <div class="panel-body">
+                        <h4>403: You do not have permission to access this page.</h4>
+                    </div>
+                </div>
+            </div>
+        <div class="col-lg-4 col-md-4 col-sm-3 col-xs-2"></div>
+    </div>
+{% endblock %}
+
+{% block js_file %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/base.js' %}?v={{ APP_VERSION }}"></script>
+{% endblock %}

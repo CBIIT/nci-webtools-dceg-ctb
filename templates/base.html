@@ -1,0 +1,197 @@
+<!--
+
+ Copyright 2020, Institute for Systems Biology
+
+ Licensed under the Apache License, Version 2.0 (the "License");
+ you may not use this file except in compliance with the License.
+ You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS,
+ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ See the License for the specific language governing permissions and
+ limitations under the License.
+
+-->
+
+{% load static %}
+{% load session_security_tags %}
+{% load i18n l10n %}
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}IDC{% endblock %}</title>
+    <meta name="description" content="{% block description %}NCI Imaging Data Commons{% endblock %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% block extra_css_libs %}{% endblock %}
+    <!--<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />-->
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script type="text/javascript" src="{% static 'js/libs/modernizr.js' %}"></script>
+
+    {% block header %}{% endblock %}
+
+    {% if SITE_GOOGLE_ANALYTICS %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ SITE_GOOGLE_ANALYTICS_TRACKING_ID }}"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '{{ SITE_GOOGLE_ANALYTICS_TRACKING_ID }}');
+        </script>
+    {%  endif %}
+    <script>
+        var STATIC_FILES_URL = '{{ STATIC_FILES_URL }}';
+        var BASE_URL = '{{ BASE_URL }}' || "";
+        var STORAGE_URI = '{{ STORAGE_URI }}';
+    </script>
+
+</head>
+<body class="{% block body_class %}content{% endblock %}" id="body">
+<!--Include site main header-->
+{% include 'share/site_header.html'  %}
+
+<main id="{% block page_name %}content{% endblock %}" class="main-content">
+    <div class="page-heading">
+        {% block page_header %}{% endblock %}
+    </div>
+    <div class="container-fluid">
+        <!-- Site Messages -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12" style="z-index: 100;">
+                {% if messages %}
+                    {% autoescape off %}
+                        {% for message in messages %}
+                            {% if message.tags == 'error' or message.tags == 'warning' %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible">
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                {{ message }}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endautoescape %}
+                {% endif %}
+                <div id="js-messages"></div>
+            </div>
+        </div>
+        <!-- Page Content -->
+        <div class="row">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    <!-- The landing page and collections page have a special layout, so they have their own footer include -->
+    {% if request.path != '/' and request.path != '/cohorts/' %}
+        {% include 'share/site_footer.html'  %}
+    {% endif %}
+</main>
+
+<!-- Warning Modal -->
+<div class="modal fade" id="gov_warning" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="gov_warning-header" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
+                <h4 class="modal-title" id="gov_warning-header">Warning</h4>
+            </div>
+            <div class="modal-body">
+            <p>You are accessing a US Government web site which may contain information that must be protected under the
+                US Privacy Act or other sensitive information and is intended for Government authorized use only. </p>
+            <p>Unauthorized attempts to upload information, change information, or use of this web site may result in
+                disciplinary action, civil, and/or criminal penalties. Unauthorized users of this website should have no
+                expectation of privacy regarding any communications or data processed by this website.</p>
+            <p> Anyone accessing this website expressly consents to monitoring of their actions and all communications
+                or data transiting or stored on related to this website and is advised that if such monitoring reveals
+                possible evidence of criminal activity, NIH may provide that evidence to law enforcement officials</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-warn">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- External Web Warning Modal -->
+<div class="modal fade" id="external-web-warning" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="external-web-warning-header" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Leaving NCI website</h4>
+            </div>
+            <div class="modal-body">
+                <p>This link will take you to an external web site. Linking to a non-federal website does not indicate an endorsement by NCI of the sponsors
+                    or of the information and products presented on the website. You will be subject to the external website’s privacy policy when you leave
+                    NCI’s website.</p>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-primary btn-warn" data-dismiss="modal">Cancel</a>
+                <a type="button" href="" class="btn btn-primary btn-warn" id="go-to-external-link" target="_blank" rel="noopener noreferrer">OK</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Logout Modal -->
+<div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="logoutModalLabel">Logout</h4>
+            </div>
+            <form method="post" action="{% url 'account_logout' %}">
+                <div class="modal-body">
+                    <p>Are you sure you want to sign out?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    {% csrf_token %}
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary">Sign Out</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    var warningSeen = {% if request.session.seenWarning %}true{% else %}false{% endif %};
+    var user_is_auth = {% if request.user.is_authenticated %}true{% else %}false{% endif %};
+</script>
+
+{# If the user is not authenticated then there is no session to secure ! #}
+{% if request.user.is_authenticated %}
+    <link rel="stylesheet" type="text/css" href="{% static 'session_security/style.css' %}"></link>
+
+    {# Include the template that actually contains the modal dialog #}
+    {% include 'session_security/dialog.html' %}
+    {% localize off %}
+    <script>
+        var pingUrl = '{% url 'session_security_ping' %}';
+        var warnAfter = {{ request|warn_after|unlocalize }};
+        var expireAfter = {{ request|expire_after|unlocalize }};
+        var confirmFormDiscard = "{% trans 'You have unsaved changes in a form of this page.' %}";
+        var returnToUrl = '{% url 'landing_page' %}';
+        var showWarning = false;
+    </script>
+    {% endlocalize %}
+{% endif %}
+
+<!-- Additional includes brought in by specific child templates -->
+{% block modal_includes %}
+
+{% endblock %}
+
+{% block js_file %}
+    <script type="text/javascript" src="{% static 'js/libs/require.js' %}"></script>
+{% endblock %}
+
+</body>
+</html>
