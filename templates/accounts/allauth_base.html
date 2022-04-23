@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block js_file %}
+	{{ block.super }}
+    <script type="text/javascript" src="{% static 'js/landing.js' %}?v={{ APP_VERSION }}"></script>
+{% endblock %}

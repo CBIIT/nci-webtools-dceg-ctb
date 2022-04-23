@@ -44,3 +44,17 @@ footer a, footer a:active {
 footer a:hover {
     color: #cacfcf;
 }
+
+.btn-primary {
+    background-color: #4d6ea0;
+}
+
+.btn-special {
+    background-color: #7d4da0;
+    color: #fff;
+}
+
+.btn-default {
+    background-color: #bf5e46;
+    color: #fff;
+}

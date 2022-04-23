@@ -1,0 +1,42 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Account" %}{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 accounts-col email-verify">
+            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-2"></div>
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8">
+                <div class="panel panel-default">
+                    <form action="/accounts/email/" class="email_list" method="post">
+                    {% csrf_token %}
+                        <div class="panel-heading"><h3>{% trans "E-mail Account" %}</h3></div>
+                        <div class="panel-body">
+                            {% if user.emailaddress_set.all %}
+                                <p>{% trans 'The following e-mail address is associated with your account:' %}</p>
+                                <form action="{% url 'account_email' %}" class="email_list" method="post">
+                                    {% csrf_token %}
+                                    <fieldset class="blockLabels">
+                                        {% for emailaddress in user.emailaddress_set.all %}
+                                            <div class="ctrlHolder">
+                                                <input id="email_radio_{{forloop.counter}}" type="hidden" name="email" checked="checked" value="{{emailaddress.email}}"/>
+                                                <b>{{ emailaddress.email }}</b>
+                                                {% if not emailaddress.verified %}
+                                                    <button class="secondaryAction btn btn-primary" type="submit" name="action_send" >{% trans 'Re-send Verification' %}</button>
+                                                {% endif %}
+                                            </div>
+                                      {% endfor %}
+                                </fieldset>
+                            </form>
+                            {% endif %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-2"></div>
+        </div>
+    </div>
+{% endblock %}
+

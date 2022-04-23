@@ -1,0 +1,51 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load socialaccount %}
+{% load static %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block page_header %}{% endblock %}
+
+{% block page_name %}sign-in{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-lg-4 accounts-col">
+            <form class="login" method="POST" action="{% url 'account_login' %}" autocomplete="off">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="idc-login">
+                            <h3 class="card-title">Sign in to Chenorbyl Tissue Biobank</h3>
+                              {% csrf_token %}
+                              {{ form.as_p }}
+                              {% if redirect_field_value %}
+                              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                              {% endif %}
+                              <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body sign-up">
+                        <p>
+                            Forgot your password?
+                        </p>
+                        <p><a class="btn btn-default secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Password Reset" %}</a></p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body sign-up">
+                        <p>
+                            Don't have an account with CTB?
+                        </p>
+                        <p>
+                            <a class="btn btn-special" href="{{ signup_url }}">{% trans "Sign Up" %}</a>
+                        </p>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

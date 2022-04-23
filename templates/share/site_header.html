@@ -34,18 +34,18 @@
             <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
                 <li id="user-login" class="nav-item navbar-signin">
-                    <a class="avatar-link" href="{% url 'user_detail' user.id %}">
-                        {% with avatar_url=user.socialaccount_set.all.0.get_avatar_url %}
-                            {% if avatar_url %}
-                                <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="40" height="40" alt="Avatar Link to User Details">
-                            {% else %}
-                                <i class="fa-solid fa-user basic-avatar"> </i>
-                            {% endif %}
-                        {% endwith %}
-                    </a>
                     <div class="dropdown">
-                        <a role="button" class="dropdown-toggle navbar-item__text" id="user-dropdown" data-toggle="dropdown" aria-label="User Dropdown" aria-expanded="true">
-                            {{ user.first_name }} <i class="fa fa-solid fa-caret-down"></i>
+                        <a class="avatar-link" href="{% url 'user_detail' user.id %}">
+                            {% with avatar_url=user.socialaccount_set.all.0.get_avatar_url %}
+                                {% if avatar_url %}
+                                    <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="40" height="40" alt="Avatar Link to User Details">
+                                {% else %}
+                                    <i class="fa-solid fa-user basic-avatar"> </i>
+                                {% endif %}
+                            {% endwith %}
+                        </a>
+                        <a role="button" class="dropdown-toggle" id="user-dropdown" data-bs-toggle="dropdown" aria-label="User Dropdown" aria-expanded="false">
+                            {{ user.first_name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" role="menu" aria-label="user-dropdown">
                             {% if has_access %}<li class="dropdown-item"><a href="{% url 'user_detail' user.id %}">Account Details <i class="fa-solid fa-cog"></i></a></li>{% endif %}
