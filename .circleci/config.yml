@@ -153,6 +153,7 @@ jobs:
             - ./adminrestrict
             - ./.git
             - ./shell
+            - ./google_helpers
             - ./static
             - ./ctb
             - ./offline
