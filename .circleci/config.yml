@@ -16,31 +16,31 @@ commands:
           command: |
             if [ ! -f deployment.key.json ]; then
               echo "Deployment JSON keyfile not found - loading from CircleCI."
-              KEY=${DEPLOYMENT_KEY_ISB_CGC_CTB_DEV}
+              KEY=${DEPLOYMENT_KEY_CTB_DEV}
             else
               echo "Deployment JSON keyfile found."
               KEY="NA"
             fi
-            CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_ISB_CGC_CTB_DEV}
-            PROJECT_ID=${DEPLOYMENT_PROJECT_ID_ISB_CGC_CTB_DEV}
-            BUCKET=${DEPLOYMENT_BUCKET_ISB_CGC_CTB_DEV}
+            CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_DEV}
+            PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_DEV}
+            BUCKET=${DEPLOYMENT_BUCKET_CTB_DEV}
             if [[ ${TIER} == "PROD" ]]; then
-              KEY=${DEPLOYMENT_KEY_ISB_CGC_CTB_PROD}
-              CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_ISB_CGC_CTB_PROD}
-              PROJECT_ID=${DEPLOYMENT_PROJECT_ID_ISB_CGC_CTB_PROD}
-              BUCKET=${DEPLOYMENT_BUCKET_ISB_CGC_CTB_PROD}
+              KEY=${DEPLOYMENT_KEY_CTB_PROD}
+              CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_PROD}
+              PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_PROD}
+              BUCKET=${DEPLOYMENT_BUCKET_CTB_PROD}
               echo "Using production project and related deployment SA and bucket."
             elif [[ ${TIER} == "UAT" ]]; then
-              KEY=${DEPLOYMENT_KEY_ISB_CGC_CTB_UAT}
-              CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_ISB_CGC_CTB_UAT}
-              PROJECT_ID=${DEPLOYMENT_PROJECT_ID_ISB_CGC_CTB_UAT}
-              BUCKET=${DEPLOYMENT_BUCKET_ISB_CGC_CTB_UAT}
+              KEY=${DEPLOYMENT_KEY_CTB_UAT}
+              CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_UAT}
+              PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_UAT}
+              BUCKET=${DEPLOYMENT_BUCKET_CTB_UAT}
               echo "Using UAT project and related deployment SA and bucket."
             elif [[ ${TIER} == "TEST" ]]; then
-              KEY=${DEPLOYMENT_KEY_ISB_CGC_CTB_TEST}
-              CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_ISB_CGC_CTB_TEST}
-              PROJECT_ID=${DEPLOYMENT_PROJECT_ID_ISB_CGC_CTB_TEST}
-              BUCKET=${DEPLOYMENT_BUCKET_ISB_CGC_CTB_TEST}
+              KEY=${DEPLOYMENT_KEY_CTB_TEST}
+              CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_TEST}
+              PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_TEST}
+              BUCKET=${DEPLOYMENT_BUCKET_CTB_TEST}
               echo "Using test project and related deployment SA and bucket."
             elif [[ ${TIER} == "DEV" ]]; then
               echo "Using development/default project and related deployment SA and bucket."
