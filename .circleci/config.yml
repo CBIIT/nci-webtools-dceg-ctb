@@ -149,11 +149,10 @@ jobs:
       - save_cache:
           key: ctb-webapp-{{ .Branch }}-{{ .Revision }}-{{ epoch }}
           paths:
+            - ./accounts
             - ./adminrestrict
             - ./.git
             - ./shell
-            - ./tasks
-            - ./etc
             - ./static
             - ./ctb
             - ./offline

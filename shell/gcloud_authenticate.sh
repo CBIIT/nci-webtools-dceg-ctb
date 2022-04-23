@@ -8,5 +8,3 @@ gcloud config set project "$DEPLOYMENT_PROJECT_ID"
 
 echo "GCloud Config for Deployment:"
 gcloud config list
-
-
