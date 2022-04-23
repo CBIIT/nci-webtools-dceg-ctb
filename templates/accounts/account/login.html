@@ -14,9 +14,9 @@
     <div class="row justify-content-center">
         <div class="col-lg-4 accounts-col">
             <form class="login" method="POST" action="{% url 'account_login' %}" autocomplete="off">
-                <div class="card">
+                <div class="card mb-3">
                     <div class="card-body">
-                        <div class="idc-login">
+                        <div class="ctb-login">
                             <h3 class="card-title">Sign in to Chenorbyl Tissue Biobank</h3>
                               {% csrf_token %}
                               {{ form.as_p }}
@@ -27,19 +27,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="card">
-                    <div class="card-body sign-up">
-                        <p>
+                <div class="card mb-3">
+                    <div class="card-body sign-up text-center">
+                        <h5 class="card-title">
                             Forgot your password?
-                        </p>
+                        </h5>
                         <p><a class="btn btn-default secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Password Reset" %}</a></p>
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-body sign-up">
-                        <p>
+                    <div class="card-body sign-up text-center">
+                        <h5 class="card-title">
                             Don't have an account with CTB?
-                        </p>
+                        </h5>
                         <p>
                             <a class="btn btn-special" href="{{ signup_url }}">{% trans "Sign Up" %}</a>
                         </p>

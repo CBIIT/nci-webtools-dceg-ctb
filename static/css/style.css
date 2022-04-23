@@ -30,6 +30,20 @@ a, a:active, a:hover {
     text-decoration: underline;
 }
 
+.navbar-ctb {
+    background-color: #fff;
+    border-bottom: 2px solid #62707c;
+}
+
+.navbar-ctb .navbar-toggler {
+    color: rgba(0,0,0,.55);
+    border-color: rgba(0,0,0,.1);
+}
+.navbar-ctb .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 0.55%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+
 main {
     margin-top: 70px;
 }
@@ -38,9 +52,10 @@ footer {
     background-color: #4d5869;
     color: #fff;
 }
-footer a, footer a:active {
+footer a, footer a:active, .btn-special, .btn-default, .btn-special:hover, .btn-default:hover {
     color: #fff;
 }
+
 footer a:hover {
     color: #cacfcf;
 }
@@ -50,11 +65,48 @@ footer a:hover {
 }
 
 .btn-special {
-    background-color: #7d4da0;
-    color: #fff;
+    background-color: #6a4188;
+    border: 1px solid #4f2f67;
+}
+.btn-special:hover {
+    background-color: #8255a4;
 }
 
 .btn-default {
-    background-color: #bf5e46;
-    color: #fff;
+    background-color: #a9503a;
+    border: 1px solid #8a4230;
+}
+.btn-default:hover {
+    background-color: #c36149;
+}
+
+/* Accounts templates */
+.signup label, .login label, .password_reset label {
+    display: none;
+}
+
+.signup input, .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
+    width: 100%;
+    border-radius: 3px;
+    padding: 12px;
+    border: 1px solid slategray;
+    background-color: #ececec;
+}
+
+.login label[for="id_remember"] {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: larger;
+    font-weight: bold;
+}
+
+#id_remember {
+    width: 20px;
+    margin-top: -2px;
+    vertical-align: middle;
+}
+
+/* User Details */
+.user-row .col h4 {
+    display: inline;
 }
