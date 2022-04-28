@@ -48,9 +48,10 @@ WEBAPP_LOGIN_LOG_NAME = settings.WEBAPP_LOGIN_LOG_NAME
 # The site's homepage
 @never_cache
 def landing_page(request):
-    return render(request, 'ctb/landing.html', {
-        'request': request,
-    })
+    return redirect('account_login')
+    # return render(request, 'ctb/landing.html', {
+    #     'request': request,
+    # })
 
 
 # Displays the privacy policy

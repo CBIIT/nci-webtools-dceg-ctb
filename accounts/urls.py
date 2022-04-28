@@ -22,6 +22,7 @@ from . import views
 
 
 urlpatterns = [
+    # url(r'^$', views.landing_page, name='landing_page'),
 #    url(r'^', include(google_urls)),
     url(r'^', include(allauth_urls)),
     url(r'^logout', views.extended_logout_view, name='account_logout'),
