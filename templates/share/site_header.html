@@ -3,33 +3,55 @@
 
 {% is_allowed user as has_access %}
 
-<div class="jumbotron crdc-nav">
-    <a target="_blank" rel="noopener noreferrer" href="https://datacommons.cancer.gov/">NCI Cancer Research Data Commons</a>
+<div class="fixed-top crdc-nav">
+    <a target="_blank" rel="noopener noreferrer" href="https://datacommons.cancer.gov/">NCI Cancer Research Data
+        Commons</a>
 </div>
 <nav class="navbar navbar-expand-md fixed-top top-30-px navbar-ctb">
-    <div class="container-fluid">
+
+    <div class="container">
+
         <a href="{% url 'landing_page' %}" title="Home Page" >
-            <img class="navbar-brand" src="{% static 'img/NIH_CTB_title.png' %}" alt="NIH CTB Logo"/>
+            <img class="navbar-brand" src="{% static 'img/ctb-biosample-logo.svg' %}" alt="NIH CTB Logo"/>
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler collapsed " type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+                aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav">
+        <div class="navbar-collapse collapse" id="navbarCollapse">
+            <ul class="navbar-nav justify-content-evenly">
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.chernobyltissuebank.com/bibliography.htm" target="_blank" rel="noopener"
+                       title="See CTB Publications">CTB Publications</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.chernobyltissuebank.com" target="_blank" rel="noopener"
+                       title="Back to Chernobyl Tissue Bank Website">Back to Main Website</a>
+                </li>
+                {% if request.user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link{% if 'search' in request.path %} active{% endif %}" href="{% url 'search' %}"
-                       title="Search the Biobank"><i class="fa-solid fa-magnifying-glass"
-                    ></i> Search</a>
+                       title="Search the Biobank">Dashboard</a>
                 </li>
+
                 <li class="nav-item">
-                    <a class="nav-link external-link" href="" url="https://learn.canceridc.dev"
-                       data-bs-toggle="modal" data-bs-target="#external-web-warning">
-                        <i class="fa-solid fa-book"></i> Documentation
-                        <i class="fa-solid fa-external-link external-link-icon" aria-hidden="true"></i>
-                    </a>
+                    <a class="nav-link{% if 'search' in request.path %} active{% endif %}" href="{% url 'search' %}"
+                       title="Search the Biobank">My Saved Searches</a>
                 </li>
+                {% endif %}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link{% if 'search' in request.path %} active{% endif %}" href="{% url 'search' %}"#}
+{#                       title="Search the Biobank"><i class="fa-solid fa-magnifying-glass"#}
+{#                    ></i> Search</a>#}
+{#                </li>#}
+{#                <li class="nav-item">#}
+{#                    <a class="nav-link external-link" href="" url="https://learn.canceridc.dev"#}
+{#                       data-bs-toggle="modal" data-bs-target="#external-web-warning">#}
+{#                        <i class="fa-solid fa-book"></i> Documentation#}
+{#                        <i class="fa-solid fa-external-link external-link-icon" aria-hidden="true"></i>#}
+{#                    </a>#}
+{#                </li>#}
             </ul>
             <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
@@ -63,5 +85,6 @@
             </ul>
         </div>
     </div>
+
 </nav>
 
