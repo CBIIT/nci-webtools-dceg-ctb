@@ -14,7 +14,7 @@ dist/
 downloads/
 eggs/
 lib/
-!js/lib/
+!static/js/lib/
 lib64/
 parts/
 sdist/
