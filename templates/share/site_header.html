@@ -76,7 +76,7 @@
 {% if 'accounts' in request.path or 'bio_samp' in request.path%}
     <div class="nav-scroller bg-body shadow-sm">
         <div class="container">
-            <nav class="nav nav-underline" aria-label="Secondary navigation">
+            <nav class="nav nav-underline navbar-ctb" aria-label="Secondary navigation">
                 <a href="{% url 'landing_page' %}" title="Home Page">
                     <img class="navbar-brand" src="{% static 'img/ctb-biosample-logo.svg' %}" alt="NIH CTB Logo"/>
                 </a>
@@ -118,10 +118,12 @@
                         </li>
                     {% else %}
                         <li class="nav-item navbar-signin dropdown">
-                            <a id="sign-in-dropdown"
-                               href="{% url 'account_login' %}" title="Sign In"><i
-                                    class="fa fa-solid fa-sign-in"></i>
-                                Sign In</a>
+                            <a class="nav-link" href="{% url 'account_login' %}"><i
+                                    class="fa fa-solid fa-sign-in"></i> Sign In</a>
+                            {#                            <a id="sign-in-dropdown"#}
+                            {#                               href="{% url 'account_login' %}" title="Sign In"><i#}
+                            {#                                    class="fa fa-solid fa-sign-in"></i>#}
+                            {#                                Sign In</a>#}
                         </li>
                     {% endif %}
                 </ul>
