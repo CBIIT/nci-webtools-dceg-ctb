@@ -3,43 +3,165 @@
 
 {% is_allowed user as has_access %}
 
-<div class="fixed-top crdc-nav">
-    <a target="_blank" rel="noopener noreferrer" href="https://datacommons.cancer.gov/">NCI Cancer Research Data
-        Commons</a>
-</div>
-<nav class="navbar navbar-expand-md fixed-top top-30-px navbar-ctb">
-
+{#<div class="fixed-top crdc-nav">#}
+{#    <a target="_blank" rel="noopener noreferrer" href="https://datacommons.cancer.gov/">NCI Cancer Research Data#}
+{#        Commons</a>#}
+{#</div>#}
+{#<nav class="navbar navbar-expand-md fixed-top crdc-nav">#}
+{#    Home#}
+{#About the Project#}
+{#For Researchers#}
+{#Resources#}
+{#Latest News#}
+{#Contact Us#}
+{#    <a href="{% url 'landing_page' %}" title="Home Page" >#}
+{#        <img class="navbar-brand" style="height:25px;" src="{% static 'img/ctb-logo.jpeg' %}" alt="CTB Logo"/>#}
+{#    </a>#}
+{#</nav>#}
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
     <div class="container">
-
-        <a href="{% url 'landing_page' %}" title="Home Page" >
-            <img class="navbar-brand" src="{% static 'img/ctb-biosample-logo.svg' %}" alt="NIH CTB Logo"/>
-        </a>
-        <button class="navbar-toggler collapsed " type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"
+        <a class="navbar-brand" href="{% url 'landing_page' %}">Chernobyl Tissue Bank</a>
+        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse collapse" id="navbarCollapse">
-            <ul class="navbar-nav justify-content-evenly">
-                <li class="nav-item mx-xl-1 mx-xxl-2">
-                    <a class="nav-link" href="https://www.chernobyltissuebank.com/bibliography.htm" target="_blank" rel="noopener"
-                       title="See CTB Publications">CTB Publications</a>
+        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'account_login' %}">CTB Biosample Search Facility</a>
                 </li>
-                <li class="nav-item mx-xl-1 mx-xxl-3">
-                    <a class="nav-link" href="https://www.chernobyltissuebank.com" target="_blank" rel="noopener"
-                       title="Back to Chernobyl Tissue Bank Website">Back to Main Website</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-about" data-bs-toggle="dropdown"
+                       aria-expanded="false">About the Project</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown-about">
+                        <li><a class="dropdown-item" href="#">Aims of the Project</a></li>
+                        <li><a class="dropdown-item" href="#">Fact Sheet</a></li>
+                        <li><a class="dropdown-item" href="#">Management of the Project</a></li>
+                    </ul>
                 </li>
-                {% if request.user.is_authenticated %}
-                <li class="nav-item mx-xl-1 mx-xxl-3">
-                    <a class="nav-link{% if 'search' in request.path %} active{% endif %}" href="{% url 'search' %}"
-                       title="Search the Biobank">Dashboard</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-researchers" data-bs-toggle="dropdown"
+                       aria-expanded="false">For Researchers</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown-researchers">
+                        <li><a class="dropdown-item" href="#">Access to Materials</a></li>
+                        <li><a class="dropdown-item" href="#">CTB Biosample Search</a></li>
+                        <li><a class="dropdown-item" href="#">Research Projects Using CTB Materials</a></li>
+                        <li><a class="dropdown-item" href="#">Material Available</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-resources" data-bs-toggle="dropdown"
+                       aria-expanded="false">Resources</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown-resources">
+                        <li><a class="dropdown-item" href="#">Publications using CTB samples and data</a></li>
+                        <li><a class="dropdown-item" href="#">Useful External Links</a></li>
+                        <li><a class="dropdown-item" href="#">Useful Podcasts and Videos</a></li>
+                    </ul>
                 </li>
 
-                <li class="nav-item mx-xl-1 mx-xxl-3">
-                    <a class="nav-link{% if 'search' in request.path %} active{% endif %}" href="{% url 'search' %}"
-                       title="Search the Biobank">My Saved Searches</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Latest News</a>
                 </li>
-                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contact Us</a>
+                </li>
+            </ul>
+{#            <form class="d-flex">#}
+{#                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
+{#                <button class="btn btn-outline-success" type="submit">Search</button>#}
+{#            </form>#}
+        </div>
+    </div>
+</nav>
+{% if 'accounts' in request.path or 'bio_samp' in request.path%}
+    <div class="nav-scroller bg-body shadow-sm">
+        <div class="container">
+            <nav class="nav nav-underline" aria-label="Secondary navigation">
+                <a href="{% url 'landing_page' %}" title="Home Page">
+                    <img class="navbar-brand" src="{% static 'img/ctb-biosample-logo.svg' %}" alt="NIH CTB Logo"/>
+                </a>
+                <a class="nav-link" href="#">
+                    Dashboard
+                </a>
+                <a class="nav-link" href="#">My Saved Searches</a>
+                <a class="nav-link" href="#">CTB Publications</a>
+                <ul class="navbar-nav ms-auto">
+                    {% if user.is_authenticated %}
+                        <li id="user-login" class="nav-item navbar-signin">
+                            <div class="dropdown">
+                                <a class="avatar-link" href="{% url 'user_detail' user.id %}">
+                                    {% with avatar_url=user.socialaccount_set.all.0.get_avatar_url %}
+                                        {% if avatar_url %}
+                                            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
+                                                 width="40" height="40" alt="Avatar Link to User Details">
+                                        {% else %}
+                                            <i class="fa-solid fa-user basic-avatar"> </i>
+                                        {% endif %}
+                                    {% endwith %}
+                                </a>
+                                <a role="button" class="dropdown-toggle" id="user-dropdown"
+                                   data-bs-toggle="dropdown" aria-label="User Dropdown"
+                                   aria-expanded="false">
+                                    {{ user.first_name }}
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" role="menu"
+                                    aria-label="user-dropdown">
+                                    {% if has_access %}
+                                        <li class="dropdown-item"><a href="{% url 'user_detail' user.id %}">Account
+                                            Details <i class="fa-solid fa-cog"></i></a></li>{% endif %}
+                                    <li class="dropdown-item"><a href="#logout-modal" data-bs-toggle="modal"
+                                                                 data-bs-target="#logout-modal"
+                                                                 title="Sign Out">Sign Out <i
+                                            class="fa-solid fa-sign-out"></i></a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item navbar-signin dropdown">
+                            <a id="sign-in-dropdown"
+                               href="{% url 'account_login' %}" title="Sign In"><i
+                                    class="fa fa-solid fa-sign-in"></i>
+                                Sign In</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+{% endif %}
+{#<nav class="navbar navbar-expand-md fixed-top top-30-px navbar-ctb">#}
+{##}
+{#    <div class="container">#}
+{##}
+{#        <a href="{% url 'landing_page' %}" title="Home Page" >#}
+{#            <img class="navbar-brand" src="{% static 'img/ctb-biosample-logo.svg' %}" alt="NIH CTB Logo"/>#}
+{#        </a>#}
+{#        <button class="navbar-toggler collapsed " type="button" data-bs-toggle="collapse"#}
+{#                data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false"#}
+{#                aria-label="Toggle navigation">#}
+{#            <span class="navbar-toggler-icon"></span>#}
+{#        </button>#}
+{#        <div class="navbar-collapse collapse" id="navbarCollapse">#}
+{#            <ul class="navbar-nav justify-content-evenly">#}
+{#                <li class="nav-item mx-xl-1 mx-xxl-2">#}
+{#                    <a class="nav-link" href="https://www.chernobyltissuebank.com/bibliography.htm" target="_blank" rel="noopener"#}
+{#                       title="See CTB Publications">Publications</a>#}
+{#                </li>#}
+{#                <li class="nav-item mx-xl-1 mx-xxl-3">#}
+{#                    <a class="nav-link" href="https://www.chernobyltissuebank.com" target="_blank" rel="noopener"#}
+{#                       title="Back to Chernobyl Tissue Bank Website">Chernobyl Tissue Bank</a>#}
+{#                </li>#}
+{#                {% if request.user.is_authenticated %}#}
+{#                <li class="nav-item mx-xl-1 mx-xxl-3">#}
+{#                    <a class="nav-link{% if 'search' in request.path %} active{% endif %}" href="{% url 'search' %}"#}
+{#                       title="Search the Biobank">Dashboard</a>#}
+{#                </li>#}
+{##}
+{#                <li class="nav-item mx-xl-1 mx-xxl-3">#}
+{#                    <a class="nav-link{% if 'search' in request.path %} active{% endif %}" href="{% url 'search' %}"#}
+{#                       title="Search the Biobank">My Saved Searches</a>#}
+{#                </li>#}
+{#                {% endif %}#}
 {#                <li class="nav-item">#}
 {#                    <a class="nav-link{% if 'search' in request.path %} active{% endif %}" href="{% url 'search' %}"#}
 {#                       title="Search the Biobank"><i class="fa-solid fa-magnifying-glass"#}
@@ -52,39 +174,39 @@
 {#                        <i class="fa-solid fa-external-link external-link-icon" aria-hidden="true"></i>#}
 {#                    </a>#}
 {#                </li>#}
-            </ul>
-            <ul class="navbar-nav ms-auto">
-                {% if user.is_authenticated %}
-                <li id="user-login" class="nav-item navbar-signin">
-                    <div class="dropdown">
-                        <a class="avatar-link" href="{% url 'user_detail' user.id %}">
-                            {% with avatar_url=user.socialaccount_set.all.0.get_avatar_url %}
-                                {% if avatar_url %}
-                                    <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="40" height="40" alt="Avatar Link to User Details">
-                                {% else %}
-                                    <i class="fa-solid fa-user basic-avatar"> </i>
-                                {% endif %}
-                            {% endwith %}
-                        </a>
-                        <a role="button" class="dropdown-toggle" id="user-dropdown" data-bs-toggle="dropdown" aria-label="User Dropdown" aria-expanded="false">
-                            {{ user.first_name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" role="menu" aria-label="user-dropdown">
-                            {% if has_access %}<li class="dropdown-item"><a href="{% url 'user_detail' user.id %}">Account Details <i class="fa-solid fa-cog"></i></a></li>{% endif %}
-                            <li class="dropdown-item"><a href="#logout-modal" data-bs-toggle="modal" data-bs-target="#logout-modal" title="Sign Out">Sign Out <i class="fa-solid fa-sign-out"></i></a></li>
-                        </ul>
-                    </div>
-                </li>
-            {% else %}
-                <li class="nav-item navbar-signin dropdown">
-                    <a id="sign-in-dropdown"
-                       href="{% url 'account_login' %}" title="Sign In"><i class="fa fa-solid fa-sign-in"></i>
-                        Sign In</a>
-                </li>
-            {% endif %}
-            </ul>
-        </div>
-    </div>
-
-</nav>
+{#            </ul>#}
+{#            <ul class="navbar-nav ms-auto">#}
+{#                {% if user.is_authenticated %}#}
+{#                <li id="user-login" class="nav-item navbar-signin">#}
+{#                    <div class="dropdown">#}
+{#                        <a class="avatar-link" href="{% url 'user_detail' user.id %}">#}
+{#                            {% with avatar_url=user.socialaccount_set.all.0.get_avatar_url %}#}
+{#                                {% if avatar_url %}#}
+{#                                    <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}" width="40" height="40" alt="Avatar Link to User Details">#}
+{#                                {% else %}#}
+{#                                    <i class="fa-solid fa-user basic-avatar"> </i>#}
+{#                                {% endif %}#}
+{#                            {% endwith %}#}
+{#                        </a>#}
+{#                        <a role="button" class="dropdown-toggle" id="user-dropdown" data-bs-toggle="dropdown" aria-label="User Dropdown" aria-expanded="false">#}
+{#                            {{ user.first_name }}#}
+{#                        </a>#}
+{#                        <ul class="dropdown-menu dropdown-menu-end" role="menu" aria-label="user-dropdown">#}
+{#                            {% if has_access %}<li class="dropdown-item"><a href="{% url 'user_detail' user.id %}">Account Details <i class="fa-solid fa-cog"></i></a></li>{% endif %}#}
+{#                            <li class="dropdown-item"><a href="#logout-modal" data-bs-toggle="modal" data-bs-target="#logout-modal" title="Sign Out">Sign Out <i class="fa-solid fa-sign-out"></i></a></li>#}
+{#                        </ul>#}
+{#                    </div>#}
+{#                </li>#}
+{#            {% else %}#}
+{#                <li class="nav-item navbar-signin dropdown">#}
+{#                    <a id="sign-in-dropdown"#}
+{#                       href="{% url 'account_login' %}" title="Sign In"><i class="fa fa-solid fa-sign-in"></i>#}
+{#                        Sign In</a>#}
+{#                </li>#}
+{#            {% endif %}#}
+{#            </ul>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#</nav>#}
 

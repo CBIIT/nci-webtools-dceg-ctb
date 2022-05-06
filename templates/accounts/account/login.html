@@ -11,41 +11,102 @@
 {% block page_name %}sign-in{% endblock %}
 
 {% block content %}
-    <div class="row justify-content-center">
-        <div class="col-lg-4 accounts-col">
-            <form class="login" method="POST" action="{% url 'account_login' %}" autocomplete="off">
-                <div class="card mb-3">
+    <div class="container">
+        <div class="row py-5">
+            <div class="col-lg-6 p-3">
+                <div class="card card-login p-3">
+
+                    <div class="mx-auto">
+                        <img src="{% static 'img/ctb-biosample-logo.svg' %}" class="card-img-top" alt="NIH CTB Logo">
+                    </div>
+
                     <div class="card-body">
-                        <div class="ctb-login">
-                            <h3 class="card-title">Sign in to Chenorbyl Tissue Biobank</h3>
-                              {% csrf_token %}
-                              {{ form.as_p }}
-                              {% if redirect_field_value %}
-                              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                              {% endif %}
-                              <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
-                        </div>
+
+                        <h5 class="card-title"><i class="fa-regular fa-user"></i> Login</h5>
+                        <form class="login" method="POST" action="{% url 'account_login' %}" autocomplete="off">
+                            {% csrf_token %}
+
+                            <div class="py-2">
+                                <input type="email" class="form-control" id="inputAddress" placeholder="Email Address">
+                            </div>
+                            <div class="py-2">
+                                <input type="password" class="form-control" id="inputAddress"
+                                       placeholder="Password">
+                            </div>
+                            <div class="py-2">
+                                <button class="form-control btn-lg btn btn-primary"
+                                        type="submit">{% trans "Log In" %}</button>
+                            </div>
+                            <div class="py-2 row">
+                                <div class="col-md-4 align-middle"><a href="{% url 'account_reset_password' %}">Forgot Password?</a></div>
+
+                                <div class="col-md-8 text-end align-middle">
+                                    <span>Don't have an account?</span>
+                                    <a id="ctb-register-btn"
+                                       href="{{ signup_url }}" class="ms-2">{% trans "Register" %}</a>
+                                </div>
+                            </div>
+
+
+                            {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}"
+                                       value="{{ redirect_field_value }}"/>
+                            {% endif %}
+
+
+
+                        </form>
                     </div>
+
+{#                        <div class="card-body p-3">#}
+{#                            <div class="ctb-login">#}
+{#                                <h3 class="card-title">Sign in to Chenorbyl Tissue Biobank</h3>#}
+{#                                {% csrf_token %}#}
+{#                                {{ form.as_p }}#}
+{#                                {% if redirect_field_value %}#}
+{#                                    <input type="hidden" name="{{ redirect_field_name }}"#}
+{#                                           value="{{ redirect_field_value }}"/>#}
+{#                                {% endif %}#}
+{#                                <button class="primaryAction btn btn-primary"#}
+{#                                        type="submit">{% trans "Sign In" %}</button>#}
+{#                            </div>#}
+{#                        </div>#}
+                        {#                </div>#}
+{#                        <div class="card-body sign-up text-center">#}
+{#                            <h5 class="card-title">#}
+{#                                Forgot your password?#}
+{#                            </h5>#}
+{#                            <p><a class="btn btn-default secondaryAction"#}
+{#                                  href="{% url 'account_reset_password' %}">{% trans "Password Reset" %}</a></p>#}
+{#                        </div>#}
+
+                {#                    <div class="card">#}
+                {#                        <div class="card-body sign-up text-center">#}
+                {#                            <h5 class="card-title">#}
+                {#                                Don't have an account with CTB?#}
+                {#                            </h5>#}
+                {#                            <p>#}
+                {#                                <a class="btn btn-special" href="{{ signup_url }}">{% trans "Sign Up" %}</a>#}
+                {#                            </p>#}
+                {#                        </div>#}
+                {#                    </div>#}
+{#                </form>#}
+            </div>
+        </div>
+            <div class="col-lg-6 p-3 login-intro">
+                <div class="fw-bold">
+                    This facility is designed for researchers who wish to search for biological samples for their research project.
                 </div>
-                <div class="card mb-3">
-                    <div class="card-body sign-up text-center">
-                        <h5 class="card-title">
-                            Forgot your password?
-                        </h5>
-                        <p><a class="btn btn-default secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Password Reset" %}</a></p>
-                    </div>
+                <div>
+                    If you have not already registered to use this facility, please click on the register link and you will be directed to a short form providing us basic information on your name, email address and affiliation.
                 </div>
-                <div class="card">
-                    <div class="card-body sign-up text-center">
-                        <h5 class="card-title">
-                            Don't have an account with CTB?
-                        </h5>
-                        <p>
-                            <a class="btn btn-special" href="{{ signup_url }}">{% trans "Sign Up" %}</a>
-                        </p>
-                    </div>
+                <div>
+                    Once registered you will be provided with a username and password. If you have already registered, please sign in using your username and password.
                 </div>
-            </form>
+                <div>
+                    If you do not require biological samples, but wish to have further information on the Chernobyl accident itself, please return to the Home Page and click on the link to further information on the Chernobyl accident.
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
