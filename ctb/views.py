@@ -53,6 +53,11 @@ def landing_page(request):
         'request': request,
     })
 
+# About the Project > Aims of the Project
+def aims(request):
+    return render(request, 'ctb/aims.html', {
+        'request': request,
+    })
 
 # Displays the privacy policy
 def privacy_policy(request):
@@ -153,3 +158,65 @@ def warn_page(request):
 # About page
 def about_page(request):
     return render(request, 'ctb/about.html', {'request': request})
+
+# Fact Sheet
+def fact_sheet(request):
+    return render(request, 'ctb/fact_sheet.html', {'request': request})
+
+# Management of the Project
+def management_page(request):
+    return render(request, 'ctb/management_page.html', {'request': request})
+
+# For Researchers
+def researchers_page(request):
+    return render(request, 'ctb/researchers_page.html', {'request': request})
+
+# Access to materials
+def access_to_materials(request):
+    return render(request, 'ctb/access_to_materials.html', {'request': request})
+
+# research-projects
+def research_projects(request):
+    return render(request, 'ctb/research_projects.html', {'request': request})
+
+# research-projects 2001-2009
+def research_projects_2001_2009(request):
+    return render(request, 'ctb/research_projects_2001_2009.html', {'request': request})
+
+# research-projects 2010-2019
+def research_projects_2010_2019(request):
+    return render(request, 'ctb/research_projects_2010_2019.html', {'request': request})
+
+# Schema Review of Applications
+def schema_review_of_applications(request):
+    return render(request, 'ctb/schema_review_of_applications.html', {'request': request})
+
+
+# Material Available
+def material_available(request):
+    return render(request, 'ctb/material_available.html', {'request': request})
+
+
+# Resources
+def resources(request):
+    return render(request, 'ctb/resources.html', {'request': request})
+
+# Bibliography: Publications using CTB samples and data
+def bibliography(request):
+    return render(request, 'ctb/bibliography.html', {'request': request})
+
+# Useful links: Links to further information on the Chernobyl accident
+def useful_links(request):
+    return render(request, 'ctb/useful_links.html', {'request': request})
+
+# Useful podcasts and videos: Podcasts and Videos by CTB project participants
+def podcasts_and_videos(request):
+    return render(request, 'ctb/podcasts_and_videos.html', {'request': request})
+
+# Latest News
+def news(request):
+    return render(request, 'ctb/news.html', {'request': request})
+
+# Latest News
+def contact(request):
+    return render(request, 'ctb/contact.html', {'request': request})

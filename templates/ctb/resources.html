@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Resources
+{% endblock %}
+
+{% block description %}
+    Resources
+{% endblock %}
+
+{% block page_name %}resources{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <h3 class="page-banner">Resources</h3>
+        <div>
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Resources</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Publications using CTB samples and data</h5>
+                        <p class="card-text">View abstracts and publications using Pubmed.com from CTB</p>
+                        <a href="{% url 'bibliography' %}" class="btn btn-primary">Visit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Useful External Links</h5>
+                        <p class="card-text">Information on the Chernobyl Nuclear Power Plant accident</p>
+                        <a href="{% url 'useful_links' %}" class="btn btn-primary">Visit</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Useful Podcasts and Videos</h5>
+                        <p class="card-text">Podcasts and Videos by CTB project participants</p>
+                        <a href="{% url 'podcasts_and_videos' %}" class="btn btn-primary">Visit</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_file %}
+	{{ block.super }}
+{#	<script type="text/javascript" src="{% static 'js/news.js' %}?v={{ APP_VERSION }}"></script>#}
+{#    <script>#}
+{#    var showWarning = true;#}
+{#    </script>#}
+{% endblock %}

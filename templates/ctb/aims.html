@@ -2,22 +2,23 @@
 {% load static %}
 
 {% block title %}
-    CTB | About the Project
+    CTB | Aims of the Project
 {% endblock %}
 
 {% block description %}
-    About the Project
+    Aims of the Project
 {% endblock %}
 
-{% block page_name %}about_page{% endblock %}
+{% block page_name %}aims_page{% endblock %}
 
 {% block page_header %}
     <div class="container">
-        <h3 class="page-banner">About the Project</h3>
+        <h3 class="page-banner">Aims of the Project</h3>
         <div>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">About the Project</li>
+                    <li class="breadcrumb-item"><a href="{% url 'about_page' %}">About the Project</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Aims of the Project</li>
                 </ol>
             </nav>
         </div>
@@ -54,7 +55,6 @@
                     Chernobyl thyroid tumours are associated with a particular aetiology, they may also provide clues to
                     the pathogenesis and molecular biology of thyroid carcinoma in general.</p>
                 <p>&nbsp;</p></div>
-
             <div class="col-md-4 pb-4">
 
                 <ul class="side-navigation">
@@ -79,9 +79,7 @@
                         </a>
                     </li>
                 </ul>
-
             </div>
-
         </div>
     </div>
 {% endblock %}

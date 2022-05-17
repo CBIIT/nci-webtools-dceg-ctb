@@ -30,40 +30,41 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="{% url 'account_login' %}">CTB Biosample Search Facility</a>
                 </li>
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-about" data-bs-toggle="dropdown"
-                       aria-expanded="false">About the Project</a>
+                    <a class="nav-link dropdown-toggle" href="{% url 'about_page' %}" id="dropdown-about" data-bs-toggle="dropdown"
+                       aria-expanded="false" role="button">About the Project</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown-about">
-                        <li><a class="dropdown-item" href="#">Aims of the Project</a></li>
-                        <li><a class="dropdown-item" href="#">Fact Sheet</a></li>
-                        <li><a class="dropdown-item" href="#">Management of the Project</a></li>
+                        <li><a class="dropdown-item" href="{% url 'aims_page' %}">Aims of the Project</a></li>
+                        <li><a class="dropdown-item" href="{% url 'fact_sheet' %}">Fact Sheet</a></li>
+                        <li><a class="dropdown-item" href="{% url 'management_page' %}">Management of the Project</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-researchers" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="{% url 'researchers_page' %}" id="dropdown-researchers" data-bs-toggle="dropdown"
                        aria-expanded="false">For Researchers</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown-researchers">
-                        <li><a class="dropdown-item" href="#">Access to Materials</a></li>
+                        <li><a class="dropdown-item" href="{% url 'access_to_materials' %}">Access to Materials</a></li>
                         <li><a class="dropdown-item" href="#">CTB Biosample Search</a></li>
-                        <li><a class="dropdown-item" href="#">Research Projects Using CTB Materials</a></li>
-                        <li><a class="dropdown-item" href="#">Material Available</a></li>
+                        <li><a class="dropdown-item" href="{% url 'research_projects' %}">Research Projects Using CTB Materials</a></li>
+                        <li><a class="dropdown-item" href="{% url 'material_available' %}">Material Available</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown-resources" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle" href="{% url 'resources' %}" id="dropdown-resources" data-bs-toggle="dropdown"
                        aria-expanded="false">Resources</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown-resources">
-                        <li><a class="dropdown-item" href="#">Publications using CTB samples and data</a></li>
-                        <li><a class="dropdown-item" href="#">Useful External Links</a></li>
-                        <li><a class="dropdown-item" href="#">Useful Podcasts and Videos</a></li>
+                        <li><a class="dropdown-item" href="{% url 'bibliography' %}">Publications using CTB Samples and Data</a></li>
+                        <li><a class="dropdown-item" href="{% url 'useful_links' %}">Useful External Links</a></li>
+                        <li><a class="dropdown-item" href="{% url 'podcasts_and_videos' %}">Useful Podcasts and Videos</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Latest News</a>
+                    <a class="nav-link" href="{% url 'news' %}">Latest News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Contact Us</a>
+                    <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
                 </li>
             </ul>
 {#            <form class="d-flex">#}

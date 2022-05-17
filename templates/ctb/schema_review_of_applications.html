@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Schema for Review of Applications
+{% endblock %}
+
+{% block description %}
+    Schema for Review of Applications
+{% endblock %}
+
+{% block page_name %}schema_of_review_of_applications{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <h3 class="page-banner">Schema for Review of Applications</h3>
+        <div>
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Schema for Review of Applications</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col pb-4 text-center">
+                <img title="schema.jpeg"
+                        src="{% static 'img/schema.jpeg' %}" alt="schema.jpeg" width="740" height="900">
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_file %}
+	{{ block.super }}
+{#	<script type="text/javascript" src="{% static 'js/news.js' %}?v={{ APP_VERSION }}"></script>#}
+{#    <script>#}
+{#    var showWarning = true;#}
+{#    </script>#}
+{% endblock %}

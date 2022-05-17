@@ -1,0 +1,207 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Material Available
+{% endblock %}
+
+{% block description %}
+    Material Available
+{% endblock %}
+
+{% block page_name %}material_available{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <h3 class="page-banner">Material Available</h3>
+        <div>
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'researchers_page' %}">For Researchers</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Material Available</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-7 pb-4">
+                <p><strong>Material available </strong></p>
+                <p>The study cohort includes all those who were resident in the areas of Ukraine and Russia contaminated
+                    by radioactive fallout from the accident and who were aged under 19 at exposure (i.e. born after
+                    26<sup>th</sup> April 1967). Thyroid cancer in those who were children or adolescents at exposure is
+                    the only cancer to have shown a substantial increase in these areas and it is clearly related to
+                    exposure to radioiodine (predominantly the short lived isotopes particularly <sup>131</sup>I, which
+                    has a half life of 8.1 days). This is evidenced by the sharp decrease in the frequency of thyroid
+                    cancer (returning to pre-accident levels) in those who were born after 1/1/87 and were therefore not
+                    exposed to radioiodine either in utero (the thyroid concentrates iodine from 3 months of
+                    intrauterine age) or in childhood. The cohort now includes a significant number of cases of thyroid
+                    tumours from patients who are resident in the areas&nbsp; contaminated by fallout from Chernobyl,
+                    but by virtue of the fact that they were born after 1/1/87 have not been exposed to radioiodine.&nbsp;
+                    This is an extremely valuable cohort that serves as a control population for thyroid cancer
+                    associated with radioiodine exposure.</p>
+                <p>The CTB collects a variety of different types of biospecimen from patients undergoing operations for
+                    thyroid cancer or adenoma in the Institute of Endocrinology and Metabolism in Kiev, Ukraine and the
+                    A. Tsyb Medical Radiological Research Centre in Obninsk, Russian Federation who consent to donate to
+                    the project. Tissue is collected to an approved standard operating procedure (SOP) and is snap
+                    frozen; the presence or absence of tumour is verified by frozen section. A representative paraffin
+                    block is also obtained for each case. Where appropriate, we also collect fresh and paraffin-embedded
+                    tissue from loco-regional metastases.</p>
+                <p>Histological slides from all tumours are reviewed by the CTB Pathology Panel - an international group
+                    of expert thyroid pathologists, and a consensus diagnosis agreed before any materials are released
+                    to researchers.</p>
+                <p>The CTB provides materials and data to research groups worldwide. The aim of the project is to ensure
+                    that the maximum amount of information can be gathered from what is a unique and limited resource.
+                    The surgical samples of thyroid tissue are generally small, therefore the CTB does not currently
+                    issue tissue, but provides extracted nucleic acids, paraffin sections and sections from tissue
+                    microarrays prepared from this material. Researchers are required to return research data to the CTB
+                    so that the information can be shared with other researchers and could lead to better patient care
+                    and assessment of risk from radiation exposure to a young population in the future.</p>
+                <p>For information on how you can apply to access biomaterials or research data <a
+                        href="{% url 'access_to_materials' %}">click here</a>.<br><br>The on-line application process allows a
+                    potential applicant to review whether samples or data matching the researchers search criteria are
+                    available in the CTB. The table below provides a summary of the cumulative total of cases from
+                    Ukraine and the Russian Federation, which have been reviewed by the Pathology Panel and a consensus
+                    diagnosis agreed; the number of cases for which frozen material is available is given in brackets.
+                </p>
+                <table border="0">
+                    <tbody>
+                    <tr>
+                        <th>Diagnosis</th>
+                        <th colspan="2">Ukraine</th>
+                        <th colspan="2">Russia</th>
+                        <th colspan="2">Total</th>
+                    </tr>
+                    <tr>
+                        <td>Papillary Carcinoma (incl micro PTC)</td>
+                        <td>2438</td>
+                        <td>(1922)</td>
+                        <td>938</td>
+                        <td>(691)</td>
+                        <td>3376</td>
+                        <td>(2613)</td>
+                    </tr>
+                    <tr>
+                        <td>Follicular Carcinoma</td>
+                        <td>121</td>
+                        <td>(103)</td>
+                        <td>34</td>
+                        <td>(28)</td>
+                        <td>155</td>
+                        <td>(131)</td>
+                    </tr>
+                    <tr>
+                        <td>Medullary Carcinoma</td>
+                        <td>57</td>
+                        <td>(48)</td>
+                        <td>32</td>
+                        <td>(22)</td>
+                        <td>89</td>
+                        <td>(70)</td>
+                    </tr>
+                    <tr>
+                        <td>Other thyroid cancers<br>(WDCA NOS, PDC)</td>
+                        <td>77</td>
+                        <td>(67)</td>
+                        <td>31</td>
+                        <td>(24)</td>
+                        <td>108</td>
+                        <td>(91)</td>
+                    </tr>
+                    <tr>
+                        <td>Follicular Adenoma</td>
+                        <td>708</td>
+                        <td>(562)</td>
+                        <td>299</td>
+                        <td>(236)</td>
+                        <td>1007</td>
+                        <td>(798)</td>
+                    </tr>
+                    <tr>
+                        <td>Other Benign Follicular Tumours<br>(FT UMP and WDT UMP)</td>
+                        <td>143</td>
+                        <td>(124)</td>
+                        <td>77</td>
+                        <td>(59)</td>
+                        <td>220</td>
+                        <td>(183)</td>
+                    </tr>
+                    <tr>
+                        <td>Miscellaneous Thyroid Tumours&nbsp;<br>(Other and Nodule, TTT)</td>
+                        <td>158</td>
+                        <td>(104)</td>
+                        <td>115</td>
+                        <td>(96)</td>
+                        <td>273</td>
+                        <td>(200)</td>
+                    </tr>
+                    <tr>
+                        <td>Total</td>
+                        <td>3702</td>
+                        <td>(2930)</td>
+                        <td>1526</td>
+                        <td>(1156)</td>
+                        <td>5228</td>
+                        <td>(4086)&nbsp;</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <p><strong>Table updated 18<sup>th</sup>&nbsp;November 2019</strong></p>
+                <p>The total number of cases included in the CTB from Ukraine and Russia is 5228. Of these 69% are
+                    resident in the contaminated oblasts and 83% of these were born before 1<sup>st </sup>December 1986
+                    and therefore exposed to radioiodine at 3 months of intrauterine age or older. A total of 17% were
+                    born after 1<sup>st</sup> December 1986 and therefore not exposed to radioiodine in fallout.</p>
+                <p><strong>More information:</strong></p>
+                <p><a href="/nucleic-acids-and-paraffin-secretions.htm">Aliquots of nucleic acid</a><br><a
+                        href="/nucleic-acids-and-paraffin-secretions.htm">Paraffin sections</a> <br><a
+                        href="/tissue-microarrays.htm">Tissue Micro Arrays</a></p>
+                <p>&nbsp;</p></div>
+
+            <div class="col-md-4 offset-md-1 pb-4">
+
+                <ul class="side-navigation">
+                    <li class="side-navigation__item side-navigation__item--heading">
+                        <a href="{% url 'researchers_page' %}" class="side-navigation__link ">
+                            For Researchers
+                        </a>
+                    </li>
+                    <li class="side-navigation__item ">
+                        <a class="side-navigation__link" href="{% url 'access_to_materials' %}">
+                            Access to Materials
+                        </a>
+                    </li>
+                    <li class="side-navigation__item ">
+                        <a class="side-navigation__link" href="https://www.chernobyltissuebank.com/biosample-search/"
+                           target="_blank">
+                            CTB Biosample Search
+                        </a>
+                    </li>
+                    <li class="side-navigation__item ">
+                        <a class="side-navigation__link" href="{% url 'research_projects' %}">
+                            Research Projects Using CTB Materials
+                        </a>
+                    </li>
+                    <li class="side-navigation__item  side-navigation__link--active ">
+                        <a class="side-navigation__link" href="{% url 'material_available' %}">
+                            Material Available
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_file %}
+	{{ block.super }}
+{#	<script type="text/javascript" src="{% static 'js/news.js' %}?v={{ APP_VERSION }}"></script>#}
+{#    <script>#}
+{#    var showWarning = true;#}
+{#    </script>#}
+{% endblock %}
