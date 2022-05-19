@@ -67,14 +67,27 @@
                     <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
                 </li>
             </ul>
-{#            <form class="d-flex">#}
-{#                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">#}
-{#                <button class="btn btn-outline-success" type="submit">Search</button>#}
-{#            </form>#}
+            <ul class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                    {% if has_access %}
+                    <li class="nav-item">
+                        <a href="{% url 'user_detail' user.id %}" class="nav-link" title="User Details">
+                            <i class="fa-solid fa-user"></i> User Name
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a href="#logout-modal" class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-modal"
+                           title="Sign Out">
+                            Sign Out <i class="fa fa-solid fa-sign-out"></i>
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
     </div>
 </nav>
-{% if 'accounts' in request.path or 'dashboard' in request.path or 'search' in request.path or 'users' in request.path %}
+{% if 'login' in request.path or 'search_facility/' in request.path %}
     <div class="nav-scroller bg-body shadow-sm">
         <div class="container">
             <nav class="nav nav-underline navbar-ctb" aria-label="Secondary navigation">
@@ -87,50 +100,10 @@
                 </a>
                 <a class="nav-link" href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
                 <a class="nav-link" href="{% url 'saved_searches' %}">My Saved Searches</a>
+
                 {% endif %}
-                <ul class="navbar-nav ms-auto">
-                    {% if user.is_authenticated %}
-                        <li id="user-login" class="nav-item navbar-signin">
-                            <div class="dropdown">
-                                <a class="avatar-link" href="{% url 'user_detail' user.id %}">
-                                    {% with avatar_url=user.socialaccount_set.all.0.get_avatar_url %}
-                                        {% if avatar_url %}
-                                            <img src="{{ user.socialaccount_set.all.0.get_avatar_url }}"
-                                                 width="40" height="40" alt="Avatar Link to User Details">
-                                        {% else %}
-                                            <i class="fa-solid fa-user basic-avatar"> </i>
-                                        {% endif %}
-                                    {% endwith %}
-                                </a>
-                                <a role="button" class="dropdown-toggle" id="user-dropdown"
-                                   data-bs-toggle="dropdown" aria-label="User Dropdown"
-                                   aria-expanded="false">
-                                    {{ user.first_name }}
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end" role="menu"
-                                    aria-label="user-dropdown">
-                                    {% if has_access %}
-                                        <li class="dropdown-item"><a href="{% url 'user_detail' user.id %}">Account
-                                            Details <i class="fa-solid fa-cog"></i></a></li>{% endif %}
-                                    <li class="dropdown-item"><a href="#logout-modal" data-bs-toggle="modal"
-                                                                 data-bs-target="#logout-modal"
-                                                                 title="Sign Out">Sign Out <i
-                                            class="fa-solid fa-sign-out"></i></a></li>
-                                </ul>
-                            </div>
-                        </li>
-                    {% else %}
-                        <li class="nav-item navbar-signin dropdown">
-                            <a class="nav-link" href="{% url 'account_login' %}"><i
-                                    class="fa fa-solid fa-sign-in"></i> Sign In</a>
-                            {#                            <a id="sign-in-dropdown"#}
-                            {#                               href="{% url 'account_login' %}" title="Sign In"><i#}
-                            {#                                    class="fa fa-solid fa-sign-in"></i>#}
-                            {#                                Sign In</a>#}
-                        </li>
-                    {% endif %}
-                </ul>
             </nav>
+
         </div>
     </div>
 {% endif %}

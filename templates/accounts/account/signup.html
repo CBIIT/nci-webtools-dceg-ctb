@@ -15,15 +15,19 @@
         <div class="col-lg-4 accounts-col">
             <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                 <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Sign Up</h3>
-                        <p>{% blocktrans %}Already have an account? Please <a href="{{ login_url }}"><b>sign in</b></a> instead.{% endblocktrans %}</p>
-                          {% csrf_token %}
-                          {{ form.as_p }}
-                          {% if redirect_field_value %}
-                          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                          {% endif %}
-                          <button class="btn btn-special btn-secondary" type="submit">{% trans "Sign Up" %} &raquo;</button>
+                    <div class="card-header"><h4>Register</h4></div>
+                    <div class="card-body p-5">
+                        <p>{% blocktrans %}Already have an account? Please <a href="{{ login_url }}"><b>sign in</b></a>
+                            instead.{% endblocktrans %}</p>
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        {% if redirect_field_value %}
+                            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                        {% endif %}
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-secondary" type="submit">{% trans "Register" %} &raquo;
+                            </button>
+                        </div>
                     </div>
                 </div>
             </form>
