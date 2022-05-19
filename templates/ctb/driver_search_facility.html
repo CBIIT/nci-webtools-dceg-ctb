@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Oncogenic Driver Search Facility
+{% endblock %}
+
+{% block description %}
+    Oncogenic Driver Search Facility
+{% endblock %}
+
+{% block page_name %}driver_search_facility{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <div class="pt-3">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Oncogenic Driver Search Facility</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="border rounded bg-light p-3">
+
+                    <div class="content-header d-flex flex-wrap justify-content-between">
+                        <h4>Oncogenic Driver Search</h4>
+                    </div>
+
+                    <div class="content-readmore-wrap">
+                        <div class="content-readmore collapsed">
+                            <p>This section of the search facility enables you to refine your search using oncogenic
+                                drivers that have been identified in tumour samples as a result of research studies
+                                using other samples from the same patients that match your search criteria. Data has
+                                been pooled from three research studies, all of which have used either whole genome
+                                sequencing or next generation sequencing/RNAseq. </p>
+                            <p>Please note that this part of the search facility is currently restricted to oncogenic
+                                drivers in Papillary Thyroid Carcinoma. Currently this data is available on 515
+                                Papillary Carcinomas in which a unique driver has been identified. In 20 of these cases,
+                                no driver mutations have yet been identified. If you wish to include these in your
+                                search, please ensure that you select “NYI” in the menu below.</p>
+                            <p>Oncogenic drivers fall into two categories – fusion events or mutation events. Many
+                                oncogenic driver genes can have multiple partners involved in fusions, for example the
+                                RET oncogene (see this recent <a href="https://pubmed.ncbi.nlm.nih.gov/32326537/"
+                                                                 target="_blank" rel="noopener">review by Santoro et
+                                    al</a>., for more information). The search facility groups these together, so if you
+                                select Fusion.RET, all of your selected cases that harbour any form of RET fusion gene
+                                will be returned. This is true for sother fusion drivers with multiple possible
+                                partners. If you require samples that harbour specific oncogenic fusions, please detail
+                                this in your application. </p>
+                            <p>Similarly, if you select Mut.Ras, the selected cases may harbour mutations in any of the
+                                3 RAS oncogenes. If you require samples that harbour specific RAS mutations, please
+                                detail this in your application.</p>
+                            <p>The table below gives you the total number of cases which harbour the individual
+                                oncogenic drivers included in the dropdown menu that may be available. The actual number
+                                that would be available for your study will depend on the biospecimens you require plus
+                                any clinical data also requested.</p>
+                            <p></p>
+                            <p></p></div>
+                        <a href="#" class="content-readmore__link closed">Read more <img class="icon"
+                                                                                         src="/getfile/design/icons/icon-arrow-left-blue.svg"
+                                                                                         alt=""></a></div>
+
+
+                    <hr>
+
+                    <h5>Current Samples</h5>
+
+                    <p>The table below gives you the total number of cases which harbour the individual oncogenic
+                        drivers included in the selection lists that may be available. The actual number that would be
+                        available for your study will depend on the biospecimens you require plus any clinical data also
+                        requested. In brackets are the drivers that also meet the search criteria you entered in the
+                        biosample search and the clinical search.</p>
+
+
+                    <table class="table--drivers">
+                        <colgroup>
+                            <col>
+                            <col style="width:45px">
+                            <col style="width:20px">
+
+                            <col>
+                            <col style="width:40px;">
+                            <col style="width:20px;">
+
+                            <col>
+                            <col style="width:40px">
+                            <col style="width:20px;">
+                        </colgroup>
+                        <tbody>
+                        <tr>
+                            <th>Fusion Drivers</th>
+                            <th>Cases</th>
+                            <th><span class="hide-visually">From results</span></th>
+                            <th>Mutated Drivers</th>
+                            <th>Cases</th>
+                            <th><span class="hide-visually">From results</span></th>
+                            <th>Not Yet Id'd</th>
+                            <th>Cases</th>
+                            <th><span class="hide-visually">From results</span></th>
+                        </tr>
+                        <tr>
+                            <td>Fusion.ALK</td>
+                            <td class="tar">16</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td>Mut.APC</td>
+                            <td class="tar">2</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td>NYI</td>
+                            <td class="tar">20</td>
+                            <td class="tar table-filter-number">(0)</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.BRAF</td>
+                            <td class="tar">25</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td>Mut.BRAFV600E</td>
+                            <td class="tar">209</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.IGF2/IGF2BP3</td>
+                            <td class="tar">6</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td>Mut.BRAF_other</td>
+                            <td class="tar">2</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.LTK</td>
+                            <td class="tar">3</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td>Mut.DICER1</td>
+                            <td class="tar">3</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.NTRK1</td>
+                            <td class="tar">14</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td>Mut.NFE2L2</td>
+                            <td class="tar">2</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.NTRK3</td>
+                            <td class="tar">43</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td>Mut.RAS</td>
+                            <td class="tar">47</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.PPARG</td>
+                            <td class="tar">14</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td>Mut.TSC</td>
+                            <td class="tar">2</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.RET</td>
+                            <td class="tar">102</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td>Mut.TSHR</td>
+                            <td class="tar">7</td>
+                            <td class="tar table-filter-number">(0)</td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+                    <p>The references for the sources of the data that are relevant to the samples that meet your search
+                        criteria will be provided to you with the biosamples requested on approval of your application.
+                        The relevant references should be quoted in any publication resulting from your study.</p>
+
+                    <hr>
+
+                    <div class="row">
+                        <div class="input-group">
+                            <input type="text" name="title" id="search-save-title"
+                                   class="form-control" value="" placeholder="Search Title"
+                                   aria-label="Recipient's username" aria-describedby="search-save">
+                            <button class="btn btn-primary" type="button" id="search-save"><i
+                                    class="fa-solid fa-floppy-disk"></i> Save Search
+                            </button>
+                        </div>
+                    </div>
+{#                    <hr>#}
+{##}
+{#                    <div class="row">#}
+{#                        <div class="col-4">#}
+{#                            <a class="btn btn-outline-dark" href="{% static 'files/application-form.doc' %}">#}
+{#                                <i class="fa-solid fa-download"></i> Download Application#}
+{#                            </a>#}
+{#                        </div>#}
+{#                        <div class="col-5">#}
+{#                            <input class="col-auto form-control" type="text" placeholder="Search Title" maxlength="50"#}
+{#                                   aria-label="default input example">#}
+{#                        </div>#}
+{#                        <div class="col-3">#}
+{#                            <button id="search-save-driver" class="btn btn-primary col-auto">#}
+{#                                <i class="fa-solid fa-floppy-disk"></i>#}
+{#                                <span class="has-icon__text">Save Search</span>#}
+{#                            </button>#}
+{#                        </div>#}
+{##}
+{#                    </div>#}
+
+                    <script id="save-search-driver-json" type="application/json">{"diagnosis":["FC"],"patientresidency":"both","patientgender":"both","ageatoperation":"0,49","ageatexposure":"-40,19","returnpatientids":true,"ids":[],"totalcases":0}</script>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="border rounded bg-light p-3 mb-4">
+                    <div class="d-grid gap-2 col mx-auto">
+                        <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i
+                                class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
+                        <a class="btn btn-primary" href="{% url 'search_clinical' %}"><i
+                                class="fa-solid fa-magnifying-glass"></i> Perform Another Clinical Search</a>
+                        <a class="btn btn-outline-dark" href="{% static 'files/application-form.doc' %}"><i
+                                class="fa-solid fa-download"></i> Download Application Form</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_file %}
+    {{ block.super }}
+{% endblock %}

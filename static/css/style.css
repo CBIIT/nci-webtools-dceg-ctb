@@ -89,25 +89,25 @@ body {
     /*color: #cacfcf;*/
 /*}*/
 
-/*.btn-primary {*/
-    /*background-color: #4d6ea0;*/
-/*}*/
+.btn-primary {
+    background-color: #4d6ea0;
+}
 
-/*.btn-special {*/
-    /*background-color: #6a4188;*/
-    /*border: 1px solid #4f2f67;*/
-/*}*/
-/*.btn-special:hover {*/
-    /*background-color: #8255a4;*/
-/*}*/
+.btn-special {
+    background-color: #6a4188;
+    border: 1px solid #4f2f67;
+}
+.btn-special:hover {
+    background-color: #8255a4;
+}
 
-/*.btn-default {*/
-    /*background-color: #a9503a;*/
-    /*border: 1px solid #8a4230;*/
-/*}*/
-/*.btn-default:hover {*/
-    /*background-color: #c36149;*/
-/*}*/
+.btn-default {
+    background-color: #a9503a;
+    border: 1px solid #8a4230;
+}
+.btn-default:hover {
+    background-color: #c36149;
+}
 
 /*.hover-grey-button {*/
     /*background-color: transparent;*/
@@ -125,34 +125,38 @@ body {
 .card-login img{
     padding: 1rem 1.5rem;
 }
-.login-intro div{
+.login-intro div {
     font-size: 1.3rem;
     padding: 0.4rem;
-
 }
 
-/*.signup input, .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {*/
-    /*width: 100%;*/
-    /*border-radius: 3px;*/
-    /*padding: 12px;*/
-    /*border: 1px solid slategray;*/
-    /*background-color: #ececec;*/
-/*}*/
+/* Accounts templates */
+.signup label, .login label, .password_reset label {
+    display: none;
+}
 
-/*.login label[for="id_remember"] {*/
-    /*display: inline-block;*/
-    /*margin-top: 5px;*/
-    /*font-size: larger;*/
-    /*font-weight: bold;*/
-/*}*/
+.signup input, .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
+    width: 100%;
+    border-radius: 3px;
+    padding: 12px;
+    border: 1px solid slategray;
+    background-color: #ececec;
+}
 
-/*#id_remember {*/
-    /*width: 20px;*/
-    /*margin-top: -2px;*/
-    /*vertical-align: middle;*/
-/*}*/
+.login label[for="id_remember"] {
+    display: inline-block;
+    margin-top: 5px;
+    font-size: larger;
+    font-weight: bold;
+}
 
-/*!* User Details *!*/
-/*.user-row .col h4 {*/
-    /*display: inline;*/
-/*}*/
+#id_remember {
+    width: 20px;
+    margin-top: -2px;
+    vertical-align: middle;
+}
+
+/* User Details */
+.user-row .col h4 {
+    display: inline;
+}

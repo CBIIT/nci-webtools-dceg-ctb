@@ -11,7 +11,7 @@
 
 {% block content %}
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center py-5">
         <div class="col-lg-4 accounts-col">
             <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                 <div class="card">
@@ -23,7 +23,7 @@
                           {% if redirect_field_value %}
                           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                           {% endif %}
-                          <button class="btn btn-special" type="submit">{% trans "Sign Up" %} &raquo;</button>
+                          <button class="btn btn-special btn-secondary" type="submit">{% trans "Sign Up" %} &raquo;</button>
                     </div>
                 </div>
             </form>

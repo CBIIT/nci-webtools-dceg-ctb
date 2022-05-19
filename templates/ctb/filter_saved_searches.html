@@ -1,0 +1,25 @@
+<table id="saved_searches_tbl" class="table table-striped" style="width:100%">
+    <thead>
+    <tr>
+        <th>Search</th>
+        <th>Type</th>
+        <th>Results</th>
+        <th>Proceed</th>
+        <th>Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for saved_search in saved_search_list %}
+        <tr>
+            <td>{{ saved_search.name }}</td>
+            <td>{{ saved_search.type }}</td>
+            <td>{{ saved_search.results }} Cases</td>
+            <td>{{ saved_search.proceed }}</td>
+            <td><a href="#"><i class="fa-solid fa-trash-can"></i></a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+

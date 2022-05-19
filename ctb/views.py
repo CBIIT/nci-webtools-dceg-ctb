@@ -138,7 +138,7 @@ def extended_login_view(request):
     except Exception as e:
         logger.exception(e)
 
-    return redirect(reverse('explore_data'))
+    return redirect(reverse('dashboard'))
 
 
 # Health check callback
@@ -220,3 +220,81 @@ def news(request):
 # Latest News
 def contact(request):
     return render(request, 'ctb/contact.html', {'request': request})
+
+# Dashboard
+def dashboard(request):
+    saved_search_list = [
+        {'name': 'Follicular Female',
+         'type': 'Biosample',
+         'results': 29,
+         'proceed': 'driver'},
+        {'name': 'Example 2',
+         'type': 'Biosample',
+         'results': 42,
+         'proceed': 'driver'},
+    ]
+    return render(request, 'ctb/dashboard.html', {'request': request, 'saved_search_list': saved_search_list})
+
+#temporary data
+
+    return render(request, 'ctb/saved_searches.html', {'request': request, 'saved_search_list': saved_search_list})
+
+# Search Tissue Samples
+def search_tissue_samples(request):
+    # hard coded data
+    tissue = {
+        'rna': {
+            'normal': 323,
+            'tumor': 534,
+            'metastatic': 115
+        },
+        'dna': {
+            'normal': 634,
+            'tumor': 274,
+            'metastatic': 284
+        },
+        'ffpe': {
+            'normal': 26,
+            'tumor': 734,
+            'metastatic': 623
+        }
+    }
+    blood ={
+        'dna': 23,
+        'serum':32
+    }
+    total = 735
+    return render(request, 'ctb/search_tissue_samples.html', {'request': request, 'tissue': tissue, 'blood': blood, 'total': total})
+
+# My Saved Searches
+def saved_searches(request):
+    #temporary data
+    saved_search_list = [
+        {'name': 'Follicular Female',
+         'type': 'Biosample',
+         'results': 29,
+         'proceed': 'driver'},
+        {'name': 'Example 2',
+         'type': 'Biosample',
+         'results': 42,
+         'proceed': 'driver'},
+    ]
+    return render(request, 'ctb/saved_searches.html', {'request': request, 'saved_search_list': saved_search_list})
+
+
+# Clinical Search Intro
+def search_clinical(request):
+    return render(request, 'ctb/search_clinical.html', {'request': request})
+
+# Clinical Search Facility
+def clinical_search_facility(request):
+    return render(request, 'ctb/clinical_search_facility.html', {'request': request})
+
+# Driver Search Facility
+def driver_search_facility(request):
+    return render(request, 'ctb/driver_search_facility.html', {'request': request})
+
+# Driver Search Facility
+def clinical_search_facility_results(request):
+    return render(request, 'ctb/clinical_search_facility_results.html', {'request': request})
+

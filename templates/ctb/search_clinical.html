@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Clinical Search Facility
+{% endblock %}
+
+{% block description %}
+    Clinical Search Facility
+{% endblock %}
+
+{% block page_name %}search_clinical{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <div class="pt-3">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Clinical Search Facility</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="border rounded bg-light p-3">
+                    <h4>Clinical Search Facility</h4>
+                    <h5>General Information</h5>
+                    <div class="fw-light">The clinical search facility is only for use in projects that are requesting
+                        access to
+                        samples from patients with a thyroid cancer diagnosis.
+                    </div>
+                    <hr>
+                    <p>You have already had the opportunity to search for samples based on pathology, exposure status,
+                        country of origin, dosimetry and age of the patient at operation and at the time of the
+                        accident. Your search may now be further defined using additional clinical information that is
+                        available on some of the cases in the CTB. Clinical data is still being added on some of our
+                        cases, so more information will be available shortly. If you do not wish to further define your
+                        search, you may skip this section. You will need to justify why you need clinical information
+                        for your project in your application.</p>
+                    <p>You can further refine your search using clinical parameters if you are requesting only samples
+                        from patients with cancer —Papillary Thyroid Cancer (PTC), Follicular Cancer (FC), Medullary
+                        Carcinoma (MTC) or Well Differentiated Cancer, Not Otherwise Specified (WDCA NOS), Poorly
+                        Differentiated Thyroid Cancer (PDC).</p>
+                    <p>You will be guided through a series of screens — if you do not wish to refine your search based
+                        on the criteria visible on that screen, simply click the next button. If you do not wish to
+                        select a particular parameter in each section of the screen, simply leave that parameter
+                        blank.</p>
+                    <p><strong>If you do not wish to refine your search using clinical parameters, please click on the
+                        links on the right.</strong></p>
+                    <hr>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a class="btn btn-primary me-md-2" href="{% url 'clinical_search_facility' %}">
+                            <i class="fa-solid fa-right-long"></i> Proceed to Refine by Clinical Parameters
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="border rounded bg-light p-3 mb-4">
+                    <div class="d-grid gap-2 col mx-auto">
+                        <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i
+                                class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
+                        <a class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
+                                class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
+                        <a class="btn btn-outline-dark" href="{% static 'files/application-form.doc' %}"><i
+                                class="fa-solid fa-download"></i> Download Application Form</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_file %}
+    {{ block.super }}
+{% endblock %}

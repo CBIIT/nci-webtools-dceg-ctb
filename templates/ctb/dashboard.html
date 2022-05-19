@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css_libs %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% static "css/dataTables.bootstrap.min.css" %}">{% endblock %}
+
+{% block title %}
+    CTB | Dashboard
+{% endblock %}
+
+{% block description %}
+    Dashboard
+{% endblock %}
+
+{% block page_name %}dashboard{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <div class="pt-3">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="bg-light border rounded p-3">
+                    <h4>Welcome to the Chernobyl Tissue Bank Biosample Search</h4>
+
+
+                    <p>Please read the following important information to allow you to make full use of the search
+                        facility.</p>
+                    <p>The Chernobyl Tissue Bank Filter Tool allows you to check whether the number of biological
+                        samples with the associated information you require for your research are available within
+                        the CTB.</p>
+                    <p>After completing your biosample search you can further refine your search using a number of
+                        clinical parameters (e.g. TNM status, AJCC Clinical stage and treatment and outcome). If you
+                        do not wish to refine your search, you can skip this step. Once you have defined the
+                        biosamples that you wish to access (with or without additional clinical information), you
+                        will have the option to download an application form. Instructions on submission of
+                        applications for access can be found on the form. Information about the review process of
+                        applications is available on the <a href="https://www.chernobyltissuebank.com"
+                                                            target="_blank" rel="noopener">CTB website</a>.
+                        Applications must be approved before any samples can be released.</p>
+                    <p>In your application, is important that you specify the criteria for sample selection as
+                        exactly as possible, by completing all sections of the Filter. If your application is
+                        approved, samples will be provided according to the search criteria you have used in the
+                        Filter. Screen shots of the biosample search may be appended to your application if you
+                        wish.</p>
+                    <p>The search facility will provide you with the number of cases that fit your search criteria –
+                        you will not receive detailed information on the individual cases until your project is
+                        approved.</p>
+                    <p>Samples issued following approval of the project will be accompanied by the following dataset
+                        – CTB unique patient identifier, sample unique identifier, pathological diagnosis, age at
+                        the accident, age at operation, gender, and oblast (administrative region) of residence at
+                        the time of the accident. Information on estimated thyroid radiation dose can also be
+                        provided if justified in your application. Clinical information as requested using the
+                        clinical search facility can also be provided on each case, providing it has been justified
+                        in the application.</p>
+{#                    <p>If you have any queries, please email these to chernobyltissuebank@imperial.ac.uk. Online#}
+{#                        information using the search tools is available where you see the <span#}
+{#                                title="Example Text"><img#}
+{#                                src="/biosample-search/getfile/design/icons/question-mark.svg" alt=""></span> icon.#}
+{#                    </p>#}
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="d-grid gap-2 mb-3">
+                    <a class="btn btn-primary" href="{% url 'search_tissue_samples' %}"><i
+                            class="fa-solid fa-magnifying-glass"></i> Search Tissue Samples</a>
+                </div>
+
+
+                <!-- <form class="form form-search" action="/biosample-search/samples">
+                    <input type="search" placeholder="Search Tissue Bank By: " />
+                    <input class="btn btn-blue" type="submit" value="Biosample Data" />
+                </form> -->
+
+                <div class="border rounded bg-light p-3">
+                    <div>
+                        <h4>
+                            My Saved Searches
+                        </h4>
+
+                    </div>
+
+                    {% include 'ctb/filter_saved_searches.html' %}
+{#                    <table></table>#}
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
+
+{% block js_file %}
+    {{ block.super }}
+    {#	<script type="text/javascript" src="{% static 'js/news.js' %}?v={{ APP_VERSION }}"></script>#}
+    {#    <script>#}
+    {#    var showWarning = true;#}
+    {#    </script>#}
+    <script type="text/javascript" src="{% static 'js/saved_searches.js' %}"></script>
+{% endblock %}
