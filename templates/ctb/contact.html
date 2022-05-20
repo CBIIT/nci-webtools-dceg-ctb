@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Contact Us
+{% endblock %}
+
+{% block description %}
+    Contact Us
+{% endblock %}
+
+{% block page_name %}contact{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <h3 class="page-banner">Contact Us</h3>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container mb-5">
+
+        <div class="fw-light text-center">
+            If you would like any further information or have any queries regarding the Tissue Bank, please
+            contact:
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-5">
+                <div class="card mt-3">
+                    <div class="card-header py-2 px-5"><h5>Professor Geraldine Thomas</h5>
+                        <div class="card-subtitle text-muted"><strong>CTB Project Director</strong>
+                        </div>
+                    </div>
+                    <div class="card-body py-2 px-5">
+                        <p class="card-text">
+                            Department of Surgery and Cancer<br>
+                            Imperial College London<br>
+                            Room 11L05<br>
+                            Charing Cross Hospital<br>
+                            Fulham Palace Road<br>
+                            London W6 8RF
+                        </p>
+
+                        <div class="text-muted">Email: <a href="mailto:chernobyltissuebank@imperial.ac.uk">chernobyltissuebank@imperial.ac.uk</a>
+                        </div>
+                        <div class="text-muted">Phone: <a href="tel:+44-203-311-7342">+44 (0)203 311 7342</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js_file %}
+    {{ block.super }}
+{% endblock %}

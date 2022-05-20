@@ -1,0 +1,60 @@
+{% extends 'ctb/research.html' %}
+
+{% load static %}
+
+{% block title %}
+    CTB | For Researchers
+{% endblock %}
+
+{% block description %}
+    For Researchers
+{% endblock %}
+
+{% block page_name %}researchers_page{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <h3 class="page-banner">For Researchers</h3>
+        <div>
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Research</li>
+                    <li class="breadcrumb-item active" aria-current="page">For Researchers</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block subcontent %}
+
+    <p><strong>Researchers wishing to use the materials in the CTB should register with the CTB Biosample
+        Search to access a comprehensive database of samples that are available and to prepare and submit an
+        application to access the tissue bank. The biomaterials and research data in the CTB are available
+        to researchers of approved projects anywhere in the world.</strong></p>
+    <p>By using the search facility in the CTB Biosample Search, a researcher can define the type of sample
+        and/or data required and obtain an instant read out of the availability of samples and data that
+        match the search criteria. Applications can be made on the application form that can be downloaded
+        <a href="{% static 'files/application-form.doc' %}">here</a>.&nbsp;
+        Applications are then reviewed and, once approved, biomaterials are sourced and shipped to the
+        researcher. Samples are provided free of charge but shipping costs will be charged to the
+        researchers. Access to additional research data, if requested, may be made available.</p>
+    <p>Researchers are strongly encouraged to publish their data and are asked to ensure that the CTB is
+        acknowledged in any publications arising from their study. The aim of the CTB is to maximise the
+        value of the research data derived from the unique tissue collection and researchers are therefore
+        required to submit their research data back to the CTB.</p>
+    <p>The CTB will normally correspond with researchers if their project addresses similar questions, or is
+        likely to produce results that complement other studies. Projects which have used, or are using, CTB
+        materials are listed <span style="text-decoration: underline;"><a href="{% url 'research_projects' %}"
+                                                                          target="_blank" rel="noopener">here</a></span>.
+    </p>
+    <p>More information about the CTB is summarised in the Fact Sheet (click here for access to the <span
+            style="text-decoration: underline;"><a href="{% url 'fact_sheet' %}" target="_blank"
+                                                   rel="noopener">Fact Sheet</a></span>). Some useful links
+        to other organisations supporting thyroid cancer research or involved with tissue banking can be
+        found <span style="text-decoration: underline;"><a href="{% url 'useful_links' %}" target="_blank"
+                                                           rel="noopener">here</a></span>.</p>
+
+
+{% endblock %}

@@ -11,38 +11,47 @@
 {% block page_name %}sign-in{% endblock %}
 
 {% block content %}
-    <div class="row justify-content-center">
+    <div class="row justify-content-center my-5">
         <div class="col-lg-4 accounts-col">
             <form class="login" method="POST" action="{% url 'account_login' %}" autocomplete="off">
-                <div class="card mb-3">
+                <div class="card p-5">
+                    <img src="{% static 'img/ctb-biosample-logo.svg' %}" class="card-img-top" style="padding: .5rem 5.5rem;" alt="CTB Biosample Search Logo">
                     <div class="card-body">
                         <div class="ctb-login">
-                            <h3 class="card-title">Sign in to Chenorbyl Tissue Biobank</h3>
-                              {% csrf_token %}
-                              {{ form.as_p }}
-                              {% if redirect_field_value %}
-                              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-                              {% endif %}
-                              <button class="primaryAction btn btn-primary" type="submit">{% trans "Sign In" %}</button>
+                            <h4 class="card-title">Sign In</h4>
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}"
+                                       value="{{ redirect_field_value }}"/>
+                            {% endif %}
+{#                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">#}
+                            <div class="d-grid gap-2">
+                                <button class="primaryAction btn btn-primary"
+                                        type="submit">{% trans "Sign In" %}</button>
+                            </div>
+                            <div>
+                                <a class="secondaryAction" href="{% url 'account_reset_password' %}">Forgot your Password?</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="card mb-3">
-                    <div class="card-body sign-up text-center">
-                        <h5 class="card-title">
-                            Forgot your password?
-                        </h5>
-                        <p><a class="btn btn-default secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Password Reset" %}</a></p>
-                    </div>
-                </div>
-                <div class="card">
-                    <div class="card-body sign-up text-center">
-                        <h5 class="card-title">
+{#                <div class="card mb-3">#}
+{#                    <div class="card-body sign-up text-center">#}
+{#                        <h5 class="card-title">#}
+{#                            Forgot your password?#}
+{#                        </h5>#}
+{#                        <p><a class="btn btn-secondary secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Password Reset" %}</a></p>#}
+{#                    </div>#}
+{#                </div>#}
+                <div class="card my-3 px-5">
+                    <div class="card-body sign-up">
+                        <h4 class="card-title">
                             Don't have an account with CTB?
-                        </h5>
-                        <p>
-                            <a class="btn btn-special" href="{{ signup_url }}">{% trans "Sign Up" %}</a>
-                        </p>
+                        </h4>
+                        <div class="d-grid gap-2">
+                            <a class="btn btn-secondary" href="{{ signup_url }}">{% trans "Register" %}</a>
+                        </div>
                     </div>
                 </div>
             </form>

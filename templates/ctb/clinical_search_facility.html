@@ -1,0 +1,903 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Refine by Clinical Parameters
+{% endblock %}
+
+{% block description %}
+    Refine by Clinical Parameters
+{% endblock %}
+
+{% block page_name %}clinical_search_facility{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <div class="pt-3">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'search_clinical' %}">Clinical Search Facility</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Refine by Clinical Parameters</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <div class="border bg-light rounded p-3">
+                    <div class="content-header d-flex flex-wrap justify-content-between">
+                        <h5>Clinical Search Facility</h5>
+                        <a class="btn btn-outline-dark clinic-skip" href="#">
+                            Skip
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                    </div>
+
+
+                    <form method="POST" id="form-clinic" class="form--clinic"
+                          action="/biosample-search/clinical-search-facility-results" autofill="off">
+
+                        <input type="hidden" name="patientresidency" value="both">
+                        <input type="hidden" name="patientgender" value="both">
+                        <input type="hidden" name="ageatoperation" value="0,49">
+                        <input type="hidden" name="ageatexposure" value="-40,19">
+
+                        <div class="form-steps">
+                            <fieldset id="form-clinic-0">
+                                <div>
+                                    <legend><h6>General Information</h6></legend>
+                                </div>
+                                <p><strong>The clinical search facility is only for use in projects that are requesting
+                                    access to samples from patients with a thyroid cancer diagnosis.</strong></p>
+                                <hr>
+                                <p>You have already had the opportunity to search for samples based on pathology,
+                                    exposure status, country of origin, dosimetry and age of the patient at operation
+                                    and at the time of the accident. Your search may now be further defined using
+                                    additional clinical information that is available on some of the cases in the CTB.
+                                    Clinical data is still being added on some of our cases, so more information will be
+                                    available shortly. If you do not wish to further define your search, you may skip
+                                    this section. You will need to justify why you need clinical information for your
+                                    project in your application.</p>
+                                <p>You can further refine your search using clinical parameters if you are requesting
+                                    only samples from patients with cancer —Papillary Thyroid Cancer (PTC), Follicular
+                                    Cancer (FC), Medullary Carcinoma (MTC) or Well Differentiated Cancer, Not Otherwise
+                                    Specified (WDCA NOS), Poorly Differentiated Thyroid Cancer (PDC).</p>
+                                <p>You will be guided through a series of screens — if you do not wish to refine your
+                                    search based on the criteria visible on that screen, simply click the next button.
+                                    If you do not wish to select a particular parameter in each section of the screen,
+                                    simply leave that parameter blank.</p>
+                                <p><strong>If you do not wish to refine your search using clinical parameters, please
+                                    click on the links on the right.</strong></p></fieldset>
+                            <fieldset id="form-clinic-1" class="clinic--active">
+                                <div>
+                                    <legend><h6>Operation Type</h6></legend>
+                                </div>
+                                <p>There are two categories for operation type:</p>
+                                <hr>
+
+                                <div class="row-bs justify-content-start flex-wrap">
+                                    <div class="col-lg-auto mgn--bottom--large">
+                                        <label class="label--clinic" for="optype-total">
+                                            <div class="label--clinic__left">
+                                                <div class="custom-radio"><input id="optype-total" type="radio"
+                                                                                 name="op-type" value="total"><span
+                                                        class="checkmark"></span></div>
+                                            </div>
+                                            <div class="label--clinic__right">
+                                                <p class="label--clinic__title">Total Thyroidectomy</p>
+                                                <span class="label--clinic__summary">Where all of the thyroid gland is removed.</span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-auto mgn--bottom--large">
+                                        <label class="label--clinic" for="optype-ltotal">
+                                            <div class="label--clinic__left">
+                                                <div class="custom-radio"><input id="optype-ltotal" type="radio"
+                                                                                 name="op-type" value="ltotal"><span
+                                                        class="checkmark"></span></div>
+                                            </div>
+                                            <div class="label--clinic__right">
+                                                <p class="label--clinic__title">Less Than Total Thyroidectomy</p>
+                                                <span class="label--clinic__summary">Where only the area of the thyroid gland that contains the tumour is removed.</span>
+                                            </div>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-auto mgn--bottom--large">
+                                        <label class="label--clinic" for="optype-any">
+                                            <div class="label--clinic__left">
+                                                <div class="custom-radio"><input id="optype-any" type="radio"
+                                                                                 name="op-type" value="any"><span
+                                                        class="checkmark"></span></div>
+                                            </div>
+                                            <div class="label--clinic__right">
+                                                <p class="label--clinic__title">Any Thyroidectomy</p>
+                                                <span class="label--clinic__summary">Includes both total and less than total thyroidectomy.</span>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p class="clinic-note">The selection criteria is set to any operation type, so if
+                                        you wish set this category to total or less than total, please select this box –
+                                        you may select only one.</p>
+                                    <p class="clinic-note"><strong>If you do not wish to refine your research with
+                                        information on operation type, please leave this section blank and continue to
+                                        the next section.</strong></p>
+                                </div>
+                            </fieldset>
+                            <fieldset id="form-clinic-2">
+                                <div>
+                                    <legend><h6>TNM Status (8th Edition) - <a
+                                            href="https://www.pathologyoutlines.com/topic/thyroidstaging.html"
+                                            target="_blank">Read more</a></h6></legend>
+                                </div>
+                                <p>
+                                    This is the pathological staging system used to describe the cancer. It will enable
+                                    you to select samples from cancers based on size, invasion into lymph nodes and
+                                    metastasis to distant organs.
+                                    In this section you can refine your biosample search for size of tumour and local
+                                    invasion using T and N status.
+                                </p>
+                                <p>
+                                    The next screen will enable you to use the clinical stage to refine your search
+                                    based on the presence of distant metastases.
+                                </p>
+
+                                <hr>
+
+
+                                <div class="clinic-options" id="options-pt1">
+                                    <div class="clinic-options__head">
+                                        <div class="clinic-options__head__top d-flex align-items-center">
+                                            <img class="has-icon__image"
+                                                 src="/biosample-search/getfile/design/icons/notepad-2.svg" alt=""
+                                                 loading="lazy">
+                                            <h3 class="clinic-options__title">
+                                                Primary tumor (pT) status for Papillary, Follicular, Poorly
+                                                differentiated, Well Differentiated Cancer, Not Otherwise Specified
+                                            </h3>
+                                            <button class="btn btn-reset" data-target="#options-pt1">Reset</button>
+                                        </div>
+                                        <div class="clinic-options__head__bottom">
+                                            <p>For all cancer types:</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="clinic-options__list">
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t1">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T1:</strong> Tumor ≤ 2 cm in greatest dimension limited to the thyroid</span>
+
+                                            </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t1a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T1a:</strong> Tumor ≤ 1 cm in greatest dimension limited to the thyroid</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusa[]"
+                                                       value="T1a" id="ptstatusa-t1a"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t1b">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T1b:</strong> T1b: Tumor &gt; 1 cm but ≤ 2 cm in greatest dimension limited to the thyroid</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusa[]"
+                                                       value="T1b" id="ptstatusa-t1b"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t2">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T2:</strong> Tumor &gt; 2 cm but ≤ 4 cm in greatest dimension limited to the thyroid</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusa[]"
+                                                       value="T2" id="ptstatusa-t2"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t3">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T3:</strong> Tumor &gt; 4 cm limited to the thyroid or gross extrathyroidal extension invading only strap muscles</span>
+
+                                            </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t3a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T3a:</strong> Tumor &gt; 4 cm limited to the thyroid</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusa[]"
+                                                       value="T3a" id="ptstatusa-t3a"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t3b">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T3b:</strong> Gross extrathyroidal extension invading only strap muscles (sternohyoid, sternothyroid, thyrohyoid or omohyoid muscles) from a tumour of any size</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusa[]"
+                                                       value="T3b" id="ptstatusa-t3b"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t4">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T4:</strong> Includes gross extrathyroidal extension into major neck structures</span>
+
+                                            </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t4a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T4a:</strong> Gross extrathyroidal extension invading subcutaneous soft tissues, larynx, trachea, oesophagus or recurrent laryngeal nerve from a tumour of any size</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusa[]"
+                                                       value="T4a" id="ptstatusa-t4a"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusa-t4b">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T4b:</strong> Gross extrathyroidal extension invading prevertebral fascia or encasing carotid artery or mediastinal vessels from a tumour of any size</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusa[]"
+                                                       value="T4b" id="ptstatusa-t4b"> </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="clinic-note  mgn--bottom--large"><strong>If you do not wish to select a size
+                                    of tumour, please leave this section blank.</strong></p>
+
+
+                                <div class="clinic-options" id="options-pt2">
+                                    <div class="clinic-options__head">
+                                        <div class="clinic-options__head__top d-flex align-items-center">
+                                            <img class="has-icon__image"
+                                                 src="/biosample-search/getfile/design/icons/notepad-2.svg" alt=""
+                                                 loading="lazy">
+                                            <h3 class="clinic-options__title">
+                                                pT status for medullary thyroid cancers
+                                            </h3>
+                                            <button class="btn btn-reset" data-target="#options-pt2">Reset</button>
+                                        </div>
+                                        <!--
+                                        <div class="clinic-options__head__bottom">
+                                            <p>T values T1-T3 the definitions are as given above for the other thyroid cancers. However, for T4, the following definitions apply: </p>
+                                        </div>
+                                        -->
+                                    </div>
+
+                                    <div class="clinic-options__list">
+
+
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t1">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T1:</strong> Tumor ≤ 2 cm in greatest dimension limited to the thyroid</span>
+
+                                            </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t1a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T1a:</strong> Tumor ≤ 1 cm in greatest dimension limited to the thyroid</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusb[]"
+                                                       value="T1a" id="ptstatusb-t1a"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t1b">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T1b:</strong> T1b: Tumor &gt; 1 cm but ≤ 2 cm in greatest dimension limited to the thyroid</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusb[]"
+                                                       value="T1b" id="ptstatusb-t1b"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t2">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T2:</strong> Tumor &gt; 2 cm but ≤ 4 cm in greatest dimension limited to the thyroid</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusb[]"
+                                                       value="T2" id="ptstatusb-t2"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t3">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T3:</strong> Tumor &gt; 4 cm limited to the thyroid or gross extrathyroidal extension invading only strap muscles</span>
+
+                                            </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t3a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T3a:</strong> Tumor &gt; 4 cm limited to the thyroid</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusb[]"
+                                                       value="T3a" id="ptstatusb-t3a"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t3b">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T3b:</strong> Gross extrathyroidal extension invading only strap muscles (sternohyoid, sternothyroid, thyrohyoid or omohyoid muscles) from a tumour of any size</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusb[]"
+                                                       value="T3b" id="ptstatusb-t3b"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t4a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T4: advanced disease:</strong></span>
+
+                                            </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t4a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T4a:</strong> Moderately advanced disease; tumour of any size with gross extrathyroidal extension into the nearby tissues of the neck, including subcutaneous soft tissue, larynx, trachea, oesophagus or recurrent laryngeal nerve</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusb[]"
+                                                       value="T4a" id="ptstatusb-t4a"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ptstatusb-t4b">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>T4b:</strong> T4b: Very advanced disease; tumour of any size with extension toward the spine or into nearby large blood vessels, invading the prevertebral fascia or encasing the carotid artery or mediastinal vessels </span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="pt-statusb[]"
+                                                       value="T4b" id="ptstatusb-t4b"> </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="clinic-note mgn--bottom"><strong>If you do not wish to select a size of
+                                    tumour, please leave this section blank.</strong></p>
+
+
+                                <div class="clinic-options" id="options-pt3">
+                                    <div class="clinic-options__head">
+                                        <div class="clinic-options__head__top d-flex align-items-center">
+                                            <img class="has-icon__image"
+                                                 src="/biosample-search/getfile/design/icons/notepad-2.svg" alt=""
+                                                 loading="lazy">
+                                            <h3 class="clinic-options__title">
+                                                Regional Lymph Node Involvement -N
+                                            </h3>
+                                            <button class="btn btn-reset" data-target="#options-pt3">Reset</button>
+                                        </div>
+                                        <div class="clinic-options__head__bottom">
+                                            <p>This section will enable you to select cancers based on the degree
+                                                invasion into local lymph nodes.
+                                                The categories are as follows:</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="clinic-options__list">
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="reg-node-nx">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>NX:</strong> Regional lymph nodes cannot be assessed</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="reg-node[]"
+                                                       value="Nx" id="reg-node-nx"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="reg-node-n0">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>N0:</strong> No evidence of regional lymph node metastasis</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="reg-node[]"
+                                                       value="N0" id="reg-node-n0"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="reg-node-n0a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>N0a:</strong> One or more cytologic or histologically confirmed benign lymph nodes</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="reg-node[]"
+                                                       value="N0a" id="reg-node-n0a"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="reg-node-n0b">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>N0b:</strong> No radiologic or clinical evidence of locoregional lymph node metastasis</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="reg-node[]"
+                                                       value="N0b" id="reg-node-n0b"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="reg-node-n1">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>N1:</strong> Metastasis to regional nodes</span>
+
+                                            </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="reg-node-n1a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>N1a:</strong> Metastasis to level VI or VII (pretracheal, paratracheal, prelaryngeal / Delphian or upper mediastinal lymph nodes; this can be unilateral or bilateral disease</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="reg-node[]"
+                                                       value="N1a" id="reg-node-n1a"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="reg-node-n1b">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>N1b:</strong> Metastasis to unilateral, bilateral or contralateral lateral neck lymph nodes (levels I, II, III, IV or V) or retropharyngeal lymph nodes</span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="reg-node[]"
+                                                       value="N1b" id="reg-node-n1b"> </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="clinic-note"><strong>If you do not wish to select for the degree of invasion
+                                    into local lymph nodes, please leave this section blank.</strong></p>
+                            </fieldset>
+                            <fieldset id="form-clinic-3">
+
+                                <div>
+                                    <legend><h6>AJCC Clinical Stage - <a
+                                            href="https://www.cancer.org/cancer/thyroid-cancer/detection-diagnosis-staging/staging.html"
+                                            target="_blank">Read more</a></h6></legend>
+                                </div>
+
+                                <p>All patients in the CTB are currently under the age of 55 at operation, so for
+                                    patients with a diagnosis of Follicular (FC), Papillary (PTC) or Well Differentiated
+                                    Thyroid Cancer Not Otherwise Specified (WDCA NOS) only two AJCC stages, I and II,
+                                    apply to these patients. The vast majority of the CTB patients are without distant
+                                    metastases at the time of primary operation and so will be AJCC clinical stage I.
+                                    Only those with an M value of 1 (those who have distant metastases) will fall into
+                                    the category of AJCC clinical stage II.</p>
+                                <p>For patients with Medullary Thyroid Cancer, all AJCC clinical stages may be
+                                    applicable. For more information on each AJCC stage, please click on the title of
+                                    this section.</p>
+
+                                <hr>
+
+                                <div class="clinic-options" id="options-pt4">
+                                    <div class="clinic-options__head">
+                                        <div class="clinic-options__head__top d-flex align-items-center">
+                                            <img class="has-icon__image"
+                                                 src="/biosample-search/getfile/design/icons/notepad-2.svg" alt=""
+                                                 loading="lazy">
+                                            <h3 class="clinic-options__title">
+                                                For PTC / FC / WDCANOS
+                                            </h3>
+                                            <button class="btn btn-reset" data-target="#options-pt4">Reset</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="clinic-options__list">
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ajcc-a-1">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>AJCC I</strong></span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="ajcc-a[]" value="I"
+                                                       id="ajcc-a-1"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ajcc-a-2">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>AJCC II</strong></span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="ajcc-a[]" value="II"
+                                                       id="ajcc-a-2"> </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="clinic-options" id="options-pt5">
+                                    <div class="clinic-options__head">
+                                        <div class="clinic-options__head__top d-flex align-items-center">
+                                            <img class="has-icon__image"
+                                                 src="/biosample-search/getfile/design/icons/notepad-2.svg" alt=""
+                                                 loading="lazy">
+                                            <h3 class="clinic-options__title">
+                                                For MTC
+                                            </h3>
+                                            <button class="btn btn-reset" data-target="#options-pt5">Reset</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="clinic-options__list">
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ajcc-b-1">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>AJCC I</strong></span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="ajcc-b[]" value="I"
+                                                       id="ajcc-b-1"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ajcc-b-2">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>AJCC II</strong></span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="ajcc-b[]" value="II"
+                                                       id="ajcc-b-2"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ajcc-b-3">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>AJCC III</strong></span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="ajcc-b[]" value="III"
+                                                       id="ajcc-b-3"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ajcc-b-4a">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>AJCC IVA</strong></span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="ajcc-b[]" value="IVA"
+                                                       id="ajcc-b-4a"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ajcc-b-4b">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>AJCC IVB</strong></span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="ajcc-b[]" value="IVB"
+                                                       id="ajcc-b-4b"> </label>
+                                        </div>
+                                        <div class="clinic-options__list__item no-indent">
+                                            <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                   for="ajcc-b-4c">
+                                                <span class="clinic-options__label__text flex-shrink-1"><strong>AJCC IVC</strong></span>
+
+                                                <input class="flex-shrink-0" type="checkbox" name="ajcc-b[]" value="IVC"
+                                                       id="ajcc-b-4c"> </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="clinic-note"><strong>If you do not wish to further define your search using
+                                    clinical stage, please leave blank and click next.</strong></p>
+
+                            </fieldset>
+                            <fieldset id="form-clinic-4">
+                                <div>
+                                    <legend><h6>Treatment and Outcome</h6></legend>
+                                </div>
+                                <p>Information on clinical treatment and outcome is still being added for some cases.
+                                    Please note that at the present time clinical information is only available on a
+                                    proportion of the cases from Ukraine.</p>
+                                <hr>
+
+                                <div class="row-bs">
+                                    <div class="col-lg-6 mgn--bottom">
+                                        <div class="clinic-options" id="options-pt6">
+                                            <div class="clinic-options__head">
+                                                <div class="clinic-options__head__top d-flex align-items-center">
+                                                    <img class="has-icon__image"
+                                                         src="/biosample-search/getfile/design/icons/notepad-2.svg"
+                                                         alt="" loading="lazy">
+                                                    <h3 class="clinic-options__title">
+                                                        Treatment with radioiodine
+                                                    </h3>
+                                                </div>
+                                                <div class="clinic-options__head__bottom no-indent">
+                                                    <p>Patients with PTC, FC and WDCA NOS often receive treatment with
+                                                        radioiodine following surgery. The following dropdown menu will
+                                                        enable you to refine your search by selecting Yes or No. By
+                                                        selecting Yes, results will only be returned on those patients
+                                                        for which we currently have information that have received
+                                                        radioiodine treatment, by selecting No, information will only be
+                                                        returned on those patients who have not received radioiodine
+                                                        treatment. Further information on treatment (e.g. doses
+                                                        administered) could be made available on request.</p>
+                                                    <p><strong>f you do not wish to refine your research with
+                                                        information on treatment, please select the ‘Neither’
+                                                        option.</strong></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="clinic-options__list">
+                                                <div class="clinic-options__list__item no-indent">
+                                                    <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                           for="treat-radio-yes">
+                                                        <span class="clinic-options__label__text flex-shrink-1">Yes</span>
+
+                                                        <div class="custom-radio"><input type="radio"
+                                                                                         id="treat-radio-yes"
+                                                                                         name="treat-radio" value="yes"><span
+                                                                class="checkmark"></span></div>
+                                                    </label>
+                                                </div>
+                                                <div class="clinic-options__list__item no-indent">
+                                                    <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                           for="treat-radio-no">
+                                                        <span class="clinic-options__label__text flex-shrink-1">No</span>
+
+                                                        <div class="custom-radio"><input type="radio"
+                                                                                         id="treat-radio-no"
+                                                                                         name="treat-radio"
+                                                                                         value="no"><span
+                                                                class="checkmark"></span></div>
+                                                    </label>
+                                                </div>
+                                                <div class="clinic-options__list__item no-indent">
+                                                    <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                           for="treat-radio-neither">
+                                                        <span class="clinic-options__label__text flex-shrink-1">Neither</span>
+
+                                                        <div class="custom-radio"><input type="radio"
+                                                                                         id="treat-radio-neither"
+                                                                                         name="treat-radio"
+                                                                                         value=""><span
+                                                                class="checkmark"></span></div>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-6 mgn--bottom">
+                                        <div class="clinic-options" id="options-pt7">
+                                            <div class="clinic-options__head">
+                                                <div class="clinic-options__head__top d-flex align-items-center">
+                                                    <img class="has-icon__image"
+                                                         src="/biosample-search/getfile/design/icons/notepad-2.svg"
+                                                         alt="" loading="lazy">
+                                                    <h3 class="clinic-options__title">
+                                                        TSH Suppression
+                                                    </h3>
+                                                </div>
+                                                <div class="clinic-options__head__bottom no-indent">
+                                                    <p>Patients with PTC, FC and WDCA NOS often receive treatment with
+                                                        radioiodine following surgery and are sometimes are given
+                                                        therapy to reduce the levels of thyroid stimulating hormone,
+                                                        therefore reducing the hormone that stimulates growth of thyroid
+                                                        cells. There is conflicting evidence with respect to whether
+                                                        this has a major effect on outcome.</p>
+                                                    <p><strong>If you do not wish to refine your research with
+                                                        information on TSH suppression, please select the ‘Neither’
+                                                        option.</strong></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="clinic-options__list">
+                                                <div class="clinic-options__list__item no-indent">
+                                                    <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                           for="tsh-supress-yes">
+                                                        <span class="clinic-options__label__text flex-shrink-1">Yes</span>
+
+                                                        <div class="custom-radio"><input type="radio"
+                                                                                         id="tsh-supress-yes"
+                                                                                         name="tsh-supress" value="yes"><span
+                                                                class="checkmark"></span></div>
+                                                    </label>
+                                                </div>
+                                                <div class="clinic-options__list__item no-indent">
+                                                    <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                           for="tsh-supress-no">
+                                                        <span class="clinic-options__label__text flex-shrink-1">No</span>
+
+                                                        <div class="custom-radio"><input type="radio"
+                                                                                         id="tsh-supress-no"
+                                                                                         name="tsh-supress"
+                                                                                         value="no"><span
+                                                                class="checkmark"></span></div>
+                                                    </label>
+                                                </div>
+                                                <div class="clinic-options__list__item no-indent">
+                                                    <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                           for="tsh-supress-neither">
+                                                        <span class="clinic-options__label__text flex-shrink-1">Neither</span>
+
+                                                        <div class="custom-radio"><input type="radio"
+                                                                                         id="tsh-supress-neither"
+                                                                                         name="tsh-supress"
+                                                                                         value=""><span
+                                                                class="checkmark"></span></div>
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12 mgn--bottom">
+                                        <div class="clinic-options" id="options-pt8">
+                                            <div class="clinic-options__head">
+                                                <div class="clinic-options__head__top d-flex align-items-center">
+                                                    <img class="has-icon__image"
+                                                         src="/biosample-search/getfile/design/icons/notepad-2.svg"
+                                                         alt="" loading="lazy">
+                                                    <h3 class="clinic-options__title">
+                                                        Clinical Outcome
+                                                    </h3>
+                                                </div>
+                                                <div class="clinic-options__head__bottom no-indent">
+                                                    <p>Unfortunately, some patients will suffer a relapse of their
+                                                        cancer. Relapse is defined as being the presence of a further
+                                                        deposit of thyroid cancer identified more than 6 months after
+                                                        the date of the primary operation. In the case of thyroid
+                                                        cancer, it is likely that over several decades around 30% of the
+                                                        cases will relapse. Very few of the cases in the CTB (around 1%)
+                                                        would be predicted to die from their disease over a period of
+                                                        several decades.</p>
+                                                    <p>You can refine your search by selecting Yes if you wish to search
+                                                        only for those cases that have suffered a relapse of their
+                                                        disease.</p>
+                                                    <p><strong>If you do not wish to refine your research with
+                                                        information clinical outcome, please select the ‘Neither’
+                                                        option.</strong></p>
+                                                </div>
+                                            </div>
+
+                                            <div class="clinic-options__list">
+                                                <div class="clinic-options__list__item no-indent">
+                                                    <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                           for="clinic-outcome-yes">
+                                                        <span class="clinic-options__label__text flex-shrink-1">Yes</span>
+
+                                                        <div class="custom-radio"><input type="radio"
+                                                                                         id="clinic-outcome-yes"
+                                                                                         name="clinic-outcome"
+                                                                                         value="yes"><span
+                                                                class="checkmark"></span></div>
+                                                    </label>
+                                                </div>
+                                                <div class="clinic-options__list__item no-indent">
+                                                    <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                           for="clinic-outcome-no">
+                                                        <span class="clinic-options__label__text flex-shrink-1">No</span>
+
+                                                        <div class="custom-radio"><input type="radio"
+                                                                                         id="clinic-outcome-no"
+                                                                                         name="clinic-outcome"
+                                                                                         value="no"><span
+                                                                class="checkmark"></span></div>
+                                                    </label>
+                                                </div>
+                                                <div class="clinic-options__list__item no-indent">
+                                                    <label class="clinic-options__label d-flex justify-content-between align-items-center"
+                                                           for="clinic-outcome-neither">
+                                                        <span class="clinic-options__label__text flex-shrink-1">Neither</span>
+
+                                                        <div class="custom-radio"><input type="radio"
+                                                                                         id="clinic-outcome-neither"
+                                                                                         name="clinic-outcome" value=""><span
+                                                                class="checkmark"></span></div>
+                                                    </label>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </fieldset>
+                        </div>
+
+                        <hr>
+
+                        <div class="form--clinic__actions d-flex justify-content-between align-items-center flex-wrap">
+
+                            <a class="btn btn-transparent clinic-prev has-icon" href="#">
+                                <img class="has-icon__image"
+                                     src="/biosample-search/getfile/design/icons/icon-arrow-left-blue.svg" alt="">
+                                <span class="has-icon__text">Back</span>
+                            </a>
+
+                            <a class="btn btn-blue clinic-next has-icon" href="#">
+                                <span class="has-icon__text">Next</span>
+                                <img class="has-icon__image right"
+                                     src="/biosample-search/getfile/design/icons/icon-arrow-right-white.svg" alt="">
+                            </a>
+
+                            <button type="submit" class="btn btn-blue has-icon  hide clinic-last">
+                                <span class="has-icon__text">View Results and Make Application</span>
+                                <img class="has-icon__image right"
+                                     src="/biosample-search/getfile/design/icons/icon-arrow-right-white.svg" alt="">
+                            </button>
+
+
+                        </div>
+
+
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-4">
+
+                <div class="border rounded bg-light p-4">
+                    <div class="clinic-sidebar">
+                        <h6 class="clinic-sidebar__title has-icon">
+                            <img class="has-icon__image"
+                                 src="/biosample-search/getfile/design/icons/icon-search-blue.svg"
+                                 alt="">
+                            <span class="clinic-sidebar__title__text">Search Progress</span>
+                        </h6>
+
+                        <div class="clinic-progress">
+                            <a class="clinic-progress__item clinic-progress__item-0 active" href="#form-clinic-0"
+                               data-index="0">
+                                <div class="clinic-progress__item__left">
+                                    <div class="clinic-progress__blob"></div>
+                                    <div class="clinic-progress__divider"></div>
+                                </div>
+
+                                <div class="clinic-progress__item__right">
+                                    <h3 class="clinic-progress__title">General information</h3>
+                                </div>
+                            </a>
+
+                            <a class="clinic-progress__item  clinic-progress__item-1 active" href="#form-clinic-1"
+                               data-index="1">
+                                <div class="clinic-progress__item__left">
+                                    <div class="clinic-progress__blob"></div>
+                                    <div class="clinic-progress__divider"></div>
+                                </div>
+
+                                <div class="clinic-progress__item__right">
+                                    <h3 class="clinic-progress__title">Operation Type</h3>
+                                </div>
+                            </a>
+
+                            <a class="clinic-progress__item  clinic-progress__item-2" href="#form-clinic-2"
+                               data-index="2">
+                                <div class="clinic-progress__item__left">
+                                    <div class="clinic-progress__blob"></div>
+                                    <div class="clinic-progress__divider"></div>
+                                </div>
+
+                                <div class="clinic-progress__item__right">
+                                    <h3 class="clinic-progress__title">TNM Status(8th Edition)</h3>
+                                </div>
+                            </a>
+
+                            <a class="clinic-progress__item  clinic-progress__item-3" href="#form-clinic-3"
+                               data-index="3">
+                                <div class="clinic-progress__item__left">
+                                    <div class="clinic-progress__blob"></div>
+                                    <div class="clinic-progress__divider"></div>
+                                </div>
+
+                                <div class="clinic-progress__item__right">
+                                    <h3 class="clinic-progress__title">AJCC Clinical Stage</h3>
+                                </div>
+                            </a>
+
+                            <a class="clinic-progress__item  clinic-progress__item-4" href="#form-clinic-4"
+                               data-index="4">
+                                <div class="clinic-progress__item__left">
+                                    <div class="clinic-progress__blob"></div>
+                                    <div class="clinic-progress__divider"></div>
+                                </div>
+
+                                <div class="clinic-progress__item__right">
+                                    <h3 class="clinic-progress__title">Treatment &amp; Outcome</h3>
+                                </div>
+                            </a>
+
+                            <a class="clinic-progress__item  clinic-progress__item-5" href="#form-clinic-5"
+                               data-index="5">
+                                <div class="clinic-progress__item__left">
+                                    <div class="clinic-progress__blob"></div>
+                                    <div class="clinic-progress__divider"></div>
+                                </div>
+
+                                <div class="clinic-progress__item__right">
+                                    <h3 class="clinic-progress__title">Results</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -48,10 +48,16 @@ WEBAPP_LOGIN_LOG_NAME = settings.WEBAPP_LOGIN_LOG_NAME
 # The site's homepage
 @never_cache
 def landing_page(request):
+    # return redirect('account_login')
     return render(request, 'ctb/landing.html', {
         'request': request,
     })
 
+# About the Project > Aims of the Project
+def aims(request):
+    return render(request, 'ctb/aims.html', {
+        'request': request,
+    })
 
 # Displays the privacy policy
 def privacy_policy(request):
@@ -132,7 +138,7 @@ def extended_login_view(request):
     except Exception as e:
         logger.exception(e)
 
-    return redirect(reverse('explore_data'))
+    return redirect(reverse('dashboard'))
 
 
 # Health check callback
@@ -150,5 +156,146 @@ def warn_page(request):
 
 
 # About page
-def about_page(request):
-    return render(request, 'ctb/about.html', {'request': request})
+def about_project(request):
+    return render(request, 'ctb/about_project.html', {'request': request})
+
+# Fact Sheet
+def fact_sheet(request):
+    return render(request, 'ctb/fact_sheet.html', {'request': request})
+
+# Management of the Project
+def management_page(request):
+    return render(request, 'ctb/management_page.html', {'request': request})
+
+# For Researchers
+def researchers_page(request):
+    return render(request, 'ctb/researchers_page.html', {'request': request})
+
+# Access to materials
+def access_to_materials(request):
+    return render(request, 'ctb/access_to_materials.html', {'request': request})
+
+# research-projects
+def research_projects(request):
+    return render(request, 'ctb/research_projects.html', {'request': request})
+
+# research-projects 2001-2009
+def research_projects_2001_2009(request):
+    return render(request, 'ctb/research_projects_2001_2009.html', {'request': request})
+
+# research-projects 2010-2019
+def research_projects_2010_2019(request):
+    return render(request, 'ctb/research_projects_2010_2019.html', {'request': request})
+
+# Schema Review of Applications
+def schema_review_of_applications(request):
+    return render(request, 'ctb/schema_review_of_applications.html', {'request': request})
+
+
+# Material Available
+def material_available(request):
+    return render(request, 'ctb/material_available.html', {'request': request})
+
+
+# #Resources
+# def resources(request):
+#     return render(request, 'ctb/resources.html', {'request': request})
+
+
+# Bibliography: Publications using CTB samples and data
+def bibliography(request):
+    return render(request, 'ctb/bibliography.html', {'request': request})
+
+# Useful links: Links to further information on the Chernobyl accident
+def useful_links(request):
+    return render(request, 'ctb/useful_links.html', {'request': request})
+
+# Useful podcasts and videos: Podcasts and Videos by CTB project participants
+def podcasts_and_videos(request):
+    return render(request, 'ctb/podcasts_and_videos.html', {'request': request})
+
+# Latest News
+def news(request):
+    return render(request, 'ctb/news.html', {'request': request})
+
+# Latest News
+def contact(request):
+    return render(request, 'ctb/contact.html', {'request': request})
+
+# Dashboard
+def dashboard(request):
+    saved_search_list = [
+        {'name': 'Follicular Female',
+         'type': 'Biosample',
+         'results': 29,
+         'proceed': 'driver'},
+        {'name': 'Example 2',
+         'type': 'Biosample',
+         'results': 42,
+         'proceed': 'driver'},
+    ]
+    return render(request, 'ctb/dashboard.html', {'request': request, 'saved_search_list': saved_search_list})
+
+#temporary data
+
+    return render(request, 'ctb/saved_searches.html', {'request': request, 'saved_search_list': saved_search_list})
+
+# Search Tissue Samples
+def search_tissue_samples(request):
+    # hard coded data
+    tissue = {
+        'rna': {
+            'normal': 323,
+            'tumor': 534,
+            'metastatic': 115
+        },
+        'dna': {
+            'normal': 634,
+            'tumor': 274,
+            'metastatic': 284
+        },
+        'ffpe': {
+            'normal': 26,
+            'tumor': 734,
+            'metastatic': 623
+        }
+    }
+    blood ={
+        'dna': 23,
+        'serum':32
+    }
+    total = 735
+    return render(request, 'ctb/search_tissue_samples.html', {'request': request, 'tissue': tissue, 'blood': blood, 'total': total})
+
+# My Saved Searches
+def saved_searches(request):
+    #temporary data
+    saved_search_list = [
+        {'name': 'Follicular Female',
+         'type': 'Biosample',
+         'results': 29,
+         'proceed': 'driver'},
+        {'name': 'Example 2',
+         'type': 'Biosample',
+         'results': 42,
+         'proceed': 'driver'},
+    ]
+    return render(request, 'ctb/saved_searches.html', {'request': request, 'saved_search_list': saved_search_list})
+
+
+# Clinical Search Intro
+def search_clinical(request):
+    return render(request, 'ctb/search_clinical.html', {'request': request})
+
+# Clinical Search Facility
+def clinical_search_facility(request):
+    return render(request, 'ctb/clinical_search_facility.html', {'request': request})
+
+# Driver Search Facility
+def driver_search_facility(request):
+    return render(request, 'ctb/driver_search_facility.html', {'request': request})
+
+# Driver Search Facility
+def clinical_search_facility_results(request):
+    return render(request, 'ctb/clinical_search_facility_results.html', {'request': request})
+

@@ -1,0 +1,34 @@
+{% extends 'ctb/research.html' %}
+
+{% load static %}
+
+{% block title %}
+    CTB | Schema for Review of Applications
+{% endblock %}
+
+{% block description %}
+    Schema for Review of Applications
+{% endblock %}
+
+{% block page_name %}schema_of_review_of_applications{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <h3 class="page-banner">Schema for Review of Applications</h3>
+        <div>
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Research</li>
+                    <li class="breadcrumb-item"><a href="{% url 'access_to_materials' %}">Access to Materials</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Schema for Review of Applications</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block subcontent %}
+    <img title="schema.jpeg"
+         src="{% static 'img/schema.jpeg' %}" alt="schema.jpeg" width="740" height="900">
+{% endblock %}

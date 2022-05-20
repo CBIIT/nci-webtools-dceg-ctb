@@ -29,76 +29,125 @@
 {% block page_name %}user-details{% endblock %}
 
 {% block content %}
-    <div class="row user-row justify-content-center mb-5 mt-5">
-        <div class="col text-center">
-            <i class="fa-solid fa-user space-top-10 basic-avatar" alt="User Avatar"/> </i>
-            <h4>Welcome {% if not unconnected_local_account %}{{ user_details.first_name }} {{ user_details.last_name }}{% else %}{{ user_details.email }}{% endif %}!</h4>
-        </div>
-    </div>
-    <div class="row user-row justify-content-center">
-        <div class="col">
-            <div class="card user-panel">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        Personal Details
-                    </h5>
-                    <table class="user-info" role="presentation">
-                        <tr>
-                        {% if not unconnected_local_account %}
-                            <td>Name</td>
-                            <td>{{ user_details.first_name }} {{ user_details.last_name }}</td>
-                        {% else %}
-                            <td>User Name</td>
-                            <td>{{ user_details.username }}</td>
-                        {% endif %}
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>{{ user_details.email }}</td>
-                        </tr>
-                        <tr>
-                            <td>Last Login</td>
-                            <td id="last_login">{{ user_details.last_login }}</td>
-                        </tr>
-                    </table>
+    <div class="container my-5">
+        {#        <div class="row user-row justify-content-center mb-5 mt-5">#}
+        {#            <div class="col text-center">#}
+        {#                <i class="fa-solid fa-user space-top-10 basic-avatar" alt="User Avatar"/> </i>#}
+        {#                <h4>Welcome {% if not unconnected_local_account %}{{ user_details.first_name }}#}
+        {#                    {{ user_details.last_name }}{% else %}{{ user_details.email }}{% endif %}!</h4>#}
+        {#            </div>#}
+        {#        </div>#}
+        <div class="row user-row justify-content-center">
+            <div class="col-md-8">
+                <div class="card user-panel">
+                    <div class="card-header">
+                        <h4><i class="fa-solid fa-user me-2"></i> Personal Details
+
+                        </h4>
+                    </div>
+                    <div class="card-body px-5 py-3">
+                        <div class="text-end">
+                            <button class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen-to-square"></i>
+                                Edit Personal Details
+                            </button>
+                        </div>
+                        <table class="user-info" role="presentation">
+                            {% if not unconnected_local_account %}
+                                <tr>
+                                    <td>First Name</td>
+                                    <td>{{ user_details.first_name }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Last Name</td>
+                                    <td>{{ user_details.last_name }}</td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td>User Name</td>
+                                    <td>{{ user_details.username }}</td>
+                                </tr>
+                            {% endif %}
+                            <tr>
+                                <td>Email</td>
+                                <td>{{ user_details.email }}</td>
+                            </tr>
+                            <tr>
+                                <td>Title</td>
+                                <td>{{ user_details.title }}</td>
+                            </tr>
+                            <tr>
+                                <td>Phone</td>
+                                <td>{{ user_details.phone }}</td>
+                            </tr>
+                            <tr>
+                                <td>Address</td>
+                                <td>{{ user_details.address }}</td>
+                            </tr>
+                            <tr>
+                                <td>Institution</td>
+                                <td>{{ user_details.institution }}</td>
+                            </tr>
+                            <tr>
+                                <td>Last Department</td>
+                                <td>{{ user_details.last_department }}</td>
+                            </tr>
+
+                            <tr>
+                                <td>Last Login</td>
+                                <td id="last_login">{{ user_details.last_login }}</td>
+                            </tr>
+                        </table>
+
+                        <hr>
+                        <div>Password Last Modified
+                            <a href="{% url 'account_change_password' %}" class="btn btn-outline-secondary btn-sm ms-5 float-end"><i
+                                    class="fa-solid fa-key"></i> Change
+                                Password
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+            {#            <div class="col">#}
+            {#                <div class="card gcp-panel">#}
+            {#                    <div class="card-body">#}
+            {#                        <h5 class="card-title">#}
+            {#                            Google Cloud Platform#}
+            {#                        </h5>#}
+            {#                        <p>#}
+            {#                            Apply for "cloud credits" and your own Google Cloud project by submitting a request <a#}
+            {#                                href="https://learn.canceridc.dev/introduction/requesting-gcp-cloud-credits"#}
+            {#                                target="_blank" rel="noopener noreferrer">here</a>.#}
+            {#                        </p>#}
+            {#                        <p>Go to the <a href="http://console.cloud.google.com" target="_blank"#}
+            {#                                        rel="noopener noreferrer">Google Cloud Console</a>.</p>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {#            </div>#}
+            {#            <div class="col">#}
+            {#                <div class="card account-management-panel">#}
+            {#                    <div class="card-body">#}
+            {#                        <h5 class="card-title">#}
+            {#                            Account Management#}
+            {#                        </h5>#}
+            {#                        <p>#}
+            {#                            <a href="#logout-modal" data-toggle="modal" data-target="#logout-modal" title="Sign Out">Sign#}
+            {#                                Out <i class="fa-solid fa-sign-out"></i></a>#}
+            {#                        </p>#}
+            {#                    </div>#}
+            {#                </div>#}
+            {#            </div>#}
         </div>
-        <div class="col">
-            <div class="card gcp-panel">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        Google Cloud Platform
-                    </h5>
-                    <p>
-                        Apply for "cloud credits" and your own Google Cloud project by submitting a request <a href="https://learn.canceridc.dev/introduction/requesting-gcp-cloud-credits" target="_blank" rel="noopener noreferrer">here</a>.
-                    </p>
-                    <p>Go to the <a href="http://console.cloud.google.com" target="_blank" rel="noopener noreferrer">Google Cloud Console</a>.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col">
-            <div class="card account-management-panel">
-                <div class="card-body">
-                    <h5 class="card-title">
-                        Account Management
-                    </h5>
-                    <p>
-                        <a href="#logout-modal" data-toggle="modal" data-target="#logout-modal" title="Sign Out">Sign Out <i class="fa-solid fa-sign-out"></i></a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
     </div>
 
-    <script type="text/javascript"> 
-        var last_login_client_time = new Date("{{ user_details.last_login|safe }}".replace(" ","T"));
-        document.getElementById('last_login').innerHTML = last_login_client_time; 
+    <script type="text/javascript">
+        var last_login_client_time = new Date("{{ user_details.last_login|safe }}".replace(" ", "T"));
+        document.getElementById('last_login').innerHTML = last_login_client_time;
     </script>
 {% endblock %}
 
 {% block js_file %}
-	{{ block.super }}
-	<script type="text/javascript" src="{% static 'js/user_details.js' %}?v={{ APP_VERSION }}"></script>
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/user_details.js' %}?v={{ APP_VERSION }}"></script>
 {% endblock %}

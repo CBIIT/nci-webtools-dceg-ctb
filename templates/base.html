@@ -29,7 +29,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% block extra_css_libs %}{% endblock %}
-    <!--<link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />-->
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />
     <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
 
     {% block header %}{% endblock %}
@@ -90,7 +90,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button> -->
                 <h4 class="modal-title" id="gov_warning-header">Warning</h4>
             </div>
             <div class="modal-body">
@@ -104,11 +103,13 @@
                 possible evidence of criminal activity, NIH may provide that evidence to law enforcement officials</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-warn">OK</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <!-- External Web Warning Modal -->
 <div class="modal fade" id="external-web-warning" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="external-web-warning-header" aria-hidden="true">
@@ -131,22 +132,23 @@
 </div>
 
 <!-- Logout Modal -->
-<div class="modal fade" id="logout-modal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+
+<div id="logout-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="logoutModalLabel">Logout</h4>
+                <h4 class="modal-title">Logout</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="post" action="{% url 'account_logout' %}">
                 <div class="modal-body">
                     <p>Are you sure you want to sign out?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                     {% csrf_token %}
                     {% if redirect_field_value %}
-                        <input type="hidden" name="{{redirect_field_name}}" value="{{redirect_field_value}}"/>
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                     {% endif %}
                     <button type="submit" class="btn btn-primary">Sign Out</button>
                 </div>
@@ -154,6 +156,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     var warningSeen = {% if request.session.seenWarning %}true{% else %}false{% endif %};
@@ -185,6 +188,7 @@
 
 {% block js_file %}
     <script type="text/javascript" src="{% static 'js/lib/require.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/base.js' %}?v={{ APP_VERSION }}"></script>
 {% endblock %}
 
 </body>
