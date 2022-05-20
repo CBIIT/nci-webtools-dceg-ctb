@@ -136,11 +136,10 @@ require([
             }
         });
     });
-
 });
 
 // Return an object for consts/methods used by most views
-define(['jquery', 'utils'], function($, utils) {
+define('base', ['jquery', 'utils'], function($, utils) {
 
     // Resets forms in modals on hide. Suppressed warning when leaving page with dirty forms
     $('.modal').on('hide.bs.modal', function () {

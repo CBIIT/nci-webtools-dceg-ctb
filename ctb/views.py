@@ -197,9 +197,10 @@ def material_available(request):
     return render(request, 'ctb/material_available.html', {'request': request})
 
 
-# Resources
-def resources(request):
-    return render(request, 'ctb/resources.html', {'request': request})
+# #Resources
+# def resources(request):
+#     return render(request, 'ctb/resources.html', {'request': request})
+
 
 # Bibliography: Publications using CTB samples and data
 def bibliography(request):

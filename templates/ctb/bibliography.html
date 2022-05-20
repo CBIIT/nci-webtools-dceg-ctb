@@ -17,7 +17,7 @@
         <div>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'researchers_page' %}">Resources</a></li>
+                    <li class="breadcrumb-item">Resources</li>
                     <li class="breadcrumb-item active" aria-current="page">Publications Using CTB Samples and Data</li>
                 </ol>
             </nav>
@@ -687,11 +687,7 @@
             <div class="col-md-4 offset-md-1 pb-4">
 
                 <ul class="side-navigation">
-                    <li class="side-navigation__item side-navigation__item--heading">
-                        <a href="{% url 'resources' %}" class="side-navigation__link ">
-                            Resources
-                        </a>
-                    </li>
+
                     <li class="side-navigation__item  side-navigation__link--active ">
                         <a class="side-navigation__link" href="{% url 'bibliography' %}">
                             Publications using CTB samples and data
@@ -712,9 +708,4 @@
 
         </div>
     </div>
-{% endblock %}
-
-{% block js_file %}
-    {{ block.super }}
-    <script type="text/javascript" src="{% static 'js/base.js' %}?v={{ APP_VERSION }}"></script>
 {% endblock %}

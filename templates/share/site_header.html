@@ -18,40 +18,41 @@
 {#        <img class="navbar-brand" style="height:25px;" src="{% static 'img/ctb-logo.jpeg' %}" alt="CTB Logo"/>#}
 {#    </a>#}
 {#</nav>#}
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+<nav id="ctb-main-navbar" class="navbar navbar-expand-lg fixed-top navbar-dark" aria-label="Main navigation">
     <div class="container">
         <a class="navbar-brand" href="{% url 'landing_page' %}">Chernobyl Tissue Bank</a>
-        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse"
+        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" data-bs-toggle="collapse" data-bs-target="#ctb-collapsible-navbar"
                 aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="navbar-collapse collapse" id="ctb-collapsible-navbar">
+            <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'account_login' %}">CTB Biosample Search Facility</a>
+                    <a class="nav-link {% if 'search_facility' in request.path %} active {% endif %}" aria-current="page" href="{% url 'account_login' %}">CTB Biosample Search Facility</a>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'about_page' %}" id="dropdown-about" data-bs-toggle="dropdown"
-                       aria-expanded="false" role="button">About the Project</a>
+                    <a class="nav-link dropdown-toggle {% if 'about/' in request.path %} active {% endif %}" id="dropdown-about" data-bs-toggle="dropdown"
+                       aria-expanded="false" role="button">About</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown-about">
+                        <li><a class="dropdown-item" href="{% url 'about_page' %}">About the Project</a></li>
                         <li><a class="dropdown-item" href="{% url 'aims_page' %}">Aims of the Project</a></li>
                         <li><a class="dropdown-item" href="{% url 'fact_sheet' %}">Fact Sheet</a></li>
                         <li><a class="dropdown-item" href="{% url 'management_page' %}">Management of the Project</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'researchers_page' %}" id="dropdown-researchers" data-bs-toggle="dropdown"
-                       aria-expanded="false">For Researchers</a>
+                    <a class="nav-link dropdown-toggle {% if 'researchers/' in request.path %} active {% endif %}" id="dropdown-researchers" data-bs-toggle="dropdown"
+                       aria-expanded="false">Research</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown-researchers">
+                        <li><a class="dropdown-item" href="{% url 'researchers_page' %}">For Researchers</a></li>
                         <li><a class="dropdown-item" href="{% url 'access_to_materials' %}">Access to Materials</a></li>
-                        <li><a class="dropdown-item" href="#">CTB Biosample Search</a></li>
                         <li><a class="dropdown-item" href="{% url 'research_projects' %}">Research Projects Using CTB Materials</a></li>
                         <li><a class="dropdown-item" href="{% url 'material_available' %}">Material Available</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="{% url 'resources' %}" id="dropdown-resources" data-bs-toggle="dropdown"
+                    <a class="nav-link dropdown-toggle {% if 'resources/' in request.path %} active {% endif %}" id="dropdown-resources" data-bs-toggle="dropdown"
                        aria-expanded="false">Resources</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown-resources">
                         <li><a class="dropdown-item" href="{% url 'bibliography' %}">Publications using CTB Samples and Data</a></li>
@@ -61,17 +62,17 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'news' %}">Latest News</a>
+                    <a class="nav-link {% if 'news/' in request.path %} active {% endif %}" href="{% url 'news' %}">Latest News</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+                    <a class="nav-link {% if 'contact/' in request.path %} active {% endif %}" href="{% url 'contact' %}">Contact Us</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
                     {% if has_access %}
                     <li class="nav-item">
-                        <a href="{% url 'user_detail' user.id %}" class="nav-link" title="User Details">
+                        <a href="{% url 'user_detail' user.id %}" class="nav-link {% if 'users/' in request.path or 'accounts/' in request.path %} active {% endif %}" title="User Details">
                             <i class="fa-solid fa-user"></i> User Name
                         </a>
                     </li>
@@ -88,18 +89,18 @@
     </div>
 </nav>
 {% if 'login' in request.path or 'search_facility/' in request.path %}
-    <div class="nav-scroller bg-body shadow-sm">
+    <div id="ctb-secondary-navbar" class="nav-scroller bg-body shadow-sm">
         <div class="container">
-            <nav class="nav nav-underline navbar-ctb" aria-label="Secondary navigation">
+            <nav class="nav navbar-ctb" aria-label="Secondary navigation">
                 <a href="{% url 'landing_page' %}" title="Home Page">
                     <img class="navbar-brand" src="{% static 'img/ctb-biosample-logo.svg' %}" alt="NIH CTB Logo"/>
                 </a>
                 {% if user.is_authenticated %}
-                <a class="nav-link" href="{% url 'dashboard' %}">
+                <a class="nav-link {% if 'dashboard/' in request.path %} active {% endif %}" href="{% url 'dashboard' %}">
                     Dashboard
                 </a>
-                <a class="nav-link" href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
-                <a class="nav-link" href="{% url 'saved_searches' %}">My Saved Searches</a>
+                <a class="nav-link {% if 'search_tissue_samples/' in request.path %} active {% endif %}" href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
+                <a class="nav-link {% if 'saved_searches/' in request.path %} active {% endif %}" href="{% url 'saved_searches' %}">My Saved Searches</a>
 
                 {% endif %}
             </nav>

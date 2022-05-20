@@ -17,7 +17,7 @@
         <div>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'about_page' %}">About the Project</a></li>
+                    <li class="breadcrumb-item">About</li>
                     <li class="breadcrumb-item active" aria-current="page">Management of the Project</li>
                 </ol>
             </nav>
@@ -117,9 +117,4 @@
 
         </div>
     </div>
-{% endblock %}
-
-{% block js_file %}
-	{{ block.super }}
-    <script type="text/javascript" src="{% static 'js/base.js' %}?v={{ APP_VERSION }}"></script>
 {% endblock %}

@@ -36,26 +36,26 @@ urlpatterns = [
     url(r'^$', views.landing_page, name='landing_page'),
 
     # About
-    url(r'^about/', views.about_page, name='about_page'),
-    url(r'^aims/', views.aims, name='aims_page'),
-    url(r'^fact_sheet/', views.fact_sheet, name='fact_sheet'),
-    url(r'^management_page/', views.management_page, name='management_page'),
+    url(r'^about/$', views.about_page, name='about_page'),
+    url(r'^about/aims/$', views.aims, name='aims_page'),
+    url(r'^about/fact_sheet/$', views.fact_sheet, name='fact_sheet'),
+    url(r'^about/management_page/$', views.management_page, name='management_page'),
 
     # For Researchers
-    url(r'^researchers_page/', views.researchers_page, name='researchers_page'),
-    url(r'^access_to_materials/', views.access_to_materials, name='access_to_materials'),
-    url(r'^research_projects/', views.research_projects, name='research_projects'),
-    url(r'^research_projects_2001_2009/', views.research_projects_2001_2009, name='research_projects_2001_2009'),
-    url(r'^research_projects_2010_2019/', views.research_projects_2010_2019, name='research_projects_2010_2019'),
-    url(r'^material_available/', views.material_available, name='material_available'),
-    url(r'^schema_review_of_applications/', views.schema_review_of_applications, name='schema_review_of_applications'),
+    url(r'^researchers/$', views.researchers_page, name='researchers_page'),
+    url(r'^researchers/access_to_materials/$', views.access_to_materials, name='access_to_materials'),
+    url(r'^researchers/research_projects/$', views.research_projects, name='research_projects'),
+    url(r'^researchers/research_projects_2001_2009/$', views.research_projects_2001_2009, name='research_projects_2001_2009'),
+    url(r'^researchers/research_projects_2010_2019/$', views.research_projects_2010_2019, name='research_projects_2010_2019'),
+    url(r'^researchers/material_available/$', views.material_available, name='material_available'),
+    url(r'^researchers/schema_review_of_applications/$', views.schema_review_of_applications, name='schema_review_of_applications'),
 
 
     # Resources
-    url(r'^resources/', views.resources, name='resources'),
-    url(r'^bibliography/', views.bibliography, name='bibliography'),
-    url(r'^useful_links/', views.useful_links, name='useful_links'),
-    url(r'^podcasts_and_videos/', views.podcasts_and_videos, name='podcasts_and_videos'),
+    # url(r'^resources/$', views.resources, name='resources'),
+    url(r'^resources/bibliography/$', views.bibliography, name='bibliography'),
+    url(r'^resources/useful_links/$', views.useful_links, name='useful_links'),
+    url(r'^resources/podcasts_and_videos/$', views.podcasts_and_videos, name='podcasts_and_videos'),
 
     # Resources
     url(r'^news/', views.news, name='news'),

@@ -17,6 +17,7 @@
         <div>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Research</li>
                     <li class="breadcrumb-item active" aria-current="page">For Researchers</li>
                 </ol>
             </nav>
@@ -70,12 +71,12 @@
                             Access to Materials
                         </a>
                     </li>
-                    <li class="side-navigation__item ">
-                        <a class="side-navigation__link" href="https://www.chernobyltissuebank.com/biosample-search/"
-                           target="_blank">
-                            CTB Biosample Search
-                        </a>
-                    </li>
+{#                    <li class="side-navigation__item ">#}
+{#                        <a class="side-navigation__link" href="https://www.chernobyltissuebank.com/biosample-search/"#}
+{#                           target="_blank">#}
+{#                            CTB Biosample Search#}
+{#                        </a>#}
+{#                    </li>#}
                     <li class="side-navigation__item ">
                         <a class="side-navigation__link" href="{% url 'research_projects' %}">
                             Research Projects Using CTB Materials
@@ -91,9 +92,4 @@
 
         </div>
     </div>
-{% endblock %}
-
-{% block js_file %}
-	{{ block.super }}
-    <script type="text/javascript" src="{% static 'js/base.js' %}?v={{ APP_VERSION }}"></script>
 {% endblock %}
