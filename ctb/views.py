@@ -156,8 +156,8 @@ def warn_page(request):
 
 
 # About page
-def about_page(request):
-    return render(request, 'ctb/about.html', {'request': request})
+def about_project(request):
+    return render(request, 'ctb/about_project.html', {'request': request})
 
 # Fact Sheet
 def fact_sheet(request):

@@ -36,7 +36,7 @@ urlpatterns = [
     url(r'^$', views.landing_page, name='landing_page'),
 
     # About
-    url(r'^about/$', views.about_page, name='about_page'),
+    url(r'^about/$', views.about_project, name='about_project'),
     url(r'^about/aims/$', views.aims, name='aims_page'),
     url(r'^about/fact_sheet/$', views.fact_sheet, name='fact_sheet'),
     url(r'^about/management_page/$', views.management_page, name='management_page'),

@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-9 pb-4">
+                {% block subcontent %}
+                {% endblock %}
+            </div>
+
+            <div class="col-md-3 pb-4">
+                <ul class="side-navigation">
+                    <li class="side-navigation__item  side-navigation__link--active ">
+                        <a class="side-navigation__link" href="{% url 'bibliography' %}">
+                            Publications using CTB samples and data
+                        </a>
+                    </li>
+                    <li class="side-navigation__item ">
+                        <a class="side-navigation__link" href="{% url 'useful_links' %}">
+                            Useful External Links
+                        </a>
+                    </li>
+                    <li class="side-navigation__item ">
+                        <a class="side-navigation__link" href="{% url 'podcasts_and_videos' %}">
+                            Useful Podcasts and Videos
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

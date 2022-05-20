@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'ctb/research.html' %}
+
 {% load static %}
 
 {% block title %}
@@ -26,51 +27,11 @@
 
 {% endblock %}
 
-{% block content %}
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-7 pb-4">
-                <p>Please select one of the sections below to view a breakdown of the research projects:</p>
-                <ul class="toc">
-                    <li><a href="{% url 'research_projects_2001_2009' %}">2001 - 2009</a></li>
-                    <li><a href="{% url 'research_projects_2010_2019' %}">2010 - 2019</a></li>
-                </ul>
-                <p>&nbsp;</p></div>
-
-            <div class="col-md-4 pb-4">
-
-                <ul class="side-navigation">
-                    <li class="side-navigation__item side-navigation__item--heading">
-                        <a href="{% url 'researchers_page' %}" class="side-navigation__link ">
-                            For Researchers
-                        </a>
-                    </li>
-                    <li class="side-navigation__item ">
-                        <a class="side-navigation__link" href="{% url 'access_to_materials' %}">
-                            Access to Materials
-                        </a>
-                    </li>
-{#                    <li class="side-navigation__item ">#}
-{#                        <a class="side-navigation__link" href="https://www.chernobyltissuebank.com/biosample-search/"#}
-{#                           target="_blank">#}
-{#                            CTB Biosample Search#}
-{#                        </a>#}
-{#                    </li>#}
-                    <li class="side-navigation__item  side-navigation__link--active ">
-                        <a class="side-navigation__link" href="{% url 'research_projects' %}">
-                            Research Projects Using CTB Materials
-                        </a>
-                    </li>
-                    <li class="side-navigation__item ">
-                        <a class="side-navigation__link" href="{% url 'material_available' %}">
-                            Material Available
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-
-        </div>
-    </div>
+{% block subcontent %}
+    <p>Please select one of the sections below to view a breakdown of the research projects:</p>
+    <ul>
+        <li><a href="{% url 'research_projects_2001_2009' %}">2001 - 2009</a></li>
+        <li><a href="{% url 'research_projects_2010_2019' %}">2010 - 2019</a></li>
+    </ul>
+    <p>&nbsp;</p>
 {% endblock %}

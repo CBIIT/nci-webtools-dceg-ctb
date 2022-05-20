@@ -1,4 +1,5 @@
-{% extends 'base.html' %}
+{% extends 'ctb/research.html' %}
+
 {% load static %}
 
 {% block title %}
@@ -17,6 +18,8 @@
         <div>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Research</li>
+                    <li class="breadcrumb-item"><a href="{% url 'access_to_materials' %}">Access to Materials</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Schema for Review of Applications</li>
                 </ol>
             </nav>
@@ -25,13 +28,7 @@
 
 {% endblock %}
 
-{% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col pb-4 text-center">
-                <img title="schema.jpeg"
-                        src="{% static 'img/schema.jpeg' %}" alt="schema.jpeg" width="740" height="900">
-            </div>
-        </div>
-    </div>
+{% block subcontent %}
+    <img title="schema.jpeg"
+         src="{% static 'img/schema.jpeg' %}" alt="schema.jpeg" width="740" height="900">
 {% endblock %}
