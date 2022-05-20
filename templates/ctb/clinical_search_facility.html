@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block title %}
-    CTB | Clinical Search Facility
+    CTB | Refine by Clinical Parameters
 {% endblock %}
 
 {% block description %}
-    Clinical Search Facility
+    Refine by Clinical Parameters
 {% endblock %}
 
 {% block page_name %}clinical_search_facility{% endblock %}
@@ -16,7 +16,9 @@
         <div class="pt-3">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Clinical Search Facility</li>
+                    <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'search_clinical' %}">Clinical Search Facility</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Refine by Clinical Parameters</li>
                 </ol>
             </nav>
         </div>
@@ -28,7 +30,7 @@
     <div class="container">
         <div class="row">
             <div class="col-8">
-                <div class="border bg-light rounded p-2">
+                <div class="border bg-light rounded p-3">
                     <div class="content-header d-flex flex-wrap justify-content-between">
                         <h5>Clinical Search Facility</h5>
                         <a class="btn btn-outline-dark clinic-skip" href="#">
@@ -49,7 +51,7 @@
                         <div class="form-steps">
                             <fieldset id="form-clinic-0">
                                 <div>
-                                    <legend><h2>General Information</h2></legend>
+                                    <legend><h6>General Information</h6></legend>
                                 </div>
                                 <p><strong>The clinical search facility is only for use in projects that are requesting
                                     access to samples from patients with a thyroid cancer diagnosis.</strong></p>
@@ -74,7 +76,7 @@
                                     click on the links on the right.</strong></p></fieldset>
                             <fieldset id="form-clinic-1" class="clinic--active">
                                 <div>
-                                    <legend><h2>Operation Type</h2></legend>
+                                    <legend><h6>Operation Type</h6></legend>
                                 </div>
                                 <p>There are two categories for operation type:</p>
                                 <hr>
@@ -134,9 +136,9 @@
                             </fieldset>
                             <fieldset id="form-clinic-2">
                                 <div>
-                                    <legend><h2>TNM Status (8th Edition) - <a
+                                    <legend><h6>TNM Status (8th Edition) - <a
                                             href="https://www.pathologyoutlines.com/topic/thyroidstaging.html"
-                                            target="_blank">Read more</a></h2></legend>
+                                            target="_blank">Read more</a></h6></legend>
                                 </div>
                                 <p>
                                     This is the pathological staging system used to describe the cancer. It will enable
@@ -440,9 +442,9 @@
                             <fieldset id="form-clinic-3">
 
                                 <div>
-                                    <legend><h2>AJCC Clinical Stage - <a
+                                    <legend><h6>AJCC Clinical Stage - <a
                                             href="https://www.cancer.org/cancer/thyroid-cancer/detection-diagnosis-staging/staging.html"
-                                            target="_blank">Read more</a></h2></legend>
+                                            target="_blank">Read more</a></h6></legend>
                                 </div>
 
                                 <p>All patients in the CTB are currently under the age of 55 at operation, so for
@@ -562,7 +564,7 @@
                             </fieldset>
                             <fieldset id="form-clinic-4">
                                 <div>
-                                    <legend><h2>Treatment and Outcome</h2></legend>
+                                    <legend><h6>Treatment and Outcome</h6></legend>
                                 </div>
                                 <p>Information on clinical treatment and outcome is still being added for some cases.
                                     Please note that at the present time clinical information is only available on a
@@ -811,12 +813,12 @@
 
                 <div class="border rounded bg-light p-4">
                     <div class="clinic-sidebar">
-                        <h2 class="clinic-sidebar__title has-icon">
+                        <h6 class="clinic-sidebar__title has-icon">
                             <img class="has-icon__image"
                                  src="/biosample-search/getfile/design/icons/icon-search-blue.svg"
                                  alt="">
                             <span class="clinic-sidebar__title__text">Search Progress</span>
-                        </h2>
+                        </h6>
 
                         <div class="clinic-progress">
                             <a class="clinic-progress__item clinic-progress__item-0 active" href="#form-clinic-0"

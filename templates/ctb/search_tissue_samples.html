@@ -11,23 +11,23 @@
 
 {% block page_name %}search_tissue_samples{% endblock %}
 
-{% block page_header %}
-    <div class="container">
-        <div class="pt-3">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active" aria-current="page">Search Tissue Samples</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-
-{% endblock %}
+{#{% block page_header %}#}
+{#    <div class="container">#}
+{#        <div class="pt-3">#}
+{#            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">#}
+{#                <ol class="breadcrumb">#}
+{#                    <li class="breadcrumb-item active" aria-current="page">Search Tissue Samples</li>#}
+{#                </ol>#}
+{#            </nav>#}
+{#        </div>#}
+{#    </div>#}
+{##}
+{#{% endblock %}#}
 
 {% block content %}
-    <div class="container">
+    <div class="container pt-3">
         <div class="row">
-            <div class="col-8">
+            <div class="col-md-8">
                 <div class="bg-light border rounded p2">
                     <div class="container-fluid">
                         <h4 class="py-2">Search Tissue Samples</h4>
@@ -262,7 +262,7 @@
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-md-4">
 
                 <div class="border rounded bg-light p-4">
                     <h4>Search Results <span class="fw-normal fs-5 float-end">{{ total }} Cases</span></h4>
@@ -320,7 +320,7 @@
 {#                    Click below to apply for these samples.#}
 
                     <div class="d-grid gap-2 col mx-auto">
-                        <a class="btn btn-outline-dark" href="{% static 'files/application-form.doc' %}"><i class="fa-solid fa-download"></i> Download Application Form</a>
+                        <a class="btn btn-outline-secondary" href="{% static 'files/application-form.doc' %}"><i class="fa-solid fa-download"></i> Download Application Form</a>
                         <a class="btn btn-primary" href="{% url 'search_clinical' %}"><i class="fa-solid fa-right-long"></i> Proceed to Clinical Search</a>
                     </div>
                 </div>

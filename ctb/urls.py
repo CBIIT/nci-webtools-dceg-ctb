@@ -57,7 +57,7 @@ urlpatterns = [
     url(r'^resources/useful_links/$', views.useful_links, name='useful_links'),
     url(r'^resources/podcasts_and_videos/$', views.podcasts_and_videos, name='podcasts_and_videos'),
 
-    # Resources
+    # Latest News
     url(r'^news/', views.news, name='news'),
 
     # Contact Us
@@ -76,17 +76,22 @@ urlpatterns = [
     url(r'^search_facility/clinical_search_facility/', views.clinical_search_facility, name='clinical_search_facility'),
     url(r'^search_facility/driver_search_facility/', views.driver_search_facility, name='driver_search_facility'),
 
+    # User Details
     url(r'^users/(?P<user_id>\d+)/$', views.user_detail, name='user_detail'),
-#    url(r'^cohorts/', include('cohorts.urls')),
-    path('admin/', admin.site.urls),
+
+    # Account Settings
     url(r'^accounts/', include('accounts.urls')),
+
+    # Privacy
+    url(r'^privacy/', views.privacy_policy, name='privacy'),
+    path('admin/', admin.site.urls),
     url(r'session_security/', include('session_security.urls')),
     url(r'^_ah/(vm_)?health$', views.health_check),
     url(r'^warning/', views.warn_page, name='warn'),
 
     url(r'^searcg/', views.search, name='search'),
     url(r'^extended_login/$', views.extended_login_view, name='extended_login'),
-    url(r'^privacy/', views.privacy_policy, name='privacy'),
+
     # url(r'^share/', include('sharing.urls')),
 ]
 

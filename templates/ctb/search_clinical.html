@@ -16,6 +16,7 @@
         <div class="pt-3">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Clinical Search Facility</li>
                 </ol>
             </nav>
@@ -70,7 +71,7 @@
                                 class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
                         <a class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
                                 class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
-                        <a class="btn btn-outline-dark" href="{% static 'files/application-form.doc' %}"><i
+                        <a class="btn btn-outline-secondary" href="{% static 'files/application-form.doc' %}"><i
                                 class="fa-solid fa-download"></i> Download Application Form</a>
                     </div>
                 </div>
