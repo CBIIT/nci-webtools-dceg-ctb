@@ -14,7 +14,7 @@
 
 {% block page_header %}
     <div class="container">
-        <h3 class="page-banner">Fact Sheet</h3>
+        <h5 class="page-banner">Fact Sheet</h5>
         <div>
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -28,20 +28,22 @@
 {% endblock %}
 
 {% block subcontent %}
-    <h2><a id="top"></a>Chernobyl Tissue Bank (CTB) Fact Sheet</h2>
-    <ol class="toc">
-        <li><a href="#one">What is the CTB?</a></li>
-        <li><a href="#two">What types of material and information are available from the CTB?</a></li>
-        <li><a href="#three">Who can obtain specimens?</a></li>
-        <li><a href="#four">How do researchers apply?</a></li>
-        <li><a href="#five">How are request evaluated?</a></li>
-        <li><a href="#six">What are the criteria for evaluation and review of applications?</a></li>
-        <li><a href="#seven">How do I get an answer to any other queries?</a></li>
-    </ol>
+    <div class="rounded bg-light p-3 mb-2">
+        <h4><a id="top"></a>Chernobyl Tissue Bank (CTB) Fact Sheet</h4>
+        <ol class="toc">
+            <li><a href="#one">What is the CTB?</a></li>
+            <li><a href="#two">What types of material and information are available from the CTB?</a></li>
+            <li><a href="#three">Who can obtain specimens?</a></li>
+            <li><a href="#four">How do researchers apply?</a></li>
+            <li><a href="#five">How are request evaluated?</a></li>
+            <li><a href="#six">What are the criteria for evaluation and review of applications?</a></li>
+            <li><a href="#seven">How do I get an answer to any other queries?</a></li>
+        </ol>
+    </div>
     <p><a href="{% static 'files/Fact-sheet-June-2014.pdf' %}" target="_blank" rel="noopener">Download
         this fact sheet as a pdf</a></p>
     <hr>
-    <h3><a id="one"></a>1. What is the CTB?</h3>
+    <h5><a id="one"></a>1. What is the CTB?</h5>
     <p>The CTB is an international cooperation to establish banks of biomaterial from and information on
         patients who were exposed as children or adolescents to fallout from the Chernobyl nuclear accident.
         It also houses research data derived by researchers using the CTB biomaterials, in a web accessible
@@ -74,7 +76,7 @@
         </li>
     </ol>
     <p><a href="#">Back to the top</a></p>
-    <h3><a id="two"></a>2. What types of material and information are available from the CTB?</h3>
+    <h5><a id="two"></a>2. What types of material and information are available from the CTB?</h5>
     <p>The bank includes material and information from patients with thyroid carcinomas and cellular
         adenomas from the contaminated oblasts of the Russian Federation and Ukraine who were born after
         26<sup>th</sup> April 1967 (i.e. aged under 19 at the time of the Chernobyl accident) and operated
@@ -98,14 +100,14 @@
         control is performed on nucleic acid extracted from all tissues and blood samples. In addition,
         sections from paraffin sections and from sections of tissue microarrays are available.</p>
     <p><a href="#">Back to the top</a></p>
-    <h3><a id="three"></a>3. Who can obtain material and/or research data from the CTB?</h3>
+    <h5><a id="three"></a>3. Who can obtain material and/or research data from the CTB?</h5>
     <p>The biomaterials available to the international scientific community comprise samples of extracted
         DNA and RNA from tissue, DNA from blood, samples of serum, paraffin embedded sections and tissue
         microarrays. It is not the aim of the project to restrict supply of material to researchers, but to
         coordinate and monitor the use of this unique resource in order to ensure that the maximum possible
         information can be obtained from a limited supply of material.</p>
     <p><a href="#">Back to the top</a></p>
-    <h3><a id="four"></a>4. How do researchers apply?</h3>
+    <h5><a id="four"></a>4. How do researchers apply?</h5>
     <p>Researchers who are interested in using material, information or research data from the CTB for
         research purposes must complete a brief, but detailed, proposal that includes information on the
         study design and justification for their requirements for materials and/or data. Researchers can
@@ -126,7 +128,7 @@
         the CTB Secretariat to obtain information on resource availability. The CTB does not provide funding
         for research projects.</p>
     <p><a href="#">Back to the top</a></p>
-    <h3><a id="five"></a>5. How are requests evaluated?</h3>
+    <h5><a id="five"></a>5. How are requests evaluated?</h5>
     <p>Requests are evaluated for scientific merit and appropriate use of CTB resources by the External
         Review Panel (ERP), which is an independent, multi-disciplinary panel of senior researchers in the
         fields of thyroid cancer and radiobiological research. The External Review Panel awards scores for
@@ -138,7 +140,7 @@
         further consideration. Projects may be submitted at any time and the review procedures are, in most
         cases, completed by e-mail.</p>
     <p><a href="#">Back to the top</a></p>
-    <h3><a id="six"></a>6. What are the criteria for evaluation and review of applications?</h3>
+    <h5><a id="six"></a>6. What are the criteria for evaluation and review of applications?</h5>
     <p>Criteria have been established to ensure that valid, productive and equitable scientific use is made
         of the CTB resources for multidisciplinary and international studies on post Chernobyl thyroid
         cancer. Approval for a project may be subject to the development of appropriate collaborative links.
@@ -201,7 +203,7 @@
         </li>
     </ol>
     <p><a href="#">Back to the top</a></p>
-    <h3><a id="seven"></a>7. How do I get an answer to any other queries?</h3>
+    <h5><a id="seven"></a>7. How do I get an answer to any other queries?</h5>
     <p>If you have any questions that are not covered in this fact sheet, please contact the CTB secretariat
         and we will do our best to help you:</p>
     <p><a href="{% url 'contact' %}">Contact us</a></p>

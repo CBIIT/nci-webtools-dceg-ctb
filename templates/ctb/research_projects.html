@@ -29,9 +29,10 @@
 
 {% block subcontent %}
     <p>Please select one of the sections below to view a breakdown of the research projects:</p>
-    <ul>
-        <li><a href="{% url 'research_projects_2001_2009' %}">2001 - 2009</a></li>
-        <li><a href="{% url 'research_projects_2010_2019' %}">2010 - 2019</a></li>
-    </ul>
-    <p>&nbsp;</p>
+    <div class="rounded bg-light p-3 mb-2">
+        <ul>
+            <li><a href="{% url 'research_projects_2001_2009' %}">2001 - 2009</a></li>
+            <li><a href="{% url 'research_projects_2010_2019' %}">2010 - 2019</a></li>
+        </ul>
+    </div>
 {% endblock %}
