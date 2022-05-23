@@ -20,7 +20,7 @@
 {% load session_security_tags %}
 {% load i18n l10n %}
 <!DOCTYPE html>
-<html lang="en" class="no-js">
+<html lang="en" class="no-js h-100">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -52,7 +52,7 @@
     </script>
 
 </head>
-<body class="{% block body_class %}content{% endblock %}" id="body">
+<body class="{% block body_class %}content{% endblock %} h-100 d-flex flex-column" id="body">
 <!--Include site main header-->
 {% include 'share/site_header.html'  %}
 
@@ -82,9 +82,9 @@
         <!-- Page Content -->
         {% block content %}{% endblock %}
     </div>
-    {% include 'share/site_footer.html'  %}
-</main>
 
+</main>
+{% include 'share/site_footer.html'  %}
 <!-- Warning Modal -->
 <div class="modal fade" id="gov_warning" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="gov_warning-header" aria-hidden="true">
     <div class="modal-dialog">
