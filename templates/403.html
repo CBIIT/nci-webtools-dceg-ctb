@@ -23,12 +23,12 @@
 {% block title %}Forbidden{% endblock %}
 
 {% block content %}
-    <div class="row justify-content-center">
+    <div class="row justify-content-center my-5">
         <div class="col-lg-4 accounts-col">
-            <div class="card">
+            <div class="card p-3">
                 <div class="card-body">
-                    <h1 class="card-title">{% trans "Access Forbidden" %}</h1>
-                    <h4>403: You do not have permission to access this page.</h4>
+                    <h4 class="card-title"><i class="fas fa-exclamation-triangle"></i> {% trans "403: Access Forbidden" %}</h4>
+                    <h5>You do not have permission to access this page.</h5>
                 </div>
             </div>
         </div>
