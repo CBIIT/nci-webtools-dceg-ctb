@@ -138,14 +138,14 @@ body {
     background-color: #c36149;
 }
 
-/*.hover-grey-button {*/
-    /*background-color: transparent;*/
-    /*border-width: 0;*/
-/*}*/
+.hover-grey-button {
+    background-color: transparent;
+    border-width: 0;
+}
 
-/*.hover-grey-button:hover {*/
-    /*background-color: rgba(0,0,0,0.1);*/
-/*}*/
+.hover-grey-button:hover {
+    background-color: rgba(0,0,0,0.1);
+}
 /*!* Accounts templates *!*/
 /*.signup label, .login label, .password_reset label {*/
     /*display: none;*/
@@ -185,14 +185,21 @@ body {
     vertical-align: middle;
 }
 
+.anchor-section{
+	/*height: 58px;*/
+	/*margin: 0;*/
+    /*margin-bottom: 2.5rem;*/
+	scroll-margin-top: 70px;
+}
+
 /* User Details */
 .user-row .col h4 {
     display: inline;
 }
 
-.pub-year{
-    padding-top: 70px;
-}
+/*.pub-year{*/
+    /*padding-top: 70px;*/
+/*}*/
 /*.tab-pane-border{*/
     /*border: */
 

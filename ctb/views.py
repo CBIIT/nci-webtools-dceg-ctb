@@ -187,6 +187,7 @@ def research_projects_2001_2009(request):
 def research_projects_2010_2019(request):
     return render(request, 'ctb/research_projects_2010_2019.html', {'request': request})
 
+
 # Schema Review of Applications
 def schema_review_of_applications(request):
     return render(request, 'ctb/schema_review_of_applications.html', {'request': request})
@@ -195,6 +196,14 @@ def schema_review_of_applications(request):
 # Material Available
 def material_available(request):
     return render(request, 'ctb/material_available.html', {'request': request})
+
+# Nuclear Acids and Paraffin Sections
+def nucleic_acids_and_paraffin_sections(request):
+    return render(request, 'ctb/nucleic-acids-and-paraffin-sections.html', {'request': request})
+
+# Tissue Microarrays
+def tissue_microarrays(request):
+    return render(request, 'ctb/tissue-microarrays.html', {'request': request})
 
 
 # #Resources

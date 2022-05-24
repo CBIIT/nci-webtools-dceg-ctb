@@ -23,12 +23,11 @@
 {% block title %}Server error{% endblock %}
 
 {% block content %}
-    <div class="row justify-content-center">
+    <div class="row justify-content-center my-5">
         <div class="col-lg-4 accounts-col">
-            <div class="card">
+            <div class="card p-3">
                 <div class="card-body">
-                    <h1 class="card-title">{% trans "Internal Server Error" %}</h1>
-                    <h4>500: There was an error while handling your request.</h4>
+                    <h4 class="card-title"><i class="fas fa-exclamation-triangle"></i> {% trans "500: Internal Server Error" %}</h4>
                     <p>We apologize for the inconvenience. Please <a href="mailto:help@canceridc.dev">contact us</a> and let us know what happened.</p>
                 </div>
             </div>

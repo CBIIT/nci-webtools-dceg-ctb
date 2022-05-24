@@ -48,6 +48,8 @@ urlpatterns = [
     url(r'^researchers/research_projects_2001_2009/$', views.research_projects_2001_2009, name='research_projects_2001_2009'),
     url(r'^researchers/research_projects_2010_2019/$', views.research_projects_2010_2019, name='research_projects_2010_2019'),
     url(r'^researchers/material_available/$', views.material_available, name='material_available'),
+    url(r'^researchers/nucleic_acids_and_paraffin_sections/$', views.nucleic_acids_and_paraffin_sections, name='nucleic_acids_and_paraffin_sections'),
+    url(r'^researchers/tissue_microarrays/$', views.tissue_microarrays, name='tissue_microarrays'),
     url(r'^researchers/schema_review_of_applications/$', views.schema_review_of_applications, name='schema_review_of_applications'),
 
 
