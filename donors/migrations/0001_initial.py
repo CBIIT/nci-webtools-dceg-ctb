@@ -21,8 +21,6 @@ class Migration(migrations.Migration):
                 ('gender', models.CharField(max_length=32, null=True)),
                 ('age_category', models.IntegerField(null=True)),
                 ('dosimetry', models.CharField(max_length=100, null=True)),
-                ('age_at_first_operation', models.IntegerField(null=True)),
-                ('age_at_exposure', models.IntegerField(null=True)),
                 ('exposed_region', models.BooleanField(default=False)),
             ],
         ),

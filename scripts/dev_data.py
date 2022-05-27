@@ -28,6 +28,7 @@ from argparse import ArgumentParser
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 from uuid import uuid4
 from random import randrange
+from csv import reader as csv_reader
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "ctb.settings")
 
@@ -38,6 +39,7 @@ django.setup()
 
 from django.contrib.auth.models import User
 from donors.models import Donor, Case, Sample
+from searches.models import Attribute
 
 SAMPLE_SUBTYPE = ["RNA", "DNA", None]
 SAMPLE_TYPE = ["EDTA", "Serum", "Frozen", "FFPE"]
@@ -51,6 +53,12 @@ DONOR_DIAG = ["Papillary Carcinoma", "Medullary Carcinoma", "Follicular Adenoma"
 DONOR_GENDER = ["Male", "Female"]
 DONOR_DOSIMETRY = ["Unknown", "<100mGy", "100-500 mGy", ">500 mGy"]
 
+attr_type_map = {
+    "CONTINUOUS NUMERIC": Attribute.CONTINUOUS_NUMERIC,
+    "CATEGORICAL NUMERIC": Attribute.CATEGORICAL_NUMERIC,
+    "STRING": Attribute.STRING,
+    "CATEGORICAL": Attribute.CATEGORICAL
+}
 
 isb_superuser = User.objects.get(username="ctb")
 
@@ -111,4 +119,17 @@ for i in range(50):
 
 Case.objects.bulk_create(cases)
 
+attributes = []
+
+attr_file = open("csv/attr.csv", "r")
+
+for line in csv_reader(attr_file):
+    attr = {
+        "name": line[0],
+        "display_name": line[1],
+        "data_type": attr_type_map[line[2]]
+    }
+    attributes.append(Attribute(**attr))
+
+Attribute.objects.bulk_create(attributes)
 

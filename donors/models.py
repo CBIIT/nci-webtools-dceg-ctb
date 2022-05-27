@@ -24,8 +24,6 @@ class Donor(models.Model):
     gender = models.CharField(max_length=32, null=True, blank=False)
     age_category = models.IntegerField(blank=False, null=True)
     dosimetry = models.CharField(max_length=100, null=True, blank=False)
-    age_at_first_operation = models.IntegerField(blank=False, null=True)
-    age_at_exposure = models.IntegerField(blank=False, null=True)
     exposed_region = models.BooleanField(default=False)
 
 
