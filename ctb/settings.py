@@ -170,10 +170,12 @@ INSTALLED_APPS = [
     'anymail',
     'ctb',
     #'sharing',
-    #'cohorts',
+    #'searches',
     'offline',
     'adminrestrict',
-    'axes'
+    'axes',
+    'donors',
+    'searches'
 ]
 
 MIDDLEWARE = [
@@ -186,7 +188,6 @@ MIDDLEWARE = [
     'adminrestrict.middleware.AdminPagesRestrictMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'ctb.team_only_middleware.TeamOnly',
-    # Uncomment the next line for simple clickjacking protection:
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'request_logging.middleware.LoggingMiddleware',
     'offline.middleware.OfflineMiddleware',

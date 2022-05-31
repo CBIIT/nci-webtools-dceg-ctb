@@ -157,6 +157,8 @@ jobs:
             - ./static
             - ./ctb
             - ./offline
+            - ./donors
+            - ./searches
             - ./request_logging
             - ./scripts
             - ./templates

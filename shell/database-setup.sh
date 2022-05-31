@@ -61,12 +61,12 @@ else
             sudo gcloud auth activate-service-account --key-file ${HOMEROOT}/${SECURE_LOCAL_PATH}/${GOOGLE_APPLICATION_CREDENTIALS}
             sudo gcloud config set project "${GCLOUD_PROJECT_ID}"
         fi
-        #echo "Downloading SQL Table File..."
-        #sudo gsutil cp "gs://${GCLOUD_BUCKET_DEV_SQL}/${METADATA_SQL_FILE}" ${HOMEROOT}/scripts/${METADATA_SQL_FILE}
+        echo "Downloading SQL Table File..."
+        sudo gsutil cp "gs://${GCLOUD_BUCKET_DEV_SQL}/${METADATA_SQL_FILE}" ${HOMEROOT}/scripts/${METADATA_SQL_FILE}
     fi
 
-    #echo "Applying SQL Table File... (may take a while)"
-    #mysql -u$MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -D$DATABASE_NAME < ${HOMEROOT}/scripts/${METADATA_SQL_FILE}
+    echo "Applying SQL Table File... (may take a while)"
+    mysql -u$MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -D$DATABASE_NAME < ${HOMEROOT}/scripts/${METADATA_SQL_FILE}
 fi
 
 echo "Adding Django site IDs..."
