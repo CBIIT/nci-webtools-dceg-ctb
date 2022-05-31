@@ -8,7 +8,7 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,700&subset=latin,latin-ext");
 
 body {
-  padding-top: 56px;
+  padding-top: 58px;
 }
 /*!*.top-30-px {*!*/
     /*!*top: 30px;*!*/
@@ -33,10 +33,11 @@ body {
     /*!*text-decoration: underline;*!*/
 /*!*}*!*/
 
-/*!*.navbar-ctb {*!*/
-    /*!*background-color: #fff;*!*/
-    /*!*border-bottom: 2px solid #62707c;*!*/
-/*!*}*!*/
+.navbar-ctb {
+    padding: 5px 0;
+}
+
+
 
 .page-banner{
   text-align: center;
@@ -103,16 +104,23 @@ body {
 
 #ctb-secondary-navbar a{
     color: #4d5869;
+    border-radius: 2px;
+    margin: 0 .25rem;
 }
 #ctb-secondary-navbar a:hover{
-    color: #6556bc;
+    background-color: rgba(0, 0, 0, .2);
+    color: white;
 }
 
 /*#ctb-secondary-navbar a {*/
     /*color: lightcoral;*/
 /*}*/
 #ctb-secondary-navbar a.active {
-    color: #6556bc;
+    background-color: rgba(204, 132, 51, .9);
+    /*background-color: rgba(0, 0, 0, .4);*/
+    color: white;
+
+    /*color: #6556bc;*/
 }
 /*.nav-link .active{*/
     /*border-bottom: 5px solid orange;*/
