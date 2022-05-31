@@ -292,9 +292,9 @@ def saved_searches(request):
     return render(request, 'ctb/saved_searches.html', {'request': request, 'saved_search_list': saved_search_list})
 
 
-# Clinical Search Intro
-def search_clinical(request):
-    return render(request, 'ctb/search_clinical.html', {'request': request})
+# # Clinical Search Intro
+# def search_clinical(request):
+#     return render(request, 'ctb/search_clinical.html', {'request': request})
 
 # Clinical Search Facility
 def clinical_search_facility(request):

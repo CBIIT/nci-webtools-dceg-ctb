@@ -92,9 +92,9 @@
     <div id="ctb-secondary-navbar" class="nav-scroller bg-body shadow-sm">
         <div class="container">
             <nav class="nav navbar-ctb" aria-label="Secondary navigation">
-                <a href="{% url 'landing_page' %}" title="Home Page">
+                <div title="Home Page">
                     <img class="navbar-brand" src="{% static 'img/ctb-biosample-logo.svg' %}" alt="NIH CTB Logo"/>
-                </a>
+                </div>
                 {% if user.is_authenticated %}
                 <a class="nav-link {% if 'dashboard/' in request.path %} active {% endif %}" href="{% url 'dashboard' %}">
                     Dashboard
