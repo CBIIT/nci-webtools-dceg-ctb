@@ -70,19 +70,38 @@
             </ul>
             <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
-                    {% if has_access %}
-                    <li class="nav-item">
-                        <a href="{% url 'user_detail' user.id %}" class="nav-link {% if 'users/' in request.path or 'accounts/' in request.path %} active {% endif %}" title="User Details">
-                            <i class="fa-solid fa-user"></i> User Name
-                        </a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle {% if 'users/' in request.path or 'accounts/' in request.path %} active {% endif %}"
+                           data-bs-toggle="dropdown" href="#" role="button"
+                           aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{% url 'user_detail' user.id %}"
+                                   class="dropdown-item"
+                                   title="My Profile">My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#logout-modal" class="dropdown-item" data-bs-toggle="modal"
+                                   data-bs-target="#logout-modal"
+                                   title="Sign Out">Sign Out <i class="fa fa-solid fa-sign-out"></i>
+                                </a>
+                            </li>
+{#                            <li class="nav-item">#}
+{#                                <a href="#logout-modal" class="dropdown-item" data-bs-toggle="modal"#}
+{#                                   data-bs-target="#logout-modal"#}
+{#                                   title="Sign Out">#}
+{#                                    Sign Out <i class="fa fa-solid fa-sign-out"></i>#}
+{#                                </a>#}
+{#                            </li>#}
+                        </ul>
                     </li>
-                    {% endif %}
-                    <li class="nav-item">
-                        <a href="#logout-modal" class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-modal"
-                           title="Sign Out">
-                            Sign Out <i class="fa fa-solid fa-sign-out"></i>
-                        </a>
-                    </li>
+{#                    <li class="nav-item">#}
+{#                        <a href="#logout-modal" class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-modal"#}
+{#                           title="Sign Out">#}
+{#                            Sign Out <i class="fa fa-solid fa-sign-out"></i>#}
+{#                        </a>#}
+{#                    </li>#}
                 {% endif %}
             </ul>
         </div>

@@ -33,22 +33,23 @@
                 <div class="border bg-light rounded p-3">
                     <div class="content-header d-flex flex-wrap justify-content-between">
                         <h5>Clinical Search Facility</h5>
-                        <a id="clinic-skip" class="btn btn-outline-secondary" href="#">
+                        <a id="clinic-skip" class="btn btn-outline-secondary d-none" href="#">
                             Skip
                             <i class="fa-solid fa-angles-right"></i>
                         </a>
                     </div>
 
 
-                    <form method="POST" id="form-clinic" class="form--clinic"
-                          action="/biosample-search/clinical-search-facility-results" autofill="off">
+                    <form method="POST" id="form-clinic" action="{% url 'clinical_search_facility_result' %}"
+                          autofill="off">
+                        {% csrf_token %}
 
                         <input type="hidden" name="patientresidency" value="both">
                         <input type="hidden" name="patientgender" value="both">
                         <input type="hidden" name="ageatoperation" value="0,49">
                         <input type="hidden" name="ageatexposure" value="-40,19">
 
-                        <div class="form-steps">
+                        <div>
                             <fieldset id="form-clinic-0">
                                 <div>
                                     <h6>General Information</h6>
@@ -83,7 +84,6 @@
                                 </div>
                                 <div>There are two categories for operation type:</div>
                                 <hr>
-                                {#                                <div class="container">#}
                                 <div class="row mx-1 mb-3">
                                     <div class="col border rounded-2 p-2 mx-1">
                                         <div class="form-check">
@@ -119,13 +119,16 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="mb-2">The selection criteria is set to any operation type, so if
                                     you wish set this category to total or less than total, please select this box –
                                     you may select only one.
                                 </div>
+
                                 <div class="mb-2"><strong>If you do not wish to refine your research with
                                     information on operation type, please leave this section blank and continue to
-                                    the next section.</strong></div>
+                                    the next section.</strong>
+                                </div>
                             </fieldset>
                             <fieldset id="form-clinic-2" class="d-none">
                                 <h6>TNM Status (8th Edition) - <a
@@ -145,15 +148,13 @@
                                 <hr>
                                 <div id="options-pt1" class="border rounded-2 p-3">
                                     <div class="pb-3">
-                                        <button class="btn btn-reset btn-outline-secondary float-end"
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
                                                 data-target="#options-pt1">Reset
                                         </button>
                                         <strong>
                                             Primary tumor (pT) status for Papillary, Follicular, Poorly
                                             differentiated, Well Differentiated Cancer, Not Otherwise Specified
                                         </strong>
-
-
                                     </div>
                                     <div>
                                         For all cancer types:
@@ -178,8 +179,7 @@
                                                         to
                                                         the thyroid
                                                     </label>
-`                                                </td>
-
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
@@ -213,7 +213,6 @@
                                                     extrathyroidal
                                                     extension invading only strap muscles
                                                 </td>
-
                                             </tr>
                                             <tr>
                                                 <td>
@@ -257,7 +256,6 @@
                                                         recurrent laryngeal nerve from a tumour of any size
                                                     </label>
                                                 </td>
-
                                             </tr>
                                             <tr>
                                                 <td>
@@ -271,23 +269,19 @@
                                                         vessels from a tumour of any size
                                                     </label>
                                                 </td>
-
                                             </tr>
                                             </tbody>
                                         </table>
                                         <div><strong>If you do not wish to select a size of tumour, please leave this
-                                        section blank.</strong></div>
+                                            section blank.</strong></div>
                                     </div>
-
                                 </div>
-
-
                                 <div id="options-pt2" class="mt-4 border rounded-2 p-3">
                                     <div>
                                         <strong>
                                             pT status for medullary thyroid cancers
                                         </strong>
-                                        <button class="btn btn-reset btn-outline-secondary float-end"
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
                                                 data-target="#options-pt2">Reset
                                         </button>
                                     </div>
@@ -351,7 +345,6 @@
                                                     extrathyroidal
                                                     extension invading only strap muscles
                                                 </td>
-
                                             </tr>
                                             <tr>
                                                 <td>
@@ -363,7 +356,6 @@
                                                         <strong>T3a</strong>: Tumor > 4 cm limited to the thyroid
                                                     </label>
                                                 </td>
-
                                             </tr>
                                             <tr>
                                                 <td>
@@ -377,7 +369,6 @@
                                                         omohyoid muscles) from a tumour of any size
                                                     </label>
                                                 </td>
-
                                             </tr>
                                             <tr>
                                                 <td></td>
@@ -412,7 +403,6 @@
                                                         carotid artery or mediastinal vessels
                                                     </label>
                                                 </td>
-
                                             </tr>
                                             </tbody>
                                         </table>
@@ -426,7 +416,7 @@
                                         <strong>
                                             Regional Lymph Node Involvement -N
                                         </strong>
-                                        <button class="btn btn-reset btn-outline-secondary float-end"
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
                                                 data-target="#options-pt3">Reset
                                         </button>
                                     </div>
@@ -549,8 +539,8 @@
                                         <strong>
                                             For PTC / FC / WDCANOS
                                         </strong>
-                                        <button class="btn btn-reset btn-outline-secondary float-end"
-                                                data-target="#options-pt3">Reset
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
+                                                data-target="#options-pt4">Reset
                                         </button>
                                     </div>
                                     <div class="mt-2">
@@ -579,8 +569,8 @@
                                         <strong>
                                             For MTC
                                         </strong>
-                                        <button class="btn btn-reset btn-outline-secondary float-end"
-                                                data-target="#options-pt3">Reset
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
+                                                data-target="#options-pt5">Reset
                                         </button>
                                     </div>
                                     <div class="mt-2">
@@ -774,8 +764,8 @@
                                     class="fa-solid fa-chevron-right"></i></a>
                             <a id="next-btn" class="btn btn-primary float-end d-none">Next <i
                                     class="fa-solid fa-chevron-right"></i></a>
-                            <a id="submit-btn" class="btn btn-primary d-none float-end">View Results and Make
-                                Application <i class="fa-solid fa-chevron-right"></i></a>
+                            <button type="submit" id="submit-btn" class="btn btn-primary d-none float-end">View Results and Make
+                                Application <i class="fa-solid fa-chevron-right"></i></button>
                         </div>
                     </form>
                 </div>
@@ -784,91 +774,73 @@
             <div class="col-4">
 
                 <div class="border rounded bg-light p-4">
-                    <div class="clinic-sidebar">
-                        <h6 class="clinic-sidebar__title has-icon">
-                            {#                            <img class="has-icon__image"#}
-                            {#                                 src="/biosample-search/getfile/design/icons/icon-search-blue.svg"#}
-                            {#                                 alt="">#}
-                            <span class="clinic-sidebar__title__text">Search Progress</span>
+                    <div id="clinic-sidebar" class="d-none">
+                        <h6>
+                            Search Progress
                         </h6>
-
-                        <div class="clinic-progress">
-                            <a class="clinic-progress__item clinic-progress__item-0 active" href="#form-clinic-0"
-                               data-index="0">
-                                <div class="clinic-progress__item__left">
-                                    <div class="clinic-progress__blob"></div>
-                                    <div class="clinic-progress__divider"></div>
-                                </div>
-
-                                <div class="clinic-progress__item__right">
-                                    <h3 class="clinic-progress__title">General information</h3>
-                                </div>
-                            </a>
-
-                            <a class="clinic-progress__item  clinic-progress__item-1 active" href="#form-clinic-1"
-                               data-index="1">
-                                <div class="clinic-progress__item__left">
-                                    <div class="clinic-progress__blob"></div>
-                                    <div class="clinic-progress__divider"></div>
-                                </div>
-
-                                <div class="clinic-progress__item__right">
-                                    <h3 class="clinic-progress__title">Operation Type</h3>
-                                </div>
-                            </a>
-
-                            <a class="clinic-progress__item  clinic-progress__item-2" href="#form-clinic-2"
-                               data-index="2">
-                                <div class="clinic-progress__item__left">
-                                    <div class="clinic-progress__blob"></div>
-                                    <div class="clinic-progress__divider"></div>
-                                </div>
-
-                                <div class="clinic-progress__item__right">
-                                    <h3 class="clinic-progress__title">TNM Status(8th Edition)</h3>
-                                </div>
-                            </a>
-
-                            <a class="clinic-progress__item  clinic-progress__item-3" href="#form-clinic-3"
-                               data-index="3">
-                                <div class="clinic-progress__item__left">
-                                    <div class="clinic-progress__blob"></div>
-                                    <div class="clinic-progress__divider"></div>
-                                </div>
-
-                                <div class="clinic-progress__item__right">
-                                    <h3 class="clinic-progress__title">AJCC Clinical Stage</h3>
-                                </div>
-                            </a>
-
-                            <a class="clinic-progress__item  clinic-progress__item-4" href="#form-clinic-4"
-                               data-index="4">
-                                <div class="clinic-progress__item__left">
-                                    <div class="clinic-progress__blob"></div>
-                                    <div class="clinic-progress__divider"></div>
-                                </div>
-
-                                <div class="clinic-progress__item__right">
-                                    <h3 class="clinic-progress__title">Treatment &amp; Outcome</h3>
-                                </div>
-                            </a>
-
-                            <a class="clinic-progress__item  clinic-progress__item-5" href="#form-clinic-5"
-                               data-index="5">
-                                <div class="clinic-progress__item__left">
-                                    <div class="clinic-progress__blob"></div>
-                                    <div class="clinic-progress__divider"></div>
-                                </div>
-
-                                <div class="clinic-progress__item__right">
-                                    <h3 class="clinic-progress__title">Results</h3>
-                                </div>
-                            </a>
+                        <hr>
+                        <div id="clinical-step-0" class="clinical-step step-active step-done">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">General Information</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-1" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">Operation Type</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-2" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">TNM Status (8th Edition)</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-3" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">AJCC Clinical Stage</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-4" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">Treatment & Outcome</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-5" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">Results</div>
+                            </div>
                         </div>
                     </div>
-
+                    <div id="clinic-sidebar-buttons">
+                        <div class="d-grid gap-2 col mx-auto">
+                            <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i
+                                    class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
+                            <a class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
+                                    class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
+                            <a class="btn btn-outline-secondary" href="{% static 'files/application-form.doc' %}"><i
+                                    class="fa-solid fa-download"></i> Download Application Form</a>
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
     </div>
 

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Clinical Search Facility
+{% endblock %}
+
+{% block description %}
+    Clinical Search Facility
+{% endblock %}
+
+{% block page_name %}search_clinical{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <div class="pt-3">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Clinical Search Facility</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+    <div class="container py-3">
+        <div class="row">
+            <div class="col-8">
+                <div class="border rounded bg-light p-3">
+                    <h4>Clinical Search Facility</h4>
+                    <h5>Results</h5>
+                    <hr>
+                    <div><strong>Original BioSample Search Results</strong>: {{ clinic_search_result.total }}</div>
+                    <div>The clinical information you have requested is available on
+                        <strong>{{ clinic_search_result.avail }}</strong> of the
+                        <strong>{{ clinic_search_result.total }}</strong> cases that met your biosample search criteria.
+                    </div>
+                    <hr>
+                    <div class="btn-toolbar justify-content-between" role="toolbar">
+
+                        <a class="btn btn-primary me-md-2" href="{% static 'files/application-form.doc' %}">
+                            <i class="fa-solid fa-download"></i> Make Application
+                        </a>
+                        <div class="input-group">
+                            <input type="text" name="title" id="search-save-title"
+                                   class="form-control" value="" placeholder="Search Title"
+                                   aria-label="Recipient's username" aria-describedby="search-save">
+                            <button class="btn btn-primary" type="button" id="search-save"><i
+                                    class="fa-solid fa-floppy-disk"></i> Save Search
+                            </button>
+                        </div>
+                    </div>
+{#                    <div class="d-grid gap-2 d-md-flex ">#}
+{#                        <a class="btn btn-primary me-md-2" href="{% static 'files/application-form.doc' %}">#}
+{#                            <i class="fa-solid fa-download"></i> Make Application#}
+{#                        </a>#}
+{#                        <div class="input-group justify-content-md-end">#}
+{#                            <input type="text" name="title" id="search-save-title"#}
+{#                                   class="form-control" value="" placeholder="Search Title"#}
+{#                                   aria-label="Recipient's username" aria-describedby="search-save">#}
+{#                            <button class="btn btn-primary" type="button" id="search-save"><i#}
+{#                                    class="fa-solid fa-floppy-disk"></i> Save Search#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </div>#}
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="border rounded bg-light p-3 mb-4">
+                    <div class="d-grid gap-2 col mx-auto">
+                        <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i
+                                class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
+                        <a class="btn btn-secondary" href="{% url 'clinical_search_facility' %}"><i
+                                class="fa-solid fa-left-long"></i> Perform Another Clinical Search</a>
+                        <a class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
+                                class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
