@@ -293,8 +293,12 @@ def saved_searches(request):
 
 
 # # Clinical Search Intro
-# def search_clinical(request):
-#     return render(request, 'ctb/search_clinical.html', {'request': request})
+def search_clinical(request):
+    clinic_search_result = {
+        'total': 5516,
+        'avail': 3167
+    }
+    return render(request, 'ctb/clinical_search_facility_result.html', {'request': request, 'clinic_search_result': clinic_search_result})
 
 # Clinical Search Facility
 def clinical_search_facility(request):

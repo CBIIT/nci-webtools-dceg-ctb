@@ -76,6 +76,7 @@ urlpatterns = [
     url(r'^search_facility/search_tissue_samples/', views.search_tissue_samples, name='search_tissue_samples'),
     # url(r'^search_facility/search_clinical/', views.search_clinical, name='search_clinical'),
     url(r'^search_facility/clinical_search_facility/', views.clinical_search_facility, name='clinical_search_facility'),
+    url(r'^search_facility/clinical_search_facility_result/', views.search_clinical, name='clinical_search_facility_result'),
     url(r'^search_facility/driver_search_facility/', views.driver_search_facility, name='driver_search_facility'),
 
     # User Details

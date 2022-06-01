@@ -29,7 +29,7 @@ require([
     $(document).ready(function () {
         var step = 0;
 
-        $('#next-btn, #proceed-btn').on("click", function () {
+        $('#next-btn, #clinic-skip, #proceed-btn').on("click", function () {
             $('#form-clinic-' + step).addClass('d-none');
             $('#form-clinic-' + (++step)).removeClass('d-none');
             update_screen();
@@ -39,16 +39,13 @@ require([
             $('#form-clinic-'+(--step)).removeClass('d-none');
             update_screen();
         });
-        $('#clinic-skip').on("click", function () {
-            $('#form-clinic-' + step).addClass('d-none');
-            step=4;
-            $('#form-clinic-' + (step)).removeClass('d-none');
-            update_screen();
+
+        $('.btn-reset').on("click", function () {
+            $($(this).data('target')).find('input:checkbox').prop('checked', false);
         });
 
         var update_screen = function () {
-            $('#submit-btn, #next-btn, #back-btn, #proceed-btn, #clinic-skip').addClass('d-none');
-            $('#clinic-skip').removeClass('d-none');
+            $('#submit-btn, #next-btn, #back-btn, #proceed-btn, #clinic-skip, #clinic-sidebar').addClass('d-none');
             if (step) {
                 $('#back-btn').removeClass('d-none');
                 if (step > 3) {
@@ -56,10 +53,26 @@ require([
                     $('#clinic-skip').addClass('d-none');
                 } else {
                     $('#next-btn').removeClass('d-none');
+                    $('#clinic-skip').removeClass('d-none');
                 }
+                $('#clinic-sidebar-buttons').addClass('d-none');
+                $('#clinic-sidebar').removeClass('d-none');
             }
             else{
                 $('#proceed-btn').removeClass('d-none');
+                $('#clinic-sidebar-buttons').removeClass('d-none');
+                // $('#clinic-skip').removeClass('d-none');
+            }
+            //update progress bar
+            for (let i=0; i<6; i++){
+                if (i > step)
+                    $('#clinical-step-'+i).removeClass('step-active step-done');
+                else if (i == step)
+                    $('#clinical-step-'+i).addClass('step-active step-done');
+                else {
+                    $('#clinical-step-' + i).addClass('step-done');
+                    $('#clinical-step-' + i).removeClass('step-active');
+                }
             }
             window.scrollTo(0, 0);
         }

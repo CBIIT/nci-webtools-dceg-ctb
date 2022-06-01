@@ -200,27 +200,6 @@
                             </button>
                         </div>
                     </div>
-{#                    <hr>#}
-{##}
-{#                    <div class="row">#}
-{#                        <div class="col-4">#}
-{#                            <a class="btn btn-outline-dark" href="{% static 'files/application-form.doc' %}">#}
-{#                                <i class="fa-solid fa-download"></i> Download Application#}
-{#                            </a>#}
-{#                        </div>#}
-{#                        <div class="col-5">#}
-{#                            <input class="col-auto form-control" type="text" placeholder="Search Title" maxlength="50"#}
-{#                                   aria-label="default input example">#}
-{#                        </div>#}
-{#                        <div class="col-3">#}
-{#                            <button id="search-save-driver" class="btn btn-primary col-auto">#}
-{#                                <i class="fa-solid fa-floppy-disk"></i>#}
-{#                                <span class="has-icon__text">Save Search</span>#}
-{#                            </button>#}
-{#                        </div>#}
-{##}
-{#                    </div>#}
-
                     <script id="save-search-driver-json" type="application/json">{"diagnosis":["FC"],"patientresidency":"both","patientgender":"both","ageatoperation":"0,49","ageatexposure":"-40,19","returnpatientids":true,"ids":[],"totalcases":0}</script>
                 </div>
             </div>
@@ -230,9 +209,9 @@
                     <div class="d-grid gap-2 col mx-auto">
                         <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i
                                 class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
-                        <a class="btn btn-primary" href="{% url 'clinical_search_facility' %}"><i
-                                class="fa-solid fa-magnifying-glass"></i> Perform Another Clinical Search</a>
-                        <a class="btn btn-outline-dark" href="{% static 'files/application-form.doc' %}"><i
+                        <a class="btn btn-secondary" href="{% url 'clinical_search_facility' %}"><i
+                                class="fa-solid fa-left-long"></i> Perform Another Clinical Search</a>
+                        <a class="btn btn-outline-secondary" href="{% static 'files/application-form.doc' %}"><i
                                 class="fa-solid fa-download"></i> Download Application Form</a>
                     </div>
                 </div>
