@@ -30,7 +30,7 @@
 {% block subcontent %}
     <div class="rounded bg-light p-3 mb-2">
         <h4><a id="top"></a>Chernobyl Tissue Bank (CTB) Fact Sheet</h4>
-        <ol class="toc">
+        <ol>
             <li><a href="#one">What is the CTB?</a></li>
             <li><a href="#two">What types of material and information are available from the CTB?</a></li>
             <li><a href="#three">Who can obtain specimens?</a></li>
@@ -40,8 +40,9 @@
             <li><a href="#seven">How do I get an answer to any other queries?</a></li>
         </ol>
     </div>
-    <p><a href="{% static 'files/Fact-sheet-June-2014.pdf' %}" target="_blank" rel="noopener">Download
-        this fact sheet as a pdf</a></p>
+    <div><a href="{% static 'files/Fact-sheet-June-2014.pdf' %}" target="_blank" rel="noopener"
+            class="btn btn-outline-secondary btn-sm"><i class="fa-solid fa-download"></i> Download
+        this fact sheet as a pdf</a></div>
     <hr>
     <h5><a id="one" class="anchor-section"></a>1. What is the CTB?</h5>
     <p>The CTB is an international cooperation to establish banks of biomaterial from and information on
@@ -75,8 +76,9 @@
             accidents is not lost.
         </li>
     </ol>
-    <p><a href="#">Back to the top</a></p>
-    <h5><a id="two" class="anchor-section"></a>2. What types of material and information are available from the CTB?</h5>
+    <div class="mb-5"><a href="#"><i class="fa-solid fa-arrow-up"></i> Back to the top</a></div>
+    <h5><a id="two" class="anchor-section"></a>2. What types of material and information are available from the CTB?
+    </h5>
     <p>The bank includes material and information from patients with thyroid carcinomas and cellular
         adenomas from the contaminated oblasts of the Russian Federation and Ukraine who were born after
         26<sup>th</sup> April 1967 (i.e. aged under 19 at the time of the Chernobyl accident) and operated
@@ -99,14 +101,15 @@
         to verify its nature. DNA and RNA are extracted to an internationally agreed protocol. Quality
         control is performed on nucleic acid extracted from all tissues and blood samples. In addition,
         sections from paraffin sections and from sections of tissue microarrays are available.</p>
-    <p><a href="#">Back to the top</a></p>
+    <div class="mb-5"><a href="#"><i class="fa-solid fa-arrow-up"></i> Back to the top</a></div>
+
     <h5><a id="three" class="anchor-section"></a>3. Who can obtain material and/or research data from the CTB?</h5>
     <p>The biomaterials available to the international scientific community comprise samples of extracted
         DNA and RNA from tissue, DNA from blood, samples of serum, paraffin embedded sections and tissue
         microarrays. It is not the aim of the project to restrict supply of material to researchers, but to
         coordinate and monitor the use of this unique resource in order to ensure that the maximum possible
         information can be obtained from a limited supply of material.</p>
-    <p><a href="#">Back to the top</a></p>
+    <div class="mb-5"><a href="#"><i class="fa-solid fa-arrow-up"></i> Back to the top</a></div>
     <h5><a id="four" class="anchor-section"></a>4. How do researchers apply?</h5>
     <p>Researchers who are interested in using material, information or research data from the CTB for
         research purposes must complete a brief, but detailed, proposal that includes information on the
@@ -127,7 +130,7 @@
         receipt of funding, or who are in the process of obtaining funds, are strongly encouraged to contact
         the CTB Secretariat to obtain information on resource availability. The CTB does not provide funding
         for research projects.</p>
-    <p><a href="#">Back to the top</a></p>
+    <div class="mb-5"><a href="#"><i class="fa-solid fa-arrow-up"></i> Back to the top</a></div>
     <h5><a id="five" class="anchor-section"></a>5. How are requests evaluated?</h5>
     <p>Requests are evaluated for scientific merit and appropriate use of CTB resources by the External
         Review Panel (ERP), which is an independent, multi-disciplinary panel of senior researchers in the
@@ -139,7 +142,7 @@
         applications about which questions have been raised and/or for which the PIs response requires
         further consideration. Projects may be submitted at any time and the review procedures are, in most
         cases, completed by e-mail.</p>
-    <p><a href="#">Back to the top</a></p>
+    <div class="mb-5"><a href="#"><i class="fa-solid fa-arrow-up"></i> Back to the top</a></div>
     <h5><a id="six" class="anchor-section"></a>6. What are the criteria for evaluation and review of applications?</h5>
     <p>Criteria have been established to ensure that valid, productive and equitable scientific use is made
         of the CTB resources for multidisciplinary and international studies on post Chernobyl thyroid
@@ -202,12 +205,10 @@
             explicit permission of the Scientific Advisory Board.
         </li>
     </ol>
-    <p><a href="#">Back to the top</a></p>
+    <div class="mb-5"><a href="#"><i class="fa-solid fa-arrow-up"></i> Back to the top</a></div>
     <h5><a id="seven" class="anchor-section"></a>7. How do I get an answer to any other queries?</h5>
-    <p>If you have any questions that are not covered in this fact sheet, please contact the CTB secretariat
-        and we will do our best to help you:</p>
-    <p><a href="{% url 'contact' %}">Contact us</a></p>
-    <p>&nbsp;</p>
-    <p><a href="#">Back to the top</a></p>
+    <p>If you have any questions that are not covered in this fact sheet, please contact us at <a
+            href="mailto:ctb-info@isb-cgc.org">ctb-info@isb-cgc.org</a> and we will do our best to help you:</p>
+    <div class="mb-5"><a href="#"><i class="fa-solid fa-arrow-up"></i> Back to the top</a></div>
 
 {% endblock %}

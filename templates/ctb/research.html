@@ -3,37 +3,29 @@
 {% block content %}
     <div class="container">
         <div class="row">
-
-            <div class="col-md-9 pb-4">
+            <div class="col-lg-9 pb-4">
                 {% block subcontent %}
                 {% endblock %}
             </div>
-
-            <div class="col-md-3 pb-4">
-                <ul class="side-navigation">
-                    <li class="side-navigation__item side-navigation__item--heading">
-                        <a href="{% url 'researchers_page' %}" class="side-navigation__link ">
-                            For Researchers
-                        </a>
-                    </li>
-                    <li class="side-navigation__item ">
-                        <a class="side-navigation__link" href="{% url 'access_to_materials' %}">
-                            Access to Materials
-                        </a>
-                    </li>
-                    <li class="side-navigation__item  side-navigation__link--active ">
-                        <a class="side-navigation__link" href="{% url 'research_projects' %}">
-                            Research Projects Using CTB Materials
-                        </a>
-                    </li>
-                    <li class="side-navigation__item ">
-                        <a class="side-navigation__link" href="{% url 'material_available' %}">
-                            Material Available
-                        </a>
-                    </li>
-                </ul>
+            <div class="col-lg-3 pb-4">
+                <div class="list-group">
+                    <div class="list-group-item list-group-item-header">
+                        Research
+                    </div>
+                    <a href="{% url 'researchers_page' %}" class="list-group-item list-group-item-action">
+                        For Researchers
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="{% url 'access_to_materials' %}">
+                        Access to Materials
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="{% url 'research_projects' %}">
+                        Research Projects Using CTB Materials
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="{% url 'material_available' %}">
+                        Material Available
+                    </a>
+                </div>
             </div>
-
         </div>
     </div>
 {% endblock %}
