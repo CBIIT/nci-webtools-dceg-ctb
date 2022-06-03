@@ -2,14 +2,14 @@
 {% load static %}
 
 {% block title %}
-    CTB | Clinical Search Facility
+    CTB | Clinical Search Facility Result
 {% endblock %}
 
 {% block description %}
-    Clinical Search Facility
+    Clinical Search Facility Result
 {% endblock %}
 
-{% block page_name %}search_clinical{% endblock %}
+{% block page_name %}clinical_search_facility_result{% endblock %}
 
 {% block page_header %}
     <div class="container">
@@ -17,7 +17,7 @@
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Clinical Search Facility</li>
+                    <li class="breadcrumb-item active" aria-current="page">Refine by Clinical Parameters</li>
                 </ol>
             </nav>
         </div>
@@ -26,12 +26,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container py-3">
+    <div class="container py-2">
         <div class="row">
-            <div class="col-8">
-                <div class="border rounded bg-light p-3">
-                    <h4>Clinical Search Facility</h4>
-                    <h5>Results</h5>
+            <div class="col-lg-8">
+                <div class="border rounded bg-light p-4 mb-2">
+                    <h5>Clinical Search Facility</h5>
+                    <h6 class="pt-3"><strong>Results</strong></h6>
                     <hr>
                     <div><strong>Original BioSample Search Results</strong>: {{ clinic_search_result.total }}</div>
                     <div>The clinical information you have requested is available on
@@ -40,36 +40,22 @@
                     </div>
                     <hr>
                     <div class="btn-toolbar justify-content-between" role="toolbar">
-
                         <a class="btn btn-primary me-md-2" href="{% static 'files/application-form.doc' %}">
                             <i class="fa-solid fa-download"></i> Make Application
                         </a>
                         <div class="input-group">
                             <input type="text" name="title" id="search-save-title"
-                                   class="form-control" value="" placeholder="Search Title"
-                                   aria-label="Recipient's username" aria-describedby="search-save">
+                                   class="form-control" value="" placeholder="Search Name"
+                                   aria-label="Search Save" aria-describedby="search-save">
                             <button class="btn btn-primary" type="button" id="search-save"><i
                                     class="fa-solid fa-floppy-disk"></i> Save Search
                             </button>
                         </div>
                     </div>
-{#                    <div class="d-grid gap-2 d-md-flex ">#}
-{#                        <a class="btn btn-primary me-md-2" href="{% static 'files/application-form.doc' %}">#}
-{#                            <i class="fa-solid fa-download"></i> Make Application#}
-{#                        </a>#}
-{#                        <div class="input-group justify-content-md-end">#}
-{#                            <input type="text" name="title" id="search-save-title"#}
-{#                                   class="form-control" value="" placeholder="Search Title"#}
-{#                                   aria-label="Recipient's username" aria-describedby="search-save">#}
-{#                            <button class="btn btn-primary" type="button" id="search-save"><i#}
-{#                                    class="fa-solid fa-floppy-disk"></i> Save Search#}
-{#                            </button>#}
-{#                        </div>#}
-{#                    </div>#}
                 </div>
             </div>
 
-            <div class="col-4">
+            <div class="col-lg-4">
                 <div class="border rounded bg-light p-3 mb-4">
                     <div class="d-grid gap-2 col mx-auto">
                         <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i

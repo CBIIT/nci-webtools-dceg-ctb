@@ -40,9 +40,7 @@ require([
             update_screen();
         });
 
-        $('.btn-reset').on("click", function () {
-            $($(this).data('target')).find('input:checkbox').prop('checked', false);
-        });
+
 
         var update_screen = function () {
             $('#submit-btn, #next-btn, #back-btn, #proceed-btn, #clinic-skip, #clinic-sidebar').addClass('d-none');

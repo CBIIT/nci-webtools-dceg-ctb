@@ -79,6 +79,7 @@ urlpatterns = [
     url(r'^search_facility/clinical_search_facility_result/', views.search_clinical, name='clinical_search_facility_result'),
     url(r'^search_facility/driver_search_facility/', views.driver_search_facility, name='driver_search_facility'),
 
+
     # User Details
     url(r'^users/(?P<user_id>\d+)/$', views.user_detail, name='user_detail'),
 
