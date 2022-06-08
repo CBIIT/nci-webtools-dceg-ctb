@@ -55,8 +55,13 @@
                     </ul>
                 </li>
 
+
+
+
+
+
                 <li class="nav-item">
-                    <a class="nav-link {% if 'news/' in request.path %} active {% endif %}" href="{% url 'news' %}">Latest
+                    <a class="nav-link {% if 'news' in request.path %} active {% endif %}" href="{% url 'latest_news' %}">Latest
                         News</a>
                 </li>
                 <li class="nav-item">

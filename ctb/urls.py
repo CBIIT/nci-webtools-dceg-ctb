@@ -60,7 +60,8 @@ urlpatterns = [
     url(r'^resources/podcasts_and_videos/$', views.podcasts_and_videos, name='podcasts_and_videos'),
 
     # Latest News
-    url(r'^news/', views.news, name='news'),
+    url(r'^latest_news/$', views.latest_news, name='latest_news'),
+    url(r'^latest_news/(?P<news_id>\d+)/$', views.news, name='news'),
 
     # Contact Us
     url(r'^contact/', views.contact, name='contact'),
