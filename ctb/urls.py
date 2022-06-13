@@ -60,7 +60,8 @@ urlpatterns = [
     url(r'^resources/podcasts_and_videos/$', views.podcasts_and_videos, name='podcasts_and_videos'),
 
     # Latest News
-    url(r'^news/', views.news, name='news'),
+    url(r'^latest_news/$', views.latest_news, name='latest_news'),
+    url(r'^latest_news/(?P<news_id>\d+)/$', views.news, name='news'),
 
     # Contact Us
     url(r'^contact/', views.contact, name='contact'),
@@ -74,9 +75,11 @@ urlpatterns = [
 
     # CTB Biosample Search Tissue Samples
     url(r'^search_facility/search_tissue_samples/', views.search_tissue_samples, name='search_tissue_samples'),
-    url(r'^search_facility/search_clinical/', views.search_clinical, name='search_clinical'),
+    # url(r'^search_facility/search_clinical/', views.search_clinical, name='search_clinical'),
     url(r'^search_facility/clinical_search_facility/', views.clinical_search_facility, name='clinical_search_facility'),
+    url(r'^search_facility/clinical_search_facility_result/', views.search_clinical, name='clinical_search_facility_result'),
     url(r'^search_facility/driver_search_facility/', views.driver_search_facility, name='driver_search_facility'),
+
 
     # User Details
     url(r'^users/(?P<user_id>\d+)/$', views.user_detail, name='user_detail'),

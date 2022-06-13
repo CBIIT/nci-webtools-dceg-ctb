@@ -224,10 +224,15 @@ def podcasts_and_videos(request):
     return render(request, 'ctb/podcasts_and_videos.html', {'request': request})
 
 # Latest News
-def news(request):
-    return render(request, 'ctb/news.html', {'request': request})
+def latest_news(request):
+    return render(request, 'ctb/latest_news.html', {'request': request})
 
-# Latest News
+
+def news(request, news_id=1):
+    news_item= whatsup.get(news_id)
+    return render(request, 'ctb/news.html', {'request': request, 'news': news_item})
+
+# Contact
 def contact(request):
     return render(request, 'ctb/contact.html', {'request': request})
 
@@ -292,9 +297,13 @@ def saved_searches(request):
     return render(request, 'ctb/saved_searches.html', {'request': request, 'saved_search_list': saved_search_list})
 
 
-# Clinical Search Intro
+# # Clinical Search Intro
 def search_clinical(request):
-    return render(request, 'ctb/search_clinical.html', {'request': request})
+    clinic_search_result = {
+        'total': 5516,
+        'avail': 3167
+    }
+    return render(request, 'ctb/clinical_search_facility_result.html', {'request': request, 'clinic_search_result': clinic_search_result})
 
 # Clinical Search Facility
 def clinical_search_facility(request):
@@ -307,4 +316,59 @@ def driver_search_facility(request):
 # Driver Search Facility
 def clinical_search_facility_results(request):
     return render(request, 'ctb/clinical_search_facility_results.html', {'request': request})
+
+
+whatsup = {
+    '1': {
+        'title': 'The latest study from the use of samples supplied by the CTB is now available online',
+        'content': '''
+        <p>
+        <strong>
+            The study used comprehensive genomic, transcriptomic and epigenomic profiling to 
+            investigate the contribution of environmental radiation to characteristics of papillary carcinoma.
+        </strong>
+        </p>
+        <p>
+            <a href="https://science.sciencemag.org/content/early/2021/04/21/science.abg2538">The latest
+                    study from the use of samples supplied by the CTB is now available on line.
+            </a>
+        </p>
+        <p>The study used comprehensive genomic, transcriptomic and epigenomic profiling to investigate the
+                    contribution of environmental radiation to characteristics of papillary carcinoma.<br>A sister
+                    paper, in the same edition of the journal, also reports the lack of transgenerational effects of
+                    radiation. Both papers have received media attention and comment in <a
+                            href="https://www.nationalgeographic.com/science/article/children-born-to-chernobyl-survivors-dont-carry-more-genetic-mutations">National
+                        Geographic</a>, the <a
+                            href="https://www.bbc.co.uk/news/science-environment-56846728">BBC</a>, in <a
+                            href="https://www.sciencemag.org/news/2021/04/no-excess-mutations-children-chernobyl-survivors-new-study-finds">Science</a>
+                    itself, and in <a
+                            href="https://www.wired.com/story/35-years-later-studies-show-a-silver-lining-from-chernobyl/">Wired
+                        magazine.</a>
+        </p>'''
+    },
+    '2': {
+        'title': 'General Meeting of the National Academy of Medical Sciences of Ukraine, 14th April 2021',
+        'content': '''
+            <p><strong>This meeting was held to mark the 35th anniversary of the Chernobyl accident.</strong></p>
+            <h5>
+                <a href="https://www.youtube.com/channel/UC6FfGVoE-V2ceMM6qreWa_Q" target="_blank" rel="noreferrer">
+                    General Meeting of the National Academy of Medical Sciences of Ukraine, 14th April 2021
+                </a>
+            </h3>
+            <p>
+                This meeting was held to mark the 35th anniversary of the Chernobyl accident.
+                The presentations are given in English and Ukrainian.
+            </p>
+            <p>
+                Academician Tronko presents on&nbsp;"Thyroid cancer in Ukraine after the Chornobyl disaster:
+                the current achievements and strategy of further research" begins at 19:37<br>Professor Bogdanova
+                presents on "Histopathological studies of thyroid cancer in Ukraine after the Chernobyl accident" begins
+                at 1:02:42<br>Professor Gerry Thomas presents on "The contribution of Ukraine to the Chernobyl Tissue 
+                Bank" begins at 1:31:05<br>Professor Stephen Chanock presents on "Radiation, genomic alterations in
+                papillary thyroid carcinoma and transgenerational studies following the Chernobyl accident" begins at 
+                3:53:06
+            </p>
+            '''
+    }
+}
 

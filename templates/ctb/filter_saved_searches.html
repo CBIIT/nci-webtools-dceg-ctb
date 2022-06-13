@@ -5,17 +5,17 @@
         <th>Type</th>
         <th>Results</th>
         <th>Proceed</th>
-        <th>Delete</th>
+        <th class="text-center">Delete</th>
     </tr>
     </thead>
     <tbody>
     {% for saved_search in saved_search_list %}
         <tr>
-            <td>{{ saved_search.name }}</td>
+            <td><a href="{% url 'search_tissue_samples' %}">{{ saved_search.name }}</a></td>
             <td>{{ saved_search.type }}</td>
             <td>{{ saved_search.results }} Cases</td>
-            <td>{{ saved_search.proceed }}</td>
-            <td><a href="#"><i class="fa-solid fa-trash-can"></i></a></td>
+            <td><a href="{% url 'driver_search_facility' %}" class="text-decoration-none">Driver Search <i class="fa-solid fa-angle-right"></i></a></td>
+            <td class="text-center"><a href="#"><i class="fa-solid fa-trash-can"></i></a></td>
         </tr>
     {% endfor %}
     </tbody>

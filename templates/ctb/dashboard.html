@@ -28,8 +28,8 @@
 {% block content %}
     <div class="container py-3">
         <div class="row">
-            <div class="col-4">
-                <div class="bg-light border rounded p-3">
+            <div class="col-lg-4">
+                <div class="bg-light border rounded p-3 mb-3">
                     <h4>Welcome to the Chernobyl Tissue Bank Biosample Search</h4>
 
 
@@ -44,8 +44,8 @@
                         biosamples that you wish to access (with or without additional clinical information), you
                         will have the option to download an application form. Instructions on submission of
                         applications for access can be found on the form. Information about the review process of
-                        applications is available on the <a href="https://www.chernobyltissuebank.com"
-                                                            target="_blank" rel="noopener">CTB website</a>.
+                        applications is available on the <a href="{% url 'access_to_materials' %}"
+                                                            target="_blank" rel="noopener">Access to Materials</a> page.
                         Applications must be approved before any samples can be released.</p>
                     <p>In your application, is important that you specify the criteria for sample selection as
                         exactly as possible, by completing all sections of the Filter. If your application is
@@ -62,17 +62,15 @@
                         provided if justified in your application. Clinical information as requested using the
                         clinical search facility can also be provided on each case, providing it has been justified
                         in the application.</p>
-{#                    <p>If you have any queries, please email these to chernobyltissuebank@imperial.ac.uk. Online#}
-{#                        information using the search tools is available where you see the <span#}
-{#                                title="Example Text"><img#}
-{#                                src="/biosample-search/getfile/design/icons/question-mark.svg" alt=""></span> icon.#}
-{#                    </p>#}
+                    <p>If you have any queries, please email these to <a href="mailto:ctb-info@isb-cgc.org" target="_top">ctb-info@isb-cgc.org</a>. Online
+                        information using the search tools is available where you see the <i class="fa-solid fa-circle-question info-color"></i> icon.
+                    </p>
                 </div>
             </div>
 
-            <div class="col-8">
+            <div class="col-lg-8">
                 <div class="d-grid gap-2 mb-3">
-                    <a class="btn btn-primary" href="{% url 'search_tissue_samples' %}"><i
+                    <a class="btn btn-primary" href="{% url 'search_tissue_samples' %}" ><i
                             class="fa-solid fa-magnifying-glass"></i> Search Tissue Samples</a>
                 </div>
 

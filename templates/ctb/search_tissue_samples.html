@@ -27,219 +27,361 @@
 {% block content %}
     <div class="container py-3">
         <div class="row">
-            <div class="col-md-8">
-                <div class="bg-light border rounded p2">
+            <div class="col-lg-8">
+                <form id="search-tissue-form" class="bg-light border rounded py-4 mb-3">
                     <div class="container-fluid">
-                        <h4 class="py-2">Search Tissue Samples</h4>
-                        <div class="row">
-                            <div class="col">
-                                <div class="card mb-2">
-                                    <div class="card-header">Diagnosis</div>
+                        <h4>Search Tissue Samples
+                            <button type="reset"
+                                    class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                    data-target="#search-tissue-form">Reset All
+                            </button>
+                        </h4>
+                        <div class="mb-2">
+                            <div class="text-muted fw-light">
+                                Please tick all that apply.
+                            </div>
+                        </div>
+
+                        <div class="row px-0">
+                            <div class="col-lg">
+                                <div id="diagnosis-card" class="card mb-2">
+                                    <div class="card-header">Diagnosis
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#diagnosis-card">Reset
+                                        </button>
+                                    </div>
                                     <div class="card-body">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="diag-ptc" name="diagnosis[]" value="PTC">
+                                            <input class="form-check-input" type="checkbox" id="diag-ptc"
+                                                   name="diagnosis[]" value="PTC">
                                             <label class="form-check-label" for="diag-ptc">Papillary Carcinoma</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="diag-fc" name="diagnosis[]" value="FC">
+                                            <input class="form-check-input" type="checkbox" id="diag-fc"
+                                                   name="diagnosis[]" value="FC">
                                             <label class="form-check-label" for="diag-fc">Follicular Carcinoma</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="diag-mtc" name="diagnosis[]" value="MTC">
+                                            <input class="form-check-input" type="checkbox" id="diag-mtc"
+                                                   name="diagnosis[]" value="MTC">
                                             <label class="form-check-label" for="diag-mtc">Medullary Carcinoma</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="diag-fa" name="diagnosis[]" value="FA">
+                                            <input class="form-check-input" type="checkbox" id="diag-fa"
+                                                   name="diagnosis[]" value="FA">
                                             <label class="form-check-label" for="diag-fa">Follicular Adenoma</label>
                                         </div>
                                         <hr>
                                         <div>Other Benign Follicular Tumors:</div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="diag-ftump" name="diagnosis[]" value="FT UMP">
+                                            <input class="form-check-input" type="checkbox" id="diag-ftump"
+                                                   name="diagnosis[]" value="FT UMP">
                                             <label class="form-check-label" for="diag-ftump">FT UMP</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="diag-wdtump" name="diagnosis[]" value="WDT UMP">
+                                            <input class="form-check-input" type="checkbox" id="diag-wdtump"
+                                                   name="diagnosis[]" value="WDT UMP">
                                             <label class="form-check-label" for="diag-wdtump">WDT UMP</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="diag-nodule" name="diagnosis[]" value="FA">
+                                            <input class="form-check-input" type="checkbox" id="diag-nodule"
+                                                   name="diagnosis[]" value="FA">
                                             <label class="form-check-label" for="diag-nodule">Nodule</label>
+                                        </div>
+                                        <div class="fw-light text-muted small">
+                                            <i class="fa-solid fa-circle-question info-color" data-bs-toggle="tooltip"
+                                               data-bs-html="true"
+                                               data-bs-placement="right"
+                                               title="<div class='text-start'> There are small numbers of other tumours that are categorised by the Pathology Panel in the following way:<br><ol><li>Well differentiated carcinoma not otherwise specified<li>Poorly differentiated carcinoma<li>Two synchronous tumours sampled from the same patient<li>Other</ol>If you wish to request any of these please email us (ctb-info@isb-cgc.org).</div>">
+                                            </i>
+                                            Other special tumours
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card my-2">
-                                    <div class="card-header">Sample Type</div>
+                                <div id="sample-type-card" class="card my-2">
+                                    <div class="card-header">Sample Type
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#sample-type-card">Reset
+                                        </button>
+                                    </div>
                                     <div class="card-body">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="type-ffpe" name="sampletype[]" value="FFPE">
+                                            <input class="form-check-input" type="checkbox" id="type-ffpe"
+                                                   name="sampletype[]" value="FFPE">
                                             <label class="form-check-label" for="type-ffpe">FFPE Section</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="type-dna" name="sampletype[]" value="dna">
+                                            <input class="form-check-input" type="checkbox" id="type-dna"
+                                                   name="sampletype[]" value="dna">
                                             <label class="form-check-label" for="type-dna">DNA</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="type-rna" name="sampletype[]" value="rna">
+                                            <input class="form-check-input" type="checkbox" id="type-rna"
+                                                   name="sampletype[]" value="rna">
                                             <label class="form-check-label" for="type-rna">RNA</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="type-blood" name="sampletype[]" value="blood">
+                                            <input class="form-check-input" type="checkbox" id="type-blood"
+                                                   name="sampletype[]" value="blood">
                                             <label class="form-check-label" for="type-blood">Blood</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="type-serum" name="sampletype[]" value="serum">
+                                            <input class="form-check-input" type="checkbox" id="type-serum"
+                                                   name="sampletype[]" value="serum">
                                             <label class="form-check-label" for="type-serum">Serum</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card my-2">
-                                    <div class="card-header">Country of Residency</div>
+                                <div id="country-card" class="card my-2">
+                                    <div class="card-header">Country of Residency
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#country-card">Reset
+                                        </button>
+                                    </div>
                                     <div class="card-body">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="country-ukraine" name="country" value="ukraine">
+                                            <input class="form-check-input" type="radio" id="country-ukraine"
+                                                   name="country" value="ukraine">
                                             <label class="form-check-label" for="country-ukraine">Ukraine</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="country-russia" name="country" value="russia">
+                                            <input class="form-check-input" type="radio" id="country-russia"
+                                                   name="country" value="russia">
                                             <label class="form-check-label" for="country-russia">Russia</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="country-both" name="country" value="both">
+                                            <input class="form-check-input" type="radio" id="country-both"
+                                                   name="country" value="both">
                                             <label class="form-check-label" for="country-both">Both</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card my-2">
-                                    <div class="card-header">Dosemetry</div>
+                                <div id="dosemetry-card" class="card my-2">
+                                    <div class="card-header">Dosemetry
+                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                               data-bs-html="true"
+                                               data-bs-placement="right"
+                                           title="<div class='text-start'>The donors in the CTB are currently operated in either Ukraine or Russia. For patients operated in Ukraine, the thyroid dose is calculated by Professor Ilya Likhtarev's group at the Institute of Radiation Protection in Kiev. For donors operated in Russia, the thyroid dose is calculated by Professor Stepanenko's group in MRRC RAMS, in Obninsk. Direct measurement of thyroid dose was carried out in only a few donors in Ukraine, and none in Russia. The majority of the dose estimation is therefore made retrospectively. The thyroid dose given in this portal is the arithmetic mean and is in mGy.</div>">
+                                        </i>
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#dosemetry-card">Reset
+                                        </button>
+                                    </div>
                                     <div class="card-body">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy" name="dosemetry[]" value="100mGy">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy"
+                                                   name="dosemetry[]" value="100mGy">
                                             <label class="form-check-label" for="dosemetry-100mGy">&lt; 100mGy</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy500mGy" name="dosemetry[]" value="100mGy500mGy">
-                                            <label class="form-check-label" for="dosemetry-100mGy500mGy">100mGy - 500mGy</label>
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy500mGy"
+                                                   name="dosemetry[]" value="100mGy500mGy">
+                                            <label class="form-check-label" for="dosemetry-100mGy500mGy">100mGy -
+                                                500mGy</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-500mGy" name="dosemetry[]" value="500mGy">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-500mGy"
+                                                   name="dosemetry[]" value="500mGy">
                                             <label class="form-check-label" for="dosemetry-500mGy">&gt; 500mGy</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-Unknown" name="dosemetry[]" value="Unknown">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-Unknown"
+                                                   name="dosemetry[]" value="Unknown">
                                             <label class="form-check-label" for="dosemetry-Unknown">Unknown</label>
                                         </div>
                                     </div>
 
                                 </div>
                             </div>
-                            <div class="col">
-                                <div class="card mb-2">
-                                    <div class="card-header">Sample Origin</div>
+                            <div class="col-lg">
+                                <div id="sample-origin-card" class="card mb-2">
+                                    <div class="card-header">Sample Origin
+                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                               data-bs-html="true"
+                                               data-bs-placement="right"
+                                           title="<div class='text-start'> Only DNA and serum are available from blood samples</div>"></i>
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#sample-origin-card">Reset
+                                        </button>
+                                    </div>
                                     <div class="card-body">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sampleorigin-blood" name="sampleorigin[]" value="blood">
+                                            <input class="form-check-input" type="checkbox" id="sampleorigin-blood"
+                                                   name="sampleorigin[]" value="blood">
                                             <label class="form-check-label" for="sampleorigin-blood">Blood</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sampleorigin-normal-tissue" name="sampleorigin[]" value="normal">
-                                            <label class="form-check-label" for="sampleorigin-normal-tissue">Normal Tissue</label>
+                                            <input class="form-check-input" type="checkbox"
+                                                   id="sampleorigin-normal-tissue" name="sampleorigin[]" value="normal">
+                                            <label class="form-check-label" for="sampleorigin-normal-tissue">Normal
+                                                Tissue</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sampleorigin-tumour-tissue" name="sampleorigin[]" value="tumour">
-                                            <label class="form-check-label" for="sampleorigin-tumour-tissue">Tumor Tissue</label>
+                                            <input class="form-check-input" type="checkbox"
+                                                   id="sampleorigin-tumour-tissue" name="sampleorigin[]" value="tumour">
+                                            <label class="form-check-label" for="sampleorigin-tumour-tissue">Tumor
+                                                Tissue</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sampleorigin-metastatic" name="sampleorigin[]" value="metastatic">
-                                            <label class="form-check-label" for="sampleorigin-metastatic">Metastatic</label>
+                                            <input class="form-check-input" type="checkbox" id="sampleorigin-metastatic"
+                                                   name="sampleorigin[]" value="metastatic">
+                                            <label class="form-check-label"
+                                                   for="sampleorigin-metastatic">Metastatic</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card my-2">
-                                    <div class="card-header">Patient Residency</div>
-                                    <div class="card-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="patientresidency-exposed-region" name="patientresidency" value="exposed">
-                                            <label class="form-check-label" for="patientresidency-exposed-region">Exposed Region</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="patientresidency-unexposed-region" name="patientresidency" value="unexposed">
-                                            <label class="form-check-label" for="patientresidency-unexposed-region">Unexposed Region</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="patientresidency-both-regions" name="patientresidency" value="both">
-                                            <label class="form-check-label" for="patientresidency-both-regions">Both Regions</label>
-                                        </div>
-                                    </div>
-                                </div>
+                                <div id="residency-card" class="card my-2">
+                                    <div class="card-header">Patient Residency
+                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                               data-bs-html="true"
+                                               data-bs-placement="right"
+                                           title="<div class='text-start'>Residency refers to residence at the time of the accident</div>"></i>
 
-                                <div class="card my-2">
-                                    <div class="card-header">Date of Birth</div>
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#residency-card">Reset
+                                        </button>
+                                    </div>
                                     <div class="card-body">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dob-before-26041986" name="dob[]" value="1">
-                                            <label class="form-check-label" for="dob-before-26041986">Before 04/26/1986</label>
+                                            <input class="form-check-input" type="radio"
+                                                   id="patientresidency-exposed-region" name="patientresidency"
+                                                   value="exposed">
+                                            <label class="form-check-label" for="patientresidency-exposed-region">Exposed
+                                                Region</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dob-26041986-01011987" name="dob[]" value="2">
-                                            <label class="form-check-label" for="dob-26041986-01011987">04/26/1986 to 01/01/1987</label>
+                                            <input class="form-check-input" type="radio"
+                                                   id="patientresidency-unexposed-region" name="patientresidency"
+                                                   value="unexposed">
+                                            <label class="form-check-label" for="patientresidency-unexposed-region">Unexposed
+                                                Region</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dob-after-01011987" name="dob[]" value="3">
-                                            <label class="form-check-label" for="dob-after-01011987">After 01/01/1987</label>
+                                            <input class="form-check-input" type="radio"
+                                                   id="patientresidency-both-regions" name="patientresidency"
+                                                   value="both" checked>
+                                            <label class="form-check-label" for="patientresidency-both-regions">Both
+                                                Regions</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card my-2">
-                                    <div class="card-header">Patient Gender</div>
+                                <div id="dob-card" class="card my-2">
+                                    <div class="card-header">Date of Birth
+                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                               data-bs-html="true"
+                                               data-bs-placement="right"
+                                           title="<div class='text-start'>Tissue and blood samples in the CTB have been collected from patients classified by their date of birth into one of three groups: <br><br>Those born between 04/26/67 and 04/26/86, i.e. aged 19 years or younger at the time of the accident on 26th April 1986 <br>Those in utero at the time of the accident<br><br>Those born after 1st January 1987 by which time the radioiodine emitted during accident had decayed to background levels.<br><br>The majority of cases are from Group (i) with much smaller numbers in Groups (ii) and (iii).</div>"></i>
+
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#dob-card">Reset
+                                        </button>
+                                    </div>
                                     <div class="card-body">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="patientgender-male" name="patientgender" value="male">
+                                            <input class="form-check-input" type="checkbox" id="dob-before-26041986"
+                                                   name="dob[]" value="1">
+                                            <label class="form-check-label" for="dob-before-26041986">Before
+                                                4/26/1986</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dob-26041986-01011987"
+                                                   name="dob[]" value="2">
+                                            <label class="form-check-label" for="dob-26041986-01011987">4/26/1986 to
+                                                4/26/1987</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dob-after-01011987"
+                                                   name="dob[]" value="3">
+                                            <label class="form-check-label" for="dob-after-01011987">After
+                                                4/26/1987</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="gender-card" class="card my-2">
+                                    <div class="card-header">Patient Gender
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#gender-card">Reset
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" id="patientgender-male"
+                                                   name="patientgender" value="male">
                                             <label class="form-check-label" for="patientgender-male">Male</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="patientgender-female" name="patientgender" value="female">
+                                            <input class="form-check-input" type="radio" id="patientgender-female"
+                                                   name="patientgender" value="female">
                                             <label class="form-check-label" for="patientgender-female">Female</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="patientgender-both" name="patientgender" value="both">
+                                            <input class="form-check-input" type="radio" id="patientgender-both"
+                                                   name="patientgender" value="both" checked>
                                             <label class="form-check-label" for="patientgender-both">Both</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="card my-2">
-                                    <div class="card-header">Age</div>
+                                <div id="age-card" class="card my-2">
+                                    <div class="card-header">Age
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#age-card">Reset
+                                        </button>
+                                    </div>
                                     <div class="card-body">
-                                        <div><label for="bslider-0" class="form-label">Age at First Operation (Range in Years):</label></div>
+                                        <div><label for="bslider-0" class="form-label">Age at First Operation (Range in
+                                            Years) <i class="fa-solid fa-circle-question info-color" data-bs-toggle="tooltip"
+                                               data-bs-html="true"
+                                               data-bs-placement="right"
+                                               title="<div class='text-start'>The selector gives the current maximum age of cases in the CTB cohort (aged under 19 at the time of the accident + time since the accident). By this age the incidence of thyroid cancers is increasing irrespective of any contributing effect of radiation. Samples are becoming available for this older cohort, who were in their late teens at the time of the accident, but applicants should be aware that any effects of radiation will be diluted by the increasing incidence of spontaneous thyroid cancers in this particular age group.</div>">
+                                            </i>:</label>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
-                                                    <input type="number" class="form-control"
+                                                    <input id="min-age-first-operation" type="number"
+                                                           class="form-control"
                                                            min="0" max="49" value="0">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
-                                                    <input type="number" class="form-control"
+                                                    <input id="max-age-first-operation" type="number"
+                                                           class="form-control"
                                                            min="0" max="49" value="49">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div><label for="bslider-0" class="form-label">Age at Exposure (Range in Years):</label></div>
+                                        <div><label for="bslider-0" class="form-label">Age at Exposure (Range in
+                                            Years) <i class="fa-solid fa-circle-question info-color" data-bs-toggle="tooltip"
+                                               data-bs-html="true"
+                                               data-bs-placement="right"
+                                               title="<div class='text-start'>Age at exposure for cases in Group (i) may be selected using the slide selector. Researchers wishing to study the cohort that were in utero at the time of the accident should contact the secretariat for more information about the gestational age of the cases in the CTB.</div>">
+                                            </i>:</label></div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
-                                                    <input type="number" class="form-control"
+                                                    <input id="min-age-first-exposure" type="number"
+                                                           class="form-control"
                                                            min="-40" max="19" value="-40">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
-                                                    <input type="number" class="form-control"
+                                                    <input id="max-age-first-exposure" type="number"
+                                                           class="form-control"
                                                            min="-40" max="19" value="19">
                                                 </div>
                                             </div>
@@ -253,20 +395,19 @@
                         <div class="row">
                             <div class="input-group mb-3">
                                 <input type="text" name="title" id="search-save-title"
-                                       class="form-control" value="" placeholder="Search Title" aria-label="Recipient's username" aria-describedby="search-save">
-                                <button class="btn btn-primary" type="button" id="search-save"><i class="fa-solid fa-floppy-disk"></i> Save Search
+                                       class="form-control" value="" placeholder="Search Title"
+                                       aria-label="Recipient's username" aria-describedby="search-save">
+                                <button class="btn btn-primary" type="button" id="search-save"><i
+                                        class="fa-solid fa-floppy-disk"></i> Save Search
                                 </button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
-
-            <div class="col-md-4">
-
-                <div class="border rounded bg-light p-4">
+            <div class="col-lg-4">
+                <div class="border rounded bg-light p-4 mb-3">
                     <h4>Search Results <span class="fw-normal fs-5 float-end">{{ total }} Cases</span></h4>
-
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -317,11 +458,13 @@
 
                         </tbody>
                     </table>
-{#                    Click below to apply for these samples.#}
+                    {#                    Click below to apply for these samples.#}
 
                     <div class="d-grid gap-2 col mx-auto">
-                        <a class="btn btn-outline-secondary" href="{% static 'files/application-form.doc' %}"><i class="fa-solid fa-download"></i> Download Application Form</a>
-                        <a class="btn btn-primary" href="{% url 'search_clinical' %}"><i class="fa-solid fa-right-long"></i> Proceed to Clinical Search</a>
+                        <a class="btn btn-outline-secondary" href="{% static 'files/application-form.doc' %}"><i
+                                class="fa-solid fa-download"></i> Download Application Form</a>
+                        <a class="btn btn-primary" href="{% url 'clinical_search_facility' %}"><i
+                                class="fa-solid fa-right-long"></i> Proceed to Clinical Search</a>
                     </div>
                 </div>
             </div>
