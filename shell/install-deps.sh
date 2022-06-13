@@ -58,6 +58,9 @@ if [ -z "${CI}" ]; then
   cp -v /usr/lib/python3/dist-packages/apt_pkg.cpython-36m-x86_64-linux-gnu.so /usr/lib/python3/dist-packages/apt_pkg.so
 fi
 
+# Bug in git and Ubuntu 20+
+git config --global --add safe.directory /home/circleci/${HOME}
+
 echo "Dependencies Installed"
 
 # If this is local development, clean out lib for a re-structuring 
@@ -118,15 +121,15 @@ fi
 echo "Running dos2unix on shell/*.sh..."
 dos2unix ${HOMEROOT}/shell/*.sh
 
-echo "Loading Git Hooks"
 if [ -z "${CI}" ] && [ -d "${HOMEROOT}/git-hooks/" ]; then
-    cp -r ${HOMEROOT}/git-hooks/* ${HOMEROOT}/.git/hooks/
+  echo "Loading Git Hooks"
+  cp -r ${HOMEROOT}/git-hooks/* ${HOMEROOT}/.git/hooks/
 fi
 
 # Create the application deployment version
 if [ -n "${CI}" ]; then
     if [ "$DEPLOYMENT_TIER" = "PROD" ]; then
-        TIER=something
+        TIER="ctb"
     else
         TIER=${DEPLOYMENT_TIER,,}
     fi
