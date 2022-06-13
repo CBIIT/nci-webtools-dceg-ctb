@@ -120,7 +120,8 @@ jobs:
       - run:
           name: Fix for bug with Git and Ubuntu 20+
           command: |
-            git config --global --add safe.directory /home/circleci/${CIRCLE_PROJECT_REPONAME}
+            SHA=$(git rev-list -1 HEAD)
+            echo "APP_SHA=${SHA:0:7}" >> $BASH_ENV
       - run:
           name: Set Python Path
           command: |
