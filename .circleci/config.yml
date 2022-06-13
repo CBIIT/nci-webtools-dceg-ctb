@@ -118,6 +118,10 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Fix for bug with Git and Ubuntu 20+
+          command: |
+            git config --global --add safe.directory /home/circleci/${CIRCLE_PROJECT_REPONAME}
+      - run:
           name: Set Python Path
           command: |
             echo "export PYTHONPATH=/home/circleci/${CIRCLE_PROJECT_REPONAME}:/home/circleci/${CIRCLE_PROJECT_REPONAME}/lib" >> $BASH_ENV
