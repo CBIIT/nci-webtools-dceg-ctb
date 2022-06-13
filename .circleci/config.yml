@@ -120,9 +120,8 @@ jobs:
       - run:
           name: Fix for bug with Git and Ubuntu 20+
           command: |
-            git rev-list -1 HEAD
             SHA=$(git rev-list -1 HEAD)
-            echo "APP_SHA=${SHA:0:7}" >> $BASH_ENV
+            echo "export APP_SHA=${SHA:0:7}" >> $BASH_ENV
       - run:
           name: Set Python Path
           command: |
