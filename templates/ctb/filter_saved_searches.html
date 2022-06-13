@@ -11,7 +11,7 @@
     <tbody>
     {% for saved_search in saved_search_list %}
         <tr>
-            <td>{{ saved_search.name }}</td>
+            <td><a href="{% url 'search_tissue_samples' %}">{{ saved_search.name }}</a></td>
             <td>{{ saved_search.type }}</td>
             <td>{{ saved_search.results }} Cases</td>
             <td><a href="{% url 'driver_search_facility' %}" class="text-decoration-none">Driver Search <i class="fa-solid fa-angle-right"></i></a></td>
