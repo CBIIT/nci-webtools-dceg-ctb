@@ -118,18 +118,17 @@ fi
 echo "Running dos2unix on shell/*.sh..."
 dos2unix ${HOMEROOT}/shell/*.sh
 
-echo "Loading Git Hooks"
 if [ -z "${CI}" ] && [ -d "${HOMEROOT}/git-hooks/" ]; then
-    cp -r ${HOMEROOT}/git-hooks/* ${HOMEROOT}/.git/hooks/
+  echo "Loading Git Hooks"
+  cp -r ${HOMEROOT}/git-hooks/* ${HOMEROOT}/.git/hooks/
 fi
 
 # Create the application deployment version
 if [ -n "${CI}" ]; then
     if [ "$DEPLOYMENT_TIER" = "PROD" ]; then
-        TIER=something
+        TIER="ctb"
     else
         TIER=${DEPLOYMENT_TIER,,}
     fi
-    SHA=$(git rev-list -1 HEAD)
-    echo "APP_VERSION=${TIER}.$(date '+%Y%m%d%H%M').${SHA:0:7}" > ${HOMEROOT}/version.env
+    echo "APP_VERSION=${TIER}.$(date '+%Y%m%d%H%M').${APP_SHA}" > ${HOMEROOT}/version.env
 fi

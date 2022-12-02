@@ -20,6 +20,10 @@
 # single application.
 FROM gcr.io/google_appengine/python
 
+ENV DEBIAN_FRONTEND=noninteractive
+RUN apt-get update
+RUN apt-get upgrade
+
 # Create a virtualenv for dependencies. This isolates these packages from
 # system-level packages.
 # Use -p python3 or -p python3.7 to select python version. Default is version 2.
@@ -29,9 +33,6 @@ RUN virtualenv /env -p python3
 # source /env/bin/activate.
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
-
-RUN apt-get update
-ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get install -y wget
 RUN wget "http://repo.mysql.com/mysql-apt-config_0.8.9-1_all.deb" -P /tmp
 
