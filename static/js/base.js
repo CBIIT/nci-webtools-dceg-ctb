@@ -138,17 +138,13 @@ require([
     });
 
     $('.btn-reset').on("click", function () {
-
         let reset_target = $($(this).data('target'));
         reset_target.find('input:checkbox').prop('checked', false);
         reset_target.find('input:radio').prop('checked', false);
-        // console.log(reset_target.find('input[type="number"]').length);
-        // for (const num_input in reset_target.find('input[type="number"]')){
         reset_target.find('input[type="number"]').each(function(){
-            // console.log($(this).prop('defaultValue'));
             $(this).val($(this).prop('defaultValue'));
-            // document.getElementById($(this).attr('id')).reset();
         });
+        reset_target.find('input').not(':hidden').first().trigger('change');
     });
 
     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -191,4 +187,10 @@ define('base', ['jquery', 'utils'], function($, utils) {
         },
         blockResubmit: utils.blockResubmit
     };
+
+
 });
+
+let numberWithCommas = function (num) {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

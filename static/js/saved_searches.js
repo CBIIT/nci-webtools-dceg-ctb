@@ -35,7 +35,69 @@ require([
     'datatables.bootstrap'
 ], function(base) {
     $(document).ready(function () {
-        $('#saved_searches_tbl').DataTable();
-    });
+        let my_search_tbl = $('#saved_searches_tbl').DataTable({
+            ajax: {
+                url: BASE_URL + "/search_facility/get_search_list/",
+                dataSrc: ''
+            },
+            columns: [
+                {
+                    render: function (data, type, row, meta) {
+                        let search_type_url;
+                        if (row.search_type == 'Biosample') {
+                            search_type_url = 'search_tissue_samples';
+                        } else if (row.search_type == 'Clinic') {
+                            search_type_url = 'search_clinical';
+                        } else {
+                            search_type_url = 'driver_search_facility';
+                        }
+                        let search_url = BASE_URL + "/search_facility/" + search_type_url + row.filter_encoded_url;
+                        return "<a href='" + search_url + "'>" + row.name + "</a>";
+                    }
+                },
+                {data: 'search_type'},
+                {
+                    data: 'case_count',
+                    type: 'num',
+                    class: 'text-end',
+                    render: $.fn.dataTable.render.number(',', null)
+                },
+                {
+                    class: 'text-center',
+                    render: function (data, type, row, meta) {
+                        let driver_search_url = BASE_URL + "/search_facility/driver_search_facility/" + row.filter_encoded_url;
+                        return "<a href='" + driver_search_url + "'>Driver Search <i class=\"fa-solid fa-angle-right\"></i></a>"
+                    },
+                    orderable: false
+                },
+                {
+                    class: 'text-center',
+                    render: function (data, type, row, meta) {
+                        return "<a class='delete-search-btn' href='#' data-filter-id='" + row.filter_id + "'><i class='fa-solid fa-trash-can'></i></a>";
+                    },
+                    orderable: false
+                },
+            ]
+        });
+        $('#saved_searches_tbl tbody').on('click', '.delete-search-btn', function () {
+            delete_filter($(this).data('filter-id'));
+        });
 
+        let delete_filter = function (filter_id) {
+            $.ajax({
+                type: "post",
+                url: BASE_URL + "/search_facility/delete_filters/" + filter_id + "/",
+                success: function (data) {
+                    my_search_tbl.ajax.reload();
+                    $('#delete_success_message').text('');
+                    $('#delete_error_message').text('');
+                    if (data.success) {
+                        $('#delete_success_message').text(data.success);
+                    } else {
+                        $('#delete_error_message').text(data.error);
+                    }
+                }
+            });
+        };
+    });
 });

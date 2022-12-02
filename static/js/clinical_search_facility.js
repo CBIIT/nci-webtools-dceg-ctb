@@ -27,8 +27,8 @@ require([
     'base',
 ], function() {
     $(document).ready(function () {
-        var step = 0;
-
+        $("#driver-search-btn").attr("href", BASE_URL + "/search_facility/driver_search_facility"+window.location.search)
+        let step = 0;
         $('#next-btn, #clinic-skip, #proceed-btn').on("click", function () {
             $('#form-clinic-' + step).addClass('d-none');
             $('#form-clinic-' + (++step)).removeClass('d-none');
@@ -39,10 +39,7 @@ require([
             $('#form-clinic-'+(--step)).removeClass('d-none');
             update_screen();
         });
-
-
-
-        var update_screen = function () {
+        let update_screen = function () {
             $('#submit-btn, #next-btn, #back-btn, #proceed-btn, #clinic-skip, #clinic-sidebar').addClass('d-none');
             if (step) {
                 $('#back-btn').removeClass('d-none');
@@ -59,7 +56,6 @@ require([
             else{
                 $('#proceed-btn').removeClass('d-none');
                 $('#clinic-sidebar-buttons').removeClass('d-none');
-                // $('#clinic-skip').removeClass('d-none');
             }
             //update progress bar
             for (let i=0; i<6; i++){
@@ -74,7 +70,6 @@ require([
             }
             window.scrollTo(0, 0);
         }
-
     });
 
 

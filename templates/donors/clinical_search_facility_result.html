@@ -33,26 +33,36 @@
                     <h5>Clinical Search Facility</h5>
                     <h6 class="pt-3"><strong>Results</strong></h6>
                     <hr>
-                    <div><strong>Original BioSample Search Results</strong>: {{ clinic_search_result.total }}</div>
+                    <div><strong>Original BioSample Search Results: {{ clinic_search_result.avail }}</strong></div>
                     <div>The clinical information you have requested is available on
                         <strong>{{ clinic_search_result.avail }}</strong> of the
                         <strong>{{ clinic_search_result.total }}</strong> cases that met your biosample search criteria.
                     </div>
                     <hr>
-                    <div class="btn-toolbar justify-content-between" role="toolbar">
-                        <a class="btn btn-primary me-md-2" href="{% static 'files/application-form.doc' %}">
-                            <i class="fa-solid fa-download"></i> Make Application
-                        </a>
-                        <div class="input-group">
-                            <input type="text" name="title" id="search-save-title"
-                                   class="form-control" value="" placeholder="Search Name"
-                                   aria-label="Search Save" aria-describedby="search-save">
-                            <button class="btn btn-primary" type="button" id="search-save"><i
-                                    class="fa-solid fa-floppy-disk"></i> Save Search
-                            </button>
+                    <form id="save-form">
+                        <div class="btn-toolbar justify-content-between" role="toolbar">
+                            <a class="btn btn-primary me-md-2" href="{% url 'make_application' %}">
+                                <i class="fas fa-edit"></i> Make Application
+                            </a>
+                            <div class="input-group">
+
+                                <input type="text" name="title" id="search-save-title"
+                                       class="form-control" value="" placeholder="Search Name"
+                                       aria-label="Search Save" aria-describedby="search-save">
+                                <input type="hidden" name="filter_encoded_url" value="{{ filter_encoded_url }}"/>
+                                <input type="hidden" name="total" value="{{ clinic_search_result.avail }}"/>
+                                <input type="hidden" name="search_type" value="Clinic"/>
+                                                            <button class="btn btn-primary" type="button" id="search-save"><i
+                                                                    class="fa-solid fa-floppy-disk"></i> Save Search
+                                </button>
+                            </div>
                         </div>
-                    </div>
+                        <div class="float-end">
+                            <div id="save_message"></div>
+                        </div>
+                    </form>
                 </div>
+
             </div>
 
             <div class="col-lg-4">
@@ -62,7 +72,7 @@
                                 class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
                         <a class="btn btn-secondary" href="{% url 'clinical_search_facility' %}"><i
                                 class="fa-solid fa-left-long"></i> Perform Another Clinical Search</a>
-                        <a class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
+                        <a id="driver-search-btn" class="btn btn-primary" href="{% url 'driver_search_facility' %}{{ filter_encoded_url }}"><i
                                 class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
                     </div>
                 </div>
@@ -70,4 +80,8 @@
 
         </div>
     </div>
+{% endblock %}
+{% block js_file %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/save_search.js' %}?v={{ APP_VERSION }}"></script>
 {% endblock %}

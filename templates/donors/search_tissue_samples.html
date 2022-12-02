@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{#{% load donors_custom_tags %}#}
 {% block title %}
     CTB | Search Tissue Samples
 {% endblock %}
@@ -11,24 +11,12 @@
 
 {% block page_name %}search_tissue_samples{% endblock %}
 
-{#{% block page_header %}#}
-{#    <div class="container">#}
-{#        <div class="pt-3">#}
-{#            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">#}
-{#                <ol class="breadcrumb">#}
-{#                    <li class="breadcrumb-item active" aria-current="page">Search Tissue Samples</li>#}
-{#                </ol>#}
-{#            </nav>#}
-{#        </div>#}
-{#    </div>#}
-{##}
-{#{% endblock %}#}
-
 {% block content %}
     <div class="container py-3">
         <div class="row">
             <div class="col-lg-8">
                 <form id="search-tissue-form" class="bg-light border rounded py-4 mb-3">
+                    <input id="total-input" type="hidden" name="total" value="{{ total }}">
                     <div class="container-fluid">
                         <h4>Search Tissue Samples
                             <button type="reset"
@@ -42,7 +30,7 @@
                             </div>
                         </div>
 
-                        <div class="row px-0">
+                        <div id="search-tissue-filters" class="row px-0">
                             <div class="col-lg">
                                 <div id="diagnosis-card" class="card mb-2">
                                     <div class="card-header">Diagnosis
@@ -72,8 +60,8 @@
                                                    name="diagnosis[]" value="FA">
                                             <label class="form-check-label" for="diag-fa">Follicular Adenoma</label>
                                         </div>
-                                        <hr>
-                                        <div>Other Benign Follicular Tumors:</div>
+{#                                        <hr>#}
+                                        <div class="fw-light fst-italic small">Other Benign Follicular Tumors:</div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="diag-ftump"
                                                    name="diagnosis[]" value="FT UMP">
@@ -86,7 +74,7 @@
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="diag-nodule"
-                                                   name="diagnosis[]" value="FA">
+                                                   name="diagnosis[]" value="nodule">
                                             <label class="form-check-label" for="diag-nodule">Nodule</label>
                                         </div>
                                         <div class="fw-light text-muted small">
@@ -109,27 +97,27 @@
                                     <div class="card-body">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="type-ffpe"
-                                                   name="sampletype[]" value="FFPE">
+                                                   name="sample_type[]" value="FFPE">
                                             <label class="form-check-label" for="type-ffpe">FFPE Section</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="type-dna"
-                                                   name="sampletype[]" value="dna">
+                                                   name="sample_type[]" value="dna">
                                             <label class="form-check-label" for="type-dna">DNA</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="type-rna"
-                                                   name="sampletype[]" value="rna">
+                                                   name="sample_type[]" value="rna">
                                             <label class="form-check-label" for="type-rna">RNA</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="type-blood"
-                                                   name="sampletype[]" value="blood">
+                                                   name="sample_type[]" value="blood">
                                             <label class="form-check-label" for="type-blood">Blood</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="type-serum"
-                                                   name="sampletype[]" value="serum">
+                                                   name="sample_type[]" value="serum">
                                             <label class="form-check-label" for="type-serum">Serum</label>
                                         </div>
                                     </div>
@@ -212,24 +200,24 @@
                                     <div class="card-body">
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="sampleorigin-blood"
-                                                   name="sampleorigin[]" value="blood">
+                                                   name="sample_origin[]" value="blood">
                                             <label class="form-check-label" for="sampleorigin-blood">Blood</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
-                                                   id="sampleorigin-normal-tissue" name="sampleorigin[]" value="normal">
+                                                   id="sampleorigin-normal-tissue" name="sample_origin[]" value="normal">
                                             <label class="form-check-label" for="sampleorigin-normal-tissue">Normal
                                                 Tissue</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
-                                                   id="sampleorigin-tumour-tissue" name="sampleorigin[]" value="tumour">
+                                                   id="sampleorigin-tumour-tissue" name="sample_origin[]" value="tumour">
                                             <label class="form-check-label" for="sampleorigin-tumour-tissue">Tumor
                                                 Tissue</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sampleorigin-metastatic"
-                                                   name="sampleorigin[]" value="metastatic">
+                                            <input class="form-check-input" type="checkbox" id="sample_origin-metastatic"
+                                                   name="sample_origin[]" value="metastatic">
                                             <label class="form-check-label"
                                                    for="sampleorigin-metastatic">Metastatic</label>
                                         </div>
@@ -250,21 +238,21 @@
                                     <div class="card-body">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio"
-                                                   id="patientresidency-exposed-region" name="patientresidency"
+                                                   id="patientresidency-exposed-region" name="patient_residency"
                                                    value="exposed">
                                             <label class="form-check-label" for="patientresidency-exposed-region">Exposed
                                                 Region</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio"
-                                                   id="patientresidency-unexposed-region" name="patientresidency"
+                                                   id="patientresidency-unexposed-region" name="patient_residency"
                                                    value="unexposed">
                                             <label class="form-check-label" for="patientresidency-unexposed-region">Unexposed
                                                 Region</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio"
-                                                   id="patientresidency-both-regions" name="patientresidency"
+                                                   id="patientresidency-both-regions" name="patient_residency"
                                                    value="both" checked>
                                             <label class="form-check-label" for="patientresidency-both-regions">Both
                                                 Regions</label>
@@ -314,17 +302,17 @@
                                     <div class="card-body">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" id="patientgender-male"
-                                                   name="patientgender" value="male">
+                                                   name="patient_gender" value="male">
                                             <label class="form-check-label" for="patientgender-male">Male</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" id="patientgender-female"
-                                                   name="patientgender" value="female">
+                                                   name="patient_gender" value="female">
                                             <label class="form-check-label" for="patientgender-female">Female</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" id="patientgender-both"
-                                                   name="patientgender" value="both" checked>
+                                                   name="patient_gender" value="both" checked>
                                             <label class="form-check-label" for="patientgender-both">Both</label>
                                         </div>
                                     </div>
@@ -349,7 +337,7 @@
                                                 <div class="input-group input-group-sm mb-3">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
                                                     <input id="min-age-first-operation" type="number"
-                                                           class="form-control"
+                                                           class="form-control" name="age_at_operation_min"
                                                            min="0" max="49" value="0">
                                                 </div>
                                             </div>
@@ -357,7 +345,7 @@
                                                 <div class="input-group input-group-sm mb-3">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
                                                     <input id="max-age-first-operation" type="number"
-                                                           class="form-control"
+                                                           class="form-control" name="age_at_operation_max"
                                                            min="0" max="49" value="49">
                                                 </div>
                                             </div>
@@ -373,7 +361,7 @@
                                                 <div class="input-group input-group-sm mb-3">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
                                                     <input id="min-age-first-exposure" type="number"
-                                                           class="form-control"
+                                                           class="form-control" name="age_at_exposure_min"
                                                            min="-40" max="19" value="-40">
                                                 </div>
                                             </div>
@@ -381,7 +369,7 @@
                                                 <div class="input-group input-group-sm mb-3">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
                                                     <input id="max-age-first-exposure" type="number"
-                                                           class="form-control"
+                                                           class="form-control"  name="age_at_exposure_max"
                                                            min="-40" max="19" value="19">
                                                 </div>
                                             </div>
@@ -400,6 +388,12 @@
                                 <button class="btn btn-primary" type="button" id="search-save"><i
                                         class="fa-solid fa-floppy-disk"></i> Save Search
                                 </button>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group mb-3">
+                                <div id="save_message"></div>
                             </div>
                         </div>
                     </div>
@@ -407,8 +401,9 @@
             </div>
             <div class="col-lg-4">
                 <div class="border rounded bg-light p-4 mb-3">
-                    <h4>Search Results <span class="fw-normal fs-5 float-end">{{ total }} Cases</span></h4>
-                    <table class="table table-striped">
+
+                    <h5>Search Results <span class="fw-normal fs-5 float-end"><span id="total-case-count">{{ total }}</span> Cases</span></h5>
+                    <table id="tissue-table" class="table table-striped tissue-samples-table">
                         <thead>
                         <tr>
                             <th class="fw-bold">TISSUE</th>
@@ -420,54 +415,65 @@
                         <tbody>
                         <tr>
                             <td>RNA</td>
-                            <td>{{ tissue.rna.normal }}</td>
-                            <td>{{ tissue.rna.tumor }}</td>
-                            <td>{{ tissue.rna.metastatic }}</td>
+                            <td id="tissue-rna-normal">{{ tissue.rna.normal }}</td>
+                            <td id="tissue-rna-tumour">{{ tissue.rna.tumour }}</td>
+                            <td id="tissue-rna-metastatic">{{ tissue.rna.metastatic }}</td>
                         </tr>
                         <tr>
                             <td>DNA</td>
-                            <td>{{ tissue.dna.normal }}</td>
-                            <td>{{ tissue.dna.tumor }}</td>
-                            <td>{{ tissue.dna.metastatic }}</td>
+                            <td id="tissue-dna-normal">{{ tissue.dna.normal }}</td>
+                            <td id="tissue-dna-tumour">{{ tissue.dna.tumour }}</td>
+                            <td id="tissue-dna-metastatic">{{ tissue.dna.metastatic }}</td>
                         </tr>
                         <tr>
                             <td>FFPE section</td>
-                            <td>{{ tissue.ffpe.normal }}</td>
-                            <td>{{ tissue.ffpe.tumor }}</td>
-                            <td>{{ tissue.ffpe.metastatic }}</td>
+                            <td id="tissue-ffpe-normal">{{ tissue.ffpe.normal }}</td>
+                            <td id="tissue-ffpe-tumour">{{ tissue.ffpe.tumour }}</td>
+                            <td id="tissue-ffpe-metastatic">{{ tissue.ffpe.metastatic }}</td>
                         </tr>
                         </tbody>
                     </table>
-                    <table class="table table-striped">
+                    <table id="blood-table" class="table table-striped tissue-samples-table">
                         <thead>
                         <tr>
-
                             <th class="fw-bold">BLOOD</th>
                             <th></th>
+                            <th class="col-3"></th>
+                            <th class="col-3"></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>Serum</td>
-                            <td>{{ blood.serum }}</td>
+                            <td id="blood-serum">{{ blood.serum }}</td>
+                            <th></th>
+                            <th></th>
                         </tr>
                         <tr>
                             <td>DNA</td>
-                            <td>{{ blood.dna }}</td>
+                            <td id="blood-dna">{{ blood.dna }}</td>
+                            <th></th>
+                            <th></th>
                         </tr>
-
                         </tbody>
                     </table>
-                    {#                    Click below to apply for these samples.#}
 
                     <div class="d-grid gap-2 col mx-auto">
-                        <a class="btn btn-outline-secondary" href="{% static 'files/application-form.doc' %}"><i
-                                class="fa-solid fa-download"></i> Download Application Form</a>
-                        <a class="btn btn-primary" href="{% url 'clinical_search_facility' %}"><i
-                                class="fa-solid fa-right-long"></i> Proceed to Clinical Search</a>
+                        <a id="make-app-btn" class="btn btn-primary me-md-2" href="{% url 'make_application' %}">
+                            <i class="fas fa-edit"></i> Make Application
+                        </a>
+                        <a id="clinical-search-facility-btn" class="btn btn-primary" target="_blank"
+                           rel="noreferrer noopener" href="{% url 'clinical_search_facility' %}">
+                            Proceed to Clinical Search <i class="fas fa-angle-double-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block js_file %}
+    {{ block.super }}
+	<script src="{% static 'js/search_tissue_samples.js' %}"></script>
 {% endblock %}

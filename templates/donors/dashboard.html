@@ -13,26 +13,25 @@
 {% block page_name %}dashboard{% endblock %}
 
 {% block page_header %}
-{#    <div class="container">#}
-{#        <div class="pt-3">#}
-{#            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">#}
-{#                <ol class="breadcrumb">#}
-{#                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>#}
-{#                </ol>#}
-{#            </nav>#}
-{#        </div>#}
-{#    </div>#}
 
 {% endblock %}
 
 {% block content %}
     <div class="container py-3">
+{#        {% if main_message.success %}#}
+{#        <div class="row m-1 p-3 mb-2 rounded border border-primary">#}
+{#            {{ main_message.success }}#}
+{#        </div>#}
+{#        {% endif %}#}
+{#        {% if main_message.error %}#}
+{#        <div class="row m-1 p-3 mb-2 rounded border border-warning">#}
+{#            {{ main_message.error }}#}
+{#        </div>#}
+{#        {% endif %}#}
         <div class="row">
             <div class="col-lg-4">
                 <div class="bg-light border rounded p-3 mb-3">
                     <h4>Welcome to the Chernobyl Tissue Bank Biosample Search</h4>
-
-
                     <p>Please read the following important information to allow you to make full use of the search
                         facility.</p>
                     <p>The Chernobyl Tissue Bank Filter Tool allows you to check whether the number of biological
@@ -73,12 +72,6 @@
                     <a class="btn btn-primary" href="{% url 'search_tissue_samples' %}" ><i
                             class="fa-solid fa-magnifying-glass"></i> Search Tissue Samples</a>
                 </div>
-
-
-                <!-- <form class="form form-search" action="/biosample-search/samples">
-                    <input type="search" placeholder="Search Tissue Bank By: " />
-                    <input class="btn btn-blue" type="submit" value="Biosample Data" />
-                </form> -->
 
                 <div class="border rounded bg-light p-3">
                     <div>

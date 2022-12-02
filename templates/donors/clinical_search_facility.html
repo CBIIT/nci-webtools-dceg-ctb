@@ -37,13 +37,18 @@
                             <i class="fa-solid fa-angles-right"></i>
                         </a>
                     </div>
-                    <form method="POST" id="form-clinic" action="{% url 'clinical_search_facility_result' %}"
+                    <form method="POST" id="form-clinic" action="{% url 'search_clinical' %}"
                           autofill="off">
                         {% csrf_token %}
-                        <input type="hidden" name="patientresidency" value="both">
-                        <input type="hidden" name="patientgender" value="both">
-                        <input type="hidden" name="ageatoperation" value="0,49">
-                        <input type="hidden" name="ageatexposure" value="-40,19">
+                        {% for key, value in sample_filters.items %}
+                            {% if key in 'diagnosis[], sample_type[], dosemetry[],sample_origin[], dob[]' %}
+                                {% for item in value %}
+                                <input type="hidden" name="{{ key }}" value="{{ item }}">
+                                {% endfor %}
+                            {% else %}
+                                <input type="hidden" name="{{ key }}" value="{{ value }}">
+                            {% endif %}
+                        {% endfor %}
 
                         <div class="py-2">
                             <fieldset id="form-clinic-0">
@@ -82,7 +87,7 @@
                                 <hr>
                                 <div class="border rounded-2 p-2 m-1">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="op-type"
+                                        <input class="form-check-input" type="radio" name="op_type"
                                                id="optype-total" value="total">
                                         <label class="form-check-label" for="optype-total">
                                             Total Thyroidectomy<br>
@@ -92,7 +97,7 @@
                                 </div>
                                 <div class="border rounded-2 p-2 m-1">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="op-type"
+                                        <input class="form-check-input" type="radio" name="op_type"
                                                id="optype-ltotal" value="ltotal">
                                         <label class="form-check-label" for="optype-ltotal">
                                             Less Than Total Thyroidectomy<br>
@@ -104,7 +109,7 @@
 
                                 <div class="border rounded-2 p-2 m-1">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="op-type"
+                                        <input class="form-check-input" type="radio" name="op_type"
                                                id="optype-any" value="any">
                                         <label class="form-check-label" for="optype-any">
                                             Any Thyroidectomy<br>
@@ -163,7 +168,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusa[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
                                                            id="ptstatusa-t1a" value="T1a">
                                                 </td>
                                                 <td class="ps-5">
@@ -176,7 +181,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusa[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
                                                            id="ptstatusa-t1b" value="T1b">
                                                 </td>
                                                 <td class="ps-5">
@@ -188,7 +193,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusa[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
                                                            id="ptstatusa-t2" value="T2">
                                                 </td>
                                                 <td>
@@ -209,7 +214,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusa[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
                                                            id="ptstatusa-t3a" value="T3a">
                                                 </td>
                                                 <td class="ps-5">
@@ -220,7 +225,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusa[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
                                                            id="ptstatusa-t3b" value="T3b">
                                                 </td>
                                                 <td class="ps-5">
@@ -239,7 +244,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusa[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
                                                            id="ptstatusa-t4a" value="T4a">
                                                 </td>
                                                 <td class="ps-5">
@@ -252,7 +257,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusa[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
                                                            id="ptstatusa-t4b" value="T4b">
                                                 </td>
                                                 <td class="ps-5">
@@ -293,7 +298,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusb[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
                                                            id="ptstatusb-t1a" value="T1a">
                                                 </td>
                                                 <td class="ps-5">
@@ -306,7 +311,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusb[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
                                                            id="ptstatusb-t1b" value="T1b">
                                                 </td>
                                                 <td class="ps-5">
@@ -318,7 +323,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusb[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
                                                            id="ptstatusb-t2" value="T2">
                                                 </td>
                                                 <td>
@@ -341,7 +346,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusb[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
                                                            id="ptstatusb-t3a" value="T3a">
                                                 </td>
                                                 <td class="ps-5">
@@ -352,7 +357,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusb[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
                                                            id="ptstatusb-t3b" value="T3b">
                                                 </td>
                                                 <td class="ps-5">
@@ -371,7 +376,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusb[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
                                                            id="ptstatusb-t4a" value="T4a">
                                                 </td>
                                                 <td class="ps-5">
@@ -385,7 +390,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="pt-statusb[]"
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
                                                            id="ptstatusb-t4b" value="T4b">
                                                 </td>
                                                 <td class="ps-5">
@@ -421,33 +426,33 @@
                                         <table class="table table-striped">
                                             <tbody>
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox" name="reg-node[]"
-                                                           id="ptstatusb-t1a" value="NX">
+                                                <td><input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-nx" value="Nx">
                                                 </td>
                                                 <td>
-                                                    <label class="form-check-label" for="ptstatusb-t1a">
+                                                    <label class="form-check-label" for="reg-node-nx">
                                                         <strong>NX</strong>: Regional lymph nodes cannot be assessed
                                                     </label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="reg-node[]"
-                                                           id="ptstatusb-t1a" value="T1a">
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-n0" value="N0">
                                                 </td>
                                                 <td>
                                                     <label class="form-check-label"
-                                                           for="ptstatusb-t1a"><strong>N0</strong>: No evidence of
+                                                           for="reg-node-n0"><strong>N0</strong>: No evidence of
                                                         regional lymph node metastasis</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="reg-node[]"
-                                                           id="ptstatusb-t1a" value="T1a">
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id=reg-node-n0a" value="N0a">
                                                 </td>
                                                 <td class="ps-5">
-                                                    <label class="form-check-label" for="ptstatusb-t1a">
+                                                    <label class="form-check-label" for="reg-node-n0a">
                                                         <strong>N0a</strong>: One or more cytologic or histologically
                                                         confirmed benign lymph nodes
                                                     </label>
@@ -455,11 +460,11 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="reg-node[]"
-                                                           id="ptstatusb-t1b" value="T1b">
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-n0b" value="N0b">
                                                 </td>
                                                 <td class="ps-5">
-                                                    <label class="form-check-label" for="ptstatusb-t1b">
+                                                    <label class="form-check-label" for="reg-node-n0b">
                                                         <strong>N0b</strong>: No radiologic or clinical evidence of
                                                         locoregional lymph node metastasis
                                                     </label>
@@ -474,14 +479,13 @@
                                                 </td>
 
                                             </tr>
-
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="reg-node[]"
-                                                           id="ptstatusb-t3a" value="T3a">
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-n1a" value="N1a">
                                                 </td>
                                                 <td class="ps-5">
-                                                    <label class="form-check-label" for="ptstatusb-t3a">
+                                                    <label class="form-check-label" for="reg-node-n1a">
                                                         <strong>N1a</strong>: Metastasis to level VI or VII
                                                         (pretracheal, paratracheal, prelaryngeal / Delphian or upper
                                                         mediastinal lymph nodes; this can be unilateral or bilateral
@@ -491,11 +495,11 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="reg-node[]"
-                                                           id="ptstatusb-t3b" value="T3b">
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-n1b" value="N1b">
                                                 </td>
                                                 <td class="ps-5">
-                                                    <label class="form-check-label" for="ptstatusb-t3b">
+                                                    <label class="form-check-label" for="reg-node-n1b">
                                                         <strong>N1b</strong>: Metastasis to unilateral, bilateral or
                                                         contralateral lateral neck lymph nodes (levels I, II, III, IV or
                                                         V) or retropharyngeal lymph nodes
@@ -541,14 +545,14 @@
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="ajcc-a[]"
+                                                    <input class="form-check-input" type="checkbox" name="ajcc_a[]"
                                                            id="ajcc-a-1" value="I">
                                                     <label class="form-check-label" for="ajcc-a-1">AJCC I</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="ajcc-a[]"
+                                                    <input class="form-check-input" type="checkbox" name="ajcc_a[]"
                                                            id="ajcc-a-2" value="II">
                                                     <label class="form-check-label" for="ajcc-a-2">AJCC II</label>
                                                 </td>
@@ -571,38 +575,38 @@
                                             <tbody>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="ajcc-b[]"
+                                                    <input class="form-check-input" type="checkbox" name="ajcc_b[]"
                                                            id="ajcc-b-1" value="I">
                                                     <label class="form-check-label" for="ajcc-b-1">AJCC I</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox" name="ajcc-b[]"
+                                                <td><input class="form-check-input" type="checkbox" name="ajcc_b[]"
                                                            id="ajcc-b-2" value="II">
                                                     <label class="form-check-label" for="ajcc-b-2">AJCC II</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox" name="ajcc-b[]"
+                                                <td><input class="form-check-input" type="checkbox" name="ajcc_b[]"
                                                            id="ajcc-b-3" value="III">
                                                     <label class="form-check-label" for="ajcc-b-3">AJCC III</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox" name="ajcc-b[]"
+                                                <td><input class="form-check-input" type="checkbox" name="ajcc_b[]"
                                                            id="ajcc-b-4a" value="IVA">
                                                     <label class="form-check-label" for="ajcc-b-4a">AJCC IVa</label>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td><input class="form-check-input" type="checkbox" name="ajcc-b[]"
+                                                <td><input class="form-check-input" type="checkbox" name="ajcc_b[]"
                                                            id="ajcc-b-4b" value="IVB">
                                                     <label class="form-check-label" for="ajcc-b-4b">AJCC IVb</label>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <input class="form-check-input" type="checkbox" name="ajcc-b[]"
+                                                    <input class="form-check-input" type="checkbox" name="ajcc_b[]"
                                                            id="ajcc-b-4c" value="IVC">
                                                     <label class="form-check-label" for="ajcc-b-4c">AJCC IVc</label>
                                                 </td>
@@ -642,21 +646,21 @@
                                     </div>
                                     <div class="mt-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="treat-radio"
+                                            <input class="form-check-input" type="radio" name="treat_radio"
                                                    id="treat-radio-yes" value="yes">
                                             <label class="form-check-label" for="treat-radio-yes">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="treat-radio"
+                                            <input class="form-check-input" type="radio" name="treat_radio"
                                                    id="treat-radio-no" value="no">
                                             <label class="form-check-label" for="treat-radio-no">
                                                 No
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="treat-radio"
+                                            <input class="form-check-input" type="radio" name="treat_radio"
                                                    id="treat-radio-neither" value="neither">
                                             <label class="form-check-label" for="treat-radio-neither">
                                                 Neither
@@ -683,21 +687,21 @@
                                     </div>
                                     <div class="mt-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tsh-supress"
+                                            <input class="form-check-input" type="radio" name="tsh_supress"
                                                    id="tsh-supress-yes" value="yes">
                                             <label class="form-check-label" for="tsh-supress-yes">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tsh-supress"
+                                            <input class="form-check-input" type="radio" name="tsh_supress"
                                                    id="tsh-supress-no" value="no">
                                             <label class="form-check-label" for="tsh-supress-no">
                                                 No
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tsh-supress"
+                                            <input class="form-check-input" type="radio" name="tsh_supress"
                                                    id="tsh-supress-neither" value="neither">
                                             <label class="form-check-label" for="tsh-supress-neither">
                                                 Neither
@@ -725,21 +729,21 @@
                                         option.</strong></div>
                                     <div class="mt-2">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="clinic-outcome"
+                                            <input class="form-check-input" type="radio" name="clinic_outcome"
                                                    id="clinic-outcome-yes" value="yes">
                                             <label class="form-check-label" for="clinic-outcome-yes">
                                                 Yes
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="clinic-outcome"
+                                            <input class="form-check-input" type="radio" name="clinic_outcome"
                                                    id="clinic-outcome-no" value="no">
                                             <label class="form-check-label" for="clinic-outcome-no">
                                                 No
                                             </label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="clinic-outcome"
+                                            <input class="form-check-input" type="radio" name="clinic_outcome"
                                                    id="clinic-outcome-neither" value="neither">
                                             <label class="form-check-label" for="clinic-outcome-neither">
                                                 Neither
@@ -825,7 +829,7 @@
                         <div class="d-grid gap-2 col mx-auto">
                             <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i
                                     class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
-                            <a class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
+                            <a id="driver-search-btn" class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
                                     class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
                             <a class="btn btn-outline-secondary" href="{% static 'files/application-form.doc' %}"><i
                                     class="fa-solid fa-download"></i> Download Application Form</a>
@@ -833,7 +837,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
