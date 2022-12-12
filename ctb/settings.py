@@ -587,34 +587,37 @@ FILE_SIZE_UPLOAD_MAX = 1950000
 
 # Explicitly check for known problems in descrpitions and names provided by users
 BLACKLIST_RE = r'((?i)<script>|(?i)</script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|(?i)<iframe>|(?i)</iframe>)'
-BLANK_TISSUE_FILTERS = {'total': '', 'country': 'both', 'patient_residency': 'both', 'patient_gender': 'both', 'age_at_operation_min': '0',
-                        'age_at_operation_max': '49', 'age_at_exposure_min': '-40', 'age_at_exposure_max': '19'}
+BLANK_TISSUE_FILTERS = {'patient_residency': 'both', 'patient_gender': 'both', 'dob': 'both'}
+    # ,
+    #                     'age_at_operation_min': '',
+    #                     'age_at_operation_max': '', 'age_at_exposure_min': '', 'age_at_exposure_max': ''}
+
 # BLANK_TISSUE_FILTERS_2 = {'total': '', 'age_at_operation_min': '0',
 #                           'age_at_operation_max': '49', 'age_at_exposure_min': '-40', 'age_at_exposure_max': '19'}
 BLANK_TISSUE_FILTER_CASE_COUNT = {
     'tissue': {
         'rna': {
-            'normal': 3956,
-            'tumour': 4135,
-            'metastatic': 432
+            'normal': 3980,
+            'tumour': 4158,
+            'metastatic': 434
         },
         'dna': {
-            'normal': 3944,
-            'tumour': 4125,
-            'metastatic': 432
+            'normal': 3968,
+            'tumour': 4148,
+            'metastatic': 434
         },
         'ffpe': {
-            'normal': 1995,
-            'tumour': 5052,
-            'metastatic': 1184
+            'normal': 2010,
+            'tumour': 5082,
+            'metastatic': 1191
 
         }
     },
     'blood': {
-        'dna': 3596,
-        'serum': 3250
+        'dna': 3623,
+        'serum': 3265
     },
-    'total': 5516
+    'total': 5546
 }
 
 if DEBUG and DEBUG_TOOLBAR:

@@ -120,7 +120,9 @@ def get_filters(request, for_save=False):
         if key.endswith('[]'):
             sample_filters[key] = request_method.getlist(key)
         elif for_save or key != 'title':
-            sample_filters[key] = request_method.get(key)
+            val = request_method.get(key)
+            if val:
+                sample_filters[key] = request_method.get(key)
     return sample_filters
 
 
@@ -148,6 +150,7 @@ def application_submit(request):
             '[Chernobyl Tissue Bank] Application from Chernobyl Tissue Bank',
             'Application has been submitted.',
             pi_email,
+
             ['elee@systemsbiology.org', pi_email],
             fail_silently=False,
         )

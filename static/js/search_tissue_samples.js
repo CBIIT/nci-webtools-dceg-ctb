@@ -63,51 +63,27 @@ require([
                 {
                     class: 'text-end'
                 }
-            ]
+            ],
+            ordering: false
 
         });
 
         search_samples();
         $("#search-tissue-filters input").not("#search-save-title").on("change", function () {
+            console.log('update');
             search_samples();
         });
         $("#search-save").on("click", function(){
             save_filters();
         });
     });
-
-    // let get_ajax = function(){
-    //     return $.ajax({
-    //         timeout: 30*1000,
-    //         type: "post",
-    //         url: BASE_URL + "/search_facility/filter_tissue_samples",
-    //         data: $('#search-tissue-form').serialize(),
-    //         success: function (case_counts) {
-    //             $('#total-case-count').text(case_counts['total']);
-    //             $('#total-input').val(case_counts['total']);
-    //             $('#tissue-rna-normal').text(case_counts['tissue']['rna']['normal']);
-    //             $('#tissue-rna-tumour').text(case_counts['tissue']['rna']['tumour']);
-    //             $('#tissue-rna-metastatic').text(case_counts['tissue']['rna']['metastatic']);
-    //             $('#tissue-dna-normal').text(case_counts['tissue']['dna']['normal']);
-    //             $('#tissue-dna-tumour').text(case_counts['tissue']['dna']['tumour']);
-    //             $('#tissue-dna-metastatic').text(case_counts['tissue']['dna']['metastatic']);
-    //             $('#tissue-ffpe-normal').text(case_counts['tissue']['ffpe']['normal']);
-    //             $('#tissue-ffpe-tumour').text(case_counts['tissue']['ffpe']['tumour']);
-    //             $('#tissue-ffpe-metastatic').text(case_counts['tissue']['ffpe']['metastatic']);
-    //             $('#blood-serum').text(case_counts['blood']['serum']);
-    //             $('#blood-dna').text(case_counts['blood']['dna']);
-    //             $('#clinical-search-facility-btn').attr('href', BASE_URL + "/search_facility/clinical_search_facility?" + $('#search-tissue-form').serialize())
-    //
-    //         }
-    //     });
-    // }
     let save_filters = function () {
         $.ajax({
             type: "post",
             url: BASE_URL + "/search_facility/save_filters",
             data: $('#search-tissue-form').serialize() +'&search_type=Biosample',
             success: function(data) {
-                $('#save_message').text(data['message']);
+                $('#save_message').html('<i class="fas fa-check-circle"></i> '+data['message']);
             }
         });
     };

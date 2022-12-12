@@ -43,7 +43,7 @@ require([
             url: BASE_URL + "/search_facility/save_filters",
             data: $('#save-form').serialize(),
             success: function(data) {
-                $('#save_message').text(data['message']);
+                $('#save_message').html('<i class="fas fa-check-circle"></i> '+data['message']);
             }
         });
     };
