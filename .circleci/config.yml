@@ -79,6 +79,7 @@ commands:
       - run:
           name: "Service Account Auth and Project Settings"
           command: |
+            echo "export CLOUDSDK_CORE_DISABLE_PROMPTS=1" >> $BASH_ENV
             sudo -E /bin/bash ./shell/gcloud_authenticate.sh
 
   install_cloud_sdk:
@@ -86,7 +87,7 @@ commands:
       - run:
           name: "Install CloudSDK"
           command: |
-            echo "export CLOUDSDK_CORE_DISABLE_PROMPTS=1" >> $BASH_ENV
+            
             sudo apt-get update -qq
             sudo apt-get install ca-certificates python3-distutils apt-transport-https gnupg
             echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
