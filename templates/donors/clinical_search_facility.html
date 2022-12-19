@@ -1,0 +1,849 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Refine by Clinical Parameters
+{% endblock %}
+
+{% block description %}
+    Refine by Clinical Parameters
+{% endblock %}
+
+{% block page_name %}clinical_search_facility{% endblock %}
+
+{% block page_header %}
+    <div class="container">
+        <div class="pt-3">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Refine by Clinical Parameters</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-3">
+                <div class="border bg-light rounded p-4">
+                    <div class="content-header d-flex flex-wrap justify-content-between">
+                        <h5>Clinical Search Facility</h5>
+                        <a id="clinic-skip" class="btn btn-outline-secondary d-none" href="#">
+                            Skip
+                            <i class="fa-solid fa-angles-right"></i>
+                        </a>
+                    </div>
+                    <form method="POST" id="form-clinic" action="{% url 'search_clinical' %}"
+                          autofill="off">
+                        {% csrf_token %}
+                        {% for key, value in sample_filters.items %}
+                            {% if key in 'diagnosis[], sample_type[], dosemetry[], sample_origin[]' %}
+                                {% for item in value %}
+                                <input type="hidden" name="{{ key }}" value="{{ item }}">
+                                {% endfor %}
+                            {% else %}
+                                <input type="hidden" name="{{ key }}" value="{{ value }}">
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="py-2">
+                            <fieldset id="form-clinic-0">
+                                <div>
+                                    <h6><strong>General Information</strong></h6>
+                                </div>
+                                <div class="fw-light">The clinical search facility is only for use in projects that are
+                                    requesting
+                                    access to samples from patients with a thyroid cancer diagnosis.
+                                </div>
+                                <hr>
+                                <p>You have already had the opportunity to search for samples based on pathology,
+                                    exposure status, country of origin, dosimetry and age of the patient at operation
+                                    and at the time of the accident. Your search may now be further defined using
+                                    additional clinical information that is available on some of the cases in the CTB.
+                                    Clinical data is still being added on some of our cases, so more information will be
+                                    available shortly. If you do not wish to further define your search, you may skip
+                                    this section. You will need to justify why you need clinical information for your
+                                    project in your application.</p>
+                                <p>You can further refine your search using clinical parameters if you are requesting
+                                    only samples from patients with cancer —Papillary Thyroid Cancer (PTC), Follicular
+                                    Cancer (FC), Medullary Carcinoma (MTC) or Well Differentiated Cancer, Not Otherwise
+                                    Specified (WDCA NOS), Poorly Differentiated Thyroid Cancer (PDC).</p>
+                                <p>You will be guided through a series of screens — if you do not wish to refine your
+                                    search based on the criteria visible on that screen, simply click the next button.
+                                    If you do not wish to select a particular parameter in each section of the screen,
+                                    simply leave that parameter blank.</p>
+                                <p><strong>If you do not wish to refine your search using clinical parameters, please
+                                    click on the links on the right.</strong></p>
+                            </fieldset>
+                            <fieldset id="form-clinic-1" class="d-none">
+                                <div>
+                                    <h6><strong>Operation Type</strong></h6>
+                                </div>
+                                <div>There are two categories for operation type:</div>
+                                <hr>
+                                <div class="border rounded-2 p-2 m-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="op_type"
+                                               id="optype-total" value="total">
+                                        <label class="form-check-label" for="optype-total">
+                                            Total Thyroidectomy<br>
+                                            <span class="text-muted fw-light">Where all of the thyroid gland is removed.</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="border rounded-2 p-2 m-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="op_type"
+                                               id="optype-ltotal" value="ltotal">
+                                        <label class="form-check-label" for="optype-ltotal">
+                                            Less Than Total Thyroidectomy<br>
+                                            <span class="text-muted fw-light">Where only the area of the thyroid gland that contains the
+                                                            tumour is removed.</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="border rounded-2 p-2 m-1">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="op_type"
+                                               id="optype-any" value="any">
+                                        <label class="form-check-label" for="optype-any">
+                                            Any Thyroidectomy<br>
+                                            <span class="text-muted fw-light">Includes both total and less than total thyroidectomy.</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="my-2 fw-light">The selection criteria is set to any operation type, so if
+                                    you wish set this category to total or less than total, please select this box –
+                                    you may select only one.
+                                </div>
+
+                                <div class="my-2"><strong>If you do not wish to refine your research with
+                                    information on operation type, please leave this section blank and continue to
+                                    the next section.</strong>
+                                </div>
+                            </fieldset>
+                            <fieldset id="form-clinic-2" class="d-none">
+                                <h6><strong>TNM Status (8th Edition)</strong> - <a
+                                        href="https://www.pathologyoutlines.com/topic/thyroidstaging.html"
+                                        target="_blank">Read more</a></h6>
+                                <p>
+                                    This is the pathological staging system used to describe the cancer. It will enable
+                                    you to select samples from cancers based on size, invasion into lymph nodes and
+                                    metastasis to distant organs.
+                                    In this section you can refine your biosample search for size of tumour and local
+                                    invasion using T and N status.
+                                </p>
+                                <p>
+                                    The next screen will enable you to use the clinical stage to refine your search
+                                    based on the presence of distant metastases.
+                                </p>
+                                <hr>
+                                <div id="options-pt1" class="border rounded-2 p-3">
+                                    <div class="pb-3">
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
+                                                data-target="#options-pt1">Reset
+                                        </button>
+                                        <strong>
+                                            Primary tumor (pT) status for Papillary, Follicular, Poorly
+                                            differentiated, Well Differentiated Cancer, Not Otherwise Specified
+                                        </strong>
+                                    </div>
+                                    <div class="my-2">
+                                        For all cancer types:
+                                    </div>
+                                    <div>
+                                        <table class="table table-striped">
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td><strong>T1</strong>: Tumor ≤ 2 cm in greatest dimension limited to
+                                                    the thyroid
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
+                                                           id="ptstatusa-t1a" value="T1a">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusa-t1a">
+                                                        <strong>T1a</strong>: Tumor ≤ 1 cm in greatest dimension limited
+                                                        to
+                                                        the thyroid
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
+                                                           id="ptstatusa-t1b" value="T1b">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusa-t1b">
+                                                        <strong>T1b</strong>: Tumor &gt; 1 cm but ≤ 2 cm in greatest
+                                                        dimension limited to the thyroid
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
+                                                           id="ptstatusa-t2" value="T2">
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="ptstatusa-t2">
+                                                        <strong>T2</strong>: Tumor &gt; 2 cm but ≤ 4 cm in greatest
+                                                        dimension limited to the
+                                                        thyroid
+                                                    </label>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><strong>T3</strong>: Tumor > 4 cm limited to the thyroid or gross
+                                                    extrathyroidal
+                                                    extension invading only strap muscles
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
+                                                           id="ptstatusa-t3a" value="T3a">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusa-t3a">
+                                                        <strong>T3a</strong>: Tumor > 4 cm limited to the thyroid
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
+                                                           id="ptstatusa-t3b" value="T3b">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusa-t3b">
+                                                        <strong>T3b</strong>: Gross extrathyroidal extension invading
+                                                        only strap muscles (sternohyoid, sternothyroid, thyrohyoid or
+                                                        omohyoid muscles) from a tumour of any size
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td><strong>T4</strong>: Includes gross extrathyroidal extension into
+                                                    major neck structures
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
+                                                           id="ptstatusa-t4a" value="T4a">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusa-t4a">
+                                                        <strong>T4a</strong>: Gross extrathyroidal extension invading
+                                                        subcutaneous soft tissues, larynx, trachea, oesophagus or
+                                                        recurrent laryngeal nerve from a tumour of any size
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_a[]"
+                                                           id="ptstatusa-t4b" value="T4b">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusa-t4b">
+                                                        <strong>T4b</strong>: Gross extrathyroidal extension invading
+                                                        prevertebral fascia or encasing carotid artery or mediastinal
+                                                        vessels from a tumour of any size
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                        <div><strong>If you do not wish to select a size of tumour, please leave this
+                                            section blank.</strong></div>
+                                    </div>
+                                </div>
+                                <div id="options-pt2" class="mt-4 border rounded-2 p-3">
+                                    <div>
+                                        <strong>
+                                            pT status for medullary thyroid cancers
+                                        </strong>
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
+                                                data-target="#options-pt2">Reset
+                                        </button>
+                                    </div>
+                                    <div class="my-2">
+                                        For all cancer types:
+                                    </div>
+                                    <div>
+                                        <table class="table table-striped">
+                                            <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <strong>T1</strong>: Tumor ≤ 2 cm in greatest dimension limited to
+                                                    the thyroid
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
+                                                           id="ptstatusb-t1a" value="T1a">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusb-t1a">
+                                                        <strong>T1a</strong>: Tumor ≤ 1 cm in greatest dimension limited
+                                                        to
+                                                        the thyroid
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
+                                                           id="ptstatusb-t1b" value="T1b">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusb-t1b">
+                                                        <strong>T1b</strong>: Tumor &gt; 1 cm but ≤ 2 cm in greatest
+                                                        dimension limited to the thyroid
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
+                                                           id="ptstatusb-t2" value="T2">
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="ptstatusb-t2">
+                                                        <strong>T2</strong>:
+                                                    </label>
+                                                    <label class="form-check-label" for="ptstatusb-t2">
+                                                        Tumor &gt; 2 cm but ≤ 4 cm in greatest dimension limited to the
+                                                        thyroid
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <strong>T3</strong>: Tumor > 4 cm limited to the thyroid or gross
+                                                    extrathyroidal
+                                                    extension invading only strap muscles
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
+                                                           id="ptstatusb-t3a" value="T3a">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusb-t3a">
+                                                        <strong>T3a</strong>: Tumor > 4 cm limited to the thyroid
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
+                                                           id="ptstatusb-t3b" value="T3b">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusb-t3b">
+                                                        <strong>T3b</strong>: Gross extrathyroidal extension invading
+                                                        only strap muscles (sternohyoid, sternothyroid, thyrohyoid or
+                                                        omohyoid muscles) from a tumour of any size
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td>
+                                                    <strong>T4</strong>: Advanced disease
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
+                                                           id="ptstatusb-t4a" value="T4a">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusb-t4a">
+                                                        <strong>T4a</strong>: Moderately advanced disease; tumour of any
+                                                        size with gross extrathyroidal extension into the nearby tissues
+                                                        of the neck, including subcutaneous soft tissue, larynx,
+                                                        trachea, oesophagus or recurrent laryngeal nerve
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="pt_status_b[]"
+                                                           id="ptstatusb-t4b" value="T4b">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="ptstatusb-t4b">
+                                                        <strong>T4b</strong>: Very advanced disease; tumour of any size
+                                                        with extension toward the spine or into nearby large blood
+                                                        vessels, invading the prevertebral fascia or encasing the
+                                                        carotid artery or mediastinal vessels
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div><strong>If you do not wish to select a size of tumour, please leave this
+                                        section blank.</strong></div>
+                                </div>
+
+                                <div id="options-pt3" class="mt-4 border rounded-2 p-3">
+                                    <div class="pb-3">
+                                        <strong>
+                                            Regional Lymph Node Involvement -N
+                                        </strong>
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
+                                                data-target="#options-pt3">Reset
+                                        </button>
+                                    </div>
+                                    <div class="my-2">
+                                        This section will enable you to select cancers based on the degree invasion into
+                                        local lymph nodes. The categories are as follows:
+                                    </div>
+                                    <div>
+                                        <table class="table table-striped">
+                                            <tbody>
+                                            <tr>
+                                                <td><input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-nx" value="Nx">
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label" for="reg-node-nx">
+                                                        <strong>NX</strong>: Regional lymph nodes cannot be assessed
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-n0" value="N0">
+                                                </td>
+                                                <td>
+                                                    <label class="form-check-label"
+                                                           for="reg-node-n0"><strong>N0</strong>: No evidence of
+                                                        regional lymph node metastasis</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id=reg-node-n0a" value="N0a">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="reg-node-n0a">
+                                                        <strong>N0a</strong>: One or more cytologic or histologically
+                                                        confirmed benign lymph nodes
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-n0b" value="N0b">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="reg-node-n0b">
+                                                        <strong>N0b</strong>: No radiologic or clinical evidence of
+                                                        locoregional lymph node metastasis
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                </td>
+                                                <td><label class="form-check-label" for="ptstatusb-t2">
+                                                    <strong>N1</strong>: Metastasis to regional nodes
+                                                </label>
+                                                </td>
+
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-n1a" value="N1a">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="reg-node-n1a">
+                                                        <strong>N1a</strong>: Metastasis to level VI or VII
+                                                        (pretracheal, paratracheal, prelaryngeal / Delphian or upper
+                                                        mediastinal lymph nodes; this can be unilateral or bilateral
+                                                        disease
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="reg_node[]"
+                                                           id="reg-node-n1b" value="N1b">
+                                                </td>
+                                                <td class="ps-5">
+                                                    <label class="form-check-label" for="reg-node-n1b">
+                                                        <strong>N1b</strong>: Metastasis to unilateral, bilateral or
+                                                        contralateral lateral neck lymph nodes (levels I, II, III, IV or
+                                                        V) or retropharyngeal lymph nodes
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div><strong>If you do not wish to select a size of tumour, please leave this
+                                        section blank.</strong></div>
+                                </div>
+                            </fieldset>
+                            <fieldset id="form-clinic-3" class="d-none">
+                                <h6><strong>AJCC Clinical Stage</strong> - <a
+                                        href="https://www.cancer.org/cancer/thyroid-cancer/detection-diagnosis-staging/staging.html"
+                                        target="_blank">Read more</a></h6>
+
+                                <p>All patients in the CTB are currently under the age of 55 at operation, so for
+                                    patients with a diagnosis of Follicular (FC), Papillary (PTC) or Well Differentiated
+                                    Thyroid Cancer Not Otherwise Specified (WDCA NOS) only two AJCC stages, I and II,
+                                    apply to these patients. The vast majority of the CTB patients are without distant
+                                    metastases at the time of primary operation and so will be AJCC clinical stage I.
+                                    Only those with an M value of 1 (those who have distant metastases) will fall into
+                                    the category of AJCC clinical stage II.</p>
+                                <p>For patients with Medullary Thyroid Cancer, all AJCC clinical stages may be
+                                    applicable. For more information on each AJCC stage, please click on the title of
+                                    this section.</p>
+
+                                <hr>
+
+                                <div id="options-pt4" class="border rounded-2 p-3">
+                                    <div class="pb-3">
+                                        <strong>
+                                            For PTC / FC / WDCANOS
+                                        </strong>
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
+                                                data-target="#options-pt4">Reset
+                                        </button>
+                                    </div>
+                                    <div class="mt-2">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="ajcc_a[]"
+                                                           id="ajcc-a-1" value="I">
+                                                    <label class="form-check-label" for="ajcc-a-1">AJCC I</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="ajcc_a[]"
+                                                           id="ajcc-a-2" value="II">
+                                                    <label class="form-check-label" for="ajcc-a-2">AJCC II</label>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div id="options-pt5" class="mt-4 border rounded-2 p-3">
+                                    <div class="pb-3">
+                                        <strong>
+                                            For MTC
+                                        </strong>
+                                        <button type="button" class="btn btn-reset btn-outline-secondary float-end"
+                                                data-target="#options-pt5">Reset
+                                        </button>
+                                    </div>
+                                    <div class="mt-2">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="ajcc_b[]"
+                                                           id="ajcc-b-1" value="I">
+                                                    <label class="form-check-label" for="ajcc-b-1">AJCC I</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input class="form-check-input" type="checkbox" name="ajcc_b[]"
+                                                           id="ajcc-b-2" value="II">
+                                                    <label class="form-check-label" for="ajcc-b-2">AJCC II</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input class="form-check-input" type="checkbox" name="ajcc_b[]"
+                                                           id="ajcc-b-3" value="III">
+                                                    <label class="form-check-label" for="ajcc-b-3">AJCC III</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input class="form-check-input" type="checkbox" name="ajcc_b[]"
+                                                           id="ajcc-b-4a" value="IVA">
+                                                    <label class="form-check-label" for="ajcc-b-4a">AJCC IVa</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><input class="form-check-input" type="checkbox" name="ajcc_b[]"
+                                                           id="ajcc-b-4b" value="IVB">
+                                                    <label class="form-check-label" for="ajcc-b-4b">AJCC IVb</label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <input class="form-check-input" type="checkbox" name="ajcc_b[]"
+                                                           id="ajcc-b-4c" value="IVC">
+                                                    <label class="form-check-label" for="ajcc-b-4c">AJCC IVc</label>
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="mt-2"><strong>If you do not wish to further define your search using
+                                    clinical stage, please leave blank and click next.</strong></div>
+                            </fieldset>
+                            <fieldset id="form-clinic-4" class="d-none">
+                                <h6><strong>Treatment and Outcome</strong></h6>
+                                <div>Information on clinical treatment and outcome is still being added for some cases.
+                                    Please note that at the present time clinical information is only available on a
+                                    proportion of the cases from Ukraine.
+                                </div>
+                                <hr>
+                                <div class="border rounded p-3 mx-1 my-2" id="options-pt6">
+                                    <h5>
+                                        Treatment with radioiodine
+                                    </h5>
+                                    <div>
+                                        Patients with PTC, FC and WDCA NOS often receive treatment with
+                                        radioiodine following surgery. The following dropdown menu will
+                                        enable you to refine your search by selecting Yes or No. By
+                                        selecting Yes, results will only be returned on those patients
+                                        for which we currently have information that have received
+                                        radioiodine treatment, by selecting No, information will only be
+                                        returned on those patients who have not received radioiodine
+                                        treatment. Further information on treatment (e.g. doses
+                                        administered) could be made available on request.
+                                    </div>
+                                    <div class="mt-2"><strong>If you do not wish to refine your research with
+                                        information on treatment, please select the 'Neither'
+                                        option.</strong>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="treat_radio"
+                                                   id="treat-radio-yes" value="yes">
+                                            <label class="form-check-label" for="treat-radio-yes">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="treat_radio"
+                                                   id="treat-radio-no" value="no">
+                                            <label class="form-check-label" for="treat-radio-no">
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="treat_radio"
+                                                   id="treat-radio-neither" value="neither">
+                                            <label class="form-check-label" for="treat-radio-neither">
+                                                Neither
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border rounded p-3 mx-1 my-2" id="options-pt7">
+                                    <h5>
+                                        TSH Suppression
+                                    </h5>
+                                    <div>Patients with PTC, FC and WDCA NOS often receive treatment
+                                        with
+                                        radioiodine following surgery and are sometimes are given
+                                        therapy to reduce the levels of thyroid stimulating hormone,
+                                        therefore reducing the hormone that stimulates growth of
+                                        thyroid
+                                        cells. There is conflicting evidence with respect to whether
+                                        this has a major effect on outcome.
+                                    </div>
+                                    <div class="mt-2"><strong>If you do not wish to refine your research with
+                                        information on TSH suppression, please select the 'Neither'
+                                        option.</strong>
+                                    </div>
+                                    <div class="mt-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="tsh_supress"
+                                                   id="tsh-supress-yes" value="yes">
+                                            <label class="form-check-label" for="tsh-supress-yes">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="tsh_supress"
+                                                   id="tsh-supress-no" value="no">
+                                            <label class="form-check-label" for="tsh-supress-no">
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="tsh_supress"
+                                                   id="tsh-supress-neither" value="neither">
+                                            <label class="form-check-label" for="tsh-supress-neither">
+                                                Neither
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="border rounded p-3 mx-1 my-2" id="options-pt8">
+                                    <h5>Clinical Outcome</h5>
+                                    <div>Unfortunately, some patients will suffer a relapse of their
+                                        cancer. Relapse is defined as being the presence of a further
+                                        deposit of thyroid cancer identified more than 6 months after
+                                        the date of the primary operation. In the case of thyroid
+                                        cancer, it is likely that over several decades around 30% of the
+                                        cases will relapse. Very few of the cases in the CTB (around 1%)
+                                        would be predicted to die from their disease over a period of
+                                        several decades.
+                                    </div>
+                                    <div>You can refine your search by selecting Yes if you wish to search
+                                        only for those cases that have suffered a relapse of their
+                                        disease.
+                                    </div>
+                                    <div class="mt-2"><strong>If you do not wish to refine your research with
+                                        information clinical outcome, please select the 'Neither'
+                                        option.</strong></div>
+                                    <div class="mt-2">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="clinic_outcome"
+                                                   id="clinic-outcome-yes" value="yes">
+                                            <label class="form-check-label" for="clinic-outcome-yes">
+                                                Yes
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="clinic_outcome"
+                                                   id="clinic-outcome-no" value="no">
+                                            <label class="form-check-label" for="clinic-outcome-no">
+                                                No
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="clinic_outcome"
+                                                   id="clinic-outcome-neither" value="neither">
+                                            <label class="form-check-label" for="clinic-outcome-neither">
+                                                Neither
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <hr>
+                        <div>
+                            <a id="back-btn" class="btn btn-outline-secondary d-none"><i
+                                    class="fa-solid fa-chevron-left"></i> Back</a>
+                            <a id="proceed-btn" class="btn btn-primary">Proceed to Refine by Clinical Parameters <i
+                                    class="fas fa-angle-double-right"></i></a>
+                            <a id="next-btn" class="btn btn-primary float-end d-none">Next <i
+                                    class="fa-solid fa-chevron-right"></i></a>
+                            <button type="submit" id="submit-btn" class="btn btn-primary d-none float-end">View Results
+                                and Make
+                                Application <i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="col-lg-4 mb-3">
+                <div class="border rounded bg-light p-4">
+                    <div id="clinic-sidebar" class="d-none">
+                        <h6>
+                            <strong>Search Progress</strong>
+                        </h6>
+                        <hr>
+                        <div id="clinical-step-0" class="clinical-step step-active step-done">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">General Information</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-1" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">Operation Type</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-2" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">TNM Status (8th Edition)</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-3" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">AJCC Clinical Stage</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-4" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">Treatment & Outcome</div>
+                            </div>
+                        </div>
+                        <div id="clinical-step-5" class="clinical-step">
+                            <div>
+                                <div class="circle"></div>
+                            </div>
+                            <div>
+                                <div class="title">Results</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="clinic-sidebar-buttons">
+                        <div class="d-grid gap-2 col mx-auto">
+                            <a class="btn btn-outline-secondary" href="{% url 'search_tissue_samples' %}"><i
+                                    class="fas fa-angle-double-left"></i> Back to Biosample Search Facility</a>
+                            <a id="driver-search-btn" class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
+                                    class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
+                            <a class="btn btn-secondary" href="{% url 'make_application' %}">
+                                <i class="fas fa-edit"></i> Make Application
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js_file %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/clinical_search_facility.js' %}?v={{ APP_VERSION }}"></script>
+{% endblock %}

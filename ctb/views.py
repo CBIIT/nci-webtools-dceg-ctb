@@ -1,5 +1,5 @@
 ###
-# Copyright 2015-2021, Institute for Systems Biology
+# Copyright 2015-2022, Institute for Systems Biology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,14 +14,18 @@
 # limitations under the License.
 ###
 
-from builtins import str
-import time
-import json
+# from builtins import str
+# import time
+# import json
 import logging
 import sys
 import datetime
-import re
-import copy
+import donors
+from donors import models, metadata_count
+
+# from donors.metadata_count import get_case_counts
+# import re
+# import copy
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -29,7 +33,7 @@ from django.views.decorators.cache import never_cache
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.contrib import messages
+# from django.contrib import messages
 
 from google_helpers.stackdriver import StackDriverLogger
 #from cohorts.models import Cohort, Cohort_Perms
@@ -236,86 +240,44 @@ def news(request, news_id=1):
 def contact(request):
     return render(request, 'ctb/contact.html', {'request': request})
 
-# Dashboard
-def dashboard(request):
-    saved_search_list = [
-        {'name': 'Follicular Female',
-         'type': 'Biosample',
-         'results': 29,
-         'proceed': 'driver'},
-        {'name': 'Example 2',
-         'type': 'Biosample',
-         'results': 42,
-         'proceed': 'driver'},
-    ]
-    return render(request, 'ctb/dashboard.html', {'request': request, 'saved_search_list': saved_search_list})
+# # Dashboard
+# def dashboard(request):
+#     saved_search_list = [
+#         {'name': 'Follicular Female',
+#          'type': 'Biosample',
+#          'results': 29,
+#          'proceed': 'driver'},
+#         {'name': 'Example 2',
+#          'type': 'Biosample',
+#          'results': 42,
+#          'proceed': 'driver'},
+#     ]
+#     return render(request, 'ctb/dashboard.html', {'request': request, 'saved_search_list': saved_search_list})
 
 #temporary data
 
     return render(request, 'ctb/saved_searches.html', {'request': request, 'saved_search_list': saved_search_list})
 
-# Search Tissue Samples
-def search_tissue_samples(request):
-    # hard coded data
-    tissue = {
-        'rna': {
-            'normal': 323,
-            'tumor': 534,
-            'metastatic': 115
-        },
-        'dna': {
-            'normal': 634,
-            'tumor': 274,
-            'metastatic': 284
-        },
-        'ffpe': {
-            'normal': 26,
-            'tumor': 734,
-            'metastatic': 623
-        }
-    }
-    blood ={
-        'dna': 23,
-        'serum':32
-    }
-    total = 735
-    return render(request, 'ctb/search_tissue_samples.html', {'request': request, 'tissue': tissue, 'blood': blood, 'total': total})
 
-# My Saved Searches
-def saved_searches(request):
-    #temporary data
-    saved_search_list = [
-        {'name': 'Follicular Female',
-         'type': 'Biosample',
-         'results': 29,
-         'proceed': 'driver'},
-        {'name': 'Example 2',
-         'type': 'Biosample',
-         'results': 42,
-         'proceed': 'driver'},
-    ]
-    return render(request, 'ctb/saved_searches.html', {'request': request, 'saved_search_list': saved_search_list})
-
-
-# # Clinical Search Intro
-def search_clinical(request):
-    clinic_search_result = {
-        'total': 5516,
-        'avail': 3167
-    }
-    return render(request, 'ctb/clinical_search_facility_result.html', {'request': request, 'clinic_search_result': clinic_search_result})
-
-# Clinical Search Facility
-def clinical_search_facility(request):
-    return render(request, 'ctb/clinical_search_facility.html', {'request': request})
-
-# Driver Search Facility
-def driver_search_facility(request):
-    return render(request, 'ctb/driver_search_facility.html', {'request': request})
-
-# Driver Search Facility
-def clinical_search_facility_results(request):
-    return render(request, 'ctb/clinical_search_facility_results.html', {'request': request})
+# def search_tissue_samples(request):
+#     # Search Tissue Samples
+#     # request.get
+#     # filters = {
+#     #     'diagnosis': ['PTC', 'MTC']
+#     # }
+#     case_counts = get_case_counts()
+#     return render(request, 'ctb/search_tissue_samples.html',
+#                   {'request': request, 'tissue': case_counts.get('tissue'), 'blood': case_counts.get('blood'),
+#                    'total': case_counts.get('total')})
+#
+#
+# def filter_tissue_samples(request):
+#     diagnosis = request.POST.getlist('diagnosis[]')
+#     if diagnosis:
+#         Donor.objects.filter()
+#     print(diagnosis)
+#     result = {}
+#     return JsonResponse(result)
 
 
 whatsup = {

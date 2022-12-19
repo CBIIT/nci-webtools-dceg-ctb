@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('donor_id', models.CharField(max_length=100, unique=True)),
-                ('diagnosis', models.CharField(max_length=256, null=True)),
+                ('diagnosis', models.CharField(max_length=256, null=True, default=None)),
                 ('gender', models.CharField(max_length=32, null=True)),
                 ('age_category', models.IntegerField(null=True)),
                 ('dosimetry', models.CharField(max_length=100, null=True)),

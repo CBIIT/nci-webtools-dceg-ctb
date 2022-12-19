@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Application Form
+{% endblock %}
+
+{% block description %}
+    Application for Access to Materials and/or Information from CTB
+{% endblock %}
+
+{% block page_name %}application_post_submit{% endblock %}
+
+{% block content %}
+    <div class="container py-3">
+        {% if main_message.success %}
+            <div class="p-3 mb-2 rounded border border-primary">
+                {{ main_message.success }}
+            </div>
+        {% endif %}
+        {% if main_message.error %}
+            <div class="p-3 mb-2 rounded border border-warning">
+                {{ main_message.error }}
+            </div>
+        {% endif %}
+    <div>
+        <a class="btn btn-primary" role="button" href="{% url 'dashboard' %}">Back to Dashboard</a>
+    </div>
+    </div>
+{% endblock %}
+
+{#{% block js_file %}#}
+{#    {{ block.super }}#}
+{#    <script src="{% static 'js/application_form.js' %}"></script>#}
+{#{% endblock %}#}
