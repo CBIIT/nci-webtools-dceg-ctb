@@ -4,7 +4,7 @@ fi
 
 gcloud auth activate-service-account --key-file deployment.key.json
 gcloud config set account ${DEPLOYMENT_CLIENT_EMAIL}
-gcloud config set project ${DEPLOYMENT_PROJECT_ID}
+gcloud config set project ${DEPLOYMENT_PROJECT_ID} --quiet
 
 echo "GCloud Config for Deployment:"
 gcloud config list
