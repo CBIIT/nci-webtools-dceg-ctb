@@ -142,7 +142,7 @@
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" id="country-both"
-                                                   name="country" value="both">
+                                                   name="country" value="both" checked>
                                             <label class="form-check-label" for="country-both">Both</label>
                                         </div>
                                     </div>
@@ -273,23 +273,27 @@
                                     </div>
                                     <div class="card-body">
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dob-before-26041986"
-                                                   name="dob[]" value="1">
-                                            <label class="form-check-label" for="dob-before-26041986">Before
-                                                4/26/1986</label>
+                                            <input class="form-check-input" type="radio" id="dob-before-1987"
+                                                   name="dob" value="1">
+                                            <label class="form-check-label" for="dob-before-1987">Before
+                                                1987</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dob-26041986-01011987"
-                                                   name="dob[]" value="2">
-                                            <label class="form-check-label" for="dob-26041986-01011987">4/26/1986 to
-                                                4/26/1987</label>
+                                            <input class="form-check-input" type="radio" id="dob-1987-plus"
+                                                   name="dob" value="2">
+                                            <label class="form-check-label" for="dob-1987-plus">1987 or After</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dob-after-01011987"
-                                                   name="dob[]" value="3">
-                                            <label class="form-check-label" for="dob-after-01011987">After
-                                                4/26/1987</label>
+                                            <input class="form-check-input" type="radio" id="dob-both"
+                                                   name="dob" value="both" checked>
+                                            <label class="form-check-label" for="dob-both">Any</label>
                                         </div>
+{#                                        <div class="form-check">#}
+{#                                            <input class="form-check-input" type="checkbox" id="dob-after-01011987"#}
+{#                                                   name="dob[]" value="3">#}
+{#                                            <label class="form-check-label" for="dob-after-01011987">After#}
+{#                                                4/26/1987</label>#}
+{#                                        </div>#}
                                     </div>
                                 </div>
                                 <div id="gender-card" class="card my-2">
@@ -338,7 +342,7 @@
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
                                                     <input id="min-age-first-operation" type="number"
                                                            class="form-control" name="age_at_operation_min"
-                                                           min="0" max="49" value="0">
+                                                           min="0" max="100">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -346,7 +350,7 @@
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
                                                     <input id="max-age-first-operation" type="number"
                                                            class="form-control" name="age_at_operation_max"
-                                                           min="0" max="49" value="49">
+                                                           min="0" max="100">
                                                 </div>
                                             </div>
                                         </div>
@@ -354,7 +358,7 @@
                                             Years) <i class="fa-solid fa-circle-question info-color" data-bs-toggle="tooltip"
                                                data-bs-html="true"
                                                data-bs-placement="right"
-                                               title="<div class='text-start'>Age at exposure for cases in Group (i) may be selected using the slide selector. Researchers wishing to study the cohort that were in utero at the time of the accident should contact the secretariat for more information about the gestational age of the cases in the CTB.</div>">
+                                               title="<div class='text-start'>Age at exposure for cases in Group: Researchers wishing to study the cohort that were in utero at the time of the accident should contact the secretariat for more information about the gestational age of the cases in the CTB.</div>">
                                             </i>:</label></div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -362,7 +366,7 @@
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
                                                     <input id="min-age-first-exposure" type="number"
                                                            class="form-control" name="age_at_exposure_min"
-                                                           min="-40" max="19" value="-40">
+                                                           min="-40" max="40">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
@@ -370,7 +374,7 @@
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
                                                     <input id="max-age-first-exposure" type="number"
                                                            class="form-control"  name="age_at_exposure_max"
-                                                           min="-40" max="19" value="19">
+                                                           min="-40" max="40">
                                                 </div>
                                             </div>
                                         </div>
@@ -392,8 +396,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="input-group mb-3">
-                                <div id="save_message"></div>
+                            <div class="text-end mb-3">
+                                <div id="save_message" class="text-primary fw-bold ms-2"></div>
                             </div>
                         </div>
                     </div>
@@ -402,7 +406,8 @@
             <div class="col-lg-4">
                 <div class="border rounded bg-light p-4 mb-3">
 
-                    <h5>Search Results <span class="fw-normal fs-5 float-end"><span id="total-case-count">{{ total }}</span> Cases</span></h5>
+                    <h5>Search Results <span class="fw-normal fs-5 float-end"><span
+                            id="total-case-count">{{ total }}</span> Cases</span></h5>
                     <table id="tissue-table" class="table table-striped tissue-samples-table">
                         <thead>
                         <tr>
@@ -459,12 +464,12 @@
                     </table>
 
                     <div class="d-grid gap-2 col mx-auto">
-                        <a id="make-app-btn" class="btn btn-primary me-md-2" href="{% url 'make_application' %}">
-                            <i class="fas fa-edit"></i> Make Application
-                        </a>
                         <a id="clinical-search-facility-btn" class="btn btn-primary" target="_blank"
                            rel="noreferrer noopener" href="{% url 'clinical_search_facility' %}">
                             Proceed to Clinical Search <i class="fas fa-angle-double-right"></i>
+                        </a>
+                        <a id="make-app-btn" class="btn btn-secondary" href="{% url 'make_application' %}">
+                            <i class="fas fa-edit"></i> Make Application
                         </a>
                     </div>
                 </div>

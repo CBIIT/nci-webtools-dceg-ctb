@@ -17,21 +17,15 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-# from datetime import datetime, timezone
-
-
-# from django.db.models import Q
 
 
 class Donor(models.Model):
+    # patient_id: eg. UA####, RF####, BY####
     patient_id = models.IntegerField(default=None, null=True, blank=False)
+    # patient_uid: CBT uid
     patient_uid = models.CharField(max_length=20, default=None, null=True, blank=False)
-    country_current = models.CharField(max_length=45, default=None, null=True, blank=False)
-    oblast_current = models.CharField(max_length=45, default=None, null=True, blank=False)
-
-    # country_at_accident: Patient country
-    country_at_accident = models.CharField(max_length=45, default=None, null=True, blank=False)
-
+    # gender: female, male
+    gender = models.CharField(max_length=10, default=None, null=True, blank=False)
     # oblast_at_accident: Patient residency
     # Exposed region -
     #   In Russia, Kaluga, Tula, Oryol (Orel) and Bryansk
@@ -40,46 +34,44 @@ class Donor(models.Model):
     # location that is classified as exposed. Oblasts outside of those listed above are all classified as being
     # unexposed regions.
     oblast_at_accident = models.CharField(max_length=45, default=None, null=True, blank=False)
-
-    gender = models.CharField(max_length=10, default=None, null=True, blank=False)
-
-    # age: 01/01/87 should be used as the cut-off date for exposure to radioiodine either in utero or as a living
-    #   individual should be used as the definition of a person who was unexposed to radioiodine from the accident.
-    age = models.DecimalField(max_digits=10, decimal_places=2, default=None, null=True, blank=False)
-
-    # age_at_first_operation: age at operation
-    age_at_first_operation = models.DecimalField(max_digits=10, decimal_places=2, default=None, null=True, blank=False)
-
-    # age_at_exposure: Age at accident
-    age_at_exposure = models.DecimalField(max_digits=10, decimal_places=2, default=None, null=True, blank=False)
-
-    # The date of birth search field is therefore fed from the age_category field
-    #   1: exposed by virtue of both date of birth (born on or before 4/26/86) and residency  in one of the contaminated
-    #       oblasts at the time of the accident
-    #   2: unexposed by virtue of date of birth (after 01/1/87) if resident in one of the contaminated oblasts,
-    #       or any date of birth and resident outside the exposed oblasts
-    #   3: in utero and exposed if born between 26/4/86 and 1/1/87 and resident in one of the contaminated oblasts.
-    #   Date of birth is determined from the data field age_category in the attached CTB donors excel spreadsheet.
-    age_category = models.CharField(max_length=2, default=None, null=True, blank=False)
-
-    # dosimetry: Radiation doses have been calculated for all Russian cases and the majority of Ukrainian cases (some
-    #   doses still remain to be calculated). Patients who are unexposed by date of birth or residency will be
-    #   classified as unknown, in addition to those for which we have no dosimetry calculation.
-    dosimetry = models.DecimalField(max_digits=15, decimal_places=10, default=None, null=True, blank=False)
-
+    # country_at_accident: Patient country - Belarus, Ukraine, Russia
+    country_at_accident = models.CharField(max_length=45, default=None, null=True, blank=False)
+    # diagnosis: deferred = Deferred
+    # FA = Follicular adenoma
+    # FC = Follicular carcinoma
+    # FT = Follicular tumour
+    # FT UMP = follicular tumour of uncertain malignant potential
+    # metastatic = Metastatic
+    # MTC = Medullary carcinoma
+    # NIFTP = Noninvasive follicular thyroid neoplasm with papillary-like nuclear features
+    # nodule = Benign nodule
+    # none = No diagnosis
+    # normal = Normal
+    # other = Other
+    # PDC = Poorly differentiated carcinoma
+    # PTC = Papillary carcinoma
+    # TTT = Two tumour types
+    # u PTC = Micro papillary carcinoma
+    # WDCA NOS = Well differentiated carcinoma not otherwise specified
+    # WDT UMP = Well differentiated tumour of uncertain malignant potential
     diagnosis = models.CharField(max_length=15, default=None, null=True, blank=False)
-
-    # latency = (age_at_first_operation - age_at_exposure)
+    # age_at_first_operation: age at operation
+    age_at_first_operation = models.IntegerField(default=None, null=True, blank=False)
+    # age_at_exposure: Age at accident
+    age_at_exposure = models.IntegerField(default=None, null=True, blank=False)
+    # age_category: 1 = <1987,  2 = 1987+
+    age_category = models.IntegerField(default=None, null=True, blank=False)
+    # dosimetry: Valid dose value, -9999 = Missing value
+    dosimetry = models.DecimalField(max_digits=15, decimal_places=10, default=None, null=True, blank=False)
+    # country_current = models.CharField(max_length=45, default=None, null=True, blank=False)
+    # oblast_current = models.CharField(max_length=45, default=None, null=True, blank=False)
 
 
 class Sample(models.Model):
     donor_id = models.IntegerField(null=False, blank=False)
     patient_uid = models.CharField(max_length=20, null=False, blank=False)
     item_uid = models.CharField(max_length=45, null=True, default=None)
-    # 'type': Sample Origin
     type = models.CharField(max_length=20, null=False, blank=False)
-
-    # subtype: Sample Type
     subtype = models.CharField(max_length=20, null=True, default=None)
     origin = models.CharField(max_length=20, null=True, default=None)
     tnm_type = models.CharField(max_length=15, null=True, default=None)
@@ -118,18 +110,18 @@ class Driver(models.Model):
     gene = models.CharField(max_length=50, null=True, blank=False)
 
 
-class Mdta(models.Model):
-    ctb_uid = models.CharField(max_length=45, null=True, blank=False)
-    date = models.DateTimeField(null=False, blank=False, default=timezone.now)
-    project_uid = models.CharField(max_length=45, null=True, blank=False)
-    project_label = models.CharField(max_length=45, null=True, blank=False)
-
-
-class Mdta_Item(models.Model):
-    mdta_id = models.IntegerField(default=None, null=True)
-    item_uid = models.CharField(max_length=45, null=True, blank=False)
-    item_label = models.CharField(max_length=45, null=True, blank=False)
-    quantity = models.IntegerField(default=0, null=False)
+# class Mdta(models.Model):
+#     ctb_uid = models.CharField(max_length=45, null=True, blank=False)
+#     date = models.DateTimeField(null=False, blank=False, default=timezone.now)
+#     project_uid = models.CharField(max_length=45, null=True, blank=False)
+#     project_label = models.CharField(max_length=45, null=True, blank=False)
+#
+#
+# class Mdta_Item(models.Model):
+#     mdta_id = models.IntegerField(default=None, null=True)
+#     item_uid = models.CharField(max_length=45, null=True, blank=False)
+#     item_label = models.CharField(max_length=45, null=True, blank=False)
+#     quantity = models.IntegerField(default=0, null=False)
 
 
 class Filter(models.Model):

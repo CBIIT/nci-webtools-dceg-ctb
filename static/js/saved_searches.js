@@ -36,6 +36,7 @@ require([
 ], function(base) {
     $(document).ready(function () {
         let my_search_tbl = $('#saved_searches_tbl').DataTable({
+            scrollX: true,
             ajax: {
                 url: BASE_URL + "/search_facility/get_search_list/",
                 dataSrc: ''

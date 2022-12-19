@@ -39,45 +39,41 @@
                         <strong>{{ clinic_search_result.total }}</strong> cases that met your biosample search criteria.
                     </div>
                     <hr>
-                    <form id="save-form">
-                        <div class="btn-toolbar justify-content-between" role="toolbar">
-                            <a class="btn btn-primary me-md-2" href="{% url 'make_application' %}">
-                                <i class="fas fa-edit"></i> Make Application
-                            </a>
-                            <div class="input-group">
+                    <form id="save-form" class="d-grid gap-2">
 
-                                <input type="text" name="title" id="search-save-title"
-                                       class="form-control" value="" placeholder="Search Name"
-                                       aria-label="Search Save" aria-describedby="search-save">
-                                <input type="hidden" name="filter_encoded_url" value="{{ filter_encoded_url }}"/>
-                                <input type="hidden" name="total" value="{{ clinic_search_result.avail }}"/>
-                                <input type="hidden" name="search_type" value="Clinic"/>
-                                                            <button class="btn btn-primary" type="button" id="search-save"><i
-                                                                    class="fa-solid fa-floppy-disk"></i> Save Search
-                                </button>
-                            </div>
+                        <div class="input-group">
+                            <input type="text" name="title" id="search-save-title"
+                                   class="form-control" value="" placeholder="Search Name"
+                                   aria-label="Search Save" aria-describedby="search-save">
+                            <input type="hidden" name="filter_encoded_url" value="{{ filter_encoded_url }}"/>
+                            <input type="hidden" name="total" value="{{ clinic_search_result.avail }}"/>
+                            <input type="hidden" name="search_type" value="Clinic"/>
+                            <button class="btn btn-primary" type="button" id="search-save"><i
+                                    class="fa-solid fa-floppy-disk"></i> Save Search
+                            </button>
                         </div>
-                        <div class="float-end">
-                            <div id="save_message"></div>
+                        <div class="text-end">
+                            <div id="save_message" class="text-primary fw-bold mt-1"></div>
                         </div>
                     </form>
                 </div>
 
             </div>
-
             <div class="col-lg-4">
                 <div class="border rounded bg-light p-3 mb-4">
                     <div class="d-grid gap-2 col mx-auto">
-                        <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i
-                                class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
-                        <a class="btn btn-secondary" href="{% url 'clinical_search_facility' %}"><i
-                                class="fa-solid fa-left-long"></i> Perform Another Clinical Search</a>
+                        <a class="btn btn-outline-secondary" href="{% url 'search_tissue_samples' %}"><i
+                                    class="fas fa-angle-double-left"></i> Back to Biosample Search Facility</a>
+                        <a class="btn btn-outline-secondary" href="{% url 'clinical_search_facility' %}"><i
+                                    class="fas fa-angle-double-left"></i></i> Perform Another Clinical Search</a>
                         <a id="driver-search-btn" class="btn btn-primary" href="{% url 'driver_search_facility' %}{{ filter_encoded_url }}"><i
                                 class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
+                        <a class="btn btn-secondary" role="button" href="{% url 'make_application' %}">
+                            <i class="fas fa-edit"></i> Make Application
+                        </a>
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 {% endblock %}

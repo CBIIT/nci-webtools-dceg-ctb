@@ -131,7 +131,7 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
         dosemetry = sample_filters.get('dosemetry[]')
         sample_origin = sample_filters.get('sample_origin[]')
         patient_residency = sample_filters.get('patient_residency')
-        dob = sample_filters.get('dob[]')
+        dob = sample_filters.get('dob')
         patient_gender = sample_filters.get('patient_gender')
         age_at_operation_min = sample_filters.get('age_at_operation_min')
         age_at_operation_max = sample_filters.get('age_at_operation_max')
@@ -165,7 +165,7 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
             dosimetry_items = []
             for item in dosemetry:
                 if item == '100mGy':
-                    dosimetry_items.append('{donor_alias}.dosimetry < 100'.format(donor_alias=donor_alias))
+                    dosimetry_items.append('{donor_alias}.dosimetry < 100 AND {donor_alias}.dosimetry >= 0'.format(donor_alias=donor_alias))
                 elif item == '100mGy500mGy':
                     dosimetry_items.append(
                         '( {donor_alias}.dosimetry >= 100 AND {donor_alias}.dosimetry <= 500 )'.format(
@@ -174,7 +174,7 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
                     dosimetry_items.append('{donor_alias}.dosimetry > 500'.format(donor_alias=donor_alias))
                 else:
                     # Unknown
-                    dosimetry_items.append('{donor_alias}.dosimetry is null'.format(donor_alias=donor_alias))
+                    dosimetry_items.append('{donor_alias}.dosimetry = -9999'.format(donor_alias=donor_alias))
             dosimetry_clause = '({})'.format('\nOR '.join(dosimetry_items))
             where_clause_items.append(dosimetry_clause)
         if sample_origin:
@@ -194,32 +194,36 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
                     sample_alias=sample_alias))
             where_clause_items.append(sample_origin_clause)
         if patient_residency and patient_residency != 'both':
-            patient_residency_clause = "LOWER({donor_alias}.oblast_current) {patient_res_bool} IN ({patient_res_list})".format(
+            patient_residency_clause = "LOWER({donor_alias}.oblast_at_accident) {patient_res_bool} IN ({patient_res_list})".format(
                 donor_alias=donor_alias,
                 patient_res_bool=('' if patient_residency == 'exposed' else 'NOT'),
                 patient_res_list="'kaluga','tula','orel','bryansk','kiev','rovno','chercassy','zhytomyr','chernigov','sumy','pripyat'"
             )
             where_clause_items.append(patient_residency_clause)
-        if dob:
-            where_clause_items.append('age_category IN ({})'.format(', '.join(dob)))
+        if dob and dob != 'both':
+            where_clause_items.append('age_category = {}'.format(', '.join(dob)))
         if patient_gender and patient_gender != 'both':
             where_clause_items.append("gender = '{}'".format(patient_gender))
-        if age_at_operation_max < age_at_operation_min:
-            temp = age_at_operation_min
-            age_at_operation_min = age_at_operation_max
-            age_at_operation_max = temp
-        if age_at_exposure_max < age_at_exposure_min:
-            temp = age_at_exposure_min
-            age_at_exposure_min = age_at_exposure_max
-            age_at_exposure_max = temp
-        where_clause_items.append(
-            'age_at_first_operation >= {age_at_operation_min} AND age_at_first_operation <= {age_at_operation_max}'.format(
-                age_at_operation_min=age_at_operation_min, age_at_operation_max=age_at_operation_max))
-        where_clause_items.append(
-            'age_at_exposure >= {age_at_exposure_min} AND age_at_exposure <= {age_at_exposure_max}'.format(
-                age_at_exposure_min=age_at_exposure_min, age_at_exposure_max=age_at_exposure_max))
+        age_at_operation_items = []
+        if age_at_operation_min:
+            age_at_operation_items.append(
+                'age_at_first_operation >= {age_at_operation_min}'.format(age_at_operation_min=age_at_operation_min))
+        if age_at_operation_max:
+            age_at_operation_items.append(
+                'age_at_first_operation <= {age_at_operation_max}'.format(age_at_operation_max=age_at_operation_max))
+        if len(age_at_operation_items):
+            where_clause_items.append(' AND '.join(age_at_operation_items))
+        age_at_exposure_items = []
+        if age_at_exposure_min:
+            age_at_exposure_items.append(
+                'age_at_exposure >= {age_at_exposure_min}'.format(age_at_exposure_min=age_at_exposure_min))
+        if age_at_exposure_max:
+            age_at_exposure_items.append(
+                'age_at_exposure <= {age_at_exposure_max}'.format(age_at_exposure_max=age_at_exposure_max))
+        if len(age_at_exposure_items):
+            where_clause_items.append(' AND '.join(age_at_exposure_items))
     if len(where_clause_items):
-        where_clause = '({})'.format(')\n\t\tAND ('.join(where_clause_items))
+        where_clause = '({})'.format(')\n\t\t\tAND ('.join(where_clause_items))
     else:
         where_clause = 'TRUE'
     return where_clause
@@ -231,9 +235,9 @@ def get_driver_case_counts(filters=None):
     where_clause = build_clinical_where_clause(filters, 'cl', 's') if filters else 'TRUE'
     query_template = '''
         SELECT dr.gene, COUNT(DISTINCT(d.id))
-        FROM `dev`.`donors_donor` as d
+        FROM `donors_donor` as d
         {sample_clin_join}
-        JOIN `dev`.`donors_driver` as dr
+        JOIN `donors_driver` as dr
         ON dr.patient_uid = d.patient_uid
         WHERE {sample_clause}
         AND {where_clause} 
@@ -241,9 +245,9 @@ def get_driver_case_counts(filters=None):
         ;
     '''
     sample_clin_join = '''
-        JOIN `dev`.`donors_sample` as s
+        JOIN `donors_sample` as s
         ON d.patient_id = s.donor_id
-        JOIN `dev`.`donors_clinical_treatment` as cl
+        JOIN `donors_clinical_treatment` as cl
         ON cl.patient_id = d.patient_id
     '''
 
@@ -324,8 +328,8 @@ def get_sample_case_counts(filters=None):
 
         query_template = '''
             SELECT {group_select_clause}COUNT(DISTINCT(d.patient_id))
-            FROM `dev`.`donors_donor` AS d 
-            JOIN `dev`.`donors_sample` AS s
+            FROM `donors_donor` AS d 
+            JOIN `donors_sample` AS s
             ON d.patient_id = s.donor_id
             WHERE {where_clause}
             {group_clause};
@@ -336,6 +340,7 @@ def get_sample_case_counts(filters=None):
         total_count_query = query_template.format(group_select_clause='', where_clause=where_clause, group_clause='')
         grouped_count_query = query_template.format(group_select_clause=group_select_clause, where_clause=where_clause,
                                                     group_clause=group_clause)
+        print(total_count_query)
         print(grouped_count_query)
         with connection.cursor() as cursor:
             cursor.execute(total_count_query)
@@ -359,16 +364,17 @@ def get_sample_case_counts(filters=None):
 def get_clinical_case_counts(filters):
     where_clause = build_clinical_where_clause(filters, 'cl', 'samp')
     sample_clause = build_sample_where_clause(filters, 'd', 's')
+
     query_template = '''
         SELECT COUNT(DISTINCT(samp.id))
         FROM (
             SELECT d.id, d.patient_id, d.diagnosis
-            FROM `dev`.`donors_donor` as d
-            JOIN `dev`.`donors_sample` as s
+            FROM `donors_donor` as d
+            JOIN `donors_sample` as s
             ON d.patient_id = s.donor_id
             WHERE {sample_clause}
         ) AS samp
-        JOIN `dev`.`donors_clinical_treatment` as cl
+        JOIN `donors_clinical_treatment` as cl
         ON cl.patient_id = samp.patient_id
         WHERE {where_clause}
         ;

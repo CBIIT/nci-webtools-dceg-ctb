@@ -41,7 +41,7 @@
                           autofill="off">
                         {% csrf_token %}
                         {% for key, value in sample_filters.items %}
-                            {% if key in 'diagnosis[], sample_type[], dosemetry[],sample_origin[], dob[]' %}
+                            {% if key in 'diagnosis[], sample_type[], dosemetry[], sample_origin[]' %}
                                 {% for item in value %}
                                 <input type="hidden" name="{{ key }}" value="{{ item }}">
                                 {% endfor %}
@@ -758,7 +758,7 @@
                             <a id="back-btn" class="btn btn-outline-secondary d-none"><i
                                     class="fa-solid fa-chevron-left"></i> Back</a>
                             <a id="proceed-btn" class="btn btn-primary">Proceed to Refine by Clinical Parameters <i
-                                    class="fa-solid fa-chevron-right"></i></a>
+                                    class="fas fa-angle-double-right"></i></a>
                             <a id="next-btn" class="btn btn-primary float-end d-none">Next <i
                                     class="fa-solid fa-chevron-right"></i></a>
                             <button type="submit" id="submit-btn" class="btn btn-primary d-none float-end">View Results
@@ -827,12 +827,13 @@
                     </div>
                     <div id="clinic-sidebar-buttons">
                         <div class="d-grid gap-2 col mx-auto">
-                            <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i
-                                    class="fa-solid fa-left-long"></i> Back to Biosample Search Facility</a>
+                            <a class="btn btn-outline-secondary" href="{% url 'search_tissue_samples' %}"><i
+                                    class="fas fa-angle-double-left"></i> Back to Biosample Search Facility</a>
                             <a id="driver-search-btn" class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
                                     class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
-                            <a class="btn btn-outline-secondary" href="{% static 'files/application-form.doc' %}"><i
-                                    class="fa-solid fa-download"></i> Download Application Form</a>
+                            <a class="btn btn-secondary" href="{% url 'make_application' %}">
+                                <i class="fas fa-edit"></i> Make Application
+                            </a>
                         </div>
                     </div>
                 </div>
