@@ -127,7 +127,7 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
     if sample_filters:
         diagnosis = sample_filters.get('diagnosis[]')
         sample_type = sample_filters.get('sample_type[]')
-        country = sample_filters.get('country[]')
+        country = sample_filters.get('country')
         dosemetry = sample_filters.get('dosemetry[]')
         sample_origin = sample_filters.get('sample_origin[]')
         patient_residency = sample_filters.get('patient_residency')
@@ -157,11 +157,10 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
                 sample_type_clause += (('OR ' if sample_type_clause else '') + '{sample_alias}.subtype is null'.format(
                     sample_alias=sample_alias))
             where_clause_items.append(sample_type_clause)
-        if country:
+        if country and country != 'both':
             where_clause_items.append(
-                "LOWER({donor_alias}.country_at_accident) IN ('{country_list}')".format(donor_alias=donor_alias,
-                                                                                       country_list=(
-                                                                                           "','".join(country))))
+                "LOWER({donor_alias}.country_at_accident) = '{country_list}'".format(donor_alias=donor_alias,
+                                                                                     country_list=country.lower()))
         if dosemetry:
             dosimetry_items = []
             for item in dosemetry:

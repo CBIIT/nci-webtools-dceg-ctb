@@ -41,7 +41,7 @@
                           autofill="off">
                         {% csrf_token %}
                         {% for key, value in sample_filters.items %}
-                            {% if key in 'diagnosis[], sample_type[], dosemetry[],sample_origin[], country[]' %}
+                            {% if key in 'diagnosis[], sample_type[], dosemetry[], sample_origin[]' %}
                                 {% for item in value %}
                                 <input type="hidden" name="{{ key }}" value="{{ item }}">
                                 {% endfor %}

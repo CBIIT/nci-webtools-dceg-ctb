@@ -587,7 +587,7 @@ FILE_SIZE_UPLOAD_MAX = 1950000
 
 # Explicitly check for known problems in descrpitions and names provided by users
 BLACKLIST_RE = r'((?i)<script>|(?i)</script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|(?i)<iframe>|(?i)</iframe>)'
-BLANK_TISSUE_FILTERS = {'patient_residency': 'both', 'patient_gender': 'both', 'dob': 'both'}
+BLANK_TISSUE_FILTERS = {'country': 'both', 'patient_residency': 'both', 'patient_gender': 'both', 'dob': 'both'}
     # ,
     #                     'age_at_operation_min': '',
     #                     'age_at_operation_max': '', 'age_at_exposure_min': '', 'age_at_exposure_max': ''}
