@@ -174,7 +174,7 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
                     dosimetry_items.append('{donor_alias}.dosimetry > 500'.format(donor_alias=donor_alias))
                 else:
                     # Unknown
-                    dosimetry_items.append('{donor_alias}.dosimetry = -9999'.format(donor_alias=donor_alias))
+                    dosimetry_items.append('{donor_alias}.dosimetry IS NULL'.format(donor_alias=donor_alias))
             dosimetry_clause = '({})'.format('\nOR '.join(dosimetry_items))
             where_clause_items.append(dosimetry_clause)
         if sample_origin:
@@ -254,8 +254,8 @@ def get_driver_case_counts(filters=None):
     count_query = query_template.format(sample_clin_join=sample_clin_join, where_clause=where_clause,
                                         sample_clause=sample_clause)
     total_avail_count_query = query_template.format(sample_clin_join='', where_clause='TRUE', sample_clause='TRUE')
-    print(count_query)
-    print(total_avail_count_query)
+    # print(count_query)
+    # print(total_avail_count_query)
     counts = {
     }
     total_filtered_case_count = 0
@@ -283,7 +283,7 @@ def get_driver_case_counts(filters=None):
 
 
 def is_default_filter(filters=None):
-    print(filters)
+    # print(filters)
     # filters.pop('total', None)
     is_default = True
     for k, v in filters.items():
@@ -340,8 +340,8 @@ def get_sample_case_counts(filters=None):
         total_count_query = query_template.format(group_select_clause='', where_clause=where_clause, group_clause='')
         grouped_count_query = query_template.format(group_select_clause=group_select_clause, where_clause=where_clause,
                                                     group_clause=group_clause)
-        print(total_count_query)
-        print(grouped_count_query)
+        # print(total_count_query)
+        # print(grouped_count_query)
         with connection.cursor() as cursor:
             cursor.execute(total_count_query)
             case_counts['total'] = cursor.fetchone()[0]
@@ -380,7 +380,7 @@ def get_clinical_case_counts(filters):
         ;
     '''
     total_count_query = query_template.format(where_clause=where_clause, sample_clause=sample_clause)
-    print(total_count_query)
+    # print(total_count_query)
     with connection.cursor() as cursor:
         cursor.execute(total_count_query)
         total_case_count = cursor.fetchone()[0]
