@@ -61,7 +61,7 @@ class Donor(models.Model):
     age_at_exposure = models.IntegerField(default=None, null=True, blank=False)
     # age_category: 1 = <1987,  2 = 1987+
     age_category = models.IntegerField(default=None, null=True, blank=False)
-    # dosimetry: Valid dose value, -9999 = Missing value
+    # dosimetry: Valid dose value, NULL = Missing value
     dosimetry = models.DecimalField(max_digits=15, decimal_places=10, default=None, null=True, blank=False)
     # country_current = models.CharField(max_length=45, default=None, null=True, blank=False)
     # oblast_current = models.CharField(max_length=45, default=None, null=True, blank=False)
