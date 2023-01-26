@@ -45,60 +45,61 @@
                         </h4>
                     </div>
                     <div class="card-body px-5 py-3">
-                        <div class="text-end">
-                            <button class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen-to-square"></i>
-                                Edit Personal Details
-                            </button>
-                        </div>
-                        <table class="user-info" role="presentation">
-                            {% if not unconnected_local_account %}
+{#                        <div class="text-end">#}
+{#                            <button class="btn btn-sm btn-outline-secondary"><i class="fa-solid fa-pen-to-square"></i>#}
+{#                                Edit Personal Details#}
+{#                            </button>#}
+{#                        </div>#}
+                        <table class="table user-info" role="presentation">
+{#                            {% if not unconnected_local_account %}#}
+{#                                <tr>#}
+{#                                    <td>First Name</td>#}
+{#                                    <td>{{ user_details.first_name }}</td>#}
+{#                                </tr>#}
+{#                                <tr>#}
+{#                                    <td>Last Name</td>#}
+{#                                    <td>{{ user_details.last_name }}</td>#}
+{#                                </tr>#}
+{#                            {% else %}#}
                                 <tr>
-                                    <td>First Name</td>
-                                    <td>{{ user_details.first_name }}</td>
-                                </tr>
-                                <tr>
-                                    <td>Last Name</td>
-                                    <td>{{ user_details.last_name }}</td>
-                                </tr>
-                            {% else %}
-                                <tr>
-                                    <td>User Name</td>
+                                    <th scope="row">User Name</th>
                                     <td>{{ user_details.username }}</td>
                                 </tr>
-                            {% endif %}
+{#                            {% endif %}#}
                             <tr>
-                                <td>Email</td>
+                                <th scope="row">Email</th>
                                 <td>{{ user_details.email }}</td>
                             </tr>
-                            <tr>
-                                <td>Title</td>
-                                <td>{{ user_details.title }}</td>
-                            </tr>
-                            <tr>
-                                <td>Phone</td>
-                                <td>{{ user_details.phone }}</td>
-                            </tr>
-                            <tr>
-                                <td>Address</td>
-                                <td>{{ user_details.address }}</td>
-                            </tr>
-                            <tr>
-                                <td>Institution</td>
-                                <td>{{ user_details.institution }}</td>
-                            </tr>
-                            <tr>
-                                <td>Last Department</td>
-                                <td>{{ user_details.last_department }}</td>
-                            </tr>
+{#                            <tr>#}
+{#                                <td>Title</td>#}
+{#                                <td>{{ user_details.title }}</td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td>Phone</td>#}
+{#                                <td>{{ user_details.phone }}</td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td>Address</td>#}
+{#                                <td>{{ user_details.address }}</td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td>Institution</td>#}
+{#                                <td>{{ user_details.institution }}</td>#}
+{#                            </tr>#}
+{#                            <tr>#}
+{#                                <td>Last Department</td>#}
+{#                                <td>{{ user_details.last_department }}</td>#}
+{#                            </tr>#}
 
                             <tr>
-                                <td>Last Login</td>
+                                <th scope="row">Last Login</th>
                                 <td id="last_login">{{ user_details.last_login }}</td>
                             </tr>
                         </table>
 
-                        <hr>
-                        <div>Password Last Modified
+{#                        <hr>#}
+                        <div>
+{#                            Password Last Modified#}
                             <a href="{% url 'account_change_password' %}" class="btn btn-outline-secondary btn-sm ms-5 float-end"><i
                                     class="fa-solid fa-key"></i> Change
                                 Password

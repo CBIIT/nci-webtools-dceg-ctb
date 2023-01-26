@@ -170,7 +170,7 @@ define('base', ['jquery', 'utils'], function($, utils) {
     $.removeCookie = utils.removeCookie;
 
     return {
-        blacklist: /<script>|<\/script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|<iframe>|<\/iframe>/ig,
+        // blacklist: /[^\w]/g,
         // From http://www.regular-expressions.info/email.html
         email: /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
         showJsMessage: utils.showJsMessage,
@@ -193,4 +193,23 @@ define('base', ['jquery', 'utils'], function($, utils) {
 
 let numberWithCommas = function (num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
+};
+
+let is_input_valid = function (e) {
+    $('#alert_message').html('');
+    let search_title = $('#search-save-title').val();
+    if (search_title.match(/\s/)) {
+        $('#alert_message').html('<i class="fa-solid fa-circle-exclamation"></i> ' + 'No space character is allowed. Please revise the search title.');
+        e.preventDefault();
+        return false;
+    }
+
+    let invalid_chars = search_title.match(/[^\w]/g);
+    if (invalid_chars) {
+        let invalid_chars_list_str = Array.from(new Set(invalid_chars)).join(', ')
+        $('#alert_message').html('<i class="fa-solid fa-circle-exclamation"></i> ' + 'Your search title contains invalid characters (<span class="fw-bold">' + invalid_chars_list_str + '</span>). Please choose another search title.');
+        e.preventDefault();
+        return false;
+    }
+    return true;
+};
