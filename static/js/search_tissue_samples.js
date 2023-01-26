@@ -70,13 +70,34 @@ require([
 
         search_samples();
         $("#search-tissue-filters input").not("#search-save-title").on("change", function () {
-            console.log('update');
             search_samples();
         });
-        $("#search-save").on("click", function(){
-            save_filters();
+        $("#search-save").on("click", function(e){
+            $('#save_message').html('');
+            if (is_input_valid(e))
+                save_filters();
+
         });
     });
+    // let is_input_valid = function(e){
+    //     $('#alert_message').html('');
+    //     let search_title = $('#search-save-title').val();
+    //     if (search_title.match(/\s/)) {
+    //         $('#alert_message').html('<i class="fa-solid fa-circle-exclamation"></i> '+'No space character is allowed. Please revise the search title.');
+    //         e.preventDefault();
+    //         return false;
+    //     }
+    //
+    //     let unallowed = search_title.match(base.blacklist);
+    //     if (unallowed) {
+    //         let unallowed_chars_list_str = Array.from(new Set(unallowed)).join(', ')
+    //         $('#alert_message').html('<i class="fa-solid fa-circle-exclamation"></i> '+'Your search title contains invalid characters (<span class="fw-bold">'+unallowed_chars_list_str+'</span>). Please choose another search title.');
+    //         e.preventDefault();
+    //         return false;
+    //     }
+    //     return true;
+    // };
+
     let save_filters = function () {
         $.ajax({
             type: "post",

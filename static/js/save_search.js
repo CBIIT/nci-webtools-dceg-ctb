@@ -20,23 +20,22 @@ require.config({
     baseUrl: STATIC_FILES_URL+'js/',
     paths: {
         base: 'base',
-        // 'datatables.net': 'lib/datatables.min',
-        // 'datatables.bootstrap': 'lib/dataTables.bootstrap5.min',
     },
-    // shim: {
-    //     'datatables.net': ['base'],
-    //     'datatables.bootstrap': ['base']
-    // }
 });
 
 require([
     'base',
 ], function(base) {
     $(document).ready(function () {
-        $("#search-save").on("click", function(){
-            save_filters();
+        $("#search-save").on("click", function(e){
+            $('#save_message').html('');
+            if (is_input_valid(e))
+                save_filters();
         });
     });
+
+
+
     let save_filters = function () {
         $.ajax({
             type: "post",
