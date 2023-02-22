@@ -1,5 +1,5 @@
 # 
-# Copyright 2015-2019, Institute for Systems Biology
+# Copyright 2023, Institute for Systems Biology
 # 
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -16,14 +16,11 @@
 
 from django.conf.urls import url, include
 from allauth import urls as allauth_urls
-#from allauth.socialaccount.providers.google import urls as google_urls, views as google_views
-
 from . import views
 
 
 urlpatterns = [
-    # url(r'^$', views.landing_page, name='landing_page'),
-#    url(r'^', include(google_urls)),
     url(r'^', include(allauth_urls)),
     url(r'^logout', views.extended_logout_view, name='account_logout'),
+    url(r'^manage_inactive_accounts', views.manage_inactive_accounts, name='manage_inactive_accounts'),
 ]

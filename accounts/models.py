@@ -1,5 +1,5 @@
 #
-# Copyright 2015-2019, Institute for Systems Biology
+# Copyright 2015-2023, Institute for Systems Biology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,15 +14,13 @@
 # limitations under the License.
 #
 
-from builtins import str
-from builtins import object
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from allauth.account.signals import password_changed, password_set, user_signed_up
 import logging
 from datetime import datetime, timezone, timedelta
-import pytz
+
 
 logger = logging.getLogger('main_logger')
 
@@ -31,8 +29,29 @@ def utc_now_plus_expiry():
     return datetime.now(timezone.utc)+timedelta(days=settings.ACCOUNTS_PASSWORD_EXPIRATION)
 
 
+def warning_last_login_date_utc():
+    return (datetime.now(timezone.utc) - timedelta(
+        days=(settings.MAX_INACTIVE_PERIOD - settings.EXPIRATION_WARNING_DAYS))).date()
+
+
+def expiry_last_login_date_utc():
+    return (datetime.now(timezone.utc) - timedelta(days=settings.MAX_INACTIVE_PERIOD)).date()
+
+
+def warn_expiration_date_utc():
+    return (datetime.now(timezone.utc) + timedelta(days=settings.EXPIRATION_WARNING_DAYS)).date()
+
+
 def utc_now():
     return datetime.now(timezone.utc)
+
+
+def deactivate_account(user_id):
+    inactive_user = User.objects.get(id=user_id)
+    inactive_user.is_active = False
+    inactive_user.save()
+    logger.info(
+        "User account {} has been deactivated.".format(inactive_user.email))
 
 
 class PasswordExpiration(models.Model):
@@ -76,4 +95,3 @@ user_signed_up.connect(add_password_history)
 user_signed_up.connect(set_password_expiration)
 password_changed.connect(add_password_history)
 password_changed.connect(set_password_expiration)
-
