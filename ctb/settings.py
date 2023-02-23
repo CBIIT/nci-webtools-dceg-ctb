@@ -1,5 +1,5 @@
 ###
-# Copyright 2015-2022, Institute for Systems Biology
+# Copyright 2015-2023, Institute for Systems Biology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +39,6 @@ if not exists(join(dirname(__file__), '../{}.env'.format(SECURE_LOCAL_PATH))):
     exit(1)
 
 dotenv.read_dotenv(join(dirname(__file__), '../{}.env'.format(SECURE_LOCAL_PATH)))
-
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)) + os.sep
 
 SHARED_SOURCE_DIRECTORIES = []
@@ -126,12 +125,6 @@ VERSION = "{}.{}".format("local-dev", datetime.datetime.now().strftime('%Y%m%d%H
 
 if exists(join(dirname(__file__), '../version.env')):
     dotenv.read_dotenv(join(dirname(__file__), '../version.env'))
-# else:
-#     if IS_DEV:
-#         import git
-#         repo = git.Repo(path="/home/vagrant/www/",search_parent_directories=True)
-#         VERSION = "{}.{}.{}".format("local-dev", datetime.datetime.now().strftime('%Y%m%d%H%M'),
-#                                     str(repo.head.object.hexsha)[-6:])
 
 APP_VERSION = os.environ.get("APP_VERSION", VERSION)
 
@@ -322,11 +315,6 @@ TEMPLATES = [
                 'finalware.context_processors.contextify',
                 'ctb.context_processor.additional_context',
             ),
-            # add any loaders here; if using the defaults, we can comment it out
-            # 'loaders': (
-            #     'django.template.loaders.filesystem.Loader',
-            #     'django.template.loaders.app_directories.Loader'
-            # ),
             'debug': DEBUG,
         },
     },
@@ -350,10 +338,13 @@ ACCOUNT_EMAIL_REQUIRED        = True
 ACCOUNT_USERNAME_REQUIRED     = bool(os.environ.get('ACCOUNT_USERNAME_REQUIRED', 'False') == 'True')
 ACCOUNT_EMAIL_VERIFICATION    = os.environ.get('ACCOUNT_EMAIL_VERIFICATION', 'mandatory').lower()
 
-ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Chernobyl Tissue Biobank] "
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Chernobyl Tissue Bank]"
 ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION',120) # Max password age in days
 ACCOUNTS_PASSWORD_HISTORY    = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5) # Max password history kept
 ACCOUNTS_ALLOWANCES          = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
+
+MAX_INACTIVE_PERIOD = os.environ.get('MAX_INACTIVE_PERIOD', 61) # Warning period in days
+EXPIRATION_WARNING_DAYS = os.environ.get('EXPIRATION_WARNING_PERIOD', 4) # Warning period in days
 
 ##########################
 #   End django-allauth   #
@@ -531,7 +522,8 @@ REQUEST_LOGGING_ENABLE_COLORIZE = bool(os.environ.get('REQUEST_LOGGING_ENABLE_CO
 # These settings allow use of MailGun as a simple API call
 EMAIL_SERVICE_API_URL           = os.environ.get('EMAIL_SERVICE_API_URL', '')
 EMAIL_SERVICE_API_KEY           = os.environ.get('EMAIL_SERVICE_API_KEY', '')
-NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATOON_EMAIL_FROM_ADDRESS', 'info@isb-cgc.org')
+NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATOON_EMAIL_FROM_ADDRESS', 'feedback@isb-cgc.org')
+SUPPORT_EMAIL = os.environ.get('SUPPORT_EMAIL', 'feedback@isb-cgc.org')
 
 #########################
 # django-anymail        #
@@ -544,7 +536,7 @@ ANYMAIL = {
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = NOTIFICATION_EMAIL_FROM_ADDRESS
-SERVER_EMAIL = "info@canceridc.dev"
+SERVER_EMAIL = "feedback@isb-cgc.org"
 
 GOOGLE_APPLICATION_CREDENTIALS  = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH,os.environ.get('GOOGLE_APPLICATION_CREDENTIALS', '')))
 OAUTH2_CLIENT_ID                = os.environ.get('OAUTH2_CLIENT_ID', '')
@@ -592,8 +584,6 @@ BLANK_TISSUE_FILTERS = {'country': 'both', 'patient_residency': 'both', 'patient
     #                     'age_at_operation_min': '',
     #                     'age_at_operation_max': '', 'age_at_exposure_min': '', 'age_at_exposure_max': ''}
 
-# BLANK_TISSUE_FILTERS_2 = {'total': '', 'age_at_operation_min': '0',
-#                           'age_at_operation_max': '49', 'age_at_exposure_min': '-40', 'age_at_exposure_max': '19'}
 BLANK_TISSUE_FILTER_CASE_COUNT = {
     'tissue': {
         'rna': {
