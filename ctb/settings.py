@@ -344,8 +344,8 @@ ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION',120
 ACCOUNTS_PASSWORD_HISTORY    = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5)  # Max password history kept
 ACCOUNTS_ALLOWANCES          = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
 
-MAX_INACTIVE_PERIOD = os.environ.get('MAX_INACTIVE_PERIOD', 90)  # Max allowed inactive days before account's expiration
-EXPIRATION_WARNING_DAYS = os.environ.get('EXPIRATION_WARNING_PERIOD', 10)  # Warning period in days
+MAX_INACTIVE_PERIOD = int(os.environ.get('MAX_INACTIVE_PERIOD', 90))  # Max allowed inactive days before account's expiration
+EXPIRATION_WARNING_DAYS = int(os.environ.get('EXPIRATION_WARNING_PERIOD', 10))  # Warning period in days
 CRON_HEADER = os.environ.get('CRON_HEADER', None)
 CRON_HEADER_VAL = os.environ.get('CRON_HEADER_VAL', None)
 ##########################

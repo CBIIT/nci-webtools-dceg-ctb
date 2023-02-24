@@ -91,8 +91,9 @@ def manage_inactive_accounts(request):
 
             Sincerely,
             ISB-CGC Team'''.format(
-                user_email=deactivate_user.email, max_inactive_period=settings.MAX_INACTIVE_PERIOD, support_email=settings.SUPPORT_EMAIL),
-                settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
+                user_email=deactivate_user.email, max_inactive_period=settings.MAX_INACTIVE_PERIOD,
+                support_email=settings.SUPPORT_EMAIL),
+            settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
             ['elee@systemsbiology.org', deactivate_user.email],
             fail_silently=False,
         )
