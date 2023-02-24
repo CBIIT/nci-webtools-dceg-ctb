@@ -47,8 +47,9 @@ logger = logging.getLogger('main_logger')
 def validate_header(request):
     # Requests from the Cron Service need to be validated using a header
     try:
-        auth_header = request.headers.get(settings.APPENGINE_CRON_HEADER, None)
-        if not auth_header:
+        auth_header = request.headers.get(settings.CRON_HEADER, None)
+
+        if not auth_header or auth_header != settings.CRON_HEADER_VAL:
             return {
                 'result': 'INVALID',
                 'message': 'AppEngine Cron header not seen.'
