@@ -156,6 +156,7 @@ jobs:
           paths:
             - ./accounts
             - ./adminrestrict
+            - ./cron_auth
             - ./.git
             - ./shell
             - ./google_helpers
