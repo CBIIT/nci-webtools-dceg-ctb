@@ -23,7 +23,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.core.mail import send_mail
 from .models import *
-from auth.auth import validate_request
+from cron_auth.auth import validate_request
 
 logger = logging.getLogger('main_logger')
 
