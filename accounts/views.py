@@ -23,6 +23,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.core.mail import send_mail
 from .models import *
+from auth.auth import validate_request
 
 logger = logging.getLogger('main_logger')
 
@@ -39,9 +40,10 @@ def extended_logout_view(request):
     return response
 
 
-@login_required
 def manage_inactive_accounts(request):
-
+    validate_resp = validate_request(request)
+    if validate_resp.get('code') != 200:
+        return HttpResponse(validate_resp['message'], status=validate_resp['code'])
     warn_user_list = []
     deactivate_user_list = []
     inactive_user_list = User.objects.filter(is_active=True, is_staff=False)
@@ -65,8 +67,8 @@ def manage_inactive_accounts(request):
 
             If you need assistance with your login then please email us at feedback@isb-cgc.org
 
-
-            ISB-CGC team'''.format(
+            Sincerely,
+            ISB-CGC Team'''.format(
                 user_email=warn_user.email, expiration_date=warn_expiration_date_utc(),
                 warning_period=settings.EXPIRATION_WARNING_DAYS,
                 website=request.build_absolute_uri('/accounts/login/')),
@@ -87,7 +89,8 @@ def manage_inactive_accounts(request):
             Please contact {support_email} in order to reactivate your account.
             If you would like more information regarding CTB policies on account deactivation, please contact {support_email}.
 
-            ISB-CGC team'''.format(
+            Sincerely,
+            ISB-CGC Team'''.format(
                 user_email=deactivate_user.email, max_inactive_period=settings.MAX_INACTIVE_PERIOD, support_email=settings.SUPPORT_EMAIL),
                 settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
             ['elee@systemsbiology.org', deactivate_user.email],

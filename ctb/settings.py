@@ -339,17 +339,16 @@ ACCOUNT_USERNAME_REQUIRED     = bool(os.environ.get('ACCOUNT_USERNAME_REQUIRED',
 ACCOUNT_EMAIL_VERIFICATION    = os.environ.get('ACCOUNT_EMAIL_VERIFICATION', 'mandatory').lower()
 
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Chernobyl Tissue Bank]"
-ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION',120) # Max password age in days
-ACCOUNTS_PASSWORD_HISTORY    = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5) # Max password history kept
+ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION',120)  # Max password age in days
+ACCOUNTS_PASSWORD_HISTORY    = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5)  # Max password history kept
 ACCOUNTS_ALLOWANCES          = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
 
-MAX_INACTIVE_PERIOD = os.environ.get('MAX_INACTIVE_PERIOD', 61) # Warning period in days
-EXPIRATION_WARNING_DAYS = os.environ.get('EXPIRATION_WARNING_PERIOD', 4) # Warning period in days
-
+MAX_INACTIVE_PERIOD = os.environ.get('MAX_INACTIVE_PERIOD', 90)  # Max allowed inactive days before account's expiration
+EXPIRATION_WARNING_DAYS = os.environ.get('EXPIRATION_WARNING_PERIOD', 10)  # Warning period in days
+APPENGINE_CRON_HEADER = os.environ.get('APPENGINE_CRON_HEADER', 'X-Appengine-Cron')
 ##########################
 #   End django-allauth   #
 ##########################
-
 WSGI_APPLICATION = 'ctb.wsgi.application'
 
 # Password validation
