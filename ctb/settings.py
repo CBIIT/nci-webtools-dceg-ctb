@@ -162,6 +162,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'anymail',
     'ctb',
+    'auth',
     'offline',
     'adminrestrict',
     'axes',
