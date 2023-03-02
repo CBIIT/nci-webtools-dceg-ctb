@@ -1,5 +1,5 @@
 #
-# Copyright 2015-2019, Institute for Systems Biology
+# Copyright 2015-2023, Institute for Systems Biology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,15 +14,13 @@
 # limitations under the License.
 #
 
-from builtins import str
-from builtins import object
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from allauth.account.signals import password_changed, password_set, user_signed_up
 import logging
 from datetime import datetime, timezone, timedelta
-import pytz
+
 
 logger = logging.getLogger('main_logger')
 
@@ -76,4 +74,3 @@ user_signed_up.connect(add_password_history)
 user_signed_up.connect(set_password_expiration)
 password_changed.connect(add_password_history)
 password_changed.connect(set_password_expiration)
-

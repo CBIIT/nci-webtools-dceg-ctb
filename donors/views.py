@@ -1,5 +1,5 @@
 ###
-# Copyright 2015-2022, Institute for Systems Biology
+# Copyright 2023, Institute for Systems Biology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,9 +14,8 @@
 # limitations under the License.
 ###
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.core.mail import send_mail
-# from django.urls import reverse
 from django.http import JsonResponse
 from .metadata_count import get_sample_case_counts, get_clinical_case_counts, get_driver_case_counts
 from .models import Filter
