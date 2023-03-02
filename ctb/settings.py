@@ -162,7 +162,6 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'anymail',
     'ctb',
-    'cron_auth',
     'offline',
     'adminrestrict',
     'axes',
@@ -344,13 +343,10 @@ ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION',120
 ACCOUNTS_PASSWORD_HISTORY    = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5)  # Max password history kept
 ACCOUNTS_ALLOWANCES          = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
 
-MAX_INACTIVE_PERIOD = int(os.environ.get('MAX_INACTIVE_PERIOD', 90))  # Max allowed inactive days before account's expiration
-EXPIRATION_WARNING_DAYS = int(os.environ.get('EXPIRATION_WARNING_PERIOD', 10))  # Warning period in days
-CRON_HEADER = os.environ.get('CRON_HEADER', None)
-CRON_HEADER_VAL = os.environ.get('CRON_HEADER_VAL', None)
 ##########################
 #   End django-allauth   #
 ##########################
+
 WSGI_APPLICATION = 'ctb.wsgi.application'
 
 # Password validation
@@ -524,7 +520,6 @@ REQUEST_LOGGING_ENABLE_COLORIZE = bool(os.environ.get('REQUEST_LOGGING_ENABLE_CO
 EMAIL_SERVICE_API_URL           = os.environ.get('EMAIL_SERVICE_API_URL', '')
 EMAIL_SERVICE_API_KEY           = os.environ.get('EMAIL_SERVICE_API_KEY', '')
 NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATOON_EMAIL_FROM_ADDRESS', 'feedback@isb-cgc.org')
-SUPPORT_EMAIL = os.environ.get('SUPPORT_EMAIL', 'feedback@isb-cgc.org')
 
 #########################
 # django-anymail        #

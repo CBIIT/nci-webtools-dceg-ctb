@@ -33,7 +33,6 @@ from django.dispatch import receiver
 debug = settings.DEBUG
 logger = logging.getLogger('main_logger')
 
-# BQ_ATTEMPT_MAX = 10
 WEBAPP_LOGIN_LOG_NAME = settings.WEBAPP_LOGIN_LOG_NAME
 
 
