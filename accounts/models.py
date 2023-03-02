@@ -29,29 +29,8 @@ def utc_now_plus_expiry():
     return datetime.now(timezone.utc)+timedelta(days=settings.ACCOUNTS_PASSWORD_EXPIRATION)
 
 
-def warning_last_login_date_utc():
-    return (datetime.now(timezone.utc) - timedelta(
-        days=(settings.MAX_INACTIVE_PERIOD - settings.EXPIRATION_WARNING_DAYS))).date()
-
-
-def expiry_last_login_date_utc():
-    return (datetime.now(timezone.utc) - timedelta(days=settings.MAX_INACTIVE_PERIOD)).date()
-
-
-def warn_expiration_date_utc():
-    return (datetime.now(timezone.utc) + timedelta(days=settings.EXPIRATION_WARNING_DAYS)).date()
-
-
 def utc_now():
     return datetime.now(timezone.utc)
-
-
-def deactivate_account(user_id):
-    inactive_user = User.objects.get(id=user_id)
-    inactive_user.is_active = False
-    inactive_user.save()
-    logger.info(
-        "User account {} has been deactivated.".format(inactive_user.email))
 
 
 class PasswordExpiration(models.Model):

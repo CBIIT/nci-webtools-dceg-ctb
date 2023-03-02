@@ -22,5 +22,4 @@ from . import views
 urlpatterns = [
     url(r'^', include(allauth_urls)),
     url(r'^logout', views.extended_logout_view, name='account_logout'),
-    url(r'^manage_inactive_accounts', views.manage_inactive_accounts, name='manage_inactive_accounts'),
 ]
