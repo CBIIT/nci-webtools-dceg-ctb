@@ -143,19 +143,41 @@ def make_application(request):
 
 
 def application_submit(request):
-    pi_email = request.POST.get('pi_email')
-    if pi_email:
+    application_content = {
+        "first_name": request.POST.get('first-name'),
+        "last_name": request.POST.get('last-name'),
+        "pi_title": request.POST.get('pi-title'),
+        "institution": request.POST.get('institution'),
+        "address1": request.POST.get('address1'),
+        "address2": request.POST.get('address2'),
+        "zipcode": request.POST.get('zipcode'),
+        "country": request.POST.get('country'),
+        "phone": request.POST.get('phone'),
+        "email": request.POST.get('email'),
+        "prj_title": request.POST.get('prj-title'),
+        "overview": request.POST.get('overview'),
+        "aims": request.POST.get('aims'),
+        "experience": request.POST.get('experience'),
+        "methods": request.POST.get('methods')
+    }
+    user_email = request.user.email
+
+    print(application_content)
+    # main_message = {
+    #     'success': 'success'
+    # }
+    if user_email:
         send_mail(
             '[Chernobyl Tissue Bank] Application from Chernobyl Tissue Bank',
             'Application has been submitted.',
-            pi_email,
+            user_email,
 
-            ['elee@systemsbiology.org', pi_email],
+            ['elee@systemsbiology.org', user_email],
             fail_silently=False,
         )
         main_message = {
             'success': 'Application has been submitted. A copy of the application has been sent to {email}.'.format(
-                email=pi_email)
+                email=user_email)
         }
     else:
         error_message = 'No email has been provided.'

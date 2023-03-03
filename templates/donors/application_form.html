@@ -15,752 +15,125 @@
     <div class="container py-3">
         <form method="POST" id="form-application" action="{% url 'application_submit' %}">
             {% csrf_token %}
-            <div class="mb-2">
-                <div class="text-muted fw-light small">
-                    CTB Application Form v3 15 3 21
-                </div>
-            </div>
-            <div class="m-3">
-                <h3 class="mb-4">Application for Access to Materials and/or Information from the CTB
-                    <a data-bs-toggle="modal" href="#"
-                       data-bs-target="#application-info-modal">
-                        <i class="fas fa-info-circle"></i>
-                    </a>
-                </h3>
-                <div class="mb-2 p-4 bg-light rounded-2 border-1">
-                    <div id="app-div-0" class="mb-4">
-                        <h4 class="fw-bold mb-2">
-                            Section A: General Information
-                        </h4>
-                        <div class="p-2">
-                            <h5 class="mt-4 mb-4 fw-bold">
-                                A1: Contact Details For Principal Investigator
-                            </h5>
-                            <div id="a1-div" class="m-2">
-                                <div class="mb-3">
-                                    <label for="pi_name" class="form-label">Principal Investigator (Full name and
-                                        title)</label>
-                                    <input type="text" class="form-control copyover" name="pi_name">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pi_institution" class="form-label">Institution</label>
-                                    <input type="text" class="form-control copyover" name="pi_institution">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pi_address" class="form-label">Full Postal Address</label>
-                                    <input type="text" class="form-control copyover" name="pi_address">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pi_phone" class="form-label">Telephone</label>
-                                    <input type="text" class="form-control copyover" name="pi_phone">
-                                    <div class="form-text text-muted fst-italic">Include international dialing code
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pi_fax" class="form-label">Fax</label>
-                                    <input type="text" class="form-control copyover" name="pi_fax">
-                                    <div class="form-text text-muted fst-italic">Include international dialing code
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="pi_email" class="form-label">Email</label>
-                                    <input type="email" class="form-control copyover" name="pi_email">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="head_institute" class="form-label">Head of Department/Institute</label>
-                                    <input type="text" class="form-control" name="head_institute">
-                                </div>
+            <div class="p-3 bg-light rounded-2">
+                <div class="py-3 px-5">
+                    <h4 class="mb-4 text-center my-2">INFORMATION FOR APPLICANTS FOR ACCESS TO MATERIALS AND/OR
+                        INFORMATION
+                        FROM THE CTB
+                    </h4>
+                    <div class="border border-secondary rounded-1 p-3 my-3">
+                        <h5>Instructions and requirements:</h5>
+                        <ul>
+                            <li>Please enter response to all sections of this application form clearly in English.</li>
+                            <li>Assessment of the project will be made only on the information supplied in this
+                                application.
+                            </li>
+                            <li>Additional information may be requested to approve this request. This information may
+                                include principal investigator’s CV and lists of recent grants and publications, a proof
+                                of IRB and/or scientific and ethical review approvals, and evidence that the facilities
+                                and support are available for the proposed work.
+                            </li>
+                            <li>If application is approved, a material and data transfer agreement (MDTA) must be
+                                executed prior to transferring and materials and data.
+                            </li>
+                        </ul>
 
-                                <div class="mb-3">
-                                    <label for="proj_title" class="form-label">Title of Research Projects</label>
-                                    <textarea class="form-control copyover" name="proj_title"></textarea>
-                                    <div class="form-text text-muted fst-italic">Not more than 200 characters</div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="co_pi" class="form-label">Coinvestigators</label>
-                                    <textarea class="form-control" name="co_pi"></textarea>
-                                    <div class="form-text text-muted fst-italic">Names and titles</div>
-                                </div>
+                    </div>
+                    <div class="py-4">
+                        <h5 class="mb-2 fw-bold">
+                            CONTACT DETAILS FOR PRINCIPAL INVESTIGATOR
+                        </h5>
+                        <div class="my-3 row g-3">
+                            <div class="col-md-4">
+                                <label for="first-name" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="first-name" name="first-name">
                             </div>
-                            <h5 class="mt-5 mb-4 fw-bold">
-                                A2: Lay Summary
-                            </h5>
-                            <div id="a2-div" class="m-2">
-                                <div class="mb-3">
-                                    <label for="a2-summary" class="form-label">
-                                        Please provide a short lay summary of the intended research.
-                                        <br>Please note, this information will be used in CTB reports to funders, IRBs
-                                        that review the project, in the public Annual Report and on the CTB website so
-                                        only include information that is not commercially sensitive.
-                                    </label>
-                                    <textarea rows="4" cols="50" type="text" class="form-control"
-                                              name="a2-summary"></textarea>
-                                </div>
-
+                            <div class="col-md-4">
+                                <label for="last-name" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="last-name" name="last-name">
+                            </div>
+                            <div class="col-md-4">
+                                <label for="pi-title" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="pi-title" name="pi-title">
+                            </div>
+                            <div class="col-12">
+                                <label for="institution" class="form-label">Institution</label>
+                                <input type="text" class="form-control" id="institution" name="institution">
+                            </div>
+                            <div class="col-12">
+                                <label for="address1" class="form-label">Mailing Address</label>
+                                <input type="text" class="form-control" id="address1" name="address1" placeholder="Address 1">
+                            </div>
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" id="address2" name="address2" placeholder="Address 2">
+                            </div>
+                            <div class="col-md-4">
+{#                                <label for="inputZip" class="form-label">Post/Zip Code</label>#}
+                                <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Post/Zip Code">
+                            </div>
+                            <div class="col-12">
+{#                                <label for="country" class="form-label">Country</label>#}
+                                <input type="text" class="form-control" id="country" name="country" placeholder="Country">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="phone" class="form-label">Telephone</label>
+                                <input type="tel" class="form-control" id="phone" name="phone">
+                                <div class="fw-light text-muted fst-italic small">Include international dialing code</div>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" class="form-control" id="email" name="email">
                             </div>
                         </div>
                     </div>
-                    <div id="app-div-1" class="d-none mb-4">
-                        <h4 class="fw-bold mb-2">
-                            Section B: Personal Details of Investigators
-                        </h4>
-                        <div class="p-2">
-                            <div id="b-div" class="m-2">
-                                <div class="mb-3 fw-light fst-italic">Important: Please provide the following details
-                                    for the Principal Investigator, and each co-investigator. For each listed individual
-                                    please use separate sheets.
-                                </div>
-                                <div class="mb-3">
-                                    Name, full postal address of Department and Institution, telephone number and email
-                                    address
-                                </div>
-                                <div class="mb-2">
-                                    <button type="button" data-bs-toggle="modal" data-bs-target="#investigator-info-modal" class="btn btn-primary">Click to Add Investigator's Detail
-                                        Info <i class="fas fa-plus"></i></button>
-                                </div>
-                                <div class="mb-2">
-                                    <select class="form-select" multiple aria-label="multiple select example">
-{#                                        <option selected>Open this select menu</option>#}
-{#                                        <option value="1">One</option>#}
-{#                                        <option value="2">Two</option>#}
-{#                                        <option value="3">Three</option>#}
-                                    </select>
-                                </div>
+                    <div class="py-4">
+                        <h5 class="mb-2 fw-bold">
+                            PROJECT DESCRIPTION
+                        </h5>
+                        <div class="my-3">
+                            Please provide the title and a short summary (maximum 2 pages) of the proposed research on
+                            the samples you are requesting from the CTB. Sufficient information should be provided to
+                            enable the CTB to determine the scientific validity of your study. Please fully justify the
+                            number and type of samples requested and address ALL sections below.
+                        </div>
+                        <div class="my-3 row g-3">
+                            <div class="col-12">
+                                <label for="prj-title" class="form-label">Title</label>
+                                <input type="text" class="form-control" name="prj-title" id="research-title">
+                            </div>
+                            <div class="col-12">
+                                <label for="overview" class="form-label">Overview and rationale</label>
+                                <textarea type="textarea" class="form-control" name="overview" rows="4" cols="50" id="overview"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="aims" class="form-label">Aim(s) <span class="text-muted fw-light ms-3 small">Please clearly state the aim(s) of your project</span></label>
+                                <textarea type="textarea" class="form-control" name="aims" rows="4" cols="50" id="aims"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="experience" class="form-label">Experience of group carrying out analysis <span class="text-muted fw-light ms-3 small">Please provide information to indicate that your research group has experience in the techniques you intend to use, either by use of preliminary data from other work carried out in your group or by providing references to publications from your group that are relevant to this application</span></label>
+                                <textarea type="textarea" class="form-control" name="experience" rows="4" cols="50"
+                                          id="experience"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <label for="methods" class="form-label">Methods <span
+                                        class="text-muted fw-light ms-3 small">Please detail the methods you intend to use, study design, analysis, planned publications and presentations, and data sharing plan</span></label>
+                                <textarea type="textarea" class="form-control" name="methods" rows="4" cols="50"
+                                          id="methods"></textarea>
                             </div>
                         </div>
                     </div>
-                    <div id="app-div-2" class="d-none mb-4">
-                        <h4 class="fw-bold mb-2">
-                            Section C: Project Description
-                        </h4>
-                        <div class="p-2">
-                            <div id="c-div" class="m-2">
-                                <div class="fst-italic fw-light mb-3">
-                                    Please provide the <strong>title</strong> and a short research summary (2-4 pages of
-                                    A4) of the proposed
-                                    research on the samples you are requesting from the CTB (use additional pages where
-                                    necessary). Sufficient information should be provided to enable the External Review
-                                    Panel to determine the scientific validity of your study. Please fully justify the
-                                    <u>number and type</u> of samples requested and address ALL the headings below. If
-                                    your
-                                    project
-                                    has already been reviewed as part of a grant application, you may supply a copy of
-                                    the
-                                    scientific part of that grant application.
-                                </div>
-                                <div class="mb-4">
-                                    <label for="c_title" class="form-label">1. Title</label>
-                                    <input type="text" class="form-control" name="c_title">
-                                </div>
-                                <div class="mb-4">
-                                    <label for="c_intro" class="form-label">2. Introduction</label>
-                                    <div class="form-text fst-italic fw-light">Include an overview of the state of
-                                        the art in your proposed project area
-                                    </div>
-                                    <textarea rows="4" cols="50" class="form-control" name="c_intro"></textarea>
-
-                                </div>
-                                <div class="mb-4">
-                                    <label for="c_aim" class="form-label">3. Aim(s)</label>
-                                    <div class="form-text fw-light fst-italic">Please clearly state the aim(s) of your
-                                        project
-                                    </div>
-                                    <textarea rows="4" cols="50" class="form-control" name="c_aim"></textarea>
-
-                                </div>
-                                <div class="mb-4">
-                                    <label for="c_exp" class="form-label">4. Experience of group carrying out
-                                        analysis</label>
-                                    <div class="form-text fw-light fst-italic">Please provide information to indicate
-                                        that your research group has experience in the techniques you intend to use,
-                                        either by use of preliminary data from other work carried out in your group or
-                                        by providing references to publications from your group that are relevant to
-                                        this application
-                                    </div>
-                                    <textarea rows="4" cols="50" class="form-control" name="c_exp"></textarea>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="c_title" class="form-label">5. Methods</label>
-                                    <div class="form-text fw-light fst-italic">Please detail the methods you intend
-                                        to use, indicating controls and the experimental design you will use - where
-                                        relevant include statistical information
-                                    </div>
-                                    <textarea rows="4" cols="50" class="form-control" name="c_title"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="app-div-3" class="d-none mb-4">
-                        <h4 class="fw-bold mb-2">
-                            Section D: Evidence that Facilities and Support are Available for the Work to be Carried Out
-                        </h4>
-                        <div class="p-2">
-                            <div id="d-div" class="m-2">
-                                <div class="mb-4">
-                                    <label class="form-label">1. Has the proposed work been approved for
-                                        grant funding?
-                                    </label>
-                                    <div class="ps-4">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" data-bs-toggle="collapse"
-                                                   data-bs-target=".award-file-div:not(.show)" aria-expanded="false"
-                                                   aria-controls=".award-file-div" type="radio" name="grant-approved"
-                                                   id="d-1-yes"
-                                                   value="yes">
-                                            <label class="form-check-label" for="d-1-yes">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" data-bs-toggle="collapse"
-                                                   data-bs-target=".award-file-div.show" aria-controls=".award-file-div"
-                                                   type="radio" name="grant-approved" id="d-1-no"
-                                                   value="no">
-                                            <label class="form-check-label" for="d-1-no">No</label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 ms-4 collapse award-file-div">
-                                        <label for="formFileMultiple" class="form-label">Attach a copy of the award
-                                            letter:</label>
-                                        <input class="form-control" type="file" id="formFileMultiple" multiple>
-                                    </div>
-
-                                </div>
-                                <div class="mb-4">
-                                    <label class="form-label">2. Is the proposed work under consideration
-                                        for grant support?
-                                    </label>
-                                    <div class="ps-4">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" data-bs-toggle="collapse"
-                                                   data-bs-target=".grant-support-div:not(.show)" aria-expanded="false"
-                                                   aria-controls=".grant-support-div" type="radio"
-                                                   name="grant-support" id="d-2-yes"
-                                                   value="yes">
-                                            <label class="form-check-label" for="d-2-yes">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" data-bs-toggle="collapse"
-                                                   data-bs-target=".grant-support-div.show"
-                                                   aria-controls=".grant-support-div"
-                                                   type="radio" name="grant-support" id="d-2-no"
-                                                   value="no">
-                                            <label class="form-check-label" for="d-2-no">No</label>
-                                        </div>
-                                        <div class="mb-4 mt-2 collapse grant-support-div">
-                                            <div class="mb-2">State the name of the funding body and the date when a decision is
-                                                expected:
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="funding_org_input">Name of funding organisation</label>
-                                                <input id="funding_org_input" class="form-control" name="funding_org"
-                                                       type="text"/>
-                                            </div>
-                                            <div class="mb-2">
-                                                <label for="dec_expected_date_input">Date when decision expected</label>
-                                                <input id="dec_expected_date_input" class="form-control"
-                                                       name="dec_expected_date" type="text"/>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="form-label">3. Is the proposed work to be funded from
-                                        non-grant supported sources?
-                                    </label>
-                                    <div class="ps-4">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" data-bs-toggle="collapse"
-                                                   data-bs-target=".statement-file-div:not(.show)" aria-expanded="false"
-                                                   aria-controls=".statement-file-div" type="radio"
-                                                   name="non-grant-support" id="d-3-yes"
-                                                   value="yes">
-                                            <label class="form-check-label" for="d-3-yes">Yes</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" data-bs-toggle="collapse"
-                                                   data-bs-target=".statement-file-div.show"
-                                                   aria-controls=".statement-file-div"
-                                                   type="radio" name="non-grant-support" id="d-3-no"
-                                                   value="no">
-                                            <label class="form-check-label" for="d-3-no">No</label>
-                                        </div>
-                                    </div>
-                                    <div class="mb-3 ms-4 collapse statement-file-div">
-                                        <label for="d-3-statement-file-input" class="form-label">Attach a statement from
-                                            the Head of Department that funding is available for the work to be carried
-                                            out:</label>
-                                        <input class="form-control" type="file" id="d-3-statement-file-input">
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label class="form-label" for="d-4-statement-file-input">4. For all proposals,
-                                        include a statement from the head of department/institute that the facilities
-                                        are available for the work to be carried out:
-                                    </label>
-                                    <input class="mb-3 ms-4 form-control" type="file" id="d-4-statement-file-input"/>
-                                </div>
-                                <div class="my-3 fw-light fst-italic">
-                                    Please label all attached documents in this <strong>section D</strong> and ensure
-                                    that
-                                    the name of the Principal Investigator appears at the top of the document.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="app-div-4" class="d-none mb-4">
-                        <h4 class="fw-bold mb-2">
-                            Section E: Requirements for the Study
-                        </h4>
-                        <div class="p-2">
-                            <div id="d-div" class="m-2">
-                                <div class="fst-italic fw-light mb-4">
-                                    State the number of tumor cases and amounts of material requested, including for
-                                    each the ideal and the minimum for the project to succeed. Please provide a
-                                    screenshot of the search you have carried out in the Biosample Search facility and
-                                    attach it to the end of this document. Please also complete the tables below to
-                                    provide us with information on the number of cases/biosample aliquots you require
-                                    for your project.
-                                    <br><br>
-                                    State also if material is needed from normal thyroid or blood from the same cases.
-                                </div>
-                                <div class="mb-4">
-                                    <strong>Extracted nucleic acid</strong>
-                                    <table class="table table-bordered text-center">
-                                        <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th colspan="2">Thyroid Tumor</th>
-                                            <th colspan="2">Normal Thyroid</th>
-                                            <th colspan="2">Blood</th>
-                                        </tr>
-                                        <tr>
-                                            <th>Biosample (Aliquot size)</th>
-                                            <th>No. of Cases</th>
-                                            <th>No. Aliquots Per Case</th>
-                                            <th>No. of Cases</th>
-                                            <th>No. Aliquots Per Case</th>
-                                            <th>No. of Cases</th>
-                                            <th>No. Aliquots Per Case</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th>DNA (3&micro;g)</th>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <th>RNA (5&micro;g)</th>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="mb-4">
-                                    <strong>FFPE material <span class="fw-light fst-italic">(in many cases tumor and normal thyroid will be present on the same slide)</span>
-                                    </strong>
-                                    <table class="table table-bordered text-center">
-                                        <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Number of Cases</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th rowspan="2">FFPE Sections</th>
-                                            <td><input type="number" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="number" class="form-control"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="mb-4">
-                                    <strong>Serum</strong>
-                                    <table class="table table-bordered text-center">
-                                        <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Number of Cases</th>
-                                            <th>Number of Aliquots</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr>
-                                            <th rowspan="2">Serum (500 &micro;L aliquots)</th>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                        </tr>
-                                        <tr>
-                                            <td><input type="number" class="form-control"></td>
-                                            <td><input type="number" class="form-control"></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="mb-3">
-                                    <label class="form-check-label">
-                                        Specify Country of origin (if desired):
-                                    </label>
-                                    <div class="ps-4">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="e-country-russia"
-                                                   value="russia">
-                                            <label class="form-check-label" for="e-country-russia">Russia</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="checkbox" id="e-country-ukraine"
-                                                   value="Ukraine">
-                                            <label class="form-check-label" for="e-country-ukraine">Ukraine</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="e-age-gender" class="form-label">Restrictions on age and sex (if any).
-                                        Please specify:</label>
-                                    <textarea type="text" class="form-control"
-                                              name="e-age-gender"></textarea>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="e-other-requests" class="form-label">Any other requests:</label>
-                                    <textarea type="text" class="form-control"
-                                              name="e-other-requests"></textarea>
-                                </div>
-                                <div class="my-3 fw-light fst-italic">
-                                    Please remember that the greater number of samples required, the larger the amounts
-                                    asked for, or the more complicated the restrictions, the harder it may be to meet
-                                    the request.
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div id="app-div-5" class="d-none mb-4">
-                        <h4 class="fw-bold mb-2">
-                            Section F: Material and Data Transfer Agreement
-                        </h4>
-                        <div class="p-2">
-                            <div class="m-2">
-                                <h5>Agreement for Use of Materials and Data from the CTB</h5>
-                                <div class="mt-4">
-                                    <div>
-                                        <label for="proj_title" class="form-label">Title of Project</label>
-                                        <textarea readonly type="text" class="form-control"
-                                                  name="proj_title"></textarea>
-                                    </div>
-                                    <div>
-                                        <label for="pi_name" class="form-label">Principal Investigator</label>
-                                        <input readonly type="text" class="form-control" name="pi_name">
-                                    </div>
-                                    <div>
-                                        <label for="pi_institution" class="form-label">Institution</label>
-                                        <input readonly type="text" class="form-control" name="pi_institution">
-                                    </div>
-                                    <div>
-                                        <label for="pi_address" class="form-label">Address</label>
-                                        <input readonly type="text" class="form-control" name="pi_address">
-                                    </div>
-                                    <div>
-                                        <label for="pi_phone" class="form-label">Phone</label>
-                                        <input readonly type="text" class="form-control" name="pi_phone">
-                                    </div>
-                                    <div>
-                                        <label for="pi_fax" class="form-label">Fax</label>
-                                        <input readonly type="text" class="form-control" name="pi_fax">
-                                    </div>
-                                    <div>
-                                        <label for="pi_email" class="form-label">Email</label>
-                                        <input readonly type="email" class="form-control" name="pi_email">
-                                    </div>
-
-                                    <div class="my-5">
-                                        As principal investigator I agree on behalf of all those involved in the project
-                                        to
-                                        accept the following conditions relating to the use of material and information
-                                        from
-                                        the Chernobyl Tissue Bank:
-                                        <ol class="mt-3">
-                                            <li>The recipient/investigator agrees that the materials and data provided
-                                                by
-                                                the Chernobyl Tissue Bank (CTB) will be used only for the purposes
-                                                specified
-                                                in this application.
-                                            </li>
-                                            <li>The recipient agrees not to attempt to obtain information identifying
-                                                the
-                                                individuals providing materials to the CTB.
-                                            </li>
-                                            <li>The recipient agrees that they shall not sell any portion of the
-                                                materials
-                                                and/or data provided by the CTB, or products directly extracted from
-                                                these
-                                                materials (e.g. protein, mRNA or DNA).
-                                            </li>
-                                            <li>The recipient also agrees that they shall not transfer tissue (or any
-                                                portion or derivative thereof) supplied by the CTB to third parties
-                                                without
-                                                the prior written permission of the CTB. Any subsequent transfer that
-                                                may be
-                                                made to other parties, with prior agreement from CTB, will require
-                                                signature
-                                                of this agreement between the final recipients of the material and the
-                                                CTB.
-                                            </li>
-                                            <li>The recipient understands that while the CTB attempts to avoid providing
-                                                materials that are contaminated with highly infectious agents such as
-                                                hepatitis and HIV, all materials should be handled as if potentially
-                                                infectious. The individuals who have supplied tissue to the CTB have not
-                                                agreed to have clinical tests performed on this tissue (e.g. for the
-                                                presence of infective agents such as hepatitis), therefore, the
-                                                recipient
-                                                agrees not to perform such tests on the materials supplied by the CTB.
-                                            </li>
-                                            <li>The recipient acknowledges that the institution where the tissue will be
-                                                used follows Human Tissue Authority or appropriate local regulations if
-                                                outside England, Wales and Northern Ireland, for handling human
-                                                specimens
-                                                and will instruct their staff to abide by those rules. The recipient
-                                                further
-                                                agrees to assume all responsibility for informing and
-                                                training personnel in the dangers and procedures for safe handling of
-                                                human
-                                                materials.
-                                            </li>
-                                            <li>Materials are provided as a service to the research community without
-                                                warranty of merchantability or fitness for a particular purpose or any
-                                                other
-                                                warranty, express or implied. The CTB accepts no responsibility for any
-                                                injury (including death) damages or loss that may arise either directly
-                                                or
-                                                indirectly from their use.
-                                            </li>
-                                            <li>Publication of all relevant results is expected; the authorship of
-                                                papers
-                                                arising out of the work should include representation of the Eastern
-                                                European countries involved, and the assistance of the Pathology Panel
-                                                in
-                                                confirming the diagnosis should be acknowledged. It is recommended that
-                                                the
-                                                following wording is either included in the methods section or in the
-                                                Acknowledgements at the end of the paper:
-                                                <code>The authors gratefully acknowledge the confirmation of diagnosis
-                                                    provided by the International Pathology Panel of the Chernobyl
-                                                    Tissue
-                                                    Bank, which is supported by NCI grant number U24CA082102</code> and
-                                                the
-                                                names of the relevant members of the Pathology Panel should be listed.
-                                                This
-                                                information can be obtained from the CTB secretariat.
-                                            </li>
-                                            <li>Where research data from others is provided together with or without
-                                                biological material, the PI undertakes the following:
-                                                <ul>
-                                                    <li>to acknowledge the provision of data via the CTB in the text or
-                                                        acknowledgements
-                                                    </li>
-                                                    <li>
-                                                        where that data is published, to acknowledge the source of the
-                                                        data
-                                                        by citation either of the original publication, or
-                                                    </li>
-                                                    <li>where the data is unpublished, to personally acknowledge the PI
-                                                        from
-                                                        whose project the data originates and to consider whether it
-                                                        would
-                                                        be appropriate to include the PI, or nominated individual
-                                                        thereof,
-                                                        in the authorship of the paper
-                                                    </li>
-                                                    <li>where the data includes detailed pathological information above
-                                                        that
-                                                        provided by the Pathology Panel (e.g. specific subtype of PTC,
-                                                        or
-                                                        information on percentage of epithelial cells present in the
-                                                        sample
-                                                        provided), the pathologist providing that information should be
-                                                        included in the authorship
-                                                    </li>
-                                                    <li>where the data includes information on radiation dose,
-                                                        authorship
-                                                        should include a member of the Institution which provided the
-                                                        dose
-                                                        estimation
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                            <li>All results should be documented using the CTB code number as set out in
-                                                the
-                                                MDTA that accompanies the samples. This is particularly important as
-                                                material from the same patient may be made available to several
-                                                researchers.
-                                            </li>
-
-                                            <li>A brief report on the work of the project will be made within 3 months
-                                                of
-                                                the end of the study. This shall include the results of all
-                                                investigations
-                                                carried out on each sample. The report should be sent to the CTB
-                                                Secretariat, for use within the CTB. It will not be otherwise
-                                                disseminated
-                                                without the agreement of the Principal Investigator.
-                                            </li>
-                                            <li>The Principal Investigator’s institution agrees to assume all risks and
-                                                responsibility in connection with the receipt, handling, storage and use
-                                                of
-                                                materials from the CTB. It further agrees to indemnify and hold harmless
-                                                the
-                                                CTB and the funders of the CTB from any claims costs, damages or
-                                                expenses
-                                                resulting from the use of the materials provided by the CTB. The
-                                                undersigned
-                                                warrant that they have authority to execute this agreement on behalf of
-                                                the
-                                                recipient institution.
-                                            </li>
-                                        </ol>
-                                    </div>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="checkbox" id="f-agree"
-                                           value="agree">
-                                    <label class="form-check-label fw-bold" for="f-agree">I agree to the terms set forth
-                                        in the above agreement.</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mb-4">
-                        <a id="back-btn" class="btn btn-outline-secondary disabled"><i
-                                class="fa-solid fa-chevron-left"></i> Back</a>
-                        <a id="next-btn" class="btn btn-primary float-end">Next <i
-                                class="fa-solid fa-chevron-right"></i></a>
-                        <button type="submit" id="submit-btn" class="btn btn-primary d-none float-end disabled">Submit<i
+                    <div class="mb-4 text-center">
+                        <button type="submit" id="submit-btn" class="btn btn-primary col-md-2 mx-auto">Submit <i
                                 class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    <div class="modal fade" id="investigator-info-modal" data-bs-backdrop="static" tabindex="-1"
-         aria-labelledby="application-info-modal-label" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="application-info-modal-label">Personal Details of Investigator</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="mb-2">
-                        <label for="b-name-input" class="form-label">Name</label>
-                        <input id="b-name-input" type="text" class="form-control" name="b-name">
-                    </div>
-                    <div class="mb-2">
-                        <label for="b-institute-input" class="form-label">Institution</label>
-                        <input id="b-institute-input" type="text" class="form-control" name="b-institute">
-                    </div>
-                    <div class="mb-2">
-                        <label for="b-address-input" class="form-label">Address</label>
-                        <input id="b-address-input" type="text" class="form-control" name="b-address">
-                    </div>
-                    <div class="mb-2">
-                        <label for="b-phone-input" class="form-label">Phone</label>
-                        <input id="b-phone-input" type="text" class="form-control" name="b-phone">
-                    </div>
-                    <div class="mb-2">
-                        <label for="b-email-input" class="form-label">e-mail</label>
-                        <input id="b-email-input" type="text" class="form-control" name="b-email">
-                    </div>
-                    <div class="mb-2">
-                        <label for="b_short_cv" class="form-label">Short CV</label>
-                        <textarea cols="50" rows="15" class="form-control" name="b_short_cv"></textarea>
-                    </div>
-                    <div class="mb-2">
-                        <label for="b_publications" class="form-label">Publications</label>
-                        <textarea cols="50" rows="4" class="form-control" name="b_publications"></textarea>
-                        <div class="form-text fst-italic">List up to 10 recent publications relevant to this
-                            application
-                        </div>
-                    </div>
-                    <div class="mb-2">
-                        <label for="b_grant_history" class="form-label">Grant History</label>
-                        <textarea cols="50" rows="4" type="text" class="form-control"
-                                  name="b_grant_history"></textarea>
-                        <div class="form-text fst-italic">
-                            List up to 5 relevant current or previous grants relevant to this
-                            application.
-                            For each grant please indicate the source of funding, the value, the
-                            duration
-                            and list the outcomes of the research, if project completed.
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Add to List</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="application-info-modal" data-bs-backdrop="static" tabindex="-1"
-         aria-labelledby="application-info-modal-label" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="application-info-modal-label">Information for Applicants for Access to
-                        Materials and/or Information from the CTB</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ol>
-                        <li>Applications must be made in English.</li>
-                        <li>All the forms listed below must be fully completed by the applicants. Assessment of the
-                            project will be made only on the information supplied in this application.
-                        </li>
-                        <li>The application consists of:
-                            <ul>
-                                <li><strong>Section A</strong>: General information and lay abstract of project</li>
-                                <li><strong>Section B</strong>: Personal details for Principal Investigator and
-                                    Co-investigators
-                                </li>
-                                <li><strong>Section C</strong>: Project Description</li>
-                                <li><strong>Section D</strong>: Evidence that facilities and support are available for
-                                    the work to be carried out (completed by Principal Investigator)
-                                </li>
-                                <li><strong>Section E</strong>: Requirements for the proposed study. A minimum data set
-                                    (tissue bank number, plus the following patient details: sex, date of birth and date
-                                    of surgery, oblast of residence, together with International Pathology Panel
-                                    diagnosis will be supplied with each biospecimen. If you require additional data or
-                                    data only please list the data set required. Ensure that the reasons for requiring
-                                    this are included in the appropriate sections of the application (e.g. C2 and C3)
-                                </li>
-                                <li><strong>Section F</strong>: Material Transfer Agreement</li>
-                            </ul>
-                            Please ensure that all sections are completed – submission of incomplete information will
-                            delay processing of your application.
-                        </li>
-                        <li>Submit applications by clicking <strong>Submit</strong> button</li>
-                    </ol>
-                    Your application will be acknowledged upon receipt. Details of the review process may be obtained
-                    from the Secretariat.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 {% endblock %}
 
-{% block js_file %}
-    {{ block.super }}
-    <script src="{% static 'js/application_form.js' %}"></script>
-{% endblock %}
+{#{% block js_file %}#}
+{#    {{ block.super }}#}
+{#    <script src="{% static 'js/application_form.js' %}"></script>#}
+{#{% endblock %}#}

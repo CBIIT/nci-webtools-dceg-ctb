@@ -1,6 +1,6 @@
 /**
  *
- * Copyright 2022, Institute for Systems Biology
+ * Copyright 2023, Institute for Systems Biology
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,38 +27,38 @@ require([
     'base',
 ], function() {
     $(document).ready(function () {
-        let step = 0;
-        $('.copyover').on('change', function(){
-            let input_name = $(this).attr('name');
-            let input_val = $(this).val();
-            $(':text[name="'+input_name+'"][readonly=readonly], :input[name="'+input_name+'"][readonly=readonly]').val(input_val);
-        });
-        $("#next-btn, #back-btn").on("click", function () {
-            $('#app-div-' + step).addClass('d-none');
-            if ($(this).attr('id').startsWith('next'))
-                step++;
-            else
-                step--;
-            $('#app-div-' + step).removeClass('d-none');
-            update_screen();
-        });
-        $("#f-agree").on("click", function(){
-            $("#submit-btn").toggleClass('disabled', !$(this).is(":checked"))
-        });
-        let update_screen = function () {
-            $('#back-btn').addClass('disabled');
-            if (step) {
-                $('#back-btn').removeClass('disabled');
-                if (step > 4) {
-                    $('#submit-btn').removeClass('d-none');
-                    $('#next-btn').addClass('d-none');
-                } else {
-                    $('#next-btn').removeClass('d-none');
-                    $('#submit-btn').addClass('d-none');
-                }
-            }
-            window.scrollTo(0, 0);
-        }
+        // let step = 0;
+        // $('.copyover').on('change', function(){
+        //     let input_name = $(this).attr('name');
+        //     let input_val = $(this).val();
+        //     $(':text[name="'+input_name+'"][readonly=readonly], :input[name="'+input_name+'"][readonly=readonly]').val(input_val);
+        // });
+        // $("#next-btn, #back-btn").on("click", function () {
+        //     $('#app-div-' + step).addClass('d-none');
+        //     if ($(this).attr('id').startsWith('next'))
+        //         step++;
+        //     else
+        //         step--;
+        //     $('#app-div-' + step).removeClass('d-none');
+        //     update_screen();
+        // });
+        // $("#f-agree").on("click", function(){
+        //     $("#submit-btn").toggleClass('disabled', !$(this).is(":checked"))
+        // });
+        // let update_screen = function () {
+        //     $('#back-btn').addClass('disabled');
+        //     if (step) {
+        //         $('#back-btn').removeClass('disabled');
+        //         if (step > 4) {
+        //             $('#submit-btn').removeClass('d-none');
+        //             $('#next-btn').addClass('d-none');
+        //         } else {
+        //             $('#next-btn').removeClass('d-none');
+        //             $('#submit-btn').addClass('d-none');
+        //         }
+        //     }
+        //     window.scrollTo(0, 0);
+        // }
     });
 
 
