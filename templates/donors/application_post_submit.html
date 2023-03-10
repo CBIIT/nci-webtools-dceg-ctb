@@ -14,13 +14,13 @@
 {% block content %}
     <div class="container py-3">
         {% if main_message.success %}
-            <div class="p-3 mb-2 rounded border border-primary">
-                {{ main_message.success }}
+            <div class="p-3 mb-2 rounded-2 border border-2 border-success">
+                <i class="fa-solid fa-circle-check text-secondary"></i> {{ main_message.success }}
             </div>
         {% endif %}
         {% if main_message.error %}
-            <div class="p-3 mb-2 rounded border border-warning">
-                {{ main_message.error }}
+            <div class="p-3 mb-2 rounded-2 border border-2 border-warning">
+                <i class="fa-solid fa-circle-exclamation text-secondary"></i> {{ main_message.error }}
             </div>
         {% endif %}
     <div>

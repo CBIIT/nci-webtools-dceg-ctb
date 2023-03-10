@@ -23,11 +23,13 @@ pyjwt==1.6.1
 django-finalware==1.0.0
 cryptography==3.3.2
 future==0.18.3
-google-cloud-storage==1.18.0
+google-cloud-storage==2.7.0
 django-session-security==2.6.5
 django-anymail[mailgun]
 django-axes==5.20.0
 django-redis==5.0.0
+xhtml2pdf==0.2.9
+
 
 # If you are seeing an error about django-debug-toolbar not being installed,
 # the problem is almost certainly that your developer .env wasn't found

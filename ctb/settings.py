@@ -606,6 +606,9 @@ BLANK_TISSUE_FILTER_CASE_COUNT = {
     'total': 5546
 }
 
+GCP_APP_DOC_BUCKET = os.environ.get('GCP_APP_DOC_BUCKET', 'ctb-dev-app-doc-files')
+CTB_APPLICATION_RECEIVER_EMAIL = os.environ.get('CTB_APPLICATION_RECEIVER_EMAIL', 'elee@systemsbiology.org')
+
 if DEBUG and DEBUG_TOOLBAR:
     INSTALLED_APPS += ('debug_toolbar',)
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware',)

@@ -14,12 +14,39 @@
 # limitations under the License.
 ###
 
+from django.conf import settings
 from django.shortcuts import render
-from django.core.mail import send_mail
+# from django.core.mail import send_mail
 from django.http import JsonResponse
+from django.contrib.auth.decorators import login_required
+from django.template.loader import get_template
 from .metadata_count import get_sample_case_counts, get_clinical_case_counts, get_driver_case_counts
 from .models import Filter
+from .utils import upload_blob
 import urllib
+import pytz
+from io import BytesIO
+from xhtml2pdf import pisa
+from datetime import datetime
+
+
+@login_required
+def dashboard(request):
+    message = request.POST.get('message')
+    return render(request, 'donors/dashboard.html',
+                  {'request': request, 'message': message})
+
+
+# My Saved Searches
+@login_required
+def saved_searches(request):
+    return render(request, 'donors/saved_searches.html',
+                  {'request': request})
+
+
+@login_required
+def get_search_list(request):
+    return JsonResponse(get_saved_searches(request.user), safe=False)
 
 
 def get_saved_searches(owner):
@@ -38,32 +65,14 @@ def get_saved_searches(owner):
     return saved_search_list
 
 
-def dashboard(request):
-    message = request.POST.get('message')
-    # saved_search_list = get_saved_searches(request.user)
-    return render(request, 'donors/dashboard.html',
-                  {'request': request, 'message': message})
-                  # {'request': request, 'saved_search_list': saved_search_list})
-
-
-# My Saved Searches
-def saved_searches(request):
-    # saved_search_list = get_saved_searches(request.user)
-    return render(request, 'donors/saved_searches.html',
-                  {'request': request})
-                  # {'request': request, 'saved_search_list': saved_search_list})
-
-
-def get_search_list(request):
-    return JsonResponse(get_saved_searches(request.user), safe=False)
-
-
+@login_required
 def delete_filters(request, filter_id):
     owner = request.user
     message = Filter.destroy(filter_id=filter_id, owner=owner)
     return JsonResponse(message)
 
 
+@login_required
 def save_filters(request):
     filters = get_filters(request, for_save=True)
     name = filters.get('title', 'Untitled')
@@ -84,6 +93,7 @@ def save_filters(request):
     return JsonResponse({'message': 'Your search \'' + name + '\' has been saved.'})
 
 
+@login_required
 def search_clinical(request):
     filters = get_filters(request)
     total = filters.get('total', 5516)
@@ -100,6 +110,7 @@ def search_clinical(request):
 
 
 # Driver Search Facility
+@login_required
 def driver_search_facility(request):
     filters = get_filters(request)
     total_filtered_case_count, counts = get_driver_case_counts(filters)
@@ -108,10 +119,12 @@ def driver_search_facility(request):
                    'filter_encoded_url': '?' + urllib.parse.urlencode(filters, True)})
 
 
+@login_required
 def search_tissue_samples(request):
     return render(request, 'donors/search_tissue_samples.html', {'request': request})
 
 
+@login_required
 def get_filters(request, for_save=False):
     sample_filters = {}
     request_method = request.GET if request.method == 'GET' else request.POST
@@ -125,6 +138,7 @@ def get_filters(request, for_save=False):
     return sample_filters
 
 
+@login_required
 def filter_tissue_samples(request):
     filters = get_filters(request)
     case_counts = get_sample_case_counts(filters)
@@ -132,17 +146,21 @@ def filter_tissue_samples(request):
 
 
 # Clinical Search Facility
+@login_required
 def clinical_search_facility(request):
     sample_filters = get_filters(request)
     return render(request, 'donors/clinical_search_facility.html',
                   {'request': request, 'sample_filters': sample_filters})
 
 
+@login_required
 def make_application(request):
     return render(request, 'donors/application_form.html', {'request': request})
 
 
+@login_required
 def application_submit(request):
+    datetime_now = datetime.now(pytz.timezone('US/Eastern'))
     application_content = {
         "first_name": request.POST.get('first-name'),
         "last_name": request.POST.get('last-name'),
@@ -155,34 +173,49 @@ def application_submit(request):
         "phone": request.POST.get('phone'),
         "email": request.POST.get('email'),
         "prj_title": request.POST.get('prj-title'),
+        "project_summary": request.POST.get('project-summary'),
+        "project_summary_file": request.POST.get('project-summary-file'),
         "overview": request.POST.get('overview'),
         "aims": request.POST.get('aims'),
         "experience": request.POST.get('experience'),
-        "methods": request.POST.get('methods')
+        "methods": request.POST.get('methods'),
+        "submitted_datetime": datetime_now.strftime("%-m/%-d/%Y %H:%M"),
+        "pdf": True
     }
     user_email = request.user.email
+    error_message = None
+    if not user_email:
+        error_message = 'No email has been provided.'
+    else:
+        template = get_template('donors/intake_form_wrapper.html')
+        html_template = template.render(application_content)
+        result = BytesIO()
+        pdf = pisa.pisaDocument(BytesIO(html_template.encode("utf-8")), result)
+        if pdf.err:
+            error_message = "Unable to generate an application file."
+        else:
+            bucket_name = settings.GCP_APP_DOC_BUCKET
+            date_str = datetime_now.strftime("%-y_%m_%d_%H%M%S")
+            user_str = user_email.split('@')[0].upper()
+            destination_file_name = f"CTB_APPLICATION_{date_str}_{user_str}.pdf"
+            upload_result = upload_blob(bucket_name, destination_file_name, result, content_type='application/pdf')
+            if upload_result.get('err', None):
+                error_message = upload_result.get('err')
+            # else:
+            #     send_mail(
+            #         '[Chernobyl Tissue Bank] Application from Chernobyl Tissue Bank',
+            #         'Application has been submitted.',
+            #         user_email,
+            #         [settings.CTB_APPLICATION_RECEIVER_EMAIL, user_email],
+            #         fail_silently=False,
+            #     )
 
-    print(application_content)
-    # main_message = {
-    #     'success': 'success'
-    # }
-    if user_email:
-        send_mail(
-            '[Chernobyl Tissue Bank] Application from Chernobyl Tissue Bank',
-            'Application has been submitted.',
-            user_email,
-
-            ['elee@systemsbiology.org', user_email],
-            fail_silently=False,
-        )
+    if error_message:
         main_message = {
-            'success': 'Application has been submitted. A copy of the application has been sent to {email}.'.format(
-                email=user_email)
+            'error': f'There has been an error while submitting your application: {error_message} Please try again.'
         }
     else:
-        error_message = 'No email has been provided.'
         main_message = {
-            'error': 'There has been an error while submitting your application: {error_message} Please try again.'.format(
-                error_message=error_message)
+            'success': f'Application has been submitted. A copy of the application has been sent to {user_email}.'
         }
     return render(request, 'donors/application_post_submit.html', {'request': request, 'main_message': main_message})

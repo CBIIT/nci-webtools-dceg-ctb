@@ -27,6 +27,11 @@ require([
     'base',
 ], function() {
     $(document).ready(function () {
+        $("#project_summary_file").find("input, button").prop("disabled", true);
+        $("#flexSwitchCheckUpload").on("click", function () {
+            $("#project_summary_text").prop("disabled", $(this).prop("checked"));
+            $("#project_summary_file").find("input, button").prop("disabled", !$(this).prop("checked"));
+        });
         // let step = 0;
         // $('.copyover').on('change', function(){
         //     let input_name = $(this).attr('name');
