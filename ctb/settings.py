@@ -182,7 +182,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'request_logging.middleware.LoggingMiddleware',
     'offline.middleware.OfflineMiddleware',
-    'axes.middleware.AxesMiddleware'
 ]
 
 #############################
@@ -631,6 +630,8 @@ if DEBUG and DEBUG_TOOLBAR:
     ]
     SHOW_TOOLBAR_CALLBACK = True
     INTERNAL_IPS = (os.environ.get('INTERNAL_IP', ''),)
+
+MIDDLEWARE.append('axes.middleware.AxesMiddleware',)
 
 # Log the version of our app
 print("[STATUS] Application Version is {}".format(APP_VERSION))
