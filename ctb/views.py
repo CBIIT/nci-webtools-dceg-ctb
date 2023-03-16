@@ -1,5 +1,5 @@
 ###
-# Copyright 2015-2022, Institute for Systems Biology
+# Copyright 2023, Institute for Systems Biology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,18 +14,9 @@
 # limitations under the License.
 ###
 
-# from builtins import str
-# import time
-# import json
 import logging
 import sys
 import datetime
-import donors
-from donors import models, metadata_count
-
-# from donors.metadata_count import get_case_counts
-# import re
-# import copy
 
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
@@ -33,11 +24,8 @@ from django.views.decorators.cache import never_cache
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse
-# from django.contrib import messages
 
 from google_helpers.stackdriver import StackDriverLogger
-#from cohorts.models import Cohort, Cohort_Perms
-#from allauth.socialaccount.models import SocialAccount
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.signals import user_login_failed
 from django.dispatch import receiver
@@ -45,32 +33,26 @@ from django.dispatch import receiver
 debug = settings.DEBUG
 logger = logging.getLogger('main_logger')
 
-BQ_ATTEMPT_MAX = 10
 WEBAPP_LOGIN_LOG_NAME = settings.WEBAPP_LOGIN_LOG_NAME
 
 
 # The site's homepage
 @never_cache
 def landing_page(request):
-    # return redirect('account_login')
-    return render(request, 'ctb/landing.html', {
-        'request': request,
-    })
+    return render(request, 'ctb/landing.html')
 
 # About the Project > Aims of the Project
 def aims(request):
-    return render(request, 'ctb/aims.html', {
-        'request': request,
-    })
+    return render(request, 'ctb/aims.html')
 
 # Displays the privacy policy
 def privacy_policy(request):
-    return render(request, 'ctb/privacy.html', {'request': request, })
+    return render(request, 'ctb/privacy.html')
 
 
 # Displays the privacy policy
 def search(request):
-    return render(request, 'ctb/search.html', {'request': request, })
+    return render(request, 'ctb/search.html')
 
 
 # User details page
@@ -81,31 +63,13 @@ def user_detail(request, user_id):
     if int(request.user.id) == int(user_id):
 
         user = User.objects.get(id=user_id)
-        # try:
-        #     social_account = SocialAccount.objects.get(user_id=user_id, provider='google')
-        # except Exception as e:
-        #     # This is a local account
-        #     social_account = None
-        user_details = {
-            'date_joined':  user.date_joined,
-            'email':        user.email,
-            'id':           user.id,
-            'last_login':   user.last_login
-        }
-
-        # if social_account:
-        #     user_details['extra_data'] = social_account.extra_data if social_account else None
-        #     user_details['first_name'] = user.first_name
-        #     user_details['last_name'] = user.last_name
-        # else:
-        user_details['username'] = user.username
+        user_details = {'date_joined': user.date_joined, 'email': user.email, 'id': user.id,
+                        'last_login': user.last_login, 'username': user.username}
 
         return render(request, 'ctb/user_detail.html',
-                      {'request': request,
-                       'user': user,
+                      {'user': user,
                        'user_details': user_details,
-                       'unconnected_local_account': True #bool(social_account is None),
-                       #'social_account': bool(social_account is not None)
+                       'unconnected_local_account': True
                        })
     else:
         return render(request, '403.html')
@@ -161,53 +125,61 @@ def warn_page(request):
 
 # About page
 def about_project(request):
-    return render(request, 'ctb/about_project.html', {'request': request})
+    return render(request, 'ctb/about_project.html')
 
 # Fact Sheet
 def fact_sheet(request):
-    return render(request, 'ctb/fact_sheet.html', {'request': request})
+    return render(request, 'ctb/fact_sheet.html')
+
 
 # Management of the Project
 def management_page(request):
-    return render(request, 'ctb/management_page.html', {'request': request})
+    return render(request, 'ctb/management_page.html')
+
 
 # For Researchers
 def researchers_page(request):
-    return render(request, 'ctb/researchers_page.html', {'request': request})
+    return render(request, 'ctb/researchers_page.html')
+
 
 # Access to materials
 def access_to_materials(request):
-    return render(request, 'ctb/access_to_materials.html', {'request': request})
+    return render(request, 'ctb/access_to_materials.html')
+
 
 # research-projects
 def research_projects(request):
-    return render(request, 'ctb/research_projects.html', {'request': request})
+    return render(request, 'ctb/research_projects.html')
+
 
 # research-projects 2001-2009
 def research_projects_2001_2009(request):
-    return render(request, 'ctb/research_projects_2001_2009.html', {'request': request})
+    return render(request, 'ctb/research_projects_2001_2009.html')
+
 
 # research-projects 2010-2019
 def research_projects_2010_2019(request):
-    return render(request, 'ctb/research_projects_2010_2019.html', {'request': request})
+    return render(request, 'ctb/research_projects_2010_2019.html')
 
 
 # Schema Review of Applications
 def schema_review_of_applications(request):
-    return render(request, 'ctb/schema_review_of_applications.html', {'request': request})
+    return render(request, 'ctb/schema_review_of_applications.html')
 
 
 # Material Available
 def material_available(request):
-    return render(request, 'ctb/material_available.html', {'request': request})
+    return render(request, 'ctb/material_available.html')
+
 
 # Nuclear Acids and Paraffin Sections
 def nucleic_acids_and_paraffin_sections(request):
-    return render(request, 'ctb/nucleic-acids-and-paraffin-sections.html', {'request': request})
+    return render(request, 'ctb/nucleic-acids-and-paraffin-sections.html')
+
 
 # Tissue Microarrays
 def tissue_microarrays(request):
-    return render(request, 'ctb/tissue-microarrays.html', {'request': request})
+    return render(request, 'ctb/tissue-microarrays.html')
 
 
 # #Resources
@@ -217,67 +189,32 @@ def tissue_microarrays(request):
 
 # Bibliography: Publications using CTB samples and data
 def bibliography(request):
-    return render(request, 'ctb/bibliography.html', {'request': request})
+    return render(request, 'ctb/bibliography.html')
+
 
 # Useful links: Links to further information on the Chernobyl accident
 def useful_links(request):
-    return render(request, 'ctb/useful_links.html', {'request': request})
+    return render(request, 'ctb/useful_links.html')
+
 
 # Useful podcasts and videos: Podcasts and Videos by CTB project participants
 def podcasts_and_videos(request):
-    return render(request, 'ctb/podcasts_and_videos.html', {'request': request})
+    return render(request, 'ctb/podcasts_and_videos.html')
+
 
 # Latest News
 def latest_news(request):
-    return render(request, 'ctb/latest_news.html', {'request': request})
+    return render(request, 'ctb/latest_news.html')
 
 
 def news(request, news_id=1):
     news_item= whatsup.get(news_id)
-    return render(request, 'ctb/news.html', {'request': request, 'news': news_item})
+    return render(request, 'ctb/news.html', {'news': news_item})
+
 
 # Contact
 def contact(request):
-    return render(request, 'ctb/contact.html', {'request': request})
-
-# # Dashboard
-# def dashboard(request):
-#     saved_search_list = [
-#         {'name': 'Follicular Female',
-#          'type': 'Biosample',
-#          'results': 29,
-#          'proceed': 'driver'},
-#         {'name': 'Example 2',
-#          'type': 'Biosample',
-#          'results': 42,
-#          'proceed': 'driver'},
-#     ]
-#     return render(request, 'ctb/dashboard.html', {'request': request, 'saved_search_list': saved_search_list})
-
-#temporary data
-
-    return render(request, 'ctb/saved_searches.html', {'request': request, 'saved_search_list': saved_search_list})
-
-
-# def search_tissue_samples(request):
-#     # Search Tissue Samples
-#     # request.get
-#     # filters = {
-#     #     'diagnosis': ['PTC', 'MTC']
-#     # }
-#     case_counts = get_case_counts()
-#     return render(request, 'ctb/search_tissue_samples.html',
-#                   {'request': request, 'tissue': case_counts.get('tissue'), 'blood': case_counts.get('blood'),
-#                    'total': case_counts.get('total')})
-#
-#
-# def filter_tissue_samples(request):
-#     diagnosis = request.POST.getlist('diagnosis[]')
-#     if diagnosis:
-#         Donor.objects.filter()
-#     print(diagnosis)
-#     result = {}
-#     return JsonResponse(result)
+    return render(request, 'ctb/contact.html')
 
 
 whatsup = {
