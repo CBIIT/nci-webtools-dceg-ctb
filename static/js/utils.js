@@ -22,19 +22,14 @@ require.config({
     baseUrl: STATIC_FILES_URL+'js/',
     paths: {
         jquery: 'lib/jquery-3.6.0.min',
-        bootstrap: 'lib/bootstrap.min',
+        bootstrap: 'lib/bootstrap.bundle.min',
         tippy: 'lib/tippy-bundle.umd.min',
-        '@popperjs/core': 'lib/popper.min'
     },
     shim: {
-        '@popperjs/core': {
-            exports: "@popperjs/core"
-        },
         'tippy': {
             exports: 'tippy',
-            deps: ['@popperjs/core']
         },
-        'bootstrap': ['jquery', '@popperjs/core']
+        'bootstrap': ['jquery']
     }
 });
 
