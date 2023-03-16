@@ -182,7 +182,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'request_logging.middleware.LoggingMiddleware',
     'offline.middleware.OfflineMiddleware',
-    # 'axes.middleware.AxesMiddleware'
+    'axes.middleware.AxesMiddleware'
 ]
 
 #############################
