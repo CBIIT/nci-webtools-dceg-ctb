@@ -1,0 +1,188 @@
+<div class="py-3 px-5">
+    <h4 class="mb-4 text-center my-2">INFORMATION FOR APPLICANTS FOR ACCESS TO MATERIALS AND/OR
+        INFORMATION FROM THE CTB
+    </h4>
+    {% if not pdf %}
+        <div class="border border-secondary rounded-1 p-3 my-3">
+            <h5>Instructions and requirements:</h5>
+            <ul>
+                <li>Please enter response to all sections of this application form clearly in English.</li>
+                <li>Assessment of the project will be made only on the information supplied in this
+                    application.
+                </li>
+                <li>Additional information may be requested to approve this request. This information may
+                    include principal investigator's CV and lists of recent grants and publications, a proof
+                    of IRB and/or scientific and ethical review approvals, and evidence that the facilities
+                    and support are available for the proposed work.
+                </li>
+                <li>If application is approved, a material and data transfer agreement (MDTA) must be
+                    executed prior to transferring and materials and data.
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+    <div class="py-4">
+        <h5 class="mb-2 fw-bold">
+            CONTACT DETAILS FOR PRINCIPAL INVESTIGATOR
+        </h5>
+        <div class="my-3 row g-3">
+            <div class="col-md-4">
+                <label for="first-name" class="form-label">First Name *</label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ first_name }}</strong></div>
+                {% else %}
+                    <input type="text" class="form-control" id="first-name" name="first-name" maxlength="50" required>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label for="last-name" class="form-label">Last Name *</label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ last_name }}</strong></div>
+                {% else %}
+                    <input type="text" class="form-control" id="last-name" name="last-name"  maxlength="50" required>
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <label for="pi-title" class="form-label">Title</label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ pi_title }}</strong></div>
+                {% else %}
+                    <input type="text" class="form-control" id="pi-title" name="pi-title"  maxlength="100">
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <label for="institution" class="form-label">Institution *</label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ institution }}</strong></div>
+                {% else %}
+                    <input type="text" class="form-control" id="institution" name="institution"  maxlength="150" required>
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <label for="address1" class="form-label">Mailing Address *</label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ address1 }}<br/>{{ address2 }} {{ zipcode }}<br/> {{ country }}
+                    </strong></div>
+                {% else %}
+                    <input type="text" class="form-control" id="address1" name="address1" placeholder="Address 1" maxlength="250" required>
+                {% endif %}
+            </div>
+            {% if not pdf %}
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id="address2" name="address2" placeholder="Address 2"  maxlength="250">
+                </div>
+                <div class="col-md-4">
+                    <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Post/Zip Code" maxlength="10" required>
+                </div>
+                <div class="col-12">
+                    <input type="text" class="form-control" id="country" name="country" placeholder="Country" maxlength="100" required>
+                </div>
+            {% endif %}
+            <div class="col-md-6">
+                <label for="telephone" class="form-label">Telephone *</label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ phone }}</strong></div>
+                {% else %}
+                    <input type="text" class="form-control" id="phone" name="phone" maxlength="25" required>
+                    <div class="fw-light text-muted fst-italic small">Include international dialing code</div>
+                {% endif %}
+            </div>
+            <div class="col-md-6">
+                <label for="email" class="form-label">E-mail *</label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ email }}</strong></div>
+                {% else %}
+                    <input type="text" class="form-control" id="email" name="email" maxlength="300" required>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="py-4">
+        <h5 class="mb-2 fw-bold">
+            PROJECT DESCRIPTION
+        </h5>
+        <div class="my-3">
+            Please provide the title and a short summary of the proposed research on
+            the samples you are requesting from the CTB. Sufficient information should be provided to
+            enable the CTB to determine the scientific validity of your study. Please fully justify the
+            number and type of samples requested and address ALL sections below.
+        </div>
+        <div class="my-3 row g-4">
+            <div class="col-12">
+                <label for="prj-title" class="form-label">Title *</label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ prj_title }}</strong></div>
+                {% else %}
+                    <input type="text" class="form-control" name="prj-title" id="research-title" maxlength="350" required>
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <label for="project_summary" class="form-label">Project summary *
+                    <span class="text-muted fw-light ms-3"><small>
+                                Turn on the "Upload file" switch below if you wish to provide summary in a pdf or word file (max 10,000 chars)</small></span>
+                </label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ project_summary|linebreaksbr }}</strong></div>
+                {% else %}
+                    <textarea type="textarea" class="form-control" name="project-summary" rows="10"
+                              cols="50" id="project_summary_text" maxlength="10000" required></textarea>
+                    <div class="form-check form-switch my-2">
+                        <input class="form-check-input" type="checkbox" id="switchCheckUpload" name="upload_option">
+                        <label class="form-check-label" for="switchCheckUpload">Upload
+                            file <span class="text-muted fw-light ms-3"><small>
+                                Max 2 pages (file size max 64 KB)</small></span></label>
+                    </div>
+                    <div class="input-group mb-3" id="project_summary_file">
+                        <input type="file" class="form-control" name="project-summary-file"
+                               aria-describedby="fileAddon" aria-label="Upload" accept=".pdf, .docx, .doc" required>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <label for="overview" class="form-label">Overview and rationale *</label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ overview|linebreaksbr }}</strong></div>
+                {% else %}
+                    <textarea type="textarea" class="form-control" name="overview" rows="4" cols="50" maxlength="2000"
+                              id="overview" required></textarea>
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <label for="aims" class="form-label">Aim(s) *<span class="text-muted fw-light ms-3"><small>Please clearly state the aim(s) of your project</small></span></label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ aims|linebreaksbr }}</strong></div>
+                {% else %}
+                    <textarea type="textarea" class="form-control" name="aims" rows="4" cols="50" maxlength="2000"
+                              id="aims" required></textarea>
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <label for="experience" class="form-label">Experience of group carrying out analysis *
+                    <span class="text-muted fw-light ms-3">
+                        <small>Please provide information to indicate that your research group has experience in the
+                            techniques you intend to use, either by use of preliminary data from other work carried out
+                            in your group or by providing references to publications from your group that are relevant
+                            to this application.
+                        </small>
+                    </span>
+                </label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ experience|linebreaksbr }}</strong></div>
+                {% else %}
+                    <textarea type="textarea" class="form-control" name="experience" rows="4" cols="50" maxlength="2000"
+                              id="experience" required></textarea>
+                {% endif %}
+            </div>
+            <div class="col-12">
+                <label for="methods" class="form-label">Methods * <span
+                        class="text-muted fw-light ms-3"><small>Please detail the methods you intend to use, study design, analysis, planned publications and presentations, and data sharing plan</small></span></label>
+                {% if pdf %}
+                    <div class="greyed-field"><strong>{{ methods|linebreaksbr }}</strong></div>
+                {% else %}
+                    <textarea type="textarea" class="form-control" name="methods" rows="4" cols="50" maxlength="2000"
+                              id="methods" required></textarea>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

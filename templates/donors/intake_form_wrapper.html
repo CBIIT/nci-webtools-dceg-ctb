@@ -1,0 +1,37 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .text-center {
+            text-align: center !important
+        }
+        .greyed-field {
+            background-color: #f8f9fa !important;
+            padding:.5rem !important;
+            margin-bottom: 1rem !important;
+        }
+        .fw-light {
+            font-weight: 300 !important
+        }
+        .text-muted {
+            color: #6c757d !important
+        }
+        .ms-3 {
+            margin-left: 1rem !important
+        }
+    </style>
+    <title>INFORMATION FOR APPLICANTS FOR ACCESS TO MATERIALS AND/OR INFORMATION FROM THE CTB</title>
+</head>
+<body>
+<div class="container py-3">
+    <div class="p-3">
+        {% include 'donors/intake_form.html' %}
+    </div>
+</div>
+<div class="text-muted fw-light"><small>Submitted Date and Time: {{ submitted_datetime }}</small></div>
+</body>
+</html>
