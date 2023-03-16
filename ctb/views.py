@@ -39,24 +39,20 @@ WEBAPP_LOGIN_LOG_NAME = settings.WEBAPP_LOGIN_LOG_NAME
 # The site's homepage
 @never_cache
 def landing_page(request):
-    return render(request, 'ctb/landing.html', {
-        'request': request,
-    })
+    return render(request, 'ctb/landing.html')
 
 # About the Project > Aims of the Project
 def aims(request):
-    return render(request, 'ctb/aims.html', {
-        'request': request,
-    })
+    return render(request, 'ctb/aims.html')
 
 # Displays the privacy policy
 def privacy_policy(request):
-    return render(request, 'ctb/privacy.html', {'request': request, })
+    return render(request, 'ctb/privacy.html')
 
 
 # Displays the privacy policy
 def search(request):
-    return render(request, 'ctb/search.html', {'request': request, })
+    return render(request, 'ctb/search.html')
 
 
 # User details page
@@ -71,8 +67,7 @@ def user_detail(request, user_id):
                         'last_login': user.last_login, 'username': user.username}
 
         return render(request, 'ctb/user_detail.html',
-                      {'request': request,
-                       'user': user,
+                      {'user': user,
                        'user_details': user_details,
                        'unconnected_local_account': True
                        })
@@ -130,61 +125,61 @@ def warn_page(request):
 
 # About page
 def about_project(request):
-    return render(request, 'ctb/about_project.html', {'request': request})
+    return render(request, 'ctb/about_project.html')
 
 # Fact Sheet
 def fact_sheet(request):
-    return render(request, 'ctb/fact_sheet.html', {'request': request})
+    return render(request, 'ctb/fact_sheet.html')
 
 
 # Management of the Project
 def management_page(request):
-    return render(request, 'ctb/management_page.html', {'request': request})
+    return render(request, 'ctb/management_page.html')
 
 
 # For Researchers
 def researchers_page(request):
-    return render(request, 'ctb/researchers_page.html', {'request': request})
+    return render(request, 'ctb/researchers_page.html')
 
 
 # Access to materials
 def access_to_materials(request):
-    return render(request, 'ctb/access_to_materials.html', {'request': request})
+    return render(request, 'ctb/access_to_materials.html')
 
 
 # research-projects
 def research_projects(request):
-    return render(request, 'ctb/research_projects.html', {'request': request})
+    return render(request, 'ctb/research_projects.html')
 
 
 # research-projects 2001-2009
 def research_projects_2001_2009(request):
-    return render(request, 'ctb/research_projects_2001_2009.html', {'request': request})
+    return render(request, 'ctb/research_projects_2001_2009.html')
 
 
 # research-projects 2010-2019
 def research_projects_2010_2019(request):
-    return render(request, 'ctb/research_projects_2010_2019.html', {'request': request})
+    return render(request, 'ctb/research_projects_2010_2019.html')
 
 
 # Schema Review of Applications
 def schema_review_of_applications(request):
-    return render(request, 'ctb/schema_review_of_applications.html', {'request': request})
+    return render(request, 'ctb/schema_review_of_applications.html')
 
 
 # Material Available
 def material_available(request):
-    return render(request, 'ctb/material_available.html', {'request': request})
+    return render(request, 'ctb/material_available.html')
 
 
 # Nuclear Acids and Paraffin Sections
 def nucleic_acids_and_paraffin_sections(request):
-    return render(request, 'ctb/nucleic-acids-and-paraffin-sections.html', {'request': request})
+    return render(request, 'ctb/nucleic-acids-and-paraffin-sections.html')
 
 
 # Tissue Microarrays
 def tissue_microarrays(request):
-    return render(request, 'ctb/tissue-microarrays.html', {'request': request})
+    return render(request, 'ctb/tissue-microarrays.html')
 
 
 # #Resources
@@ -194,32 +189,32 @@ def tissue_microarrays(request):
 
 # Bibliography: Publications using CTB samples and data
 def bibliography(request):
-    return render(request, 'ctb/bibliography.html', {'request': request})
+    return render(request, 'ctb/bibliography.html')
 
 
 # Useful links: Links to further information on the Chernobyl accident
 def useful_links(request):
-    return render(request, 'ctb/useful_links.html', {'request': request})
+    return render(request, 'ctb/useful_links.html')
 
 
 # Useful podcasts and videos: Podcasts and Videos by CTB project participants
 def podcasts_and_videos(request):
-    return render(request, 'ctb/podcasts_and_videos.html', {'request': request})
+    return render(request, 'ctb/podcasts_and_videos.html')
 
 
 # Latest News
 def latest_news(request):
-    return render(request, 'ctb/latest_news.html', {'request': request})
+    return render(request, 'ctb/latest_news.html')
 
 
 def news(request, news_id=1):
     news_item= whatsup.get(news_id)
-    return render(request, 'ctb/news.html', {'request': request, 'news': news_item})
+    return render(request, 'ctb/news.html', {'news': news_item})
 
 
 # Contact
 def contact(request):
-    return render(request, 'ctb/contact.html', {'request': request})
+    return render(request, 'ctb/contact.html')
 
 
 whatsup = {

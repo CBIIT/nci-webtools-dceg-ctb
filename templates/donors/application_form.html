@@ -14,7 +14,7 @@
 {% block content %}
     <div class="container py-4">
         <div class="p-3 my-3 bg-light rounded-2">
-            <form method="POST" id="form-application" action="{% url 'application_submit' %}">
+            <form enctype="multipart/form-data" method="POST" id="form-application" action="{% url 'application_submit' %}">
                 {% csrf_token %}
                 {% include 'donors/intake_form.html' %}
                 <div class="mb-3 text-center">

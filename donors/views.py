@@ -15,8 +15,8 @@
 ###
 
 from django.conf import settings
+from django.core.mail import EmailMessage
 from django.shortcuts import render
-# from django.core.mail import send_mail
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.template.loader import get_template
@@ -28,20 +28,21 @@ import pytz
 from io import BytesIO
 from xhtml2pdf import pisa
 from datetime import datetime
+import logging
+
+logger = logging.getLogger('main_logger')
 
 
 @login_required
 def dashboard(request):
     message = request.POST.get('message')
-    return render(request, 'donors/dashboard.html',
-                  {'request': request, 'message': message})
+    return render(request, 'donors/dashboard.html', {'message': message})
 
 
 # My Saved Searches
 @login_required
 def saved_searches(request):
-    return render(request, 'donors/saved_searches.html',
-                  {'request': request})
+    return render(request, 'donors/saved_searches.html')
 
 
 @login_required
@@ -88,7 +89,7 @@ def save_filters(request):
         filter_encoded_url = filters.get('filter_encoded_url', 0)
         filters.pop('filter_encoded_url')
     else:
-        filter_encoded_url = ('?'+urllib.parse.urlencode(filters, True))
+        filter_encoded_url = ('?' + urllib.parse.urlencode(filters, True))
     Filter.create(name, search_type, case_count, filter_encoded_url, request.user)
     return JsonResponse({'message': 'Your search \'' + name + '\' has been saved.'})
 
@@ -105,7 +106,7 @@ def search_clinical(request):
         'avail': case_counts
     }
     return render(request, 'donors/clinical_search_facility_result.html',
-                  {'request': request, 'clinic_search_result': clinic_search_result,
+                  {'clinic_search_result': clinic_search_result,
                    'filter_encoded_url': '?' + urllib.parse.urlencode(filters, True)})
 
 
@@ -115,13 +116,13 @@ def driver_search_facility(request):
     filters = get_filters(request)
     total_filtered_case_count, counts = get_driver_case_counts(filters)
     return render(request, 'donors/driver_search_facility.html',
-                  {'request': request, 'counts': counts, 'total_filtered_case_count': total_filtered_case_count,
+                  {'counts': counts, 'total_filtered_case_count': total_filtered_case_count,
                    'filter_encoded_url': '?' + urllib.parse.urlencode(filters, True)})
 
 
 @login_required
 def search_tissue_samples(request):
-    return render(request, 'donors/search_tissue_samples.html', {'request': request})
+    return render(request, 'donors/search_tissue_samples.html')
 
 
 @login_required
@@ -150,72 +151,97 @@ def filter_tissue_samples(request):
 def clinical_search_facility(request):
     sample_filters = get_filters(request)
     return render(request, 'donors/clinical_search_facility.html',
-                  {'request': request, 'sample_filters': sample_filters})
+                  {'sample_filters': sample_filters})
 
 
 @login_required
 def make_application(request):
-    return render(request, 'donors/application_form.html', {'request': request})
+    return render(request, 'donors/application_form.html')
 
 
 @login_required
 def application_submit(request):
     datetime_now = datetime.now(pytz.timezone('US/Eastern'))
-    application_content = {
-        "first_name": request.POST.get('first-name'),
-        "last_name": request.POST.get('last-name'),
-        "pi_title": request.POST.get('pi-title'),
-        "institution": request.POST.get('institution'),
-        "address1": request.POST.get('address1'),
-        "address2": request.POST.get('address2'),
-        "zipcode": request.POST.get('zipcode'),
-        "country": request.POST.get('country'),
-        "phone": request.POST.get('phone'),
-        "email": request.POST.get('email'),
-        "prj_title": request.POST.get('prj-title'),
-        "project_summary": request.POST.get('project-summary'),
-        "project_summary_file": request.POST.get('project-summary-file'),
-        "overview": request.POST.get('overview'),
-        "aims": request.POST.get('aims'),
-        "experience": request.POST.get('experience'),
-        "methods": request.POST.get('methods'),
-        "submitted_datetime": datetime_now.strftime("%-m/%-d/%Y %H:%M"),
-        "pdf": True
-    }
     user_email = request.user.email
-    error_message = None
-    if not user_email:
-        error_message = 'No email has been provided.'
-    else:
-        template = get_template('donors/intake_form_wrapper.html')
-        html_template = template.render(application_content)
-        result = BytesIO()
-        pdf = pisa.pisaDocument(BytesIO(html_template.encode("utf-8")), result)
-        if pdf.err:
-            error_message = "Unable to generate an application file."
-        else:
-            bucket_name = settings.GCP_APP_DOC_BUCKET
+    try:
+        if not user_email:
+            raise Exception('No email has been provided.')
+
+        if request.method == 'POST':
+            application_content = {
+                "first_name": request.POST.get('first-name'),
+                "last_name": request.POST.get('last-name'),
+                "pi_title": request.POST.get('pi-title'),
+                "institution": request.POST.get('institution'),
+                "address1": request.POST.get('address1'),
+                "address2": request.POST.get('address2'),
+                "zipcode": request.POST.get('zipcode'),
+                "country": request.POST.get('country'),
+                "phone": request.POST.get('phone'),
+                "email": request.POST.get('email'),
+                "prj_title": request.POST.get('prj-title'),
+                "project_summary": request.POST.get('project-summary'),
+                "overview": request.POST.get('overview'),
+                "aims": request.POST.get('aims'),
+                "experience": request.POST.get('experience'),
+                "methods": request.POST.get('methods'),
+                "submitted_datetime": datetime_now.strftime("%-m/%-d/%Y %H:%M %Z"),
+                "pdf": True
+            }
+            is_file_option_on = (request.POST.get('upload_option') == 'on')
+            uploaded_blob = None
             date_str = datetime_now.strftime("%-y_%m_%d_%H%M%S")
             user_str = user_email.split('@')[0].upper()
             destination_file_name = f"CTB_APPLICATION_{date_str}_{user_str}.pdf"
-            upload_result = upload_blob(bucket_name, destination_file_name, result, content_type='application/pdf')
-            if upload_result.get('err', None):
-                error_message = upload_result.get('err')
-            # else:
-            #     send_mail(
-            #         '[Chernobyl Tissue Bank] Application from Chernobyl Tissue Bank',
-            #         'Application has been submitted.',
-            #         user_email,
-            #         [settings.CTB_APPLICATION_RECEIVER_EMAIL, user_email],
-            #         fail_silently=False,
-            #     )
 
-    if error_message:
-        main_message = {
-            'error': f'There has been an error while submitting your application: {error_message} Please try again.'
-        }
-    else:
-        main_message = {
-            'success': f'Application has been submitted. A copy of the application has been sent to {user_email}.'
-        }
-    return render(request, 'donors/application_post_submit.html', {'request': request, 'main_message': main_message})
+            if is_file_option_on and request.FILES:
+                # uploaded project summary file
+                uploaded_blob = request.FILES["project-summary-file"]
+                if uploaded_blob.size > settings.CTB_FORM_FILE_SIZE_UPLOAD_MAX:
+                    raise Exception('Project summary file you are trying to upload is too large.')
+                application_content["project_summary"] = f"[Attached file: {destination_file_name}]"
+                file_extension = uploaded_blob.name.split('.')[-1]
+                destination_att_file_name = f"CTB_APPLICATION_{date_str}_{user_str}_ATTACHMENT.{file_extension}"
+            template = get_template('donors/intake_form_wrapper.html')
+            html_template = template.render(application_content)
+            result = BytesIO()
+            pdf = pisa.pisaDocument(BytesIO(html_template.encode("utf-8")), result)
+            if pdf.err:
+                raise Exception('Unable to generate an application file.')
+
+            # upload application to cloud storage
+            bucket_name = settings.GCP_APP_DOC_BUCKET
+            upload_blob(bucket_name, destination_file_name, result, content_type='application/pdf')
+            if is_file_option_on and uploaded_blob:  # attach a copy of the uploaded project summary file
+                upload_blob(bucket_name, destination_att_file_name, uploaded_blob,
+                            content_type=uploaded_blob.content_type)
+            # notification email set up
+            mail = EmailMessage(
+                '[Chernobyl Tissue Bank] Application Submitted',
+                '''
+            
+            A Chernobyl Tissue Bank application has been submitted.
+            A copy of the application is attached to this email for you to review.
+            Please contact feedback@isb-cgc.org if you have any questions or concerns.
+            
+            ISB-CGC Team''',
+                settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
+                [settings.CTB_APPLICATION_RECEIVER_EMAIL, user_email])
+            # attach a copy of the application in pdf to the email after rewinding result (ByteIO)
+            result.seek(0)
+            mail.attach(destination_file_name, result.read(), 'application/pdf')
+            if is_file_option_on and uploaded_blob:
+                # attach a copy of the uploaded project summary file to the email
+                mail.attach(destination_att_file_name, uploaded_blob.open().read(), uploaded_blob.content_type)
+            mail.send()
+        else:  # method not POST
+            raise Exception('Invalid request was made.')
+    except Exception as e:
+        return render(request, 'donors/application_post_submit.html', {'request': request,
+                                                                       'error': e})
+    return render(request, 'donors/application_post_submit.html',
+                  {
+                      'request': request,
+                      'success': f'Application is submitted and a copy of the application is sent to {user_email}.'
+                  })
+

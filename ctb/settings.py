@@ -180,8 +180,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'ctb.team_only_middleware.TeamOnly',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'request_logging.middleware.LoggingMiddleware',
+    # 'request_logging.middleware.LoggingMiddleware',
     'offline.middleware.OfflineMiddleware',
+    'axes.middleware.AxesMiddleware'
 ]
 
 #############################
@@ -572,7 +573,9 @@ SITE_GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKI
 
 # Rough max file size to allow for eg. barcode list upload, to prevent triggering RequestDataTooBig
 FILE_SIZE_UPLOAD_MAX = 1950000
-
+CTB_FORM_FILE_SIZE_UPLOAD_MAX = 65536
+# DATA_UPLOAD_MAX_MEMORY_SIZE = 131072
+# REQUEST_LOGGING_MAX_BODY_LENGTH = 5242880
 # Explicitly check for known problems in descrpitions and names provided by users
 BLACKLIST_RE = r'((?i)<script>|(?i)</script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|(?i)<iframe>|(?i)</iframe>)'
 BLANK_TISSUE_FILTERS = {'country': 'both', 'patient_residency': 'both', 'patient_gender': 'both', 'dob': 'both'}
