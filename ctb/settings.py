@@ -519,7 +519,7 @@ REQUEST_LOGGING_ENABLE_COLORIZE = bool(os.environ.get('REQUEST_LOGGING_ENABLE_CO
 # These settings allow use of MailGun as a simple API call
 EMAIL_SERVICE_API_URL           = os.environ.get('EMAIL_SERVICE_API_URL', '')
 EMAIL_SERVICE_API_KEY           = os.environ.get('EMAIL_SERVICE_API_KEY', '')
-NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATOON_EMAIL_FROM_ADDRESS', 'feedback@isb-cgc.org')
+NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATION_EMAIL_FROM_ADDRESS', 'noreply@isb-cgc.org')
 
 #########################
 # django-anymail        #
@@ -528,7 +528,7 @@ NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATOON_EMAIL_FROM_ADDRES
 # Anymail lets us use the Django mail system with mailgun (eg. in local account email verification)
 ANYMAIL = {
     "MAILGUN_API_KEY": EMAIL_SERVICE_API_KEY,
-    "MAILGUN_SENDER_DOMAIN": 'mg.canceridc.dev',  # your Mailgun domain, if needed
+    "MAILGUN_SENDER_DOMAIN": 'isb-cgc.org',  # your Mailgun domain, if needed
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = NOTIFICATION_EMAIL_FROM_ADDRESS
