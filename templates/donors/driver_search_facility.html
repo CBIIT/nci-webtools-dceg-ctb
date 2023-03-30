@@ -173,6 +173,7 @@
                     </div>
                     <hr>
                     <form id="save-form">
+                        {% csrf_token %}
                         <input type="hidden" name="filter_encoded_url" value="{{ filter_encoded_url }}"/>
                         <input type="hidden" name="search_type" value="Driver"/>
                         <input type="hidden" name="total" value="{{ total_filtered_case_count }}"/>
