@@ -220,7 +220,7 @@ def application_submit(request):
                 '[Chernobyl Tissue Bank] Application Submitted',
                 '''
             
-            A Chernobyl Tissue Bank application has been submitted.
+            A Chernobyl tissue bank application has been submitted.
             A copy of the application is attached to this email for you to review.
             Please contact feedback@isb-cgc.org if you have any questions or concerns.
             

@@ -1,6 +1,6 @@
 /**
  *
- * Copyright 2022, Institute for Systems Biology
+ * Copyright 2023, Institute for Systems Biology
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,7 +34,12 @@ require([
     'datatables.net',
     'datatables.bootstrap'
 ], function(base) {
+    // To ensure the search is not run while the user is still actively entering the inputs
+    // the system will wait for at least 1.5 seconds to see if there are any other inputs being entered
+    let lastInputChangeTimeLog = 0;    // 0 indicates a reset timer
+    let TIME_TO_WAIT = 1500; // 1.5 secs
     $(document).ready(function () {
+
         let queryString = window.location.search;
         if (queryString){
             const urlParams = new URLSearchParams(queryString);
@@ -69,9 +74,12 @@ require([
         });
 
         search_samples();
+
         $("#search-tissue-filters input").not("#search-save-title").on("change", function () {
-            search_samples();
+            lastInputChangeTimeLog = Date.now();
+            setTimeout(run_search_after_sleep, TIME_TO_WAIT);
         });
+
         $("#search-save").on("click", function(e){
             $('#save_message').html('');
             if (is_input_valid(e))
@@ -79,24 +87,13 @@ require([
 
         });
     });
-    // let is_input_valid = function(e){
-    //     $('#alert_message').html('');
-    //     let search_title = $('#search-save-title').val();
-    //     if (search_title.match(/\s/)) {
-    //         $('#alert_message').html('<i class="fa-solid fa-circle-exclamation"></i> '+'No space character is allowed. Please revise the search title.');
-    //         e.preventDefault();
-    //         return false;
-    //     }
-    //
-    //     let unallowed = search_title.match(base.blacklist);
-    //     if (unallowed) {
-    //         let unallowed_chars_list_str = Array.from(new Set(unallowed)).join(', ')
-    //         $('#alert_message').html('<i class="fa-solid fa-circle-exclamation"></i> '+'Your search title contains invalid characters (<span class="fw-bold">'+unallowed_chars_list_str+'</span>). Please choose another search title.');
-    //         e.preventDefault();
-    //         return false;
-    //     }
-    //     return true;
-    // };
+    let run_search_after_sleep = function(){
+        if (lastInputChangeTimeLog && Date.now() - lastInputChangeTimeLog > TIME_TO_WAIT){
+            lastInputChangeTimeLog = 0; // reset timer
+            search_samples();
+        }
+    };
+
 
     let save_filters = function () {
         $.ajax({
@@ -109,6 +106,7 @@ require([
         });
     };
     let search_samples = function () {
+        let form_inputs = $("input.form-check-input:checkbox, input.form-check-input:radio, button.btn-reset, :input[type='number']");
         $('#total-input').val('');
         $('#total-case-count').text(numberWithCommas(0));
         $('table.table').addClass('loading');
@@ -117,9 +115,13 @@ require([
             type: "post",
             url: BASE_URL + "/search_facility/filter_tissue_samples",
             data: $('#search-tissue-form').serialize(),
+            beforeSend: function(){
+                form_inputs.attr("disabled", true);
+            },
             success: function (case_counts) {
                 $("#make-app-btn, #clinical-search-facility-btn, #search-save").removeClass('disabled');
                 $('table.table.loading').removeClass('loading');
+                form_inputs.attr("disabled", false);
                 $('#total-case-count').text(numberWithCommas(case_counts['total']));
                 $('#total-input').val(case_counts['total']);
                 $('#tissue-rna-normal').text(numberWithCommas(case_counts['tissue']['rna']['normal']));
