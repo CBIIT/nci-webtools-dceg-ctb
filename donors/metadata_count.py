@@ -287,7 +287,7 @@ def is_default_filter(filters=None):
     # filters.pop('total', None)
     is_default = True
     for k, v in filters.items():
-        if settings.BLANK_TISSUE_FILTERS.get(k, None) != v:
+        if k != 'csrfmiddlewaretoken' and settings.BLANK_TISSUE_FILTERS.get(k, None) != v:
             is_default = False
             break
     for k, v in settings.BLANK_TISSUE_FILTERS.items():

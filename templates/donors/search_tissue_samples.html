@@ -16,6 +16,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <form id="search-tissue-form" class="bg-light border rounded py-4 mb-3">
+                    {% csrf_token %}
                     <input id="total-input" type="hidden" name="total" value="{{ total }}">
                     <div class="container-fluid">
                         <h4>Search Tissue Samples
