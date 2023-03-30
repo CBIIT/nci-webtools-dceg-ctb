@@ -199,9 +199,10 @@ def application_submit(request):
                 uploaded_blob = request.FILES["project-summary-file"]
                 if uploaded_blob.size > settings.CTB_FORM_FILE_SIZE_UPLOAD_MAX:
                     raise Exception('Project summary file you are trying to upload is too large.')
-                application_content["project_summary"] = f"[Attached file: {destination_file_name}]"
+
                 file_extension = uploaded_blob.name.split('.')[-1]
                 destination_att_file_name = f"CTB_APPLICATION_{date_str}_{user_str}_ATTACHMENT.{file_extension}"
+                application_content["project_summary"] = f"[Attached file: {destination_att_file_name}]"
             template = get_template('donors/intake_form_wrapper.html')
             html_template = template.render(application_content)
             result = BytesIO()
