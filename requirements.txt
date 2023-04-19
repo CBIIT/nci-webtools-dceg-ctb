@@ -19,9 +19,9 @@ django-allauth==0.41.0
 pexpect==4.0.1
 jsonschema==2.6.0
 oauth2client==3.0.0
-pyjwt==2.6.0
+pyjwt==2.4.0
 django-finalware==1.0.0
-cryptography==39.0.1
+cryptography==40.0.2
 future==0.18.3
 google-cloud-storage==1.18.0
 django-session-security==2.6.5
