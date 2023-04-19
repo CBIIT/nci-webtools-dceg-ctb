@@ -196,6 +196,7 @@ jobs:
           command: |
             sudo -E rm -rf ./lib
             sudo -E /bin/bash ./shell/unpack_for_deployment.sh
+            sudo -E gcloud config set app/cloud_build_timeout 1800
             sudo -E gcloud app deploy --verbosity=debug ./app.yaml --quiet
 workflows:
   version: 2
