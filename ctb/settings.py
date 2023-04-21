@@ -1,5 +1,5 @@
 ###
-# Copyright 2015-2022, Institute for Systems Biology
+# Copyright 2015-2023, Institute for Systems Biology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -39,7 +39,6 @@ if not exists(join(dirname(__file__), '../{}.env'.format(SECURE_LOCAL_PATH))):
     exit(1)
 
 dotenv.read_dotenv(join(dirname(__file__), '../{}.env'.format(SECURE_LOCAL_PATH)))
-
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)) + os.sep
 
 SHARED_SOURCE_DIRECTORIES = []
@@ -126,12 +125,6 @@ VERSION = "{}.{}".format("local-dev", datetime.datetime.now().strftime('%Y%m%d%H
 
 if exists(join(dirname(__file__), '../version.env')):
     dotenv.read_dotenv(join(dirname(__file__), '../version.env'))
-# else:
-#     if IS_DEV:
-#         import git
-#         repo = git.Repo(path="/home/vagrant/www/",search_parent_directories=True)
-#         VERSION = "{}.{}.{}".format("local-dev", datetime.datetime.now().strftime('%Y%m%d%H%M'),
-#                                     str(repo.head.object.hexsha)[-6:])
 
 APP_VERSION = os.environ.get("APP_VERSION", VERSION)
 
@@ -187,7 +180,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'ctb.team_only_middleware.TeamOnly',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'request_logging.middleware.LoggingMiddleware',
+    # 'request_logging.middleware.LoggingMiddleware',
     'offline.middleware.OfflineMiddleware',
 ]
 
@@ -322,11 +315,6 @@ TEMPLATES = [
                 'finalware.context_processors.contextify',
                 'ctb.context_processor.additional_context',
             ),
-            # add any loaders here; if using the defaults, we can comment it out
-            # 'loaders': (
-            #     'django.template.loaders.filesystem.Loader',
-            #     'django.template.loaders.app_directories.Loader'
-            # ),
             'debug': DEBUG,
         },
     },
@@ -350,9 +338,9 @@ ACCOUNT_EMAIL_REQUIRED        = True
 ACCOUNT_USERNAME_REQUIRED     = bool(os.environ.get('ACCOUNT_USERNAME_REQUIRED', 'False') == 'True')
 ACCOUNT_EMAIL_VERIFICATION    = os.environ.get('ACCOUNT_EMAIL_VERIFICATION', 'mandatory').lower()
 
-ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Chernobyl Tissue Biobank] "
-ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION',120) # Max password age in days
-ACCOUNTS_PASSWORD_HISTORY    = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5) # Max password history kept
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Chernobyl Tissue Bank]"
+ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION',120)  # Max password age in days
+ACCOUNTS_PASSWORD_HISTORY    = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5)  # Max password history kept
 ACCOUNTS_ALLOWANCES          = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
 
 ##########################
@@ -531,7 +519,7 @@ REQUEST_LOGGING_ENABLE_COLORIZE = bool(os.environ.get('REQUEST_LOGGING_ENABLE_CO
 # These settings allow use of MailGun as a simple API call
 EMAIL_SERVICE_API_URL           = os.environ.get('EMAIL_SERVICE_API_URL', '')
 EMAIL_SERVICE_API_KEY           = os.environ.get('EMAIL_SERVICE_API_KEY', '')
-NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATOON_EMAIL_FROM_ADDRESS', 'info@isb-cgc.org')
+NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATION_EMAIL_FROM_ADDRESS', 'noreply@isb-cgc.org')
 
 #########################
 # django-anymail        #
@@ -540,11 +528,11 @@ NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATOON_EMAIL_FROM_ADDRES
 # Anymail lets us use the Django mail system with mailgun (eg. in local account email verification)
 ANYMAIL = {
     "MAILGUN_API_KEY": EMAIL_SERVICE_API_KEY,
-    "MAILGUN_SENDER_DOMAIN": 'mg.canceridc.dev',  # your Mailgun domain, if needed
+    "MAILGUN_SENDER_DOMAIN": 'isb-cgc.org',  # your Mailgun domain, if needed
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = NOTIFICATION_EMAIL_FROM_ADDRESS
-SERVER_EMAIL = "info@canceridc.dev"
+SERVER_EMAIL = "feedback@isb-cgc.org"
 
 GOOGLE_APPLICATION_CREDENTIALS  = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH,os.environ.get('GOOGLE_APPLICATION_CREDENTIALS', '')))
 OAUTH2_CLIENT_ID                = os.environ.get('OAUTH2_CLIENT_ID', '')
@@ -584,7 +572,9 @@ SITE_GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKI
 
 # Rough max file size to allow for eg. barcode list upload, to prevent triggering RequestDataTooBig
 FILE_SIZE_UPLOAD_MAX = 1950000
-
+CTB_FORM_FILE_SIZE_UPLOAD_MAX = 65536
+# DATA_UPLOAD_MAX_MEMORY_SIZE = 131072
+# REQUEST_LOGGING_MAX_BODY_LENGTH = 5242880
 # Explicitly check for known problems in descrpitions and names provided by users
 BLACKLIST_RE = r'((?i)<script>|(?i)</script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|(?i)<iframe>|(?i)</iframe>)'
 BLANK_TISSUE_FILTERS = {'country': 'both', 'patient_residency': 'both', 'patient_gender': 'both', 'dob': 'both'}
@@ -592,8 +582,6 @@ BLANK_TISSUE_FILTERS = {'country': 'both', 'patient_residency': 'both', 'patient
     #                     'age_at_operation_min': '',
     #                     'age_at_operation_max': '', 'age_at_exposure_min': '', 'age_at_exposure_max': ''}
 
-# BLANK_TISSUE_FILTERS_2 = {'total': '', 'age_at_operation_min': '0',
-#                           'age_at_operation_max': '49', 'age_at_exposure_min': '-40', 'age_at_exposure_max': '19'}
 BLANK_TISSUE_FILTER_CASE_COUNT = {
     'tissue': {
         'rna': {
@@ -620,6 +608,9 @@ BLANK_TISSUE_FILTER_CASE_COUNT = {
     'total': 5546
 }
 
+GCP_APP_DOC_BUCKET = os.environ.get('GCP_APP_DOC_BUCKET', 'ctb-dev-app-doc-files')
+CTB_APPLICATION_RECEIVER_EMAIL = os.environ.get('CTB_APPLICATION_RECEIVER_EMAIL', 'elee@systemsbiology.org')
+
 if DEBUG and DEBUG_TOOLBAR:
     INSTALLED_APPS += ('debug_toolbar',)
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware',)
@@ -639,6 +630,8 @@ if DEBUG and DEBUG_TOOLBAR:
     ]
     SHOW_TOOLBAR_CALLBACK = True
     INTERNAL_IPS = (os.environ.get('INTERNAL_IP', ''),)
+
+MIDDLEWARE.append('axes.middleware.AxesMiddleware',)
 
 # Log the version of our app
 print("[STATUS] Application Version is {}".format(APP_VERSION))

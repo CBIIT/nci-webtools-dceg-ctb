@@ -85,7 +85,6 @@ class Sample(models.Model):
 class Clinical_Treatment(models.Model):
     # unique CTB identifier
     patient_id = models.IntegerField(null=False, default=-1)
-    # unique CTB identifier
     patient_uid = models.CharField(max_length=45, null=True, blank=False)
     edition = models.CharField(max_length=10, default=None, null=True, blank=False)
     classification_tumour = models.CharField(max_length=10, default=None, null=True, blank=False)
@@ -108,7 +107,6 @@ class Clinical_Treatment(models.Model):
 class Driver(models.Model):
     patient_uid = models.CharField(max_length=10, null=True, blank=False)
     gene = models.CharField(max_length=50, null=True, blank=False)
-
 
 # class Mdta(models.Model):
 #     ctb_uid = models.CharField(max_length=45, null=True, blank=False)

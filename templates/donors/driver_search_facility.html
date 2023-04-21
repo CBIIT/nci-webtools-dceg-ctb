@@ -33,7 +33,7 @@
                     </div>
                     <div class="py-3">
                         <p>This section of the search facility enables you to refine your search using oncogenic
-                            drivers that have been identified in tumour samples as a result of research studies
+                            drivers that have been identified in tumor samples as a result of research studies
                             using other samples from the same patients that match your search criteria. Data has
                             been pooled from three research studies, all of which have used either whole genome
                             sequencing or next generation sequencing/RNAseq.</p>
@@ -173,6 +173,7 @@
                     </div>
                     <hr>
                     <form id="save-form">
+                        {% csrf_token %}
                         <input type="hidden" name="filter_encoded_url" value="{{ filter_encoded_url }}"/>
                         <input type="hidden" name="search_type" value="Driver"/>
                         <input type="hidden" name="total" value="{{ total_filtered_case_count }}"/>
@@ -187,7 +188,8 @@
                             </div>
                         </div>
                         <div class="text-end mb-3">
-                            <div id="save_message" class="text-primary fw-bold ms-2"></div>
+                            <div id="save_message" class="text-primary fw-bold my-2"></div>
+                            <div id="alert_message" class="text-primary my-2"></div>
                         </div>
                     </form>
                 </div>

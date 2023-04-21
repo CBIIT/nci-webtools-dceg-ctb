@@ -25,10 +25,11 @@
 {% block page_name %}landing{% endblock %}
 {% block body_class %}landing{% endblock %}
 {% block content %}
+
     <div class="container text-center my-5">
 
         <div class="row pt-5">
-            <div class="col fs-5">
+            <div class="col pt-5 fs-5">
                 WELCOME TO
             </div>
         </div>
@@ -37,16 +38,16 @@
             Chernobyl Tissue Bank
             </div>
         </div>
-        <div class="row py-5 fs-4 justify-content-center">
+        <div class="row py-5 fs-3 justify-content-center">
             <div class="col-9">
                 <div>
                     The CTB is a research tissue bank that was established to collect, document, store, and issue to
                     bona
-                    fide researchers, biological samples donated by patients with thyroid tumours who live in the areas
+                    fide researchers, biological samples donated by patients with thyroid tumors who live in the areas
                     of
                     Ukraine and Russia close to the site of the Chernobyl Nuclear Power Plant.
                 </div>
-                <div class="py-3">If you are looking for information on the Chernobyl accident itself please go to <a href="{% url 'podcasts_and_videos' %}">Podcasts &amp; Videos</a> and <a href="{% url 'useful_links' %}">General Information about the Chernobyl Accident</a>.</div>
+{#                <div class="py-3">If you are looking for information on the Chernobyl accident itself please go to <a href="{% url 'podcasts_and_videos' %}">Podcasts &amp; Videos</a> and <a href="{% url 'useful_links' %}">General Information about the Chernobyl Accident</a>.</div>#}
             </div>
 
         </div>
@@ -67,7 +68,6 @@
 {#                Other things.#}
 {#            </div>#}
 {#        </div>#}
-    </div>
 {% endblock %}
 
 {% block js_file %}

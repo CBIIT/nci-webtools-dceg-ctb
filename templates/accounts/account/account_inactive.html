@@ -4,17 +4,20 @@
 
 {% block head_title %}{% trans "Account Inactive" %}{% endblock %}
 
+{% block page_header %}{% endblock %}
+
+{% block page_name %}account-inactive{% endblock %}
+
 {% block content %}
-    <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="col-lg-4 col-md-4 col-sm-3 col-xs-2"></div>
-            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-8">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3>{% trans "Account Inactive" %}</h3>
-                    </div>
-                    <div class="panel-body">
-                        <p>{% trans "This account is inactive." %}</p>
+    <div class="row justify-content-center py-5">
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header"><h4>{% trans "Account Inactive" %}</h4></div>
+                <div class="card-body p-4">
+                    <div class="fw-bold mb-2">Your CTB account has been deactivated.</div>
+                    <div>
+                        If you would like to reactivate your account or need more information regarding CTB policies on
+                        accounts, please contact <a href="mailto:feedback@isb-cgc.org">feedback@isb-cgc.org</a>
                     </div>
                 </div>
             </div>

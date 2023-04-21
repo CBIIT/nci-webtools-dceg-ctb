@@ -1,2 +1,2 @@
 # isb-cgc-ctb
-Chernobyl Tissue Biobank
+Chernobyl Tissue Bank

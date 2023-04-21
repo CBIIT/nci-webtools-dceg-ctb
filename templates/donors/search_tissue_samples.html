@@ -16,6 +16,7 @@
         <div class="row">
             <div class="col-lg-8">
                 <form id="search-tissue-form" class="bg-light border rounded py-4 mb-3">
+                    {% csrf_token %}
                     <input id="total-input" type="hidden" name="total" value="{{ total }}">
                     <div class="container-fluid">
                         <h4>Search Tissue Samples
@@ -81,9 +82,9 @@
                                             <i class="fa-solid fa-circle-question info-color" data-bs-toggle="tooltip"
                                                data-bs-html="true"
                                                data-bs-placement="right"
-                                               title="<div class='text-start'> There are small numbers of other tumours that are categorised by the Pathology Panel in the following way:<br><ol><li>Well differentiated carcinoma not otherwise specified<li>Poorly differentiated carcinoma<li>Two synchronous tumours sampled from the same patient<li>Other</ol>If you wish to request any of these please email us (ctb-info@isb-cgc.org).</div>">
+                                               title="<div class='text-start'> There are small numbers of other tumors that are categorised by the Pathology Panel in the following way:<br><ol><li>Well differentiated carcinoma not otherwise specified<li>Poorly differentiated carcinoma<li>Two synchronous tumors sampled from the same patient<li>Other</ol>If you wish to request any of these please email us (ctb-info@isb-cgc.org).</div>">
                                             </i>
-                                            Other special tumours
+                                            Other special tumors
                                         </div>
                                     </div>
                                 </div>
@@ -398,6 +399,7 @@
                         <div class="row">
                             <div class="text-end mb-3">
                                 <div id="save_message" class="text-primary fw-bold ms-2"></div>
+                                <div id="alert_message" class="text-primary ms-2"></div>
                             </div>
                         </div>
                     </div>
