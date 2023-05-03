@@ -15,7 +15,8 @@
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
                     <a class="nav-link {% if 'search_facility' in request.path %} active {% endif %}"
-                       aria-current="page" href="{% url 'account_login' %}">CTB Biosample Search Facility</a>
+                       aria-current="page" {% if user.is_authenticated %} href="{% url 'dashboard' %}" {% else %} href="{% url 'two_factor:login' %}"{% endif %}>CTB Biosample Search Facility</a>
+{#                       aria-current="page" href="{% url 'account_login' %}">CTB Biosample Search Facility</a>#}
                 </li>
 
                 <li class="nav-item dropdown">
@@ -82,6 +83,12 @@
                                    title="My Profile">My Profile
                                 </a>
                             </li>
+{#                            <li>#}
+{#                                <a href="{% url 'two_factor:profile' %}"#}
+{#                                   class="dropdown-item"#}
+{#                                   title="My Profile">Account Settings#}
+{#                                </a>#}
+{#                            </li>#}
                             <li>
                                 <a href="#logout-modal" class="dropdown-item" data-bs-toggle="modal"
                                    data-bs-target="#logout-modal"
@@ -108,7 +115,7 @@
         </div>
     </div>
 </nav>
-{% if 'login' in request.path or 'search_facility/' in request.path %}
+{% if 'search_facility/' in request.path %}
     <div id="ctb-secondary-navbar" class="bg-body shadow-sm">
         <div class="container">
             <nav class="nav navbar-ctb" aria-label="Secondary navigation">
@@ -120,7 +127,7 @@
                        href="{% url 'dashboard' %}">
                         Dashboard
                     </a>
-                    <a class="nav-link {% if 'search_tissue_samples/' in request.path or '_search_facility' in request.path %} active {% endif %}"
+                    <a class="nav-link {% if 'search_tissue_samples' in request.path or '_search_facility' in request.path %} active {% endif %}"
                        href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
                     <a class="nav-link {% if 'saved_searches/' in request.path %} active {% endif %}"
                        href="{% url 'saved_searches' %}">My Saved Searches</a>

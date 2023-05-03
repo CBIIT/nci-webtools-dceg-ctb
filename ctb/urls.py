@@ -15,19 +15,18 @@
 ###
 
 from __future__ import absolute_import
-
 from django.contrib import admin
 from django.urls import path
+from two_factor.urls import urlpatterns as tf_urls
+from django.conf.urls import include, url
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-from django.conf.urls import include, url
 from django.urls import path
 from django.contrib import admin
 from django.conf import settings
-
 from . import views
 
 admin.autodiscover()
@@ -99,6 +98,7 @@ urlpatterns = [
     url(r'^extended_login/$', views.extended_login_view, name='extended_login'),
 
     # url(r'^share/', include('sharing.urls')),
+    path('', include(tf_urls)),
 ]
 
 if settings.IS_DEV:

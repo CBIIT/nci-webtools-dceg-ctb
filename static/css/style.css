@@ -120,10 +120,17 @@ main a, footer a, .nav-link{
     padding: 0.4rem;
 }
 
-/* Accounts templates */
-.signup label, .login label, .password_reset label {
-    display: none;
+.login table{
+    width: 100%;
 }
+
+.login table td{
+    padding-bottom: .5rem;
+}
+/* Accounts templates */
+/*.signup label, .login label, .password_reset label {*/
+/*    display: none;*/
+/*}*/
 
 .signup input, .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
     width: 100%;
@@ -133,18 +140,18 @@ main a, footer a, .nav-link{
     background-color: #ececec;
 }
 
-.login label[for="id_remember"] {
-    display: inline-block;
-    margin-top: 5px;
-    font-size: larger;
-    font-weight: bold;
-}
+/*.login label[for="id_remember"] {*/
+/*    display: inline-block;*/
+/*    margin-top: 5px;*/
+/*    font-size: larger;*/
+/*    font-weight: bold;*/
+/*}*/
 
-#id_remember {
-    width: 20px;
-    margin-top: -2px;
-    vertical-align: middle;
-}
+/*#id_remember {*/
+/*    width: 20px;*/
+/*    margin-top: -2px;*/
+/*    vertical-align: middle;*/
+/*}*/
 
 .anchor-section{
 	/*height: 58px;*/

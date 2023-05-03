@@ -17,14 +17,14 @@
                 <div class="card">
                     <div class="card-header"><h4>Register</h4></div>
                     <div class="card-body p-5">
-                        <p>{% blocktrans %}Already have an account? Please <a href="{{ login_url }}"><b>sign in</b></a>
-                            instead.{% endblocktrans %}</p>
+                        <p>Already have an account? Please <a href="{% url 'two_factor:login' %}"><b>sign in</b></a>
+                            instead.</p>
                         {% csrf_token %}
                         {{ form.as_p }}
                         {% if redirect_field_value %}
                             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                         {% endif %}
-                        <div class="d-grid gap-2">
+                        <div class="d-grid gap-2 pt-3">
                             <button class="btn btn-secondary" type="submit">{% trans "Register" %} &raquo;
                             </button>
                         </div>

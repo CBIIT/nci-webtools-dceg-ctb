@@ -166,7 +166,7 @@ INSTALLED_APPS = [
     'adminrestrict',
     'axes',
     'donors',
-    'searches'
+    'searches',
 ]
 
 MIDDLEWARE = [
@@ -282,15 +282,25 @@ if IS_DEV:
 ##########################
 #  Start django-allauth  #
 ##########################
-
+LOGIN_URL = 'two_factor:login'
 LOGIN_REDIRECT_URL = '/extended_login/'
+# LOGIN_REDIRECT_URL = 'two_factor:profile'
+
 
 INSTALLED_APPS += (
     'accounts',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
+# 2FA support
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_email',  # <- if you want email capability.
+    'two_factor',
+    'two_factor.plugins.phonenumber',  # <- if you want phone number capability.
+    'two_factor.plugins.email',  # <- if you want email capability.
 )
 
 ROOT_URLCONF = 'ctb.urls'
@@ -632,6 +642,9 @@ if DEBUG and DEBUG_TOOLBAR:
     INTERNAL_IPS = (os.environ.get('INTERNAL_IP', ''),)
 
 MIDDLEWARE.append('axes.middleware.AxesMiddleware',)
+MIDDLEWARE.append('django_otp.middleware.OTPMiddleware',)
+# LOGIN_URL = 'bogus'
+# REDIRECT_FIELD_NAME = 'bogus'
 
 # Log the version of our app
 print("[STATUS] Application Version is {}".format(APP_VERSION))
