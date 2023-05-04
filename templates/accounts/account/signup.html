@@ -24,8 +24,24 @@
                         {% if redirect_field_value %}
                             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                         {% endif %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="two-fa-check" required>
+                            <label class="form-check-label" for="two-fa-check">
+                                I agree to use two-factor authentication to sign-in
+                            </label>
+                        </div>
+                        <div class="small fst-italic fw-light mt-2 bg-light p-2 rounded-2">
+                            This password must contain at least one each of the following:
+                            <ul>
+                                <li>a lower-case letter</li>
+                                <li>an upper-case letter</li>
+                                <li>a number</li>
+                                <li>a special character from the set '!@#$%^&*+:;?'</li>
+                            </ul>
+                        </div>
+
                         <div class="d-grid gap-2 pt-3">
-                            <button class="btn btn-secondary" type="submit">{% trans "Register" %} &raquo;
+                            <button class="btn btn-primary" type="submit">{% trans "Register" %} &raquo;
                             </button>
                         </div>
                     </div>

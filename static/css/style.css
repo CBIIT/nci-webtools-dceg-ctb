@@ -132,7 +132,7 @@ main a, footer a, .nav-link{
 /*    display: none;*/
 /*}*/
 
-.signup input, .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
+.signup input:not([type='checkbox']), .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
     width: 100%;
     border-radius: 3px;
     padding: 12px;
