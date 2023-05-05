@@ -99,7 +99,7 @@
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="type-ffpe"
                                                    name="sample_type[]" value="FFPE">
-                                            <label class="form-check-label" for="type-ffpe">FFPE Section</label>
+                                            <label class="form-check-label" for="type-ffpe">FFPE</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="type-dna"
@@ -408,12 +408,12 @@
             <div class="col-lg-4">
                 <div class="border rounded bg-light p-4 mb-3">
 
-                    <h5>Search Results <span class="fw-normal fs-5 float-end"><span
+                    <h5>Available Samples & Cases <span class="fw-normal fs-5 float-end"><span
                             id="total-case-count">{{ total }}</span> Cases</span></h5>
                     <table id="tissue-table" class="table table-striped tissue-samples-table">
                         <thead>
                         <tr>
-                            <th class="fw-bold">TISSUE</th>
+                            <th class="fw-bold">Tissue</th>
                             <th>Normal</th>
                             <th>Tumor</th>
                             <th>Metastatic</th>
@@ -433,7 +433,7 @@
                             <td id="tissue-dna-metastatic">{{ tissue.dna.metastatic }}</td>
                         </tr>
                         <tr>
-                            <td>FFPE section</td>
+                            <td>FFPE</td>
                             <td id="tissue-ffpe-normal">{{ tissue.ffpe.normal }}</td>
                             <td id="tissue-ffpe-tumour">{{ tissue.ffpe.tumour }}</td>
                             <td id="tissue-ffpe-metastatic">{{ tissue.ffpe.metastatic }}</td>
@@ -443,7 +443,7 @@
                     <table id="blood-table" class="table table-striped tissue-samples-table">
                         <thead>
                         <tr>
-                            <th class="fw-bold">BLOOD</th>
+                            <th class="fw-bold">Blood</th>
                             <th></th>
                             <th class="col-3"></th>
                             <th class="col-3"></th>
@@ -470,7 +470,7 @@
                            rel="noreferrer noopener" href="{% url 'clinical_search_facility' %}">
                             Proceed to Clinical Search <i class="fas fa-angle-double-right"></i>
                         </a>
-                        <a id="make-app-btn" class="btn btn-secondary" href="{% url 'make_application' %}">
+                        <a id="make-app-btn" class="btn btn-primary" href="{% url 'make_application' %}">
                             <i class="fas fa-edit"></i> Make Application
                         </a>
                     </div>

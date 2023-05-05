@@ -131,6 +131,23 @@ main a, footer a, .nav-link{
 /*.signup label, .login label, .password_reset label {*/
 /*    display: none;*/
 /*}*/
+.readmore-acc div{
+    padding: 0;
+    margin: 0;
+}
+.readmore-acc .accordion-button{
+    width: inherit;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: .4rem;
+    box-shadow: none;
+    color: #4d6ea0;
+}
+
+.readmore-acc .accordion-button:after{
+    margin-left: .5rem;
+}
 
 .signup input:not([type='checkbox']), .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
     width: 100%;
@@ -139,6 +156,10 @@ main a, footer a, .nav-link{
     border: 1px solid slategray;
     background-color: #ececec;
 }
+.setup-form ul{
+    list-style-type: none;
+}
+
 
 /*.login label[for="id_remember"] {*/
 /*    display: inline-block;*/

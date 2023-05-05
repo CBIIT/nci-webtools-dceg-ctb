@@ -8,10 +8,10 @@
 
 {% block content %}
     <div class="row justify-content-center py-5">
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div class="card">
-                <div class="card-header"><h4>{% trans "Confirm E-mail Address" %}</h4></div>
-                <div class="card-body p-5">
+                <div class="card-header"><h5>{% trans "Confirm E-mail Address" %}</h5></div>
+                <div class="card-body p-4">
                     {% if confirmation %}
                         {% user_display confirmation.email_address.user as user_display %}
                         <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that

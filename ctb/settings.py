@@ -284,8 +284,9 @@ if IS_DEV:
 ##########################
 LOGIN_URL = 'two_factor:login'
 LOGIN_REDIRECT_URL = '/extended_login/'
+OTP_LOGIN_URL = 'two_factor:profile'
 # LOGIN_REDIRECT_URL = 'two_factor:profile'
-
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'two_factor:setup'
 
 INSTALLED_APPS += (
     'accounts',

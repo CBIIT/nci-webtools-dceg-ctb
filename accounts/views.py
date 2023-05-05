@@ -24,6 +24,11 @@ from .models import *
 logger = logging.getLogger('main_logger')
 
 
+def redirect_login_view(request):
+    response = redirect('/account/login/')
+    return response
+
+
 @login_required
 def extended_logout_view(request):
     try:

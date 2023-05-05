@@ -18,8 +18,8 @@
                     <div class="card-body px-5 py-3">
                         <h6 class="card-title"><i class="fa-solid fa-shield"></i> Two-Factor Authentication
                         </h6>
-                        <table class="table" role="presentation">
                             {% if default_device %}
+                                <table class="table" role="presentation">
                                 <tr>
                                     {% blocktrans with primary=default_device|as_action %}
                                         <th scope="row">Primary method</th>
@@ -54,30 +54,32 @@
                                     </td>
 
                                 {% endif %}
-                                </tr>
                                 <tr>
                                     <th>{% trans "Backup Tokens" %}</th>
                                     <td>{% blocktrans trimmed %}If you don't have any device with you, you can access
                                         your account using backup tokens.{% endblocktrans %}
-                                    {% blocktrans trimmed count counter=backup_tokens %}
-                                        You have only one backup token remaining.
-                                    {% plural %}
-                                        You have {{ counter }} backup tokens remaining.
-                                    {% endblocktrans %}<br/>
-                                    <a href="{% url 'two_factor:backup_tokens' %}"
-                                      class="btn btn-outline-secondary btn-sm mt-2"><i class="fa-solid fa-angles-right"></i> {% trans "Show Codes" %}</a>
+                                        {% blocktrans trimmed count counter=backup_tokens %}
+                                            You have only one backup token remaining.
+                                        {% plural %}
+                                            You have {{ counter }} backup tokens remaining.
+                                        {% endblocktrans %}<br/>
+                                        <a href="{% url 'two_factor:backup_tokens' %}"
+                                           class="btn btn-outline-secondary btn-sm mt-2"><i
+                                                class="fa-solid fa-angles-right"></i> {% trans "Show Codes" %}</a>
                                     </td>
                                 </tr>
-{#                                <tr>#}
-{#                                    <th>#}
-{#                                        {% trans "Disable Two-Factor Authentication" %}#}
-{#                                    </th>#}
-{#                                    <td>{% blocktrans trimmed %}However we strongly discourage you to do so, you can#}
-{#                                    also disable two-factor authentication for your account.{% endblocktrans %}<br>#}
-{#                                    <a class="btn btn-secondary" href="{% url 'two_factor:disable' %}">#}
-{#                                    {% trans "Disable Two-Factor Authentication" %}</a>#}
-{#                                    </td>#}
-{#                                </tr>#}
+                                <tr>
+                                    <th>
+                                        {% trans "Disable Two-Factor Authentication" %}
+                                    </th>
+                                    <td>{% blocktrans trimmed %}However we strongly discourage you to do so, you can
+                                        also disable two-factor authentication for your account.{% endblocktrans %}<br>
+                                        <a class="btn btn-outline-secondary btn-sm mt-2"
+                                           href="{% url 'two_factor:disable' %}">
+                                            <i class="fas fa-ban"></i> {% trans "Disable Two-Factor Authentication" %}
+                                        </a>
+                                    </td>
+                                </tr>
                                 </table>
                             {% else %}
                                 <p>{% blocktrans trimmed %}Two-factor authentication is not enabled for your
@@ -87,6 +89,7 @@
                                     {% trans "Enable Two-Factor Authentication" %}</a>
                                 </p>
                             {% endif %}
+
                     </div>
                 </div>
             </div>

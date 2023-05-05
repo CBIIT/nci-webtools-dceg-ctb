@@ -12,11 +12,11 @@
 {% block content %}
 
     <div class="row justify-content-center py-5">
-        <div class="col-lg-4 accounts-col">
+        <div class="col-lg-5 accounts-col">
             <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                 <div class="card">
-                    <div class="card-header"><h4>Register</h4></div>
-                    <div class="card-body p-5">
+                    <div class="card-header"><h5>Register</h5></div>
+                    <div class="card-body p-4">
                         <p>Already have an account? Please <a href="{% url 'two_factor:login' %}"><b>sign in</b></a>
                             instead.</p>
                         {% csrf_token %}

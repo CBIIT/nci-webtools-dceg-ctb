@@ -18,7 +18,8 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import render
 from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
+from django_otp.decorators import otp_required
 from django.template.loader import get_template
 from .metadata_count import get_sample_case_counts, get_clinical_case_counts, get_driver_case_counts
 from .models import Filter
@@ -33,19 +34,20 @@ import logging
 logger = logging.getLogger('main_logger')
 
 
-@login_required
+# @login_required
+@otp_required
 def dashboard(request):
     message = request.POST.get('message')
     return render(request, 'donors/dashboard.html', {'message': message})
 
 
 # My Saved Searches
-@login_required
+@otp_required
 def saved_searches(request):
     return render(request, 'donors/saved_searches.html')
 
 
-@login_required
+@otp_required
 def get_search_list(request):
     return JsonResponse(get_saved_searches(request.user), safe=False)
 
@@ -60,20 +62,21 @@ def get_saved_searches(owner):
                 'name': u_filter.name,
                 'search_type': u_filter.search_type,
                 'case_count': u_filter.case_count,
-                'filter_encoded_url': u_filter.value
+                'filter_encoded_url': u_filter.value,
+                'saved_date': u_filter.last_date_saved
             }
         )
     return saved_search_list
 
 
-@login_required
+@otp_required
 def delete_filters(request, filter_id):
     owner = request.user
     message = Filter.destroy(filter_id=filter_id, owner=owner)
     return JsonResponse(message)
 
 
-@login_required
+@otp_required
 def save_filters(request):
     filters = get_filters(request, for_save=True)
     name = filters.get('title', 'Untitled')
@@ -83,7 +86,7 @@ def save_filters(request):
     if 'search_type' in filters:
         filters.pop('search_type')
     case_count = filters.get('total', 0)
-    if 'total' in filters and search_type != 'Clinic':
+    if 'total' in filters and search_type != 'Clinical':
         filters.pop('total')
     if 'filter_encoded_url' in filters:
         filter_encoded_url = filters.get('filter_encoded_url', 0)
@@ -94,7 +97,7 @@ def save_filters(request):
     return JsonResponse({'message': 'Your search \'' + name + '\' has been saved.'})
 
 
-@login_required
+@otp_required
 def search_clinical(request):
     filters = get_filters(request)
     total = filters.get('total', 5516)
@@ -111,7 +114,7 @@ def search_clinical(request):
 
 
 # Driver Search Facility
-@login_required
+@otp_required
 def driver_search_facility(request):
     filters = get_filters(request)
     total_filtered_case_count, counts = get_driver_case_counts(filters)
@@ -120,12 +123,12 @@ def driver_search_facility(request):
                    'filter_encoded_url': '?' + urllib.parse.urlencode(filters, True)})
 
 
-@login_required
+@otp_required
 def search_tissue_samples(request):
     return render(request, 'donors/search_tissue_samples.html')
 
 
-@login_required
+@otp_required
 def get_filters(request, for_save=False):
     sample_filters = {}
     request_method = request.GET if request.method == 'GET' else request.POST
@@ -139,7 +142,7 @@ def get_filters(request, for_save=False):
     return sample_filters
 
 
-@login_required
+@otp_required
 def filter_tissue_samples(request):
     filters = get_filters(request)
     case_counts = get_sample_case_counts(filters)
@@ -147,19 +150,19 @@ def filter_tissue_samples(request):
 
 
 # Clinical Search Facility
-@login_required
+@otp_required
 def clinical_search_facility(request):
     sample_filters = get_filters(request)
     return render(request, 'donors/clinical_search_facility.html',
                   {'sample_filters': sample_filters})
 
 
-@login_required
+@otp_required
 def make_application(request):
     return render(request, 'donors/application_form.html')
 
 
-@login_required
+@otp_required
 def application_submit(request):
     datetime_now = datetime.now(pytz.timezone('US/Eastern'))
     user_email = request.user.email
