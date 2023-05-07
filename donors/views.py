@@ -63,7 +63,8 @@ def get_saved_searches(owner):
                 'search_type': u_filter.search_type,
                 'case_count': u_filter.case_count,
                 'filter_encoded_url': u_filter.value,
-                'saved_date': u_filter.last_date_saved
+                'saved_date': datetime.strftime(u_filter.last_date_saved, '%b %-d %Y at %-I:%-M %p (%Z)')
+                # 'saved_date': u_filter.last_date_saved
             }
         )
     return saved_search_list
@@ -101,15 +102,18 @@ def save_filters(request):
 def search_clinical(request):
     filters = get_filters(request)
     total = filters.get('total', 5516)
+    title = filters.get('title', '')
+    if 'title' in filters:
+        filters.pop('title')
     if 'csrfmiddlewaretoken' in filters:
         filters.pop('csrfmiddlewaretoken')
     case_counts = get_clinical_case_counts(filters)
     clinic_search_result = {
-        'total': total,
-        'avail': case_counts
+        'total': f"{int(total):,}",
+        'avail': f"{int(case_counts):,}"
     }
     return render(request, 'donors/clinical_search_facility_result.html',
-                  {'clinic_search_result': clinic_search_result,
+                  {'clinic_search_result': clinic_search_result, 'title': title,
                    'filter_encoded_url': '?' + urllib.parse.urlencode(filters, True)})
 
 
@@ -117,15 +121,18 @@ def search_clinical(request):
 @otp_required
 def driver_search_facility(request):
     filters = get_filters(request)
+    title = filters.get('title', '')
+    if 'title' in filters:
+        filters.pop('title')
     total_filtered_case_count, counts = get_driver_case_counts(filters)
     return render(request, 'donors/driver_search_facility.html',
-                  {'counts': counts, 'total_filtered_case_count': total_filtered_case_count,
+                  {'counts': counts, 'title': title, 'total_filtered_case_count': total_filtered_case_count,
                    'filter_encoded_url': '?' + urllib.parse.urlencode(filters, True)})
 
 
 @otp_required
 def search_tissue_samples(request):
-    return render(request, 'donors/search_tissue_samples.html')
+    return render(request, 'donors/search_tissue_samples.html', {'total_counts': settings.BLANK_TISSUE_FILTER_CASE_COUNT})
 
 
 @otp_required
@@ -135,7 +142,8 @@ def get_filters(request, for_save=False):
     for key in request_method:
         if key.endswith('[]'):
             sample_filters[key] = request_method.getlist(key)
-        elif for_save or key != 'title':
+        else:
+        # elif for_save or key != 'title':
             val = request_method.get(key)
             if val:
                 sample_filters[key] = request_method.get(key)

@@ -1,6 +1,6 @@
 /**
  *
- * Copyright 2022, Institute for Systems Biology
+ * Copyright 2023, Institute for Systems Biology
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +44,7 @@ require([
             },
             columns: [
                 {
+                    class: 'text-end',
                     render: function (data, type, row, meta) {
                         let search_type_url;
                         if (row.search_type == 'Biosample') {
@@ -53,16 +54,24 @@ require([
                         } else {
                             search_type_url = 'driver_search_facility';
                         }
-                        let search_url = BASE_URL + "/search_facility/" + search_type_url + row.filter_encoded_url;
+                        let search_url = BASE_URL + "/search_facility/" + search_type_url + row.filter_encoded_url + '&title='+row.name;
                         return "<a href='" + search_url + "'>" + row.name + "</a>";
                     }
                 },
-                {data: 'search_type'},
+                {
+                    data: 'search_type',
+                    class: 'text-end',
+                },
                 {
                     data: 'case_count',
                     type: 'num',
                     class: 'text-end',
                     render: $.fn.dataTable.render.number(',', null)
+                },
+                {
+                    class: 'date-col text-end',
+                    data: 'saved_date',
+                    type: 'date'
                 },
 
                 // {

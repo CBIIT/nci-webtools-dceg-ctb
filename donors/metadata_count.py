@@ -283,8 +283,7 @@ def get_driver_case_counts(filters=None):
 
 
 def is_default_filter(filters=None):
-    # print(filters)
-    # filters.pop('total', None)
+    filters.pop('search_type', None)
     is_default = True
     for k, v in filters.items():
         if k != 'csrfmiddlewaretoken' and settings.BLANK_TISSUE_FILTERS.get(k, None) != v:
@@ -297,6 +296,8 @@ def is_default_filter(filters=None):
 
 
 def get_sample_case_counts(filters=None):
+    if 'title' in filters:
+        filters.pop('title')
     case_counts = {
         'tissue': {
             'rna': {

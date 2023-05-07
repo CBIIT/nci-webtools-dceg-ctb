@@ -127,6 +127,11 @@ main a, footer a, .nav-link{
 .login table td{
     padding-bottom: .5rem;
 }
+
+td.date-col{
+    color: #6c757d!important;
+    font-size: .8rem;
+}
 /* Accounts templates */
 /*.signup label, .login label, .password_reset label {*/
 /*    display: none;*/

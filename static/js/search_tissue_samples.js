@@ -44,7 +44,10 @@ require([
         if (queryString){
             const urlParams = new URLSearchParams(queryString);
             for(const [key, value] of urlParams.entries()){
-                if(key.endsWith('[]')) {
+                if(key == 'title'){
+                    $('#general-message').attr('data-title',value);
+                }
+                else if(key.endsWith('[]')) {
                     $("input:checkbox[name='" + key + "'][value='" + value + "']").prop('checked', true);
                 }
                 else if (key.startsWith('age')){
@@ -80,12 +83,12 @@ require([
             setTimeout(run_search_after_sleep, TIME_TO_WAIT);
         });
 
-        $("#search-save").on("click", function(e){
-            $('#save_message').html('');
-            if (is_input_valid(e))
-                save_filters();
-
-        });
+        // $("#search-save").on("click", function(e){
+        //     $('#save_message').html('');
+        //     if (is_input_valid(e))
+        //         save_filters();
+        //
+        // });
     });
     let run_search_after_sleep = function(){
         if (lastInputChangeTimeLog && Date.now() - lastInputChangeTimeLog > TIME_TO_WAIT){
@@ -95,22 +98,22 @@ require([
     };
 
 
-    let save_filters = function () {
-        $.ajax({
-            type: "post",
-            url: BASE_URL + "/search_facility/save_filters",
-            data: $('#search-tissue-form').serialize() +'&search_type=Biosample',
-            success: function(data) {
-                $('#save_message').html('<i class="fas fa-check-circle"></i> '+data['message']);
-            }
-        });
-    };
+    // let save_filters = function () {
+    //     $.ajax({
+    //         type: "post",
+    //         url: BASE_URL + "/search_facility/save_filters",
+    //         data: $('#search-tissue-form').serialize() +'&search_type=Biosample',
+    //         success: function(data) {
+    //             $('#save_message').html('<i class="fas fa-check-circle"></i> '+data['message']);
+    //         }
+    //     });
+    // };
     let search_samples = function () {
         let form_inputs = $("input.form-check-input:checkbox, input.form-check-input:radio, button.btn-reset, :input[type='number']");
         $('#total-input').val('');
         $('#total-case-count').text(numberWithCommas(0));
         $('table.table').addClass('loading');
-        $("#make-app-btn, #clinical-search-facility-btn, #search-save").addClass('disabled')
+        $("#make-app-btn, #clinical-search-facility-btn, #search-save-btn").addClass('disabled')
         $.ajax({
             type: "post",
             url: BASE_URL + "/search_facility/filter_tissue_samples",
@@ -119,7 +122,7 @@ require([
                 form_inputs.attr("disabled", true);
             },
             success: function (case_counts) {
-                $("#make-app-btn, #clinical-search-facility-btn, #search-save").removeClass('disabled');
+                $("#make-app-btn, #clinical-search-facility-btn, #search-save-btn").removeClass('disabled');
                 $('table.table.loading').removeClass('loading');
                 form_inputs.attr("disabled", false);
                 $('#total-case-count').text(numberWithCommas(case_counts['total']));
@@ -136,7 +139,7 @@ require([
                 $('#blood-serum').text(numberWithCommas(case_counts['blood']['serum']));
                 $('#blood-dna').text(numberWithCommas(case_counts['blood']['dna']));
                 $('#clinical-search-facility-btn').attr('href', BASE_URL + "/search_facility/clinical_search_facility?" + $('#search-tissue-form').serialize())
-
+                $('#general-message').html($('#general-message').data('title')?"<div class=\"border rounded p-2 mb-2 text-primary fst-italic\"><i class=\"fas fa-check-circle\"></i> Search '"+$('#general-message').data('title')+"' is loaded</div>":"")
             }
         });
     };

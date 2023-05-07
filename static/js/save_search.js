@@ -1,6 +1,6 @@
 /**
  *
- * Copyright 2022, Institute for Systems Biology
+ * Copyright 2023, Institute for Systems Biology
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,25 +24,38 @@ require.config({
 });
 
 require([
-    'base',
+    'base'
 ], function(base) {
     $(document).ready(function () {
         $("#search-save").on("click", function(e){
             $('#save_message').html('');
-            if (is_input_valid(e))
-                save_filters();
+            let title_id = $(this).data('titleid');
+            let search_title = $('#' + title_id).val()
+            let form_id = $(this).data('formid');
+            if (is_input_valid(search_title, e)){
+                $('#save-icon').addClass('d-none');
+                $('#load-icon').removeClass('d-none');
+                if ($('#search-save-title').val() != search_title) {
+                    $('#search-save-title').val(search_title)
+                }
+                save_filters(form_id);
+            }
         });
     });
 
 
 
-    let save_filters = function () {
+    let save_filters = function (form_id) {
+
         $.ajax({
             type: "post",
             url: BASE_URL + "/search_facility/save_filters",
-            data: $('#save-form').serialize(),
+            data: $('#'+form_id).serialize(),
             success: function(data) {
-                $('#save_message').html('<i class="fas fa-check-circle"></i> '+data['message']);
+                $('#save-icon').removeClass('d-none');
+                $('#load-icon').addClass('d-none');
+                $('#close-btn').click();
+                $('#general-message').html('<div class=\"border rounded p-2 mb-2 text-primary fst-italic\"><i class="fas fa-check-circle"></i> '+data['message']+'</div>');
             }
         });
     };

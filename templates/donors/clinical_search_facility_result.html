@@ -31,6 +31,11 @@
             <div class="col-lg-8">
                 <div class="border rounded bg-light p-4 mb-2">
                     <h5>Clinical Search Facility</h5>
+                    {% if title %}
+                    <div id="filter-title-div" class="text-primary fst-italic float-end">
+                        <i class="fas fa-check-circle"></i> Search '{{ title }}' is loaded
+                    </div>
+                    {% endif %}
                     <h6 class="pt-3"><strong>Results</strong></h6>
                     <hr>
                     <div><strong>Original BioSample Search Results: {{ clinic_search_result.avail }}</strong></div>
@@ -53,8 +58,8 @@
                             </button>
                         </div>
                         <div class="text-end">
-                            <div id="save_message" class="text-primary fw-bold my-2"></div>
-                            <div id="alert_message" class="text-primary my-2"></div>
+                            <div id="save_message" class="text-primary fst-italic my-2"></div>
+                            <div id="alert_message" class="text-primary fst-italic my-2"></div>
                         </div>
                     </form>
                 </div>

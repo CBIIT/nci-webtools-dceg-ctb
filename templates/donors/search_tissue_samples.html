@@ -13,24 +13,45 @@
 
 {% block content %}
     <div class="container py-3">
+        <div id="general-message"></div>
+
         <div class="row">
-            <div class="col-lg-8">
-                <form id="search-tissue-form" class="bg-light border rounded py-4 mb-3">
+            <div class="col-lg-7 pe-0">
+                <form id="search-tissue-form" class="bg-light border rounded py-3 mb-3">
                     {% csrf_token %}
                     <input id="total-input" type="hidden" name="total" value="{{ total }}">
+                    <input type="hidden" name="search_type" value="Biosample"/>
+                    <input type="hidden" name="title" id="search-save-title"/>
                     <div class="container-fluid">
                         <h4>Search Tissue Samples
-                            <button type="reset"
-                                    class="btn btn-reset btn-sm btn-outline-secondary float-end"
-                                    data-target="#search-tissue-form">Reset All
-                            </button>
                         </h4>
                         <div class="mb-2">
-                            <div class="text-muted fw-light">
+                            <div class="d-flex justify-content-end mb-2">
+                                <div role="group" aria-label="action buttons">
+                                    <button id="search-save-btn" type="button" class="btn btn-primary btn-sm"
+                                            data-bs-toggle="modal"
+                                            data-bs-target="#saveModal"><i
+                                            class="fa-solid fa-floppy-disk"></i> Save
+                                    </button>
+                                    <a id="clinical-search-facility-btn" type="button" class="btn btn-primary btn-sm"
+                                       href="{% url 'clinical_search_facility' %}">Proceed to Clinical Search <i
+                                            class="fas fa-angle-double-right"></i>
+                                    </a>
+                                    <a id="make-app-btn" type="button" class="btn btn-primary btn-sm"
+                                       href="{% url 'make_application' %}"><i
+                                            class="fas fa-edit"></i> Make
+                                        Application
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="text-muted fw-light mb-2">
                                 Please tick all that apply.
+                                <button type="reset"
+                                        class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                        data-target="#search-tissue-form">Reset All
+                                </button>
                             </div>
                         </div>
-
                         <div id="search-tissue-filters" class="row px-0">
                             <div class="col-lg">
                                 <div id="diagnosis-card" class="card mb-2">
@@ -61,7 +82,7 @@
                                                    name="diagnosis[]" value="FA">
                                             <label class="form-check-label" for="diag-fa">Follicular Adenoma</label>
                                         </div>
-{#                                        <hr>#}
+                                        {#                                        <hr>#}
                                         <div class="fw-light fst-italic small">Other Benign Follicular Tumors:</div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="diag-ftump"
@@ -151,8 +172,8 @@
                                 <div id="dosemetry-card" class="card my-2">
                                     <div class="card-header">Dosemetry
                                         <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
-                                               data-bs-html="true"
-                                               data-bs-placement="right"
+                                           data-bs-html="true"
+                                           data-bs-placement="right"
                                            title="<div class='text-start'>The donors in the CTB are currently operated in either Ukraine or Russia. For patients operated in Ukraine, the thyroid dose is calculated by Professor Ilya Likhtarev's group at the Institute of Radiation Protection in Kiev. For donors operated in Russia, the thyroid dose is calculated by Professor Stepanenko's group in MRRC RAMS, in Obninsk. Direct measurement of thyroid dose was carried out in only a few donors in Ukraine, and none in Russia. The majority of the dose estimation is therefore made retrospectively. The thyroid dose given in this portal is the arithmetic mean and is in mGy.</div>">
                                         </i>
                                         <button type="button"
@@ -190,8 +211,8 @@
                                 <div id="sample-origin-card" class="card mb-2">
                                     <div class="card-header">Sample Origin
                                         <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
-                                               data-bs-html="true"
-                                               data-bs-placement="right"
+                                           data-bs-html="true"
+                                           data-bs-placement="right"
                                            title="<div class='text-start'> Only DNA and serum are available from blood samples</div>"></i>
                                         <button type="button"
                                                 class="btn btn-reset btn-sm btn-outline-secondary float-end"
@@ -206,18 +227,21 @@
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
-                                                   id="sampleorigin-normal-tissue" name="sample_origin[]" value="normal">
+                                                   id="sampleorigin-normal-tissue" name="sample_origin[]"
+                                                   value="normal">
                                             <label class="form-check-label" for="sampleorigin-normal-tissue">Normal
                                                 Tissue</label>
                                         </div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox"
-                                                   id="sampleorigin-tumour-tissue" name="sample_origin[]" value="tumour">
+                                                   id="sampleorigin-tumour-tissue" name="sample_origin[]"
+                                                   value="tumour">
                                             <label class="form-check-label" for="sampleorigin-tumour-tissue">Tumor
                                                 Tissue</label>
                                         </div>
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="sample_origin-metastatic"
+                                            <input class="form-check-input" type="checkbox"
+                                                   id="sample_origin-metastatic"
                                                    name="sample_origin[]" value="metastatic">
                                             <label class="form-check-label"
                                                    for="sampleorigin-metastatic">Metastatic</label>
@@ -227,8 +251,8 @@
                                 <div id="residency-card" class="card my-2">
                                     <div class="card-header">Patient Residency
                                         <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
-                                               data-bs-html="true"
-                                               data-bs-placement="right"
+                                           data-bs-html="true"
+                                           data-bs-placement="right"
                                            title="<div class='text-start'>Residency refers to residence at the time of the accident</div>"></i>
 
                                         <button type="button"
@@ -263,8 +287,8 @@
                                 <div id="dob-card" class="card my-2">
                                     <div class="card-header">Date of Birth
                                         <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
-                                               data-bs-html="true"
-                                               data-bs-placement="right"
+                                           data-bs-html="true"
+                                           data-bs-placement="right"
                                            title="<div class='text-start'>Tissue and blood samples in the CTB have been collected from patients classified by their date of birth into one of three groups: <br><br>Those born between 04/26/67 and 04/26/86, i.e. aged 19 years or younger at the time of the accident on 26th April 1986 <br>Those in utero at the time of the accident<br><br>Those born after 1st January 1987 by which time the radioiodine emitted during accident had decayed to background levels.<br><br>The majority of cases are from Group (i) with much smaller numbers in Groups (ii) and (iii).</div>"></i>
 
                                         <button type="button"
@@ -289,12 +313,12 @@
                                                    name="dob" value="both" checked>
                                             <label class="form-check-label" for="dob-both">Any</label>
                                         </div>
-{#                                        <div class="form-check">#}
-{#                                            <input class="form-check-input" type="checkbox" id="dob-after-01011987"#}
-{#                                                   name="dob[]" value="3">#}
-{#                                            <label class="form-check-label" for="dob-after-01011987">After#}
-{#                                                4/26/1987</label>#}
-{#                                        </div>#}
+                                        {#                                        <div class="form-check">#}
+                                        {#                                            <input class="form-check-input" type="checkbox" id="dob-after-01011987"#}
+                                        {#                                                   name="dob[]" value="3">#}
+                                        {#                                            <label class="form-check-label" for="dob-after-01011987">After#}
+                                        {#                                                4/26/1987</label>#}
+                                        {#                                        </div>#}
                                     </div>
                                 </div>
                                 <div id="gender-card" class="card my-2">
@@ -331,10 +355,11 @@
                                     </div>
                                     <div class="card-body">
                                         <div><label for="bslider-0" class="form-label">Age at First Operation (Range in
-                                            Years) <i class="fa-solid fa-circle-question info-color" data-bs-toggle="tooltip"
-                                               data-bs-html="true"
-                                               data-bs-placement="right"
-                                               title="<div class='text-start'>The selector gives the current maximum age of cases in the CTB cohort (aged under 19 at the time of the accident + time since the accident). By this age the incidence of thyroid cancers is increasing irrespective of any contributing effect of radiation. Samples are becoming available for this older cohort, who were in their late teens at the time of the accident, but applicants should be aware that any effects of radiation will be diluted by the increasing incidence of spontaneous thyroid cancers in this particular age group.</div>">
+                                            Years) <i class="fa-solid fa-circle-question info-color"
+                                                      data-bs-toggle="tooltip"
+                                                      data-bs-html="true"
+                                                      data-bs-placement="right"
+                                                      title="<div class='text-start'>The selector gives the current maximum age of cases in the CTB cohort (aged under 19 at the time of the accident + time since the accident). By this age the incidence of thyroid cancers is increasing irrespective of any contributing effect of radiation. Samples are becoming available for this older cohort, who were in their late teens at the time of the accident, but applicants should be aware that any effects of radiation will be diluted by the increasing incidence of spontaneous thyroid cancers in this particular age group.</div>">
                                             </i>:</label>
                                         </div>
                                         <div class="row">
@@ -356,10 +381,11 @@
                                             </div>
                                         </div>
                                         <div><label for="bslider-0" class="form-label">Age at Exposure (Range in
-                                            Years) <i class="fa-solid fa-circle-question info-color" data-bs-toggle="tooltip"
-                                               data-bs-html="true"
-                                               data-bs-placement="right"
-                                               title="<div class='text-start'>Age at exposure for cases in Group: Researchers wishing to study the cohort that were in utero at the time of the accident should contact the secretariat for more information about the gestational age of the cases in the CTB.</div>">
+                                            Years) <i class="fa-solid fa-circle-question info-color"
+                                                      data-bs-toggle="tooltip"
+                                                      data-bs-html="true"
+                                                      data-bs-placement="right"
+                                                      title="<div class='text-start'>Age at exposure for cases in Group: Researchers wishing to study the cohort that were in utero at the time of the accident should contact the secretariat for more information about the gestational age of the cases in the CTB.</div>">
                                             </i>:</label></div>
                                         <div class="row">
                                             <div class="col-md-6">
@@ -374,7 +400,7 @@
                                                 <div class="input-group input-group-sm mb-3">
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
                                                     <input id="max-age-first-exposure" type="number"
-                                                           class="form-control"  name="age_at_exposure_max"
+                                                           class="form-control" name="age_at_exposure_max"
                                                            min="-40" max="40">
                                                 </div>
                                             </div>
@@ -385,33 +411,37 @@
                         </div>
                         <hr>
 
-                        <div class="row">
-                            <div class="input-group mb-3">
-                                <input type="text" name="title" id="search-save-title"
-                                       class="form-control" value="" placeholder="Search Title"
-                                       aria-label="Recipient's username" aria-describedby="search-save">
-                                <button class="btn btn-primary" type="button" id="search-save"><i
-                                        class="fa-solid fa-floppy-disk"></i> Save Search
-                                </button>
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="text-end mb-3">
-                                <div id="save_message" class="text-primary fw-bold ms-2"></div>
-                                <div id="alert_message" class="text-primary ms-2"></div>
-                            </div>
-                        </div>
+                        {#                        <div class="row">#}
+                        {#                            <div class="input-group mb-3">#}
+                        {#                                <input type="text" name="title" id="search-save-title"#}
+                        {#                                       class="form-control" value="" placeholder="Search Title"#}
+                        {#                                       aria-label="Recipient's username" aria-describedby="search-save">#}
+                        {#                                <button class="btn btn-primary" type="button" id="search-save"><i#}
+                        {#                                        class="fa-solid fa-floppy-disk"></i> Save Search#}
+                        {#                                </button>#}
+                        {##}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="row">#}
+                        {#                            <div class="text-end mb-3">#}
+                        {#                                <div id="save_message" class="text-primary fst-italic ms-2"></div>#}
+                        {#                                <div id="alert_message" class="text-primary fst-italic ms-2"></div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
                     </div>
                 </form>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-5">
                 <div class="border rounded bg-light p-4 mb-3">
 
-                    <h5>Available Samples & Cases <span class="fw-normal fs-5 float-end"><span
-                            id="total-case-count">{{ total }}</span> Cases</span></h5>
+                    <h5>Available Cases & Samples
+                    </h5>
+                    <div class="fw-normal fs-5 text-end"><span
+                            id="total-case-count" class="fw-bold">{{ total|default:0 }}</span><span class="fst-italic text-muted small"> /{{ total_counts.total }}</span>
+                        Cases
+                    </div>
                     <table id="tissue-table" class="table table-striped tissue-samples-table">
-                        <thead>
+                    <thead>
                         <tr>
                             <th class="fw-bold">Tissue</th>
                             <th>Normal</th>
@@ -422,21 +452,39 @@
                         <tbody>
                         <tr>
                             <td>RNA</td>
-                            <td id="tissue-rna-normal">{{ tissue.rna.normal }}</td>
-                            <td id="tissue-rna-tumour">{{ tissue.rna.tumour }}</td>
-                            <td id="tissue-rna-metastatic">{{ tissue.rna.metastatic }}</td>
+                            <td><span id="tissue-rna-normal" class="fw-bold">{{ tissue.rna.normal|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.normal }}</span>
+                            </td>
+                            <td><span id="tissue-rna-tumour" class="fw-bold">{{ tissue.rna.tumour|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.tumour }}</span>
+                            </td>
+                            <td><span id="tissue-rna-metastatic" class="fw-bold">{{ tissue.rna.metastatic|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.metastatic }}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>DNA</td>
-                            <td id="tissue-dna-normal">{{ tissue.dna.normal }}</td>
-                            <td id="tissue-dna-tumour">{{ tissue.dna.tumour }}</td>
-                            <td id="tissue-dna-metastatic">{{ tissue.dna.metastatic }}</td>
+                            <td><span id="tissue-dna-normal" class="fw-bold">{{ tissue.dna.normal|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.normal }}</span>
+                            </td>
+                            <td><span id="tissue-dna-tumour" class="fw-bold">{{ tissue.dna.tumour|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.tumour }}</span>
+                            </td>
+                            <td><span id="tissue-dna-metastatic" class="fw-bold">{{ tissue.dna.metastatic|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.metastatic }}</span>
+                            </td>
                         </tr>
                         <tr>
                             <td>FFPE</td>
-                            <td id="tissue-ffpe-normal">{{ tissue.ffpe.normal }}</td>
-                            <td id="tissue-ffpe-tumour">{{ tissue.ffpe.tumour }}</td>
-                            <td id="tissue-ffpe-metastatic">{{ tissue.ffpe.metastatic }}</td>
+                            <td><span id="tissue-ffpe-normal" class="fw-bold">{{ tissue.ffpe.normal|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.normal }}</span>
+                            </td>
+                            <td><span id="tissue-ffpe-tumour" class="fw-bold">{{ tissue.ffpe.tumour|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.tumour }}</span>
+                            </td>
+                            <td><span id="tissue-ffpe-metastatic" class="fw-bold">{{ tissue.ffpe.metastatic|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.metastatic }}</span>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -452,29 +500,73 @@
                         <tbody>
                         <tr>
                             <td>Serum</td>
-                            <td id="blood-serum">{{ blood.serum }}</td>
+                            <td><span id="blood-serum" class="fw-bold">{{ blood.serum|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.blood.serum }}</span>
+                            </td>
                             <th></th>
                             <th></th>
                         </tr>
                         <tr>
                             <td>DNA</td>
-                            <td id="blood-dna">{{ blood.dna }}</td>
+                            <td><span id="blood-dna" class="fw-bold">{{ blood.dna|default:0 }}</span><span
+                                    class="fst-italic text-muted small"> /{{ total_counts.blood.dna }}</span>
+                            </td>
                             <th></th>
                             <th></th>
                         </tr>
                         </tbody>
                     </table>
 
-                    <div class="d-grid gap-2 col mx-auto">
-                        <a id="clinical-search-facility-btn" class="btn btn-primary" target="_blank"
-                           rel="noreferrer noopener" href="{% url 'clinical_search_facility' %}">
-                            Proceed to Clinical Search <i class="fas fa-angle-double-right"></i>
-                        </a>
-                        <a id="make-app-btn" class="btn btn-primary" href="{% url 'make_application' %}">
-                            <i class="fas fa-edit"></i> Make Application
-                        </a>
-                    </div>
+                    {#                    <div class="d-grid gap-2 col mx-auto">#}
+                    {#                        <a id="clinical-search-facility-btn" class="btn btn-primary" target="_blank"#}
+                    {#                           rel="noreferrer noopener" href="{% url 'clinical_search_facility' %}">#}
+                    {#                            Proceed to Clinical Search <i class="fas fa-angle-double-right"></i>#}
+                    {#                        </a>#}
+                    {#                        <a id="make-app-btn" class="btn btn-primary" href="{% url 'make_application' %}">#}
+                    {#                            <i class="fas fa-edit"></i> Make Application#}
+                    {#                        </a>#}
+                    {#                    </div>#}
                 </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form id="save-form">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="saveModalLabel">Save Search</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        {#                        <input type="hidden" name="filter_encoded_url" value="{{ filter_encoded_url }}"/>#}
+                        {#                        <input type="hidden" name="search_type" value="Biosample"/>#}
+                        {#                        <input type="hidden" name="total" value="{{ total_filtered_case_count }}"/>#}
+                        {#                        <div class="d-grid gap-2">#}
+                        {#                            <div class="input-group">#}
+                        <input id="save-title" type="text" name="title"
+                               class="form-control" value="" placeholder="Search Name"
+                               aria-label="Save Search" aria-describedby="search-save">
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        <div class="text-end mb-3">
+
+                            <div id="alert_message" class="text-primary fst-italic my-2"></div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button id="close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                        </button>
+                        <button id="search-save" data-formid="search-tissue-form" data-titleid="save-title"
+                                type="button" class="btn btn-primary"><i id="save-icon"
+                                                                         class="fas fa-save"></i><i
+                                id="load-icon" class="d-none fas fa-circle-notch fa-spin"></i> Save
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -482,5 +574,6 @@
 
 {% block js_file %}
     {{ block.super }}
-	<script src="{% static 'js/search_tissue_samples.js' %}"></script>
+    <script src="{% static 'js/search_tissue_samples.js' %}"></script>
+    <script src="{% static 'js/save_search.js' %}"></script>
 {% endblock %}
