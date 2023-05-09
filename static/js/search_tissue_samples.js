@@ -36,8 +36,8 @@ require([
 ], function(base) {
     // To ensure the search is not run while the user is still actively entering the inputs
     // the system will wait for at least 1.5 seconds to see if there are any other inputs being entered
-    let lastInputChangeTimeLog = 0;    // 0 indicates a reset timer
-    let TIME_TO_WAIT = 1500; // 1.5 secs
+    // let lastInputChangeTimeLog = 0;    // 0 indicates a reset timer
+    // let TIME_TO_WAIT = 1500; // 1.5 secs
     $(document).ready(function () {
 
         let queryString = window.location.search;
@@ -79,8 +79,9 @@ require([
         search_samples();
 
         $("#search-tissue-filters input").not("#search-save-title").on("change", function () {
-            lastInputChangeTimeLog = Date.now();
-            setTimeout(run_search_after_sleep, TIME_TO_WAIT);
+            search_samples();
+            // lastInputChangeTimeLog = Date.now();
+            // setTimeout(run_search_after_sleep, TIME_TO_WAIT);
         });
 
         // $("#search-save").on("click", function(e){
@@ -90,12 +91,12 @@ require([
         //
         // });
     });
-    let run_search_after_sleep = function(){
-        if (lastInputChangeTimeLog && Date.now() - lastInputChangeTimeLog > TIME_TO_WAIT){
-            lastInputChangeTimeLog = 0; // reset timer
-            search_samples();
-        }
-    };
+    // let run_search_after_sleep = function(){
+    //     if (lastInputChangeTimeLog && Date.now() - lastInputChangeTimeLog > TIME_TO_WAIT){
+    //         lastInputChangeTimeLog = 0; // reset timer
+    //         search_samples();
+    //     }
+    // };
 
 
     // let save_filters = function () {

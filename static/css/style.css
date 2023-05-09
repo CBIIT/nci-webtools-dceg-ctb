@@ -177,6 +177,9 @@ td.date-col{
     margin-left: .5rem;
 }
 
+#ctb-intro-acc .accordion-item, #ctb-intro-acc .accordion-button{
+    background-color: #e2e3e5;
+}
 .signup input:not([type='checkbox']), .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
     width: 100%;
     border-radius: 3px;
