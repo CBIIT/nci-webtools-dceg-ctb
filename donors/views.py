@@ -125,8 +125,6 @@ def search_clinical(request):
     clinic_search_result = {
         'total': total,
         'avail': case_counts
-        # 'total': f"{int(total):,}",
-        # 'avail': f"{int(case_counts):,}"
     }
     return render(request, 'donors/clinical_search_facility_result.html',
                   {'clinic_search_result': clinic_search_result, 'title': title,

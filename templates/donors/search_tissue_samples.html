@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load donors_custom_tags %}
 {% block title %}
     CTB | Search Tissue Samples
 {% endblock %}
@@ -12,7 +13,7 @@
 
 {% block content %}
     <div class="container py-3">
-    <h5>Search Tissue Samples</h5>
+        <h5>Search Tissue Samples</h5>
         <div id="general-message"></div>
 
         <div class="row">
@@ -449,98 +450,139 @@
             <div class="col-lg-5">
                 <div class="border rounded bg-light p-4 mb-3">
 
-                    <h5>Available Cases & Samples
+                    <h5>Available Cases
                     </h5>
                     <div class="fw-normal fs-5 text-end"><span
                             id="total-case-count" class="fw-bold">{{ total|default:0 }}</span><span
-                            class="fst-italic text-muted small"> /{{ total_counts.total }}</span>
+                            class="fst-italic text-muted small"> /{{ total_counts.total|format_num_with_commmas }}</span>
                         Cases
                     </div>
-                    <table id="tissue-table" class="table table-striped tissue-samples-table">
-                        <thead>
-                        <tr>
-                            <th class="fw-bold">Tissue</th>
-                            <th>Normal</th>
-                            <th>Tumor</th>
-                            <th>Metastatic</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>RNA</td>
-                            <td><span id="tissue-rna-normal"
-                                      class="fw-bold">{{ tissue.rna.normal|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.normal }}</span>
-                            </td>
-                            <td><span id="tissue-rna-tumour"
-                                      class="fw-bold">{{ tissue.rna.tumour|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.tumour }}</span>
-                            </td>
-                            <td><span id="tissue-rna-metastatic"
-                                      class="fw-bold">{{ tissue.rna.metastatic|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.metastatic }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>DNA</td>
-                            <td><span id="tissue-dna-normal"
-                                      class="fw-bold">{{ tissue.dna.normal|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.normal }}</span>
-                            </td>
-                            <td><span id="tissue-dna-tumour"
-                                      class="fw-bold">{{ tissue.dna.tumour|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.tumour }}</span>
-                            </td>
-                            <td><span id="tissue-dna-metastatic"
-                                      class="fw-bold">{{ tissue.dna.metastatic|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.metastatic }}</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>FFPE</td>
-                            <td><span id="tissue-ffpe-normal"
-                                      class="fw-bold">{{ tissue.ffpe.normal|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.normal }}</span>
-                            </td>
-                            <td><span id="tissue-ffpe-tumour"
-                                      class="fw-bold">{{ tissue.ffpe.tumour|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.tumour }}</span>
-                            </td>
-                            <td><span id="tissue-ffpe-metastatic"
-                                      class="fw-bold">{{ tissue.ffpe.metastatic|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.metastatic }}</span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <table id="blood-table" class="table table-striped tissue-samples-table">
-                        <thead>
-                        <tr>
-                            <th class="fw-bold">Blood</th>
-                            <th></th>
-                            <th class="col-3"></th>
-                            <th class="col-3"></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Serum</td>
-                            <td><span id="blood-serum" class="fw-bold">{{ blood.serum|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.blood.serum }}</span>
-                            </td>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        <tr>
-                            <td>DNA</td>
-                            <td><span id="blood-dna" class="fw-bold">{{ blood.dna|default:0 }}</span><span
-                                    class="fst-italic text-muted small"> /{{ total_counts.blood.dna }}</span>
-                            </td>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </tbody>
-                    </table>
+                    <div class="border rounded p-2 my-2">
+                        <div class="fw-bold">Tissue Origin</div>
+                        <table id="tissue-table" class="table table-striped tissue-samples-table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center" colspan="2">Normal</th>
+                                <th class="text-center" colspan="2">Tumor</th>
+                                <th class="text-center" colspan="2">Metastatic</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>RNA</td>
+                                <td class="text-end pe-0"><span id="tissue-rna-normal"
+                                                           class="fw-bold">{{ tissue.rna.normal|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.normal|format_num_with_commmas }}</span>
+                                </td>
+                                <td class="text-end pe-0"><span id="tissue-rna-tumour"
+                                                           class="fw-bold">{{ tissue.rna.tumour|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.tumour|format_num_with_commmas }}</span>
+                                </td>
+                                <td class="text-end pe-0"><span id="tissue-rna-metastatic"
+                                                           class="fw-bold">{{ tissue.rna.metastatic|format_num_with_commmas|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.metastatic|format_num_with_commmas }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>DNA</td>
+                                <td class="text-end pe-0"><span id="tissue-dna-normal"
+                                                           class="fw-bold">{{ tissue.dna.normal|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.normal|format_num_with_commmas }}</span>
+                                </td>
+                                <td class="text-end pe-0"><span id="tissue-dna-tumour"
+                                                           class="fw-bold">{{ tissue.dna.tumour|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.tumour|format_num_with_commmas }}</span>
+                                </td>
+                                <td class="text-end pe-0"><span id="tissue-dna-metastatic"
+                                                           class="fw-bold">{{ tissue.dna.metastatic|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.metastatic|format_num_with_commmas }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>FFPE</td>
+                                <td class="text-end pe-0"><span id="tissue-ffpe-normal"
+                                                           class="fw-bold">{{ tissue.ffpe.normal|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.normal|format_num_with_commmas }}</span>
+                                </td>
+                                <td class="text-end pe-0"><span id="tissue-ffpe-tumour"
+                                                           class="fw-bold">{{ tissue.ffpe.tumour|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.tumour|format_num_with_commmas }}</span>
+                                </td>
+                                <td class="text-end pe-0"><span id="tissue-ffpe-metastatic"
+                                                           class="fw-bold">{{ tissue.ffpe.metastatic|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.metastatic|format_num_with_commmas }}</span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="border rounded p-2 my-2">
+                        <div class="fw-bold">Blood Origin</div>
+                        <table id="blood-table" class="table table-striped tissue-samples-table">
+                            <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center" colspan="2">Blood</th>
+                                <th class="col-3"></th>
+                                <th class="col-3"></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>Serum</td>
+                                <td class="text-end pe-0"><span id="blood-serum"
+                                                           class="fw-bold">{{ blood.serum|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.blood.serum|format_num_with_commmas }}</span>
+                                </td>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>DNA</td>
+                                <td class="text-end pe-0"><span id="blood-dna"
+                                                           class="fw-bold">{{ blood.dna|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.blood.dna|format_num_with_commmas }}</span>
+                                </td>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>Blood</td>
+                                <td class="text-end pe-0"><span id="blood-blood"
+                                                           class="fw-bold">{{ blood.blood|default:0 }}</span>
+                                </td>
+                                <td><span
+                                        class="fst-italic text-muted small"> /{{ total_counts.blood.blood|format_num_with_commmas }}</span>
+                                </td>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
 
                     {#                    <div class="d-grid gap-2 col mx-auto">#}
                     {#                        <a id="clinical-search-facility-btn" class="btn btn-primary" target="_blank"#}

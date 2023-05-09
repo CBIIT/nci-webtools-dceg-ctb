@@ -614,7 +614,8 @@ BLANK_TISSUE_FILTER_CASE_COUNT = {
     },
     'blood': {
         'dna': 3623,
-        'serum': 3265
+        'serum': 3265,
+        'blood': 3420
     },
     'total': 5546
 }

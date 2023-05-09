@@ -318,7 +318,8 @@ def get_sample_case_counts(filters=None):
         },
         'blood': {
             'dna': 0,
-            'serum': 0
+            'serum': 0,
+            'blood': 0
         },
         'total': 0
     }
@@ -341,8 +342,9 @@ def get_sample_case_counts(filters=None):
         total_count_query = query_template.format(group_select_clause='', where_clause=where_clause, group_clause='')
         grouped_count_query = query_template.format(group_select_clause=group_select_clause, where_clause=where_clause,
                                                     group_clause=group_clause)
+        print(grouped_count_query)
 
-        # print(total_count_query)
+        print(total_count_query)
         # print(grouped_count_query)
         with connection.cursor() as cursor:
             cursor.execute(total_count_query)
