@@ -15,9 +15,6 @@
 ###
 from __future__ import division
 from django import template
-from functools import reduce
-from django.db.models import Q
-import logging
 
 register = template.Library()
 

@@ -52,6 +52,20 @@ def get_search_list(request):
     return JsonResponse(get_saved_searches(request.user), safe=False)
 
 
+@otp_required
+def get_my_application_list(owner):
+    my_application_list = []
+    user_application_object_list = Filter.get_list(owner)
+    for u_filter in user_application_object_list:
+        my_application_list.append(
+            {
+                'submitted_date': datetime.strftime(u_filter.last_date_saved, '%b %-d %Y at %-I:%-M %p (%Z)')
+            }
+        )
+    return my_application_list
+
+
+# @otp_required
 def get_saved_searches(owner):
     saved_search_list = []
     user_filter_object_list = Filter.get_list(owner)
@@ -109,8 +123,10 @@ def search_clinical(request):
         filters.pop('csrfmiddlewaretoken')
     case_counts = get_clinical_case_counts(filters)
     clinic_search_result = {
-        'total': f"{int(total):,}",
-        'avail': f"{int(case_counts):,}"
+        'total': total,
+        'avail': case_counts
+        # 'total': f"{int(total):,}",
+        # 'avail': f"{int(case_counts):,}"
     }
     return render(request, 'donors/clinical_search_facility_result.html',
                   {'clinic_search_result': clinic_search_result, 'title': title,
@@ -160,9 +176,12 @@ def filter_tissue_samples(request):
 # Clinical Search Facility
 @otp_required
 def clinical_search_facility(request):
-    sample_filters = get_filters(request)
+    filters = get_filters(request)
+    title = filters.get('title', '')
+    if 'title' in filters:
+        filters.pop('title')
     return render(request, 'donors/clinical_search_facility.html',
-                  {'sample_filters': sample_filters})
+                  {'sample_filters': filters, 'title': title})
 
 
 @otp_required

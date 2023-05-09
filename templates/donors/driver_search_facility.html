@@ -26,296 +26,295 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col mb-3">
-                <div id="general-message">
-                    {% if title %}
-                        <div class="border rounded p-2 mb-2 text-primary fst-italic"><i
-                                class="fas fa-check-circle"></i>
-                            Search '{{ title }}' is loaded
-                        </div>
-                    {% endif %}
-                </div>
-                {#            <div class="col-lg-8 mb-3">#}
-                <div class="border rounded bg-light p-4">
-                    <div class="content-header">
-                        <h5>Oncogenic Driver Search</h5>
+            <div class="content-header">
+                <h5>Oncogenic Driver Search</h5>
+            </div>
+            <div id="general-message">
+                {% if title %}
+                    <div class="alert alert-light alert-dismissible fade show border rounded"><i
+                            class="fas fa-check-circle"></i>
+                        Search '{{ title }}' is loaded
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
-                    <div class="p-3">
-                        <div class="readmore-acc accordion accordion-flush" id="driver-intro-acc">
-                            <div class="accordion-item bg-light">
-                                <h2 class="accordion-header d-md-flex justify-content-md-end"
-                                    id="driver-intro-acc-headingOne">
-                                    <button class="accordion-button collapsed bg-light" type="button"
-                                            data-bs-toggle="collapse"
-                                            data-bs-target="#driver-intro-one" aria-expanded="false"
-                                            aria-controls="driver-intro-one">
-                                        About Oncogenic Driver Search
-                                    </button>
-                                </h2>
-                                <div id="driver-intro-one" class="accordion-collapse collapse"
-                                     aria-labelledby="driver-intro-acc-headingOne" data-bs-parent="#driver-intro-acc">
-                                    <div class="accordion-body border rounded-2 p-3 mb-2">
-                                        <p>This section of the search facility enables you to refine your search using
-                                            oncogenic
-                                            drivers that have been identified in tumor samples as a result of research
-                                            studies
-                                            using other samples from the same patients that match your search criteria.
-                                            Data
-                                            has
-                                            been pooled from three research studies, all of which have used either whole
-                                            genome
-                                            sequencing or next generation sequencing/RNAseq.</p>
-                                        <p>Please note that this part of the search facility is currently restricted to
-                                            oncogenic
-                                            drivers in Papillary Thyroid Carcinoma. Currently this data is available on
-                                            515
-                                            Papillary Carcinomas in which a unique driver has been identified. In 20 of
-                                            these cases,
-                                            no driver mutations have yet been identified. If you wish to include these
-                                            in
-                                            your
-                                            search, please ensure that you select "NYI" in the menu below.</p>
-                                        <p>Oncogenic drivers fall into two categories – fusion events or mutation
-                                            events.
-                                            Many
-                                            oncogenic driver genes can have multiple partners involved in fusions, for
-                                            example the
-                                            RET oncogene (see this recent <a
-                                                    href="https://pubmed.ncbi.nlm.nih.gov/32326537/"
-                                                    target="_blank" rel="noopener">review by Santoro et
-                                                al</a>., for more information). The search facility groups these
-                                            together,
-                                            so if you
-                                            select Fusion.RET, all of your selected cases that harbour any form of RET
-                                            fusion gene
-                                            will be returned. This is true for sother fusion drivers with multiple
-                                            possible
-                                            partners. If you require samples that harbour specific oncogenic fusions,
-                                            please
-                                            detail
-                                            this in your application.
-                                        </p>
-                                        <p>Similarly, if you select Mut.Ras, the selected cases may harbour mutations in
-                                            any
-                                            of the
-                                            3 RAS oncogenes. If you require samples that harbour specific RAS mutations,
-                                            please
-                                            detail this in your application.</p>
-                                        <p>The table below gives you the total number of cases which harbour the
-                                            individual
-                                            oncogenic drivers included in the dropdown menu that may be available. The
-                                            actual number
-                                            that would be available for your study will depend on the biospecimens you
-                                            require plus
-                                            any clinical data also requested.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                {% endif %}
+            </div>
+            <div class="col mb-3">
+                <div class="border rounded bg-light p-4">
 
-                        <div class="fw-bold">Current Samples</div>
-                        <div class="p-3">
-                            <div class="my-2">
-                                <a type="button" class="btn btn-secondary"
-                                   href="{% url 'clinical_search_facility' %}"><i
-                                        class="fas fa-angle-double-left"></i> Back to Clinical Search
-                                </a>
-                                <div class="float-end" role="group" aria-label="action buttons">
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#saveModal"><i
-                                            class="fa-solid fa-floppy-disk"></i> Save
-                                    </button>
-                                    <a type="button" class="btn btn-primary" href="{% url 'make_application' %}"><i
-                                            class="fas fa-edit"></i> Make
-                                        Application
-                                    </a>
+                    <div class="readmore-acc accordion accordion-flush" id="driver-intro-acc">
+                        <div class="accordion-item bg-light">
+                            <h2 class="accordion-header d-md-flex justify-content-md-end"
+                                id="driver-intro-acc-headingOne">
+                                <button class="accordion-button collapsed bg-light" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#driver-intro-one" aria-expanded="false"
+                                        aria-controls="driver-intro-one">
+                                    <i class="fas fa-info-circle me-1"></i> About Oncogenic Driver Search
+                                </button>
+                            </h2>
+                            <div id="driver-intro-one" class="accordion-collapse collapse"
+                                 aria-labelledby="driver-intro-acc-headingOne" data-bs-parent="#driver-intro-acc">
+                                <div class="accordion-body border rounded-2 p-3 mb-2">
+                                    <p>This section of the search facility enables you to refine your search using
+                                        oncogenic
+                                        drivers that have been identified in tumor samples as a result of research
+                                        studies
+                                        using other samples from the same patients that match your search criteria.
+                                        Data
+                                        has
+                                        been pooled from three research studies, all of which have used either whole
+                                        genome
+                                        sequencing or next generation sequencing/RNAseq.</p>
+                                    <p>Please note that this part of the search facility is currently restricted to
+                                        oncogenic
+                                        drivers in Papillary Thyroid Carcinoma. Currently this data is available on
+                                        515
+                                        Papillary Carcinomas in which a unique driver has been identified. In 20 of
+                                        these cases,
+                                        no driver mutations have yet been identified. If you wish to include these
+                                        in
+                                        your
+                                        search, please ensure that you select "NYI" in the menu below.</p>
+                                    <p>Oncogenic drivers fall into two categories – fusion events or mutation
+                                        events.
+                                        Many
+                                        oncogenic driver genes can have multiple partners involved in fusions, for
+                                        example the
+                                        RET oncogene (see this recent <a
+                                                href="https://pubmed.ncbi.nlm.nih.gov/32326537/"
+                                                target="_blank" rel="noopener">review by Santoro et
+                                            al</a>., for more information). The search facility groups these
+                                        together,
+                                        so if you
+                                        select Fusion.RET, all of your selected cases that harbour any form of RET
+                                        fusion gene
+                                        will be returned. This is true for sother fusion drivers with multiple
+                                        possible
+                                        partners. If you require samples that harbour specific oncogenic fusions,
+                                        please
+                                        detail
+                                        this in your application.
+                                    </p>
+                                    <p>Similarly, if you select Mut.Ras, the selected cases may harbour mutations in
+                                        any
+                                        of the
+                                        3 RAS oncogenes. If you require samples that harbour specific RAS mutations,
+                                        please
+                                        detail this in your application.</p>
+                                    <p>The table below gives you the total number of cases which harbour the
+                                        individual
+                                        oncogenic drivers included in the dropdown menu that may be available. The
+                                        actual number
+                                        that would be available for your study will depend on the biospecimens you
+                                        require plus
+                                        any clinical data also requested.</p>
                                 </div>
-                            </div>
-                            <table class="table table-striped table-sm">
-                                <thead>
-                                <tr class="align-top">
-                                    <th>Fusion Drivers</th>
-                                    <th colspan="2">Cases<br><span
-                                            class="text-muted small text-end">Filtered </span><span
-                                            class="text-muted small fst-italic"> /Total</span></th>
-                                    <th>Muted Drivers</th>
-                                    <th colspan="2">Cases<br><span
-                                            class="text-muted small text-end">Filtered </span><span
-                                            class="text-muted small fst-italic"> /Total</span></th>
-                                    <th>Not Yet Id'd</th>
-                                    <th colspan="2">Cases<br><span
-                                            class="text-muted small text-end">Filtered </span><span
-                                            class="text-muted small fst-italic"> /Total</span></th>
-                                </tr>
-                                </thead>
-                                <tbody class="align-bottom">
-                                <tr>
-                                    <td>Fusion.ALK</td>
-                                    <td class="text-end">{{ counts.Fusion_ALK.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Fusion_ALK.total|default:0 }}</td>
-                                    </td>
-                                    <td>Mut.APC</td>
-                                    <td class="text-end">{{ counts.Mut_APC.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Mut_APC.total|default:0 }}</td>
-                                    </td>
-                                    <td>NYI</td>
-                                    <td class="text-end">{{ counts.NYI.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic"> /{{ counts.NYI.total|default:0 }}</td>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Fusion.BRAF</td>
-                                    <td class="text-end">{{ counts.Fusion_BRAF.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Fusion_BRAF.total|default:0 }}</td>
-                                    </td>
-                                    <td>Mut.BRAFV600E</td>
-                                    <td class="text-end">{{ counts.Mut_BRAFV600E.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Mut_BRAFV600E.total|default:0 }}</td>
-                                    </td>
-                                    <td colspan="3">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>Fusion.IGF2/IGF2BP3</td>
-                                    <td class="text-end">{{ counts.Fusion_IGF2_IGF2BP3.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Fusion_IGF2_IGF2BP3.total|default:0 }}</td>
-                                    </td>
-                                    <td>Mut.BRAF_other</td>
-                                    <td class="text-end">{{ counts.Mut_BRAF_other.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Mut_BRAF_other.total|default:0 }}</td>
-                                    </td>
-                                    <td colspan="3">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>Fusion.LTK</td>
-                                    <td class="text-end">{{ counts.Fusion_LTK.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Fusion_LTK.total|default:0 }}</td>
-                                    </td>
-                                    <td>Mut.DICER1</td>
-                                    <td class="text-end">{{ counts.Mut_DICER1.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Mut_DICER1.total|default:0 }}</td>
-                                    </td>
-                                    <td colspan="3">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>Fusion.NTRK1</td>
-                                    <td class="text-end">{{ counts.Fusion_NTRK1.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Fusion_NTRK1.total|default:0 }}</td>
-                                    </td>
-                                    <td>Mut.NFE2L2</td>
-                                    <td class="text-end">{{ counts.Mut_NFE2L2.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Mut_NFE2L2.total|default:0 }}</td>
-                                    </td>
-                                    <td colspan="3">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>Fusion.NTRK3</td>
-                                    <td class="text-end">{{ counts.Fusion_NTRK3.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Fusion_NTRK3.total|default:0 }}</td>
-                                    </td>
-                                    <td>Mut.RAS</td>
-                                    <td class="text-end">{{ counts.Mut_RAS.filtered|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Mut_RAS.total|default:0 }}</td>
-                                    </td>
-                                    <td colspan="3">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>Fusion.PPARG</td>
-                                    <td class="text-end">{{ counts.Mut_RAS.Fusion_PPARG|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Fusion_PPARG.total|default:0 }}</td>
-                                    </td>
-                                    <td>Mut.TSC</td>
-                                    <td class="text-end">{{ counts.Mut_TSC.Fusion_PPARG|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Mut_TSC.total|default:0 }}</td>
-                                    </td>
-                                    <td colspan="3">&nbsp;</td>
-                                </tr>
-                                <tr>
-                                    <td>Fusion.RET</td>
-                                    <td class="text-end">{{ counts.Fusion_RET.Fusion_PPARG|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Fusion_RET.total|default:0 }}</td>
-                                    </td>
-                                    <td>Mut.TSHR</td>
-                                    <td class="text-end">{{ counts.Mut_TSHR.Fusion_PPARG|default:0 }}</td>
-                                    <td
-                                            class="text-muted small fst-italic">
-                                        /{{ counts.Mut_TSHR.total|default:0 }}</td>
-                                    </td>
-                                    <td colspan="3">&nbsp;</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class="readmore-acc accordion accordion-flush" id="table-intro-acc">
-                                <div class="accordion-item bg-light">
-                                    <h2 class="accordion-header d-md-flex justify-content-md-end"
-                                        id="table-intro-acc-headingOne">
-                                        <button class="accordion-button collapsed bg-light" type="button"
-                                                data-bs-toggle="collapse"
-                                                data-bs-target="#table-intro-one" aria-expanded="false"
-                                                aria-controls="table-intro-one">
-                                            About This Table
-                                        </button>
-                                    </h2>
-                                    <div id="table-intro-one" class="accordion-collapse collapse"
-                                         aria-labelledby="table-intro-acc-headingOne" data-bs-parent="#table-intro-acc">
-                                        <div class="accordion-body border rounded-2 p-3">
-                                            The table above gives you the total number of cases which harbour
-                                            the individual
-                                            oncogenic
-                                            drivers included in the selection lists that may be available. The actual
-                                            number
-                                            that would be
-                                            available for your study will depend on the biospecimens you require plus
-                                            any
-                                            clinical data also
-                                            requested. In brackets are the drivers that also meet the search criteria
-                                            you
-                                            entered in the
-                                            biosample search and the clinical search.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="pt-2 small text-muted">The references for the sources of the data that are
-                                relevant
-                                to
-                                the samples that
-                                meet your search
-                                criteria will be provided to you with the biosamples requested on approval of your
-                                application.
-                                The relevant references should be quoted in any publication resulting from your study.
                             </div>
                         </div>
+                    </div>
+
+                    <div class="fw-bold">Current Samples</div>
+                    <hr>
+                    <div class="my-2">
+                        <a type="button" class="btn btn-secondary"
+                           href="{% url 'clinical_search_facility' %}"><i
+                                class="fas fa-angle-double-left"></i> Back to Clinical Search
+                        </a>
+                        <div class="float-end" role="group" aria-label="action buttons">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#saveModal"><i
+                                    class="fa-solid fa-floppy-disk"></i> Save
+                            </button>
+                            <a type="button" class="btn btn-primary" href="{% url 'make_application' %}"><i
+                                    class="fas fa-edit"></i> Make
+                                Application
+                            </a>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <tr class="align-top">
+                            <th>Fusion Drivers</th>
+                            <th colspan="2">Cases<br><span
+                                    class="text-muted small text-end">Filtered </span><span
+                                    class="text-muted small fst-italic"> /Total</span></th>
+                            <th>Muted Drivers</th>
+                            <th colspan="2">Cases<br><span
+                                    class="text-muted small text-end">Filtered </span><span
+                                    class="text-muted small fst-italic"> /Total</span></th>
+                            <th>Not Yet Id'd</th>
+                            <th colspan="2">Cases<br><span
+                                    class="text-muted small text-end">Filtered </span><span
+                                    class="text-muted small fst-italic"> /Total</span></th>
+                        </tr>
+                        </thead>
+                        <tbody class="align-bottom">
+                        <tr>
+                            <td>Fusion.ALK</td>
+                            <td class="text-end">{{ counts.Fusion_ALK.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Fusion_ALK.total|default:0 }}</td>
+                            </td>
+                            <td>Mut.APC</td>
+                            <td class="text-end">{{ counts.Mut_APC.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Mut_APC.total|default:0 }}</td>
+                            </td>
+                            <td>NYI</td>
+                            <td class="text-end">{{ counts.NYI.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic"> /{{ counts.NYI.total|default:0 }}</td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.BRAF</td>
+                            <td class="text-end">{{ counts.Fusion_BRAF.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Fusion_BRAF.total|default:0 }}</td>
+                            </td>
+                            <td>Mut.BRAFV600E</td>
+                            <td class="text-end">{{ counts.Mut_BRAFV600E.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Mut_BRAFV600E.total|default:0 }}</td>
+                            </td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.IGF2/IGF2BP3</td>
+                            <td class="text-end">{{ counts.Fusion_IGF2_IGF2BP3.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Fusion_IGF2_IGF2BP3.total|default:0 }}</td>
+                            </td>
+                            <td>Mut.BRAF_other</td>
+                            <td class="text-end">{{ counts.Mut_BRAF_other.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Mut_BRAF_other.total|default:0 }}</td>
+                            </td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.LTK</td>
+                            <td class="text-end">{{ counts.Fusion_LTK.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Fusion_LTK.total|default:0 }}</td>
+                            </td>
+                            <td>Mut.DICER1</td>
+                            <td class="text-end">{{ counts.Mut_DICER1.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Mut_DICER1.total|default:0 }}</td>
+                            </td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.NTRK1</td>
+                            <td class="text-end">{{ counts.Fusion_NTRK1.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Fusion_NTRK1.total|default:0 }}</td>
+                            </td>
+                            <td>Mut.NFE2L2</td>
+                            <td class="text-end">{{ counts.Mut_NFE2L2.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Mut_NFE2L2.total|default:0 }}</td>
+                            </td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.NTRK3</td>
+                            <td class="text-end">{{ counts.Fusion_NTRK3.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Fusion_NTRK3.total|default:0 }}</td>
+                            </td>
+                            <td>Mut.RAS</td>
+                            <td class="text-end">{{ counts.Mut_RAS.filtered|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Mut_RAS.total|default:0 }}</td>
+                            </td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.PPARG</td>
+                            <td class="text-end">{{ counts.Mut_RAS.Fusion_PPARG|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Fusion_PPARG.total|default:0 }}</td>
+                            </td>
+                            <td>Mut.TSC</td>
+                            <td class="text-end">{{ counts.Mut_TSC.Fusion_PPARG|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Mut_TSC.total|default:0 }}</td>
+                            </td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        <tr>
+                            <td>Fusion.RET</td>
+                            <td class="text-end">{{ counts.Fusion_RET.Fusion_PPARG|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Fusion_RET.total|default:0 }}</td>
+                            </td>
+                            <td>Mut.TSHR</td>
+                            <td class="text-end">{{ counts.Mut_TSHR.Fusion_PPARG|default:0 }}</td>
+                            <td
+                                    class="text-muted small fst-italic">
+                                /{{ counts.Mut_TSHR.total|default:0 }}</td>
+                            </td>
+                            <td colspan="3">&nbsp;</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <hr>
+                    <div class="readmore-acc accordion accordion-flush" id="table-intro-acc">
+                        <div class="accordion-item bg-light">
+                            <h2 class="accordion-header d-md-flex justify-content-md-end"
+                                id="table-intro-acc-headingOne">
+                                <button class="accordion-button collapsed bg-light" type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#table-intro-one" aria-expanded="false"
+                                        aria-controls="table-intro-one">
+                                    <i class="fas fa-info-circle me-1"></i> About This Table
+                                </button>
+                            </h2>
+                            <div id="table-intro-one" class="accordion-collapse collapse"
+                                 aria-labelledby="table-intro-acc-headingOne" data-bs-parent="#table-intro-acc">
+                                <div class="accordion-body border rounded-2 p-3">
+                                    The table above gives you the total number of cases which harbour
+                                    the individual
+                                    oncogenic
+                                    drivers included in the selection lists that may be available. The actual
+                                    number
+                                    that would be
+                                    available for your study will depend on the biospecimens you require plus
+                                    any
+                                    clinical data also
+                                    requested. In brackets are the drivers that also meet the search criteria
+                                    you
+                                    entered in the
+                                    biosample search and the clinical search.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pt-2 small text-muted">The references for the sources of the data that are
+                        relevant
+                        to
+                        the samples that
+                        meet your search
+                        criteria will be provided to you with the biosamples requested on approval of your
+                        application.
+                        The relevant references should be quoted in any publication resulting from your study.
                     </div>
                 </div>
             </div>

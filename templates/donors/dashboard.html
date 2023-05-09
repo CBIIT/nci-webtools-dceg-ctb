@@ -20,101 +20,121 @@
 {% block content %}
     <div class="container py-3">
         <div class="row">
-            <div class="col">
-                <div class="bg-light border rounded p-3 mb-3">
-                    <h5>Welcome to the Chernobyl Tissue Bank Biosample Search</h5>
-                    {#                    <p>Please read the following important information to allow you to make full use of the search#}
-                    {#                        facility.</p>#}
-                    <p>The Chernobyl Tissue Bank Filter Tool allows you to check whether the number of biological
-                        samples with the associated information you require for your research are available within
-                        the CTB. </p>
-                    <div class="readmore-acc accordion accordion-flush" id="ctb-intro-acc">
-                        <div class="accordion-item bg-light">
-                            <h2 class="accordion-header d-md-flex justify-content-md-end" id="ctb-intro-acc-headingOne">
-                                <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#ctb-intro-one" aria-expanded="false"
-                                        aria-controls="ctb-intro-one">
-                                    Learn More
-                                </button>
-                            </h2>
-                            <div id="ctb-intro-one" class="accordion-collapse collapse"
-                                 aria-labelledby="ctb-intro-acc-headingOne" data-bs-parent="#ctb-intro-acc">
-                                <div class="accordion-body"><p>After completing your biosample search you can further
-                                    refine your search using a number of
-                                    clinical parameters (e.g. TNM status, AJCC Clinical stage and treatment and
-                                    outcome). If you
-                                    do not wish to refine your search, you can skip this step. Once you have defined the
-                                    biosamples that you wish to access (with or without additional clinical
-                                    information), you
-                                    will have the option to download an application form. Instructions on submission of
-                                    applications for access can be found on the form. Information about the review
-                                    process of
-                                    applications is available on the <a href="{% url 'access_to_materials' %}"
-                                                                        target="_blank" rel="noopener">Access to
-                                        Materials</a>
-                                    page.
-                                    Applications must be approved before any samples can be released.</p>
-                                    <p>In your application, is important that you specify the criteria for sample
-                                        selection as
-                                        exactly as possible, by completing all sections of the Filter. If your
-                                        application is
-                                        approved, samples will be provided according to the search criteria you have
-                                        used in the
-                                        Filter. Screen shots of the biosample search may be appended to your application
-                                        if you
-                                        wish.</p>
-                                    <p>The search facility will provide you with the number of cases that fit your
-                                        search criteria –
-                                        you will not receive detailed information on the individual cases until your
-                                        project is
-                                        approved.</p>
-                                    <p>Samples issued following approval of the project will be accompanied by the
-                                        following dataset
-                                        – CTB unique patient identifier, sample unique identifier, pathological
-                                        diagnosis, age at
-                                        the accident, age at operation, gender, and oblast (administrative region) of
-                                        residence at
-                                        the time of the accident. Information on estimated thyroid radiation dose can
-                                        also be
-                                        provided if justified in your application. Clinical information as requested
-                                        using the
-                                        clinical search facility can also be provided on each case, providing it has
-                                        been justified
-                                        in the application.</p>
-                                    <p>If you have any queries, please email these to <a
-                                            href="mailto:ctb-info@isb-cgc.org"
-                                            target="_top">ctb-info@isb-cgc.org</a>.
-                                        Online
-                                        information using the search tools is available where you see the <i
-                                                class="fa-solid fa-circle-question info-color"></i> icon.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
+            <div class="col-lg-12">
+                <div class="alert alert-secondary alert-dismissible fade show" role="alert">
+                    <div><strong>Welcome to the Chernobyl Tissue Bank Biosample Search</strong></div>
+                    <div>The Chernobyl Tissue Bank Filter
+                        Tool allows you to check whether the number of biological samples with the associated
+                        information you
+                        require for your research are available within the CTB.
                     </div>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                {#            <div class="col">#}
+                {#                <div class="bg-light border rounded p-3 mb-3">#}
+                {#                    <h5>Welcome to the Chernobyl Tissue Bank Biosample Search</h5>#}
+                {#                    <p>Please read the following important information to allow you to make full use of the search#}
+                {#                        facility.</p>#}
+                {#                    <p>The Chernobyl Tissue Bank Filter Tool allows you to check whether the number of biological#}
+                {#                        samples with the associated information you require for your research are available within#}
+                {#                        the CTB. </p>#}
+                {#                    <div class="readmore-acc accordion accordion-flush" id="ctb-intro-acc">#}
+                {#                        <div class="accordion-item bg-light">#}
+                {#                            <h2 class="accordion-header d-md-flex justify-content-md-end" id="ctb-intro-acc-headingOne">#}
+                {#                                <button class="accordion-button collapsed bg-light" type="button"#}
+                {#                                        data-bs-toggle="collapse"#}
+                {#                                        data-bs-target="#ctb-intro-one" aria-expanded="false"#}
+                {#                                        aria-controls="ctb-intro-one">#}
+                {#                                    Learn More#}
+                {#                                </button>#}
+                {#                            </h2>#}
+                {#                            <div id="ctb-intro-one" class="accordion-collapse collapse"#}
+                {#                                 aria-labelledby="ctb-intro-acc-headingOne" data-bs-parent="#ctb-intro-acc">#}
+                {#                                <div class="accordion-body">#}
+                {#                                    <p>After completing your biosample search you can further#}
+                {#                                    refine your search using a number of#}
+                {#                                    clinical parameters (e.g. TNM status, AJCC Clinical stage and treatment and#}
+                {#                                    outcome). If you#}
+                {#                                    do not wish to refine your search, you can skip this step. Once you have defined the#}
+                {#                                    biosamples that you wish to access (with or without additional clinical#}
+                {#                                    information), you#}
+                {#                                    will have the option to download an application form. Instructions on submission of#}
+                {#                                    applications for access can be found on the form. Information about the review#}
+                {#                                    process of#}
+                {#                                    applications is available on the <a href="{% url 'access_to_materials' %}"#}
+                {#                                                                        target="_blank" rel="noopener">Access to#}
+                {#                                        Materials</a>#}
+                {#                                    page.#}
+                {#                                    Applications must be approved before any samples can be released.</p>#}
+                {#                                    <p>In your application, is important that you specify the criteria for sample#}
+                {#                                        selection as#}
+                {#                                        exactly as possible, by completing all sections of the Filter. If your#}
+                {#                                        application is#}
+                {#                                        approved, samples will be provided according to the search criteria you have#}
+                {#                                        used in the#}
+                {#                                        Filter. Screen shots of the biosample search may be appended to your application#}
+                {#                                        if you#}
+                {#                                        wish.</p>#}
+                {#                                    <p>The search facility will provide you with the number of cases that fit your#}
+                {#                                        search criteria –#}
+                {#                                        you will not receive detailed information on the individual cases until your#}
+                {#                                        project is#}
+                {#                                        approved.</p>#}
+                {#                                    <p>Samples issued following approval of the project will be accompanied by the#}
+                {#                                        following dataset#}
+                {#                                        – CTB unique patient identifier, sample unique identifier, pathological#}
+                {#                                        diagnosis, age at#}
+                {#                                        the accident, age at operation, gender, and oblast (administrative region) of#}
+                {#                                        residence at#}
+                {#                                        the time of the accident. Information on estimated thyroid radiation dose can#}
+                {#                                        also be#}
+                {#                                        provided if justified in your application. Clinical information as requested#}
+                {#                                        using the#}
+                {#                                        clinical search facility can also be provided on each case, providing it has#}
+                {#                                        been justified#}
+                {#                                        in the application.</p>#}
+                {#                                    <p>If you have any queries, please email these to <a#}
+                {#                                            href="mailto:ctb-info@isb-cgc.org"#}
+                {#                                            target="_top">ctb-info@isb-cgc.org</a>.#}
+                {#                                        Online#}
+                {#                                        information using the search tools is available where you see the <i#}
+                {#                                                class="fa-solid fa-circle-question info-color"></i> icon.#}
+                {#                                    </p>#}
+                {#                                </div>#}
+                {#                            </div>#}
+                {#                        </div>#}
+                {##}
+                {#                    </div>#}
+                {#                </div>#}
+                {#            </div>#}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-7 pe-0">
+                <div class="border rounded bg-light p-3">
+                    <h5>
+                        Saved Searches
+                    </h5>
+                    <hr>
+                    {% include 'donors/filter_saved_searches.html' %}
                 </div>
             </div>
-
-            <div class="col">
-                <div class="d-grid gap-2 mb-3">
+            <div class="col-lg-5">
+                <div class="d-grid gap-2 mb-2">
                     <a class="btn btn-primary" href="{% url 'search_tissue_samples' %}"><i
                             class="fa-solid fa-magnifying-glass"></i> Search Tissue Samples</a>
                 </div>
-
                 <div class="border rounded bg-light p-3">
                     <div>
                         <h5>
-                            My Saved Searches
+                            Submissions
                         </h5>
-
                     </div>
-
-                    {% include 'ctb/filter_saved_searches.html' %}
-                    {#                    <table></table>#}
+                    <hr>
+                    {% include 'donors/my_applications.html' %}
                 </div>
             </div>
-
         </div>
     </div>
 {% endblock %}
@@ -122,4 +142,5 @@
 {% block js_file %}
     {{ block.super }}
     <script type="text/javascript" src="{% static 'js/saved_searches.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/my_applications.js' %}"></script>
 {% endblock %}

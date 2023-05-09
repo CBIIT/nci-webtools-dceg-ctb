@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-{#{% load donors_custom_tags %}#}
 {% block title %}
     CTB | Search Tissue Samples
 {% endblock %}
@@ -13,6 +12,7 @@
 
 {% block content %}
     <div class="container py-3">
+    <h5>Search Tissue Samples</h5>
         <div id="general-message"></div>
 
         <div class="row">
@@ -23,10 +23,27 @@
                     <input type="hidden" name="search_type" value="Biosample"/>
                     <input type="hidden" name="title" id="search-save-title"/>
                     <div class="container-fluid">
-                        <h4>Search Tissue Samples
-                        </h4>
+
+                        {#                        <div class="d-flex justify-content-end">#}
+                        {#                            <div role="group" aria-label="action buttons">#}
+                        {#                                <button id="search-save-btn" type="button" class="btn btn-primary btn-sm"#}
+                        {#                                        data-bs-toggle="modal"#}
+                        {#                                        data-bs-target="#saveModal"><i#}
+                        {#                                        class="fa-solid fa-floppy-disk"></i> Save#}
+                        {#                                </button>#}
+                        {#                                <a id="clinical-search-facility-btn" type="button" class="btn btn-primary btn-sm"#}
+                        {#                                   href="{% url 'clinical_search_facility' %}">Proceed to Clinical Search <i#}
+                        {#                                        class="fas fa-angle-double-right"></i>#}
+                        {#                                </a>#}
+                        {#                                <a id="make-app-btn" type="button" class="btn btn-primary btn-sm"#}
+                        {#                                   href="{% url 'make_application' %}"><i#}
+                        {#                                        class="fas fa-edit"></i> Make#}
+                        {#                                    Application#}
+                        {#                                </a>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
                         <div class="mb-2">
-                            <div class="d-flex justify-content-end mb-2">
+                            <div class="float-end">
                                 <div role="group" aria-label="action buttons">
                                     <button id="search-save-btn" type="button" class="btn btn-primary btn-sm"
                                             data-bs-toggle="modal"
@@ -42,14 +59,14 @@
                                             class="fas fa-edit"></i> Make
                                         Application
                                     </a>
+                                    <button type="reset"
+                                            class="btn btn-reset btn-sm btn-outline-secondary"
+                                            data-target="#search-tissue-form">Reset All
+                                    </button>
                                 </div>
                             </div>
-                            <div class="text-muted fw-light mb-2">
+                            <div class="text-muted fw-light pb-1">
                                 Please tick all that apply.
-                                <button type="reset"
-                                        class="btn btn-reset btn-sm btn-outline-secondary float-end"
-                                        data-target="#search-tissue-form">Reset All
-                                </button>
                             </div>
                         </div>
                         <div id="search-tissue-filters" class="row px-0">
@@ -82,7 +99,6 @@
                                                    name="diagnosis[]" value="FA">
                                             <label class="form-check-label" for="diag-fa">Follicular Adenoma</label>
                                         </div>
-                                        {#                                        <hr>#}
                                         <div class="fw-light fst-italic small">Other Benign Follicular Tumors:</div>
                                         <div class="form-check">
                                             <input class="form-check-input" type="checkbox" id="diag-ftump"
@@ -409,7 +425,6 @@
                                 </div>
                             </div>
                         </div>
-                        <hr>
 
                         {#                        <div class="row">#}
                         {#                            <div class="input-group mb-3">#}
@@ -437,11 +452,12 @@
                     <h5>Available Cases & Samples
                     </h5>
                     <div class="fw-normal fs-5 text-end"><span
-                            id="total-case-count" class="fw-bold">{{ total|default:0 }}</span><span class="fst-italic text-muted small"> /{{ total_counts.total }}</span>
+                            id="total-case-count" class="fw-bold">{{ total|default:0 }}</span><span
+                            class="fst-italic text-muted small"> /{{ total_counts.total }}</span>
                         Cases
                     </div>
                     <table id="tissue-table" class="table table-striped tissue-samples-table">
-                    <thead>
+                        <thead>
                         <tr>
                             <th class="fw-bold">Tissue</th>
                             <th>Normal</th>
@@ -452,37 +468,46 @@
                         <tbody>
                         <tr>
                             <td>RNA</td>
-                            <td><span id="tissue-rna-normal" class="fw-bold">{{ tissue.rna.normal|default:0 }}</span><span
+                            <td><span id="tissue-rna-normal"
+                                      class="fw-bold">{{ tissue.rna.normal|default:0 }}</span><span
                                     class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.normal }}</span>
                             </td>
-                            <td><span id="tissue-rna-tumour" class="fw-bold">{{ tissue.rna.tumour|default:0 }}</span><span
+                            <td><span id="tissue-rna-tumour"
+                                      class="fw-bold">{{ tissue.rna.tumour|default:0 }}</span><span
                                     class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.tumour }}</span>
                             </td>
-                            <td><span id="tissue-rna-metastatic" class="fw-bold">{{ tissue.rna.metastatic|default:0 }}</span><span
+                            <td><span id="tissue-rna-metastatic"
+                                      class="fw-bold">{{ tissue.rna.metastatic|default:0 }}</span><span
                                     class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.metastatic }}</span>
                             </td>
                         </tr>
                         <tr>
                             <td>DNA</td>
-                            <td><span id="tissue-dna-normal" class="fw-bold">{{ tissue.dna.normal|default:0 }}</span><span
+                            <td><span id="tissue-dna-normal"
+                                      class="fw-bold">{{ tissue.dna.normal|default:0 }}</span><span
                                     class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.normal }}</span>
                             </td>
-                            <td><span id="tissue-dna-tumour" class="fw-bold">{{ tissue.dna.tumour|default:0 }}</span><span
+                            <td><span id="tissue-dna-tumour"
+                                      class="fw-bold">{{ tissue.dna.tumour|default:0 }}</span><span
                                     class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.tumour }}</span>
                             </td>
-                            <td><span id="tissue-dna-metastatic" class="fw-bold">{{ tissue.dna.metastatic|default:0 }}</span><span
+                            <td><span id="tissue-dna-metastatic"
+                                      class="fw-bold">{{ tissue.dna.metastatic|default:0 }}</span><span
                                     class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.metastatic }}</span>
                             </td>
                         </tr>
                         <tr>
                             <td>FFPE</td>
-                            <td><span id="tissue-ffpe-normal" class="fw-bold">{{ tissue.ffpe.normal|default:0 }}</span><span
+                            <td><span id="tissue-ffpe-normal"
+                                      class="fw-bold">{{ tissue.ffpe.normal|default:0 }}</span><span
                                     class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.normal }}</span>
                             </td>
-                            <td><span id="tissue-ffpe-tumour" class="fw-bold">{{ tissue.ffpe.tumour|default:0 }}</span><span
+                            <td><span id="tissue-ffpe-tumour"
+                                      class="fw-bold">{{ tissue.ffpe.tumour|default:0 }}</span><span
                                     class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.tumour }}</span>
                             </td>
-                            <td><span id="tissue-ffpe-metastatic" class="fw-bold">{{ tissue.ffpe.metastatic|default:0 }}</span><span
+                            <td><span id="tissue-ffpe-metastatic"
+                                      class="fw-bold">{{ tissue.ffpe.metastatic|default:0 }}</span><span
                                     class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.metastatic }}</span>
                             </td>
                         </tr>

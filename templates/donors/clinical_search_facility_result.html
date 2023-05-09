@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% load donors_custom_tags %}
 {% block title %}
     CTB | Clinical Search Facility Result
 {% endblock %}
@@ -16,7 +16,8 @@
         <div class="pt-3">
             <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
+                    </li>
                     <li class="breadcrumb-item active" aria-current="page">Refine by Clinical Parameters</li>
                 </ol>
             </nav>
@@ -28,58 +29,86 @@
 {% block content %}
     <div class="container py-2">
         <div class="row">
-            <div class="col-lg-8">
-                <div class="border rounded bg-light p-4 mb-2">
-                    <h5>Clinical Search Facility</h5>
+            <div class="col">
+                <h5>Clinical Search Facility</h5>
+                <div id="general-message">
                     {% if title %}
-                    <div id="filter-title-div" class="text-primary fst-italic float-end">
-                        <i class="fas fa-check-circle"></i> Search '{{ title }}' is loaded
-                    </div>
-                    {% endif %}
-                    <h6 class="pt-3"><strong>Results</strong></h6>
-                    <hr>
-                    <div><strong>Original BioSample Search Results: {{ clinic_search_result.avail }}</strong></div>
-                    <div>The clinical information you have requested is available on
-                        <strong>{{ clinic_search_result.avail }}</strong> of the
-                        <strong>{{ clinic_search_result.total }}</strong> cases that met your biosample search criteria.
-                    </div>
-                    <hr>
-                    <form id="save-form" class="d-grid gap-2">
-
-                        <div class="input-group">
-                            <input type="text" name="title" id="search-save-title"
-                                   class="form-control" value="" placeholder="Search Name"
-                                   aria-label="Search Save" aria-describedby="search-save">
-                            <input type="hidden" name="filter_encoded_url" value="{{ filter_encoded_url }}"/>
-                            <input type="hidden" name="total" value="{{ clinic_search_result.avail }}"/>
-                            <input type="hidden" name="search_type" value="Clinical"/>
-                            <button class="btn btn-primary" type="button" id="search-save"><i
-                                    class="fa-solid fa-floppy-disk"></i> Save Search
-                            </button>
+                        <div role="alert" class="alert alert-light alert-dismissible fade show fst-italic border"><i
+                                class="fas fa-check-circle"></i>
+                            Search '{{ title }}' is loaded
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        <div class="text-end">
-                            <div id="save_message" class="text-primary fst-italic my-2"></div>
+                    {% endif %}
+                </div>
+                <div class="border rounded bg-light p-4 mb-2">
+                    <div><strong>Original BioSample Search
+                        Results: {{ clinic_search_result.avail|format_num_with_commmas }}</strong></div>
+                    <div>The clinical information you have requested is available on
+                        <strong>{{ clinic_search_result.avail|format_num_with_commmas }}</strong> of the
+                        <strong>{{ clinic_search_result.total|format_num_with_commmas }}</strong> cases that met
+                        your biosample search
+                        criteria.
+                    </div>
+                    <hr>
+                    <div class="mt-2">
+                        <a type="button" class="btn btn-secondary"
+                           href="{% url 'clinical_search_facility' %}"><i
+                                class="fas fa-angle-double-left"></i> Back to Clinical Search
+                        </a>
+                        <a type="button" class="btn btn-secondary"
+                           href="{% url 'search_tissue_samples' %}"><i
+                                class="fas fa-angle-double-left"></i> Back to Search Tissue Samples
+                        </a>
+                        <div class="float-end" role="group" aria-label="action buttons">
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                    data-bs-target="#saveModal"><i
+                                    class="fa-solid fa-floppy-disk"></i> Save
+                            </button>
+                            <a type="button" class="btn btn-primary" href="{% url 'make_application' %}"><i
+                                    class="fas fa-edit"></i> Make
+                                Application
+                            </a>
+                            <a type="button" class="btn btn-primary"
+                               href="{% url 'driver_search_facility' %}">Search by Driver Mutation <i
+                                    class="fas fa-angle-double-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="saveModal" tabindex="-1" aria-labelledby="saveModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="save-form">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="saveModalLabel">Save Search</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% csrf_token %}
+                        <input type="hidden" name="total" value="{{ clinic_search_result.avail }}"/>
+                        <input type="hidden" name="search_type" value="Clinical"/>
+                        <input type="hidden" name="filter_encoded_url" value="{{ filter_encoded_url }}"/>
+                        <input type="text" name="title" id="search-save-title"
+                               class="form-control" value="" placeholder="Search Name"
+                               aria-label="Save Search" aria-describedby="search-save">
+                        <div class="text-end mb-3">
                             <div id="alert_message" class="text-primary fst-italic my-2"></div>
                         </div>
-                    </form>
-                </div>
-
-            </div>
-            <div class="col-lg-4">
-                <div class="border rounded bg-light p-3 mb-4">
-                    <div class="d-grid gap-2 col mx-auto">
-                        <a class="btn btn-outline-secondary" href="{% url 'search_tissue_samples' %}"><i
-                                    class="fas fa-angle-double-left"></i> Back to Biosample Search Facility</a>
-                        <a class="btn btn-outline-secondary" href="{% url 'clinical_search_facility' %}"><i
-                                    class="fas fa-angle-double-left"></i></i> Perform Another Clinical Search</a>
-                        <a id="driver-search-btn" class="btn btn-primary" href="{% url 'driver_search_facility' %}{{ filter_encoded_url }}"><i
-                                class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
-                        <a class="btn btn-secondary" role="button" href="{% url 'make_application' %}">
-                            <i class="fas fa-edit"></i> Make Application
-                        </a>
+                    </div>
+                    <div class="modal-footer">
+                        <button id="close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
+                        </button>
+                        <button id="search-save" data-formid="save-form" data-titleid="search-save-title"
+                                type="button" class="btn btn-primary"><i id="save-icon" class="fas fa-save"></i><i
+                                id="load-icon" class="d-none fas fa-circle-notch fa-spin"></i> Save
+                        </button>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 {% endblock %}

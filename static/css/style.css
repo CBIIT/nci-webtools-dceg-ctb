@@ -149,7 +149,30 @@ td.date-col{
     box-shadow: none;
     color: #4d6ea0;
 }
-
+.accordion-flush .accordion-item:first-child {
+    border-top: 0;
+    border-top-width: 0px;
+    border-top-style: initial;
+    border-top-color: initial;
+}
+.accordion-flush .accordion-item {
+    border-right: 0;
+    border-right-width: 0px;
+    border-right-style: initial;
+    border-right-color: initial;
+    border-left: 0;
+    border-left-width: 0px;
+    border-left-style: initial;
+    border-left-color: initial;
+    border-radius: 0;
+}
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+}
+.readmore-acc .accordion-item{
+    border: none;
+}
 .readmore-acc .accordion-button:after{
     margin-left: .5rem;
 }

@@ -73,21 +73,11 @@ require([
                     data: 'saved_date',
                     type: 'date'
                 },
-
-                // {
-                //     class: 'text-center',
-                //     render: function (data, type, row, meta) {
-                //         let driver_search_url = BASE_URL + "/search_facility/driver_search_facility/" + row.filter_encoded_url;
-                //         return "<a href='" + driver_search_url + "'>Driver Search <i class=\"fa-solid fa-angle-right\"></i></a>"
-                //     },
-                //     orderable: false
-                // },
                 {
                     class: 'text-center',
                     render: function (data, type, row, meta) {
                         return "<a class='delete-search-btn' href='#' data-filter-id='" + row.filter_id + "'><i class='fa-solid fa-trash-can'></i></a>";
                     },
-                    // orderable: false
                 },
             ]
         });

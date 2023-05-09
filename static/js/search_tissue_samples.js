@@ -139,7 +139,8 @@ require([
                 $('#blood-serum').text(numberWithCommas(case_counts['blood']['serum']));
                 $('#blood-dna').text(numberWithCommas(case_counts['blood']['dna']));
                 $('#clinical-search-facility-btn').attr('href', BASE_URL + "/search_facility/clinical_search_facility?" + $('#search-tissue-form').serialize())
-                $('#general-message').html($('#general-message').data('title')?"<div class=\"border rounded p-2 mb-2 text-primary fst-italic\"><i class=\"fas fa-check-circle\"></i> Search '"+$('#general-message').data('title')+"' is loaded</div>":"")
+                $('#general-message').html($('#general-message').data('title')?"<div role=\"alert\" class=\"alert alert-light alert-dismissible fade show fst-italic border\"><i class=\"fas fa-check-circle\"></i> Search '"+$('#general-message').data('title')+"' is loaded<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>":"")
+
             }
         });
     };
