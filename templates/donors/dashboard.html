@@ -102,7 +102,11 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-7 pe-0">
+            <div class="col-lg-6">
+                <div class="d-grid gap-2 mb-3">
+                    <a class="btn btn-primary" href="{% url 'search_tissue_samples' %}">Proceed to Search Samples <i
+                            class="fas fa-angle-double-right"></i></a>
+                </div>
                 <div class="border rounded bg-light p-3">
                     <h6 class="bold">
                         Saved Searches
@@ -111,10 +115,9 @@
                     {% include 'donors/filter_saved_searches.html' %}
                 </div>
             </div>
-            <div class="col-lg-5">
-                <div class="d-grid gap-2 mb-2">
-                    <a class="btn btn-primary" href="{% url 'search_tissue_samples' %}"><i
-                            class="fa-solid fa-magnifying-glass"></i> Search Tissue Samples</a>
+            <div class="col-lg-6">
+                <div class="d-grid gap-2 mb-3">
+                    <a class="btn btn-primary" href="{% url 'make_application' %}"><i class="fas fa-edit"></i> Make Application</a>
                 </div>
                 <div class="border rounded bg-light p-3">
                     <div>

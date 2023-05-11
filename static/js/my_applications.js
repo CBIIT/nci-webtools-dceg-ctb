@@ -38,17 +38,51 @@ require([
         let my_search_tbl = $('#my_applications_tbl').DataTable({
             ordering: false,
             searching: false,
-            // ajax: {
-            //     url: BASE_URL + "/search_facility/get_my_application_list/",
-            //     dataSrc: ''
-            // },
+            ajax: {
+                url: BASE_URL + "/search_facility/get_submissions_list/",
+                dataSrc: ''
+            },
             columns: [
                 {
-                    // class: 'text-end',
+                    class: 'date-col text-end',
                     data: 'submitted_date',
                     type: 'date'
                 },
+                {
+                    data: 'entry_form_path',
+                    // class: 'text-center',
+                    render: function (data) {
+                        if (data){
+                            return "<a target=\"_blank\" class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/0'><i class=\"fas fa-file-pdf\"></i> View Form</a>";
+                        }
+                    }
+                },
+                {
+                    data: 'summary_file_path',
+                    // class: 'text-center',
+                    render: function (data) {
+                        if (data){
+                            let icon = "<i class=\"fas fa-file-pdf\"></i>";
+                            if (!data.endsWith('.pdf')){
+                                icon = "<i class=\"fas fa-file-word\"></i>";
+                            }
+                             return "<a target=\"_blank\" class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/1'>"+icon+" View Summary</a>";
+                        }
+                        else
+                            return ""
+                    },
+                },
             ]
         });
+        // $('#saved_searches_tbl tbody').on('click', '.view-submissions-btn', function () {
+        //     open_file($(this).data('filename'));
+        // });
+
+        // let open_file = function (filename) {
+        //     $.ajax({
+        //         type: "post",
+        //         url: BASE_URL + "/search_facility/open_file/" + filename + "/",
+        //     });
+        // };
     });
 });

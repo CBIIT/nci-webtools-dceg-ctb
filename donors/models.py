@@ -169,7 +169,7 @@ class Filter(models.Model):
 class Submissions(models.Model):
     id = models.AutoField(primary_key=True)
     entry_form_path = models.CharField(max_length=256, null=False, blank=False)
-    summary_file_path = models.CharField(default=None, max_length=256, null=False, blank=True)
+    summary_file_path = models.CharField(default=None, max_length=256, null=True, blank=True)
     owner = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     active = models.BooleanField(default=True)
     submitted_date = models.DateTimeField(auto_now=True)
@@ -184,3 +184,12 @@ class Submissions(models.Model):
     def get_list(cls, owner):
         submission_list = cls.objects.filter(owner=owner, active=True).order_by('-submitted_date')
         return submission_list
+
+    @classmethod
+    def is_users_file(cls, owner, filename, is_attachment):
+        # filelist = []
+        if is_attachment:
+            submission = cls.objects.get(owner=owner, summary_file_path=filename, active=True)
+        else:
+            submission = cls.objects.get(owner=owner, entry_form_path=filename, active=True)
+        return submission is not None

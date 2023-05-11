@@ -16,3 +16,13 @@ def upload_blob(bucket_name, destination_file_name, file_object, content_type):
         logger.exception(e)
         raise Exception('Error while attempting to upload application to GCS bucket.')
     logger.info(f"[INFO] File {destination_file_name} uploaded to cloud storage [{bucket_name}].")
+
+
+def read_blob(bucket_name, blob_name):
+    storage_client = storage.Client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(blob_name)
+    return blob
+
+    # with blob.open("r") as f:
+    #     print(f.read())

@@ -17,13 +17,13 @@
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import render
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 # from django.contrib.auth.decorators import login_required
 from django_otp.decorators import otp_required
 from django.template.loader import get_template
 from .metadata_count import get_sample_case_counts, get_clinical_case_counts, get_driver_case_counts
-from .models import Filter
-from .utils import upload_blob
+from .models import Filter, Submissions
+from .utils import upload_blob, read_blob
 import urllib
 import pytz
 from io import BytesIO
@@ -53,19 +53,24 @@ def get_search_list(request):
 
 
 @otp_required
+def get_submissions_list(request):
+    return JsonResponse(get_my_application_list(request.user), safe=False)
+
+
 def get_my_application_list(owner):
     my_application_list = []
-    user_application_object_list = Filter.get_list(owner)
+    user_application_object_list = Submissions.get_list(owner)
     for u_filter in user_application_object_list:
         my_application_list.append(
             {
-                'submitted_date': datetime.strftime(u_filter.last_date_saved, '%b %-d %Y at %-I:%-M %p (%Z)')
+                'submitted_date': datetime.strftime(u_filter.submitted_date, '%b %-d %Y at %-I:%M %p (%Z)'),
+                'entry_form_path': u_filter.entry_form_path,
+                'summary_file_path': u_filter.summary_file_path if u_filter.summary_file_path else ''
             }
         )
     return my_application_list
 
 
-# @otp_required
 def get_saved_searches(owner):
     saved_search_list = []
     user_filter_object_list = Filter.get_list(owner)
@@ -77,7 +82,7 @@ def get_saved_searches(owner):
                 'search_type': u_filter.search_type,
                 'case_count': u_filter.case_count,
                 'filter_encoded_url': u_filter.value,
-                'saved_date': datetime.strftime(u_filter.last_date_saved, '%b %-d %Y at %-I:%-M %p (%Z)')
+                'saved_date': datetime.strftime(u_filter.last_date_saved, '%b %-d %Y at %-I:%M %p (%Z)')
                 # 'saved_date': u_filter.last_date_saved
             }
         )
@@ -89,6 +94,19 @@ def delete_filters(request, filter_id):
     owner = request.user
     message = Filter.destroy(filter_id=filter_id, owner=owner)
     return JsonResponse(message)
+
+
+@otp_required
+def open_file(request, filename, att):
+    owner = request.user
+    if Submissions.is_users_file(owner, filename, (att == "1")):
+        bucket_name = settings.GCP_APP_DOC_BUCKET
+        file_blob = read_blob(bucket_name=bucket_name, blob_name=filename)
+        file_bytes = file_blob.download_as_bytes()
+        logger.info(f"[INFO] File {filename} accessed by '{owner}' for reading from [{bucket_name}].")
+        return HttpResponse(file_bytes, content_type=file_blob.content_type)
+    else:
+        return JsonResponse({'error': "Unable to access the file"})
 
 
 @otp_required
@@ -221,7 +239,7 @@ def application_submit(request):
             date_str = datetime_now.strftime("%-y_%m_%d_%H%M%S")
             user_str = user_email.split('@')[0].upper()
             destination_file_name = f"CTB_APPLICATION_{date_str}_{user_str}.pdf"
-
+            destination_att_file_name = None
             if is_file_option_on and request.FILES:
                 # uploaded project summary file
                 uploaded_blob = request.FILES["project-summary-file"]
@@ -265,6 +283,7 @@ def application_submit(request):
             mail.send()
         else:  # method not POST
             raise Exception('Invalid request was made.')
+        Submissions.create(entry_form_path=destination_file_name, summary_file_path=destination_att_file_name, owner=request.user)
     except Exception as e:
         return render(request, 'donors/application_post_submit.html', {'request': request,
                                                                        'error': e})

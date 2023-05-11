@@ -83,6 +83,11 @@ main a, footer a, .nav-link{
     background-color: rgba(0, 0, 0, .5);
 }
 
+/*.btn-tiny{*/
+/*    padding: 0.1rem 0.2rem;*/
+/*    font-size: .7rem;*/
+/*    border-radius: 0.2rem;*/
+/*}*/
 .btn-special {
     background-color: #6a4188;
     border: 1px solid #4f2f67;
