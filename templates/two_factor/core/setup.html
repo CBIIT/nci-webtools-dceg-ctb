@@ -67,15 +67,9 @@
                             {{ wizard.management_form }}
                             <div class="setup-form mt-2">
                                 {% for field in wizard.form %}
-{#                                    <label class="form-label">{{ field.label }}</label>#}
                                     {{ field }}
                                 {% endfor %}
-{#                            {{ wizard.form }}#}
                             </div>
-{#                                <label class="form-check-label">{{ field.label }}</label>#}
-{#                                {{ field.label }}#}
-{#                                <input class="form-check-label">#}
-
                         {% else %}
                             {% include "two_factor/_simple_wizard_forms.html" %}
                         {% endif %}

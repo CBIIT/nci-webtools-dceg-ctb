@@ -16,9 +16,8 @@ simplejson==3.8.1
 six==1.13.0
 uritemplate==3.0.0
 django-dotenv==1.4.2
-django-allauth==0.41.0
-django-two-factor-auth==1.15.1
-phonenumbers==8.13.11
+django-allauth==0.54.0
+django-two-factor-auth==1.15.2
 pexpect==4.0.1
 jsonschema==2.6.0
 oauth2client==3.0.0
@@ -32,9 +31,6 @@ django-anymail[mailgun]
 django-axes==5.20.0
 django-redis==5.0.0
 xhtml2pdf
-
-
-
 
 # If you are seeing an error about django-debug-toolbar not being installed,
 # the problem is almost certainly that your developer .env wasn't found

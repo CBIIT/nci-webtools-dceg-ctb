@@ -44,9 +44,7 @@ require([
     });
 
 
-
     let save_filters = function (form_id) {
-
         $.ajax({
             type: "post",
             url: BASE_URL + "/search_facility/save_filters",
@@ -55,7 +53,7 @@ require([
                 $('#save-icon').removeClass('d-none');
                 $('#load-icon').addClass('d-none');
                 $('#close-btn').click();
-                $('#general-message').html('<div class=\"alert alert-light alert-dismissible border\"><i class="fas fa-check-circle"></i> '+data['message']+'<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>');
+                $('#general-message').html('<div class=\"alert primary alert-dismissible border\"><i class="fas fa-check-circle"></i> '+data['message']+'<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>');
             }
         });
     };

@@ -73,7 +73,12 @@ body {
     color: white;
 }
 
-main a, footer a, .nav-link{
+footer, footer a{
+    color: whitesmoke;
+    font-size: 1rem;
+}
+
+main a, .nav-link{
     text-decoration: none;
     color: #4d6ea0;
 }

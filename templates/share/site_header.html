@@ -14,9 +14,14 @@
         <div class="navbar-collapse collapse" id="ctb-collapsible-navbar">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link {% if 'search_facility' in request.path %} active {% endif %}"
-                       aria-current="page" {% if user.is_authenticated %} href="{% url 'dashboard' %}" {% else %} href="{% url 'two_factor:login' %}"{% endif %}>CTB Biosample Search Facility</a>
-{#                       aria-current="page" href="{% url 'account_login' %}">CTB Biosample Search Facility</a>#}
+                    <a class="nav-link
+                        {% if 'search_facility' in request.path %} active {% endif %}"
+                        aria-current="page" {% if user.is_authenticated %} href="{% url 'dashboard' %}"
+                        {% else %}
+                        href="{% url 'two_factor:login' %}"
+                        {% endif %}>
+                        CTB Biosample Search Facility
+                    </a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -73,7 +78,7 @@
             <ul class="navbar-nav ms-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if 'users/' in request.path or 'accounts/' in request.path %} active {% endif %}"
+                        <a class="nav-link dropdown-toggle {% if 'users/' in request.path or 'account' in request.path %} active {% endif %}"
                            data-bs-toggle="dropdown" href="#" role="button"
                            aria-expanded="false"><i class="fa-solid fa-user"></i></a>
                         <ul class="dropdown-menu">
@@ -83,33 +88,14 @@
                                    title="My Profile">My Profile
                                 </a>
                             </li>
-{#                            <li>#}
-{#                                <a href="{% url 'two_factor:profile' %}"#}
-{#                                   class="dropdown-item"#}
-{#                                   title="My Profile">Account Settings#}
-{#                                </a>#}
-{#                            </li>#}
                             <li>
                                 <a href="#logout-modal" class="dropdown-item" data-bs-toggle="modal"
                                    data-bs-target="#logout-modal"
                                    title="Sign Out">Sign Out <i class="fa fa-solid fa-sign-out"></i>
                                 </a>
                             </li>
-                            {#                            <li class="nav-item">#}
-                            {#                                <a href="#logout-modal" class="dropdown-item" data-bs-toggle="modal"#}
-                            {#                                   data-bs-target="#logout-modal"#}
-                            {#                                   title="Sign Out">#}
-                            {#                                    Sign Out <i class="fa fa-solid fa-sign-out"></i>#}
-                            {#                                </a>#}
-                            {#                            </li>#}
                         </ul>
                     </li>
-                    {#                    <li class="nav-item">#}
-                    {#                        <a href="#logout-modal" class="nav-link" data-bs-toggle="modal" data-bs-target="#logout-modal"#}
-                    {#                           title="Sign Out">#}
-                    {#                            Sign Out <i class="fa fa-solid fa-sign-out"></i>#}
-                    {#                        </a>#}
-                    {#                    </li>#}
                 {% endif %}
             </ul>
         </div>

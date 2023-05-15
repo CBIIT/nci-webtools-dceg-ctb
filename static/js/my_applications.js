@@ -44,29 +44,25 @@ require([
             },
             columns: [
                 {
-                    class: 'date-col text-end',
+                    class: 'text-end',
                     data: 'submitted_date',
                     type: 'date'
                 },
                 {
                     data: 'entry_form_path',
-                    // class: 'text-center',
+                    class: 'text-center',
                     render: function (data) {
                         if (data){
-                            return "<a target=\"_blank\" class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/0'><i class=\"fas fa-file-pdf\"></i> View Form</a>";
+                            return "<a target=\"_blank\" class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/0'>View Submitted Form</a>";
                         }
                     }
                 },
                 {
                     data: 'summary_file_path',
-                    // class: 'text-center',
+                    class: 'text-center',
                     render: function (data) {
                         if (data){
-                            let icon = "<i class=\"fas fa-file-pdf\"></i>";
-                            if (!data.endsWith('.pdf')){
-                                icon = "<i class=\"fas fa-file-word\"></i>";
-                            }
-                             return "<a target=\"_blank\" class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/1'>"+icon+" View Summary</a>";
+                            return "<a target='_blank' title='View Attached Summary File' class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/1'><i class=\"fa-solid fa-paperclip\"></i> File</a>";
                         }
                         else
                             return ""
@@ -74,15 +70,5 @@ require([
                 },
             ]
         });
-        // $('#saved_searches_tbl tbody').on('click', '.view-submissions-btn', function () {
-        //     open_file($(this).data('filename'));
-        // });
-
-        // let open_file = function (filename) {
-        //     $.ajax({
-        //         type: "post",
-        //         url: BASE_URL + "/search_facility/open_file/" + filename + "/",
-        //     });
-        // };
     });
 });
