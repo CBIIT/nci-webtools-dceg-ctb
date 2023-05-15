@@ -28,22 +28,23 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 mb-3">
-                <div class="border bg-light rounded p-4">
-                    <div class="content-header d-flex flex-wrap justify-content-between">
+            <div class="col-lg-8 col mb-3 pe-0">
+                <div class="border bg-light rounded p-3 pb-5">
+                    <div class="d-flex justify-content-between">
                         <h5>Clinical Search Facility</h5>
                         <a id="clinic-skip" class="btn btn-outline-secondary d-none" href="#">
                             Skip
                             <i class="fa-solid fa-angles-right"></i>
                         </a>
                     </div>
+                    <hr>
                     <form method="POST" id="form-clinic" action="{% url 'search_clinical' %}"
                           autofill="off">
                         {% csrf_token %}
                         {% for key, value in sample_filters.items %}
                             {% if key in 'diagnosis[], sample_type[], dosemetry[], sample_origin[]' %}
                                 {% for item in value %}
-                                <input type="hidden" name="{{ key }}" value="{{ item }}">
+                                    <input type="hidden" name="{{ key }}" value="{{ item }}">
                                 {% endfor %}
                             {% else %}
                                 <input type="hidden" name="{{ key }}" value="{{ value }}">
@@ -59,32 +60,69 @@
                                     requesting
                                     access to samples from patients with a thyroid cancer diagnosis.
                                 </div>
-                                <hr>
-                                <p>You have already had the opportunity to search for samples based on pathology,
-                                    exposure status, country of origin, dosimetry and age of the patient at operation
-                                    and at the time of the accident. Your search may now be further defined using
-                                    additional clinical information that is available on some of the cases in the CTB.
-                                    Clinical data is still being added on some of our cases, so more information will be
-                                    available shortly. If you do not wish to further define your search, you may skip
-                                    this section. You will need to justify why you need clinical information for your
-                                    project in your application.</p>
-                                <p>You can further refine your search using clinical parameters if you are requesting
-                                    only samples from patients with cancer —Papillary Thyroid Cancer (PTC), Follicular
-                                    Cancer (FC), Medullary Carcinoma (MTC) or Well Differentiated Cancer, Not Otherwise
-                                    Specified (WDCA NOS), Poorly Differentiated Thyroid Cancer (PDC).</p>
-                                <p>You will be guided through a series of screens — if you do not wish to refine your
-                                    search based on the criteria visible on that screen, simply click the next button.
-                                    If you do not wish to select a particular parameter in each section of the screen,
-                                    simply leave that parameter blank.</p>
-                                <p><strong>If you do not wish to refine your search using clinical parameters, please
-                                    click on the links on the right.</strong></p>
+
+                                <div class="readmore-acc accordion accordion-flush" id="clinical-intro-acc">
+                                    <div class="accordion-item bg-light">
+                                        <h2 class="accordion-header d-md-flex justify-content-end"
+                                            id="clinical-intro-acc-headingOne">
+                                            <button class="accordion-button collapsed bg-light" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#clinical-intro-one" aria-expanded="false"
+                                                    aria-controls="clinical-intro-one">
+                                                Learn More
+                                            </button>
+                                        </h2>
+                                        <div id="clinical-intro-one" class="accordion-collapse collapse"
+                                             aria-labelledby="clinical-intro-acc-headingOne"
+                                             data-bs-parent="#clinical-intro-acc">
+                                            <div class="accordion-body">
+                                                <p>You have already had the opportunity to search for samples based on
+                                                    pathology,
+                                                    exposure status, country of origin, dosimetry and age of the patient
+                                                    at operation
+                                                    and at the time of the accident. Your search may now be further
+                                                    defined using
+                                                    additional clinical information that is available on some of the
+                                                    cases in the CTB.
+                                                    Clinical data is still being added on some of our cases, so more
+                                                    information will be
+                                                    available shortly. If you do not wish to further define your search,
+                                                    you may skip
+                                                    this section. You will need to justify why you need clinical
+                                                    information for your
+                                                    project in your application.</p>
+                                                <p>You can further refine your search using clinical parameters if you
+                                                    are requesting
+                                                    only samples from patients with cancer —Papillary Thyroid Cancer
+                                                    (PTC), Follicular
+                                                    Cancer (FC), Medullary Carcinoma (MTC) or Well Differentiated
+                                                    Cancer, Not Otherwise
+                                                    Specified (WDCA NOS), Poorly Differentiated Thyroid Cancer
+                                                    (PDC).</p>
+                                                <p>You will be guided through a series of screens — if you do not wish
+                                                    to refine your
+                                                    search based on the criteria visible on that screen, simply click
+                                                    the next button.
+                                                    If you do not wish to select a particular parameter in each section
+                                                    of the screen,
+                                                    simply leave that parameter blank.</p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="fw-light fst-italic"><br>If you do not wish to refine your search using
+                                    clinical
+                                    parameters, please
+                                    click on the links on the right.
+                                </div>
+
                             </fieldset>
                             <fieldset id="form-clinic-1" class="d-none">
                                 <div>
                                     <h6><strong>Operation Type</strong></h6>
                                 </div>
                                 <div>There are two categories for operation type:</div>
-                                <hr>
                                 <div class="border rounded-2 p-2 m-1">
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="op_type"
@@ -123,27 +161,53 @@
                                     you may select only one.
                                 </div>
 
-                                <div class="my-2"><strong>If you do not wish to refine your research with
-                                    information on operation type, please leave this section blank and continue to
-                                    the next section.</strong>
-                                </div>
+
                             </fieldset>
                             <fieldset id="form-clinic-2" class="d-none">
-                                <h6><strong>TNM Status (8th Edition)</strong> - <a
-                                        href="https://www.pathologyoutlines.com/topic/thyroidstaging.html"
-                                        target="_blank">Read more</a></h6>
-                                <p>
-                                    This is the pathological staging system used to describe the cancer. It will enable
-                                    you to select samples from cancers based on size, invasion into lymph nodes and
-                                    metastasis to distant organs.
-                                    In this section you can refine your biosample search for size of tumor and local
-                                    invasion using T and N status.
-                                </p>
-                                <p>
-                                    The next screen will enable you to use the clinical stage to refine your search
-                                    based on the presence of distant metastases.
-                                </p>
-                                <hr>
+                                {#                                <div>#}
+                                <h6><strong>TNM Status (8th Edition)</strong>
+                                    {#                                    - <a#}
+                                    {#                                        href="https://www.pathologyoutlines.com/topic/thyroidstaging.html"#}
+                                    {#                                        target="_blank">Read more</a>#}
+                                </h6>
+                                <div class="readmore-acc accordion accordion-flush" id="tnm-status-intro-acc">
+                                    <div class="accordion-item bg-light">
+                                        <h2 class="accordion-header d-md-flex justify-content-md-end"
+                                            id="tnm-status-intro-acc-headingOne">
+                                            <button class="accordion-button collapsed bg-light" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#tnm-status-intro-one" aria-expanded="false"
+                                                    aria-controls="tnm-status-intro-one">
+                                                Learn More
+                                            </button>
+                                        </h2>
+                                        <div id="tnm-status-intro-one" class="accordion-collapse collapse"
+                                             aria-labelledby="tnm-status-intro-acc-headingOne"
+                                             data-bs-parent="#tnm-status-intro-acc">
+                                            <div class="accordion-body p-2 mb-2">
+                                                <p>
+                                                    This is the pathological staging system used to describe the
+                                                    cancer.
+                                                    It will enable
+                                                    you to select samples from cancers based on size, invasion into
+                                                    lymph nodes and
+                                                    metastasis to distant organs.
+                                                    In this section you can refine your biosample search for size of
+                                                    tumor and local
+                                                    invasion using T and N status.
+                                                </p>
+                                                <p>
+                                                    The next screen will enable you to use the clinical stage to
+                                                    refine
+                                                    your search
+                                                    based on the presence of distant metastases.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {#                                </div>#}
+                                {#                                <hr>#}
                                 <div id="options-pt1" class="border rounded-2 p-3">
                                     <div class="pb-3">
                                         <button type="button" class="btn btn-reset btn-outline-secondary float-end"
@@ -270,8 +334,7 @@
                                             </tr>
                                             </tbody>
                                         </table>
-                                        <div><strong>If you do not wish to select a size of tumor, please leave this
-                                            section blank.</strong></div>
+
                                     </div>
                                 </div>
                                 <div id="options-pt2" class="mt-4 border rounded-2 p-3">
@@ -405,8 +468,6 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div><strong>If you do not wish to select a size of tumor, please leave this
-                                        section blank.</strong></div>
                                 </div>
 
                                 <div id="options-pt3" class="mt-4 border rounded-2 p-3">
@@ -509,27 +570,55 @@
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div><strong>If you do not wish to select a size of tumor, please leave this
-                                        section blank.</strong></div>
                                 </div>
                             </fieldset>
                             <fieldset id="form-clinic-3" class="d-none">
-                                <h6><strong>AJCC Clinical Stage</strong> - <a
-                                        href="https://www.cancer.org/cancer/thyroid-cancer/detection-diagnosis-staging/staging.html"
-                                        target="_blank">Read more</a></h6>
+                                <h6><strong>AJCC Clinical Stage</strong></h6>
+                                {#                                    - <a#}
+                                {#                                        href="https://www.cancer.org/cancer/thyroid-cancer/detection-diagnosis-staging/staging.html"#}
+                                {#                                        target="_blank">Read more</a>#}
+                                <div class="readmore-acc accordion accordion-flush" id="ajcc-clinical-intro-acc">
+                                    <div class="accordion-item bg-light">
+                                        <h2 class="accordion-header d-md-flex justify-content-md-end"
+                                            id="ajcc-clinical-intro-acc-headingOne">
+                                            <button class="accordion-button collapsed bg-light" type="button"
+                                                    data-bs-toggle="collapse"
+                                                    data-bs-target="#ajcc-clinical-intro-one" aria-expanded="false"
+                                                    aria-controls="ajcc-clinical-intro-one">
+                                                Learn More
+                                            </button>
+                                        </h2>
+                                        <div id="ajcc-clinical-intro-one" class="accordion-collapse collapse"
+                                             aria-labelledby="ajcc-clinical-intro-acc-headingOne"
+                                             data-bs-parent="#ajcc-clinical-intro-acc">
+                                            <div class="accordion-body p-2 mb-2">
+                                                <p>All patients in the CTB are currently under the age of 55 at
+                                                    operation, so for
+                                                    patients with a diagnosis of Follicular (FC), Papillary (PTC) or
+                                                    Well Differentiated
+                                                    Thyroid Cancer Not Otherwise Specified (WDCA NOS) only two AJCC
+                                                    stages, I and II,
+                                                    apply to these patients. The vast majority of the CTB patients
+                                                    are
+                                                    without distant
+                                                    metastases at the time of primary operation and so will be AJCC
+                                                    clinical stage I.
+                                                    Only those with an M value of 1 (those who have distant
+                                                    metastases)
+                                                    will fall into
+                                                    the category of AJCC clinical stage II.</p>
+                                                <p>For patients with Medullary Thyroid Cancer, all AJCC clinical
+                                                    stages
+                                                    may be
+                                                    applicable. For more information on each AJCC stage, please
+                                                    click on
+                                                    the title of
+                                                    this section.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <p>All patients in the CTB are currently under the age of 55 at operation, so for
-                                    patients with a diagnosis of Follicular (FC), Papillary (PTC) or Well Differentiated
-                                    Thyroid Cancer Not Otherwise Specified (WDCA NOS) only two AJCC stages, I and II,
-                                    apply to these patients. The vast majority of the CTB patients are without distant
-                                    metastases at the time of primary operation and so will be AJCC clinical stage I.
-                                    Only those with an M value of 1 (those who have distant metastases) will fall into
-                                    the category of AJCC clinical stage II.</p>
-                                <p>For patients with Medullary Thyroid Cancer, all AJCC clinical stages may be
-                                    applicable. For more information on each AJCC stage, please click on the title of
-                                    this section.</p>
-
-                                <hr>
 
                                 <div id="options-pt4" class="border rounded-2 p-3">
                                     <div class="pb-3">
@@ -615,8 +704,6 @@
                                         </table>
                                     </div>
                                 </div>
-                                <div class="mt-2"><strong>If you do not wish to further define your search using
-                                    clinical stage, please leave blank and click next.</strong></div>
                             </fieldset>
                             <fieldset id="form-clinic-4" class="d-none">
                                 <h6><strong>Treatment and Outcome</strong></h6>
@@ -624,12 +711,11 @@
                                     Please note that at the present time clinical information is only available on a
                                     proportion of the cases from Ukraine.
                                 </div>
-                                <hr>
                                 <div class="border rounded p-3 mx-1 my-2" id="options-pt6">
-                                    <h5>
-                                        Treatment with radioiodine
-                                    </h5>
-                                    <div>
+                                    <div><strong>
+                                        Treatment with Radioiodine
+                                    </strong></div>
+                                    <div class="mt-2">
                                         Patients with PTC, FC and WDCA NOS often receive treatment with
                                         radioiodine following surgery. The following dropdown menu will
                                         enable you to refine your search by selecting Yes or No. By
@@ -639,10 +725,6 @@
                                         returned on those patients who have not received radioiodine
                                         treatment. Further information on treatment (e.g. doses
                                         administered) could be made available on request.
-                                    </div>
-                                    <div class="mt-2"><strong>If you do not wish to refine your research with
-                                        information on treatment, please select the 'Neither'
-                                        option.</strong>
                                     </div>
                                     <div class="mt-2">
                                         <div class="form-check">
@@ -669,10 +751,11 @@
                                     </div>
                                 </div>
                                 <div class="border rounded p-3 mx-1 my-2" id="options-pt7">
-                                    <h5>
+                                    <div><strong>
                                         TSH Suppression
-                                    </h5>
-                                    <div>Patients with PTC, FC and WDCA NOS often receive treatment
+                                    </strong>
+                                    </div>
+                                    <div class="mt-2">Patients with PTC, FC and WDCA NOS often receive treatment
                                         with
                                         radioiodine following surgery and are sometimes are given
                                         therapy to reduce the levels of thyroid stimulating hormone,
@@ -680,10 +763,6 @@
                                         thyroid
                                         cells. There is conflicting evidence with respect to whether
                                         this has a major effect on outcome.
-                                    </div>
-                                    <div class="mt-2"><strong>If you do not wish to refine your research with
-                                        information on TSH suppression, please select the 'Neither'
-                                        option.</strong>
                                     </div>
                                     <div class="mt-2">
                                         <div class="form-check">
@@ -710,8 +789,8 @@
                                     </div>
                                 </div>
                                 <div class="border rounded p-3 mx-1 my-2" id="options-pt8">
-                                    <h5>Clinical Outcome</h5>
-                                    <div>Unfortunately, some patients will suffer a relapse of their
+                                    <div><strong>Clinical Outcome</strong></div>
+                                    <div class="mt-2">Unfortunately, some patients will suffer a relapse of their
                                         cancer. Relapse is defined as being the presence of a further
                                         deposit of thyroid cancer identified more than 6 months after
                                         the date of the primary operation. In the case of thyroid
@@ -720,13 +799,10 @@
                                         would be predicted to die from their disease over a period of
                                         several decades.
                                     </div>
-                                    <div>You can refine your search by selecting Yes if you wish to search
+                                    <div class="mt-2">You can refine your search by selecting Yes if you wish to search
                                         only for those cases that have suffered a relapse of their
                                         disease.
                                     </div>
-                                    <div class="mt-2"><strong>If you do not wish to refine your research with
-                                        information clinical outcome, please select the 'Neither'
-                                        option.</strong></div>
                                     <div class="mt-2">
                                         <div class="form-check">
                                             <input class="form-check-input" type="radio" name="clinic_outcome"
@@ -757,20 +833,20 @@
                         <div>
                             <a id="back-btn" class="btn btn-outline-secondary d-none"><i
                                     class="fa-solid fa-chevron-left"></i> Back</a>
-                            <a id="proceed-btn" class="btn btn-primary">Proceed to Refine by Clinical Parameters <i
-                                    class="fas fa-angle-double-right"></i></a>
+                            <a id="proceed-btn" class="btn btn-primary float-end">Proceed to Refine by Clinical
+                                Parameters <i
+                                        class="fas fa-angle-double-right"></i></a>
                             <a id="next-btn" class="btn btn-primary float-end d-none">Next <i
                                     class="fa-solid fa-chevron-right"></i></a>
-                            <button type="submit" id="submit-btn" class="btn btn-primary d-none float-end">View Results
-                                and Make
-                                Application <i class="fa-solid fa-chevron-right"></i></button>
+                            <button type="submit" id="submit-btn" class="btn btn-primary d-none float-end">View
+                                Results<i class="fa-solid fa-chevron-right"></i></button>
+
                         </div>
                     </form>
                 </div>
             </div>
-
             <div class="col-lg-4 mb-3">
-                <div class="border rounded bg-light p-4">
+                <div class="border rounded bg-light p-3">
                     <div id="clinic-sidebar" class="d-none">
                         <h6>
                             <strong>Search Progress</strong>
@@ -827,11 +903,11 @@
                     </div>
                     <div id="clinic-sidebar-buttons">
                         <div class="d-grid gap-2 col mx-auto">
-                            <a class="btn btn-outline-secondary" href="{% url 'search_tissue_samples' %}"><i
-                                    class="fas fa-angle-double-left"></i> Back to Biosample Search Facility</a>
+                            <a class="btn btn-secondary" href="{% url 'search_tissue_samples' %}"><i
+                                    class="fas fa-angle-double-left"></i> Back to Search Tissue Samples</a>
                             <a id="driver-search-btn" class="btn btn-primary" href="{% url 'driver_search_facility' %}"><i
                                     class="fa-solid fa-magnifying-glass"></i> Search by Driver Mutation</a>
-                            <a class="btn btn-secondary" href="{% url 'make_application' %}">
+                            <a class="btn btn-primary" href="{% url 'make_application' %}">
                                 <i class="fas fa-edit"></i> Make Application
                             </a>
                         </div>

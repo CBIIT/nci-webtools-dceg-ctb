@@ -166,7 +166,7 @@ INSTALLED_APPS = [
     'adminrestrict',
     'axes',
     'donors',
-    'searches'
+    'searches',
 ]
 
 MIDDLEWARE = [
@@ -282,15 +282,26 @@ if IS_DEV:
 ##########################
 #  Start django-allauth  #
 ##########################
-
+LOGIN_URL = 'two_factor:login'
 LOGIN_REDIRECT_URL = '/extended_login/'
+OTP_LOGIN_URL = 'two_factor:profile'
+# LOGIN_REDIRECT_URL = 'two_factor:profile'
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATED_REDIRECT_URL = 'two_factor:setup'
 
 INSTALLED_APPS += (
     'accounts',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google'
+    'allauth.socialaccount.providers.google',
+# 2FA support
+    'django_otp',
+    'django_otp.plugins.otp_static',
+    'django_otp.plugins.otp_totp',
+    'django_otp.plugins.otp_email',  # <- if you want email capability.
+    'two_factor',
+    # 'two_factor.plugins.phonenumber',  # <- if you want phone number capability.
+    'two_factor.plugins.email',  # <- if you want email capability.
 )
 
 ROOT_URLCONF = 'ctb.urls'
@@ -338,7 +349,7 @@ ACCOUNT_EMAIL_REQUIRED        = True
 ACCOUNT_USERNAME_REQUIRED     = bool(os.environ.get('ACCOUNT_USERNAME_REQUIRED', 'False') == 'True')
 ACCOUNT_EMAIL_VERIFICATION    = os.environ.get('ACCOUNT_EMAIL_VERIFICATION', 'mandatory').lower()
 
-ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Chernobyl Tissue Bank]"
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Chernobyl Tissue Bank] "
 ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION',120)  # Max password age in days
 ACCOUNTS_PASSWORD_HISTORY    = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5)  # Max password history kept
 ACCOUNTS_ALLOWANCES          = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
@@ -605,7 +616,8 @@ BLANK_TISSUE_FILTER_CASE_COUNT = {
     },
     'blood': {
         'dna': 3623,
-        'serum': 3265
+        'serum': 3265,
+        'blood': 3420
     },
     'total': 5546
 }
@@ -639,6 +651,9 @@ if DEBUG and DEBUG_TOOLBAR:
 # If you do not want Axes to override the authentication response
 # you can skip installing the middleware and use your own views.
 MIDDLEWARE.append('axes.middleware.AxesMiddleware',)
+MIDDLEWARE.append('django_otp.middleware.OTPMiddleware',)
+# LOGIN_URL = 'bogus'
+# REDIRECT_FIELD_NAME = 'bogus'
 
 # Log the version of our app
 print("[STATUS] Application Version is {}".format(APP_VERSION))
