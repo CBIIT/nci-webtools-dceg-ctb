@@ -17,12 +17,13 @@
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import render
-from django.http import JsonResponse
-from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse, HttpResponse
+# from django.contrib.auth.decorators import login_required
+from django_otp.decorators import otp_required
 from django.template.loader import get_template
 from .metadata_count import get_sample_case_counts, get_clinical_case_counts, get_driver_case_counts
-from .models import Filter
-from .utils import upload_blob
+from .models import Filter, Submissions
+from .utils import upload_blob, read_blob
 import urllib
 import pytz
 from io import BytesIO
@@ -33,21 +34,41 @@ import logging
 logger = logging.getLogger('main_logger')
 
 
-@login_required
+# @login_required
+@otp_required
 def dashboard(request):
     message = request.POST.get('message')
     return render(request, 'donors/dashboard.html', {'message': message})
 
 
 # My Saved Searches
-@login_required
+@otp_required
 def saved_searches(request):
     return render(request, 'donors/saved_searches.html')
 
 
-@login_required
+@otp_required
 def get_search_list(request):
     return JsonResponse(get_saved_searches(request.user), safe=False)
+
+
+@otp_required
+def get_submissions_list(request):
+    return JsonResponse(get_my_application_list(request.user), safe=False)
+
+
+def get_my_application_list(owner):
+    my_application_list = []
+    user_application_object_list = Submissions.get_list(owner)
+    for u_filter in user_application_object_list:
+        my_application_list.append(
+            {
+                'submitted_date': datetime.strftime(u_filter.submitted_date, '%b %-d %Y at %-I:%M %p (%Z)'),
+                'entry_form_path': u_filter.entry_form_path,
+                'summary_file_path': u_filter.summary_file_path if u_filter.summary_file_path else ''
+            }
+        )
+    return my_application_list
 
 
 def get_saved_searches(owner):
@@ -60,20 +81,35 @@ def get_saved_searches(owner):
                 'name': u_filter.name,
                 'search_type': u_filter.search_type,
                 'case_count': u_filter.case_count,
-                'filter_encoded_url': u_filter.value
+                'filter_encoded_url': u_filter.value,
+                'saved_date': datetime.strftime(u_filter.last_date_saved, '%b %-d %Y at %-I:%M %p (%Z)')
+                # 'saved_date': u_filter.last_date_saved
             }
         )
     return saved_search_list
 
 
-@login_required
+@otp_required
 def delete_filters(request, filter_id):
     owner = request.user
     message = Filter.destroy(filter_id=filter_id, owner=owner)
     return JsonResponse(message)
 
 
-@login_required
+@otp_required
+def open_file(request, filename, att):
+    owner = request.user
+    if Submissions.is_users_file(owner, filename, (att == "1")):
+        bucket_name = settings.GCP_APP_DOC_BUCKET
+        file_blob = read_blob(bucket_name=bucket_name, blob_name=filename)
+        file_bytes = file_blob.download_as_bytes()
+        logger.info(f"[INFO] File {filename} accessed by '{owner}' for reading from [{bucket_name}].")
+        return HttpResponse(file_bytes, content_type=file_blob.content_type)
+    else:
+        return JsonResponse({'error': "Unable to access the file"})
+
+
+@otp_required
 def save_filters(request):
     filters = get_filters(request, for_save=True)
     name = filters.get('title', 'Untitled')
@@ -83,7 +119,7 @@ def save_filters(request):
     if 'search_type' in filters:
         filters.pop('search_type')
     case_count = filters.get('total', 0)
-    if 'total' in filters and search_type != 'Clinic':
+    if 'total' in filters and search_type != 'Clinical':
         filters.pop('total')
     if 'filter_encoded_url' in filters:
         filter_encoded_url = filters.get('filter_encoded_url', 0)
@@ -94,10 +130,13 @@ def save_filters(request):
     return JsonResponse({'message': 'Your search \'' + name + '\' has been saved.'})
 
 
-@login_required
+@otp_required
 def search_clinical(request):
     filters = get_filters(request)
     total = filters.get('total', 5516)
+    title = filters.get('title', '')
+    if 'title' in filters:
+        filters.pop('title')
     if 'csrfmiddlewaretoken' in filters:
         filters.pop('csrfmiddlewaretoken')
     case_counts = get_clinical_case_counts(filters)
@@ -106,40 +145,44 @@ def search_clinical(request):
         'avail': case_counts
     }
     return render(request, 'donors/clinical_search_facility_result.html',
-                  {'clinic_search_result': clinic_search_result,
+                  {'clinic_search_result': clinic_search_result, 'title': title,
                    'filter_encoded_url': '?' + urllib.parse.urlencode(filters, True)})
 
 
 # Driver Search Facility
-@login_required
+@otp_required
 def driver_search_facility(request):
     filters = get_filters(request)
+    title = filters.get('title', '')
+    if 'title' in filters:
+        filters.pop('title')
     total_filtered_case_count, counts = get_driver_case_counts(filters)
     return render(request, 'donors/driver_search_facility.html',
-                  {'counts': counts, 'total_filtered_case_count': total_filtered_case_count,
+                  {'counts': counts, 'title': title, 'total_filtered_case_count': total_filtered_case_count,
                    'filter_encoded_url': '?' + urllib.parse.urlencode(filters, True)})
 
 
-@login_required
+@otp_required
 def search_tissue_samples(request):
-    return render(request, 'donors/search_tissue_samples.html')
+    return render(request, 'donors/search_tissue_samples.html', {'total_counts': settings.BLANK_TISSUE_FILTER_CASE_COUNT})
 
 
-@login_required
+@otp_required
 def get_filters(request, for_save=False):
     sample_filters = {}
     request_method = request.GET if request.method == 'GET' else request.POST
     for key in request_method:
         if key.endswith('[]'):
             sample_filters[key] = request_method.getlist(key)
-        elif for_save or key != 'title':
+        else:
+        # elif for_save or key != 'title':
             val = request_method.get(key)
             if val:
                 sample_filters[key] = request_method.get(key)
     return sample_filters
 
 
-@login_required
+@otp_required
 def filter_tissue_samples(request):
     filters = get_filters(request)
     case_counts = get_sample_case_counts(filters)
@@ -147,19 +190,22 @@ def filter_tissue_samples(request):
 
 
 # Clinical Search Facility
-@login_required
+@otp_required
 def clinical_search_facility(request):
-    sample_filters = get_filters(request)
+    filters = get_filters(request)
+    title = filters.get('title', '')
+    if 'title' in filters:
+        filters.pop('title')
     return render(request, 'donors/clinical_search_facility.html',
-                  {'sample_filters': sample_filters})
+                  {'sample_filters': filters, 'title': title})
 
 
-@login_required
+@otp_required
 def make_application(request):
     return render(request, 'donors/application_form.html')
 
 
-@login_required
+@otp_required
 def application_submit(request):
     datetime_now = datetime.now(pytz.timezone('US/Eastern'))
     user_email = request.user.email
@@ -193,7 +239,7 @@ def application_submit(request):
             date_str = datetime_now.strftime("%-y_%m_%d_%H%M%S")
             user_str = user_email.split('@')[0].upper()
             destination_file_name = f"CTB_APPLICATION_{date_str}_{user_str}.pdf"
-
+            destination_att_file_name = None
             if is_file_option_on and request.FILES:
                 # uploaded project summary file
                 uploaded_blob = request.FILES["project-summary-file"]
@@ -237,6 +283,7 @@ def application_submit(request):
             mail.send()
         else:  # method not POST
             raise Exception('Invalid request was made.')
+        Submissions.create(entry_form_path=destination_file_name, summary_file_path=destination_att_file_name, owner=request.user)
     except Exception as e:
         return render(request, 'donors/application_post_submit.html', {'request': request,
                                                                        'error': e})

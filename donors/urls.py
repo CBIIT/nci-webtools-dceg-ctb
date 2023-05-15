@@ -21,8 +21,10 @@ urlpatterns = [
     url(r'^dashboard/', views.dashboard, name='dashboard'),
     url(r'^saved_searches/', views.saved_searches, name='saved_searches'),
     url(r'^get_search_list/', views.get_search_list, name='get_search_list'),
+    url(r'^get_submissions_list/', views.get_submissions_list, name='get_submissions_list'),
     url(r'^save_filters', views.save_filters, name='save_filters'),
     url(r'^delete_filters/(?P<filter_id>\d+)/', views.delete_filters, name='delete_filters'),
+    url(r'^open_file/(?P<filename>.*)/(?P<att>\d+)/', views.open_file, name='open_file'),
     url(r'^search_tissue_samples', views.search_tissue_samples, name='search_tissue_samples'),
     url(r'^filter_tissue_samples', views.filter_tissue_samples, name='filter_tissue_samples'),
     url(r'^search_clinical', views.search_clinical, name='search_clinical'),
@@ -30,4 +32,5 @@ urlpatterns = [
     url(r'^driver_search_facility', views.driver_search_facility, name='driver_search_facility'),
     url(r'^make_application', views.make_application, name='make_application'),
     url(r'^application_submit', views.application_submit, name='application_submit')
+
 ]
