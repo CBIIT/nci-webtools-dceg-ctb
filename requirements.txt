@@ -1,5 +1,5 @@
 requests==2.30.0
-django==3.2.18
+django==3.2.19
 PyYAML==5.4
 pyOpenSSL==23.1.1
 mysqlclient==2.0.1
