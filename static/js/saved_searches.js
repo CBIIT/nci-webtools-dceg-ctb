@@ -1,6 +1,6 @@
 /**
  *
- * Copyright 2022, Institute for Systems Biology
+ * Copyright 2023, Institute for Systems Biology
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,26 +37,31 @@ require([
     $(document).ready(function () {
         let my_search_tbl = $('#saved_searches_tbl').DataTable({
             scrollX: true,
+            ordering: false,
             ajax: {
                 url: BASE_URL + "/search_facility/get_search_list/",
                 dataSrc: ''
             },
             columns: [
                 {
+                    class: 'text-end',
                     render: function (data, type, row, meta) {
                         let search_type_url;
                         if (row.search_type == 'Biosample') {
                             search_type_url = 'search_tissue_samples';
-                        } else if (row.search_type == 'Clinic') {
+                        } else if (row.search_type == 'Clinical') {
                             search_type_url = 'search_clinical';
                         } else {
                             search_type_url = 'driver_search_facility';
                         }
-                        let search_url = BASE_URL + "/search_facility/" + search_type_url + row.filter_encoded_url;
+                        let search_url = BASE_URL + "/search_facility/" + search_type_url + row.filter_encoded_url + '&title='+row.name;
                         return "<a href='" + search_url + "'>" + row.name + "</a>";
                     }
                 },
-                {data: 'search_type'},
+                {
+                    data: 'search_type',
+                    class: 'text-end',
+                },
                 {
                     data: 'case_count',
                     type: 'num',
@@ -64,19 +69,15 @@ require([
                     render: $.fn.dataTable.render.number(',', null)
                 },
                 {
-                    class: 'text-center',
-                    render: function (data, type, row, meta) {
-                        let driver_search_url = BASE_URL + "/search_facility/driver_search_facility/" + row.filter_encoded_url;
-                        return "<a href='" + driver_search_url + "'>Driver Search <i class=\"fa-solid fa-angle-right\"></i></a>"
-                    },
-                    orderable: false
+                    class: 'date-col text-end',
+                    data: 'saved_date',
+                    type: 'date'
                 },
                 {
                     class: 'text-center',
                     render: function (data, type, row, meta) {
                         return "<a class='delete-search-btn' href='#' data-filter-id='" + row.filter_id + "'><i class='fa-solid fa-trash-can'></i></a>";
                     },
-                    orderable: false
                 },
             ]
         });

@@ -100,9 +100,13 @@
 {#                        <hr>#}
                         <div>
 {#                            Password Last Modified#}
-                            <a href="{% url 'account_change_password' %}" class="btn btn-outline-secondary btn-sm ms-5 float-end"><i
-                                    class="fa-solid fa-key"></i> Change
-                                Password
+
+                            <a href="{% url 'account_change_password' %}" class="btn btn-outline-secondary btn-sm ms-2 float-end"><i
+                                    class="fa-solid fa-key"></i> Change Password
+                            </a>
+                            <a href="{% url 'two_factor:profile' %}"
+                               class="btn btn-outline-secondary btn-sm ms-2 float-end"><i class="fa-solid fa-gear"></i>
+                                Account Security
                             </a>
                         </div>
                     </div>

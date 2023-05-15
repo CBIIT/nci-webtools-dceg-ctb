@@ -73,7 +73,12 @@ body {
     color: white;
 }
 
-main a, footer a, .nav-link{
+footer, footer a{
+    color: whitesmoke;
+    font-size: 1rem;
+}
+
+main a, .nav-link{
     text-decoration: none;
     color: #4d6ea0;
 }
@@ -83,6 +88,11 @@ main a, footer a, .nav-link{
     background-color: rgba(0, 0, 0, .5);
 }
 
+/*.btn-tiny{*/
+/*    padding: 0.1rem 0.2rem;*/
+/*    font-size: .7rem;*/
+/*    border-radius: 0.2rem;*/
+/*}*/
 .btn-special {
     background-color: #6a4188;
     border: 1px solid #4f2f67;
@@ -120,31 +130,90 @@ main a, footer a, .nav-link{
     padding: 0.4rem;
 }
 
-/* Accounts templates */
-.signup label, .login label, .password_reset label {
-    display: none;
+.login table{
+    width: 100%;
 }
 
-.signup input, .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
+.login table td{
+    padding-bottom: .5rem;
+}
+
+td.date-col{
+    color: #6c757d!important;
+    font-size: .8rem;
+}
+/* Accounts templates */
+/*.signup label, .login label, .password_reset label {*/
+/*    display: none;*/
+/*}*/
+.readmore-acc div{
+    padding: 0;
+    margin: 0;
+}
+.readmore-acc .accordion-button{
+    width: inherit;
+    padding-top: 0;
+    padding-left: 0;
+    padding-right: 0;
+    padding-bottom: .4rem;
+    box-shadow: none;
+    color: #4d6ea0;
+}
+.accordion-flush .accordion-item:first-child {
+    border-top: 0;
+    border-top-width: 0px;
+    border-top-style: initial;
+    border-top-color: initial;
+}
+.accordion-flush .accordion-item {
+    border-right: 0;
+    border-right-width: 0px;
+    border-right-style: initial;
+    border-right-color: initial;
+    border-left: 0;
+    border-left-width: 0px;
+    border-left-style: initial;
+    border-left-color: initial;
+    border-radius: 0;
+}
+.bg-light {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+}
+.readmore-acc .accordion-item{
+    border: none;
+}
+.readmore-acc .accordion-button:after{
+    margin-left: .5rem;
+}
+
+#ctb-intro-acc .accordion-item, #ctb-intro-acc .accordion-button{
+    background-color: #e2e3e5;
+}
+.signup input:not([type='checkbox']), .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
     width: 100%;
     border-radius: 3px;
     padding: 12px;
     border: 1px solid slategray;
     background-color: #ececec;
 }
-
-.login label[for="id_remember"] {
-    display: inline-block;
-    margin-top: 5px;
-    font-size: larger;
-    font-weight: bold;
+.setup-form ul{
+    list-style-type: none;
 }
 
-#id_remember {
-    width: 20px;
-    margin-top: -2px;
-    vertical-align: middle;
-}
+
+/*.login label[for="id_remember"] {*/
+/*    display: inline-block;*/
+/*    margin-top: 5px;*/
+/*    font-size: larger;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*#id_remember {*/
+/*    width: 20px;*/
+/*    margin-top: -2px;*/
+/*    vertical-align: middle;*/
+/*}*/
 
 .anchor-section{
 	/*height: 58px;*/
