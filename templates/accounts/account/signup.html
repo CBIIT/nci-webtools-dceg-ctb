@@ -12,20 +12,36 @@
 {% block content %}
 
     <div class="row justify-content-center py-5">
-        <div class="col-lg-4 accounts-col">
+        <div class="col-lg-5 accounts-col">
             <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                 <div class="card">
-                    <div class="card-header"><h4>Register</h4></div>
-                    <div class="card-body p-5">
-                        <p>{% blocktrans %}Already have an account? Please <a href="{{ login_url }}"><b>sign in</b></a>
-                            instead.{% endblocktrans %}</p>
+                    <div class="card-header"><h5>Register</h5></div>
+                    <div class="card-body p-4">
+                        <p>Already have an account? Please <a href="{% url 'two_factor:login' %}"><b>sign in</b></a>
+                            instead.</p>
                         {% csrf_token %}
                         {{ form.as_p }}
                         {% if redirect_field_value %}
                             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
                         {% endif %}
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-secondary" type="submit">{% trans "Register" %} &raquo;
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="two-fa-check" required>
+                            <label class="form-check-label" for="two-fa-check">
+                                I agree to use two-factor authentication to sign-in
+                            </label>
+                        </div>
+                        <div class="small fst-italic fw-light mt-2 bg-light p-2 rounded-2">
+                            This password must contain at least one each of the following:
+                            <ul>
+                                <li>a lower-case letter</li>
+                                <li>an upper-case letter</li>
+                                <li>a number</li>
+                                <li>a special character from the set '!@#$%^&*+:;?'</li>
+                            </ul>
+                        </div>
+
+                        <div class="d-grid gap-2 pt-3">
+                            <button class="btn btn-primary" type="submit">{% trans "Register" %} &raquo;
                             </button>
                         </div>
                     </div>

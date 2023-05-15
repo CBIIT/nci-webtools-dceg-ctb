@@ -36,15 +36,18 @@ require([
 ], function(base) {
     // To ensure the search is not run while the user is still actively entering the inputs
     // the system will wait for at least 1.5 seconds to see if there are any other inputs being entered
-    let lastInputChangeTimeLog = 0;    // 0 indicates a reset timer
-    let TIME_TO_WAIT = 1500; // 1.5 secs
+    // let lastInputChangeTimeLog = 0;    // 0 indicates a reset timer
+    // let TIME_TO_WAIT = 1500; // 1.5 secs
     $(document).ready(function () {
 
         let queryString = window.location.search;
         if (queryString){
             const urlParams = new URLSearchParams(queryString);
             for(const [key, value] of urlParams.entries()){
-                if(key.endsWith('[]')) {
+                if(key == 'title'){
+                    $('#general-message').attr('data-title',value);
+                }
+                else if(key.endsWith('[]')) {
                     $("input:checkbox[name='" + key + "'][value='" + value + "']").prop('checked', true);
                 }
                 else if (key.startsWith('age')){
@@ -55,62 +58,63 @@ require([
                 }
             }
         }
-        $('.table').DataTable({
-            dom: 't',
-            columns: [
-                null,
-                {
-                    class: 'text-end'
-                },
-                {
-                    class: 'text-end'
-                },
-                {
-                    class: 'text-end'
-                }
-            ],
-            ordering: false
-
-        });
+        // $('.table').DataTable({
+        //     dom: 't',
+        //     columns: [
+        //         null,
+        //         {
+        //             class: 'text-end'
+        //         },
+        //         {
+        //             class: 'text-end'
+        //         },
+        //         {
+        //             class: 'text-end'
+        //         }
+        //     ],
+        //     ordering: false
+        //
+        // });
 
         search_samples();
 
         $("#search-tissue-filters input").not("#search-save-title").on("change", function () {
-            lastInputChangeTimeLog = Date.now();
-            setTimeout(run_search_after_sleep, TIME_TO_WAIT);
-        });
-
-        $("#search-save").on("click", function(e){
-            $('#save_message').html('');
-            if (is_input_valid(e))
-                save_filters();
-
-        });
-    });
-    let run_search_after_sleep = function(){
-        if (lastInputChangeTimeLog && Date.now() - lastInputChangeTimeLog > TIME_TO_WAIT){
-            lastInputChangeTimeLog = 0; // reset timer
             search_samples();
-        }
-    };
-
-
-    let save_filters = function () {
-        $.ajax({
-            type: "post",
-            url: BASE_URL + "/search_facility/save_filters",
-            data: $('#search-tissue-form').serialize() +'&search_type=Biosample',
-            success: function(data) {
-                $('#save_message').html('<i class="fas fa-check-circle"></i> '+data['message']);
-            }
+            // lastInputChangeTimeLog = Date.now();
+            // setTimeout(run_search_after_sleep, TIME_TO_WAIT);
         });
-    };
+
+        // $("#search-save").on("click", function(e){
+        //     $('#save_message').html('');
+        //     if (is_input_valid(e))
+        //         save_filters();
+        //
+        // });
+    });
+    // let run_search_after_sleep = function(){
+    //     if (lastInputChangeTimeLog && Date.now() - lastInputChangeTimeLog > TIME_TO_WAIT){
+    //         lastInputChangeTimeLog = 0; // reset timer
+    //         search_samples();
+    //     }
+    // };
+
+
+    // let save_filters = function () {
+    //     $.ajax({
+    //         type: "post",
+    //         url: BASE_URL + "/search_facility/save_filters",
+    //         data: $('#search-tissue-form').serialize() +'&search_type=Biosample',
+    //         success: function(data) {
+    //             $('#save_message').html('<i class="fas fa-check-circle"></i> '+data['message']);
+    //         }
+    //     });
+    // };
     let search_samples = function () {
         let form_inputs = $("input.form-check-input:checkbox, input.form-check-input:radio, button.btn-reset, :input[type='number']");
         $('#total-input').val('');
         $('#total-case-count').text(numberWithCommas(0));
         $('table.table').addClass('loading');
-        $("#make-app-btn, #clinical-search-facility-btn, #search-save").addClass('disabled')
+        $("#make-app-btn, #clinical-search-facility-btn, #search-save-btn").addClass('disabled')
         $.ajax({
             type: "post",
             url: BASE_URL + "/search_facility/filter_tissue_samples",
@@ -119,7 +123,7 @@ require([
                 form_inputs.attr("disabled", true);
             },
             success: function (case_counts) {
-                $("#make-app-btn, #clinical-search-facility-btn, #search-save").removeClass('disabled');
+                $("#make-app-btn, #clinical-search-facility-btn, #search-save-btn").removeClass('disabled');
                 $('table.table.loading').removeClass('loading');
                 form_inputs.attr("disabled", false);
                 $('#total-case-count').text(numberWithCommas(case_counts['total']));
@@ -135,7 +139,10 @@ require([
                 $('#tissue-ffpe-metastatic').text(numberWithCommas(case_counts['tissue']['ffpe']['metastatic']));
                 $('#blood-serum').text(numberWithCommas(case_counts['blood']['serum']));
                 $('#blood-dna').text(numberWithCommas(case_counts['blood']['dna']));
+                $('#blood-blood').text(numberWithCommas(case_counts['blood']['blood']));
+
                 $('#clinical-search-facility-btn').attr('href', BASE_URL + "/search_facility/clinical_search_facility?" + $('#search-tissue-form').serialize())
+                $('#general-message').html($('#general-message').data('title')?"<div role=\"alert\" class=\"alert alert-primary alert-dismissible fade show fst-italic\"><i class=\"fas fa-check-circle\"></i> Search '"+$('#general-message').data('title')+"' is loaded<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>":"")
 
             }
         });

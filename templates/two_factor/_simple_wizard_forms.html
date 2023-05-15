@@ -1,0 +1,8 @@
+{% load custom_tags %}
+<table class="mb-3">
+    {{ wizard.management_form }}
+    {% for field in wizard.form %}
+        <label class="form-label">{{ field.label }}</label>
+        {{ field|add_classes:'form-control mb-2' }}
+    {% endfor %}
+</table>

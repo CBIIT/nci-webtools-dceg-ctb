@@ -190,9 +190,9 @@ let numberWithCommas = function (num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 };
 
-let is_input_valid = function (e) {
+let is_input_valid = function (search_title, e) {
     $('#alert_message').html('');
-    let search_title = $('#search-save-title').val();
+    // let search_title = $('#'+title_el_id).val();
     if (search_title.match(/\s/)) {
         $('#alert_message').html('<i class="fa-solid fa-circle-exclamation"></i> ' + 'No space character is allowed. Please revise the search title.');
         e.preventDefault();
