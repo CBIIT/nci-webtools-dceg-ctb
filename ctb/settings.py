@@ -166,7 +166,7 @@ INSTALLED_APPS = [
     'adminrestrict',
     'axes',
     'donors',
-    'searches',
+    # 'searches',
 ]
 
 MIDDLEWARE = [
@@ -294,7 +294,7 @@ INSTALLED_APPS += (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-# 2FA support
+    # 2FA support
     'django_otp',
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
