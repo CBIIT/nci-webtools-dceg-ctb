@@ -64,8 +64,9 @@ def get_my_application_list(owner):
         my_application_list.append(
             {
                 'submitted_date': datetime.strftime(u_filter.submitted_date, '%b %-d %Y at %-I:%M %p (%Z)'),
-                'entry_form_path': u_filter.entry_form_path,
-                'summary_file_path': u_filter.summary_file_path if u_filter.summary_file_path else ''
+                'submission_id': u_filter.id,
+                'entry_form_path': int(bool(u_filter.entry_form_path)),
+                'summary_file_path': int(bool(u_filter.summary_file_path))
             }
         )
     return my_application_list
@@ -97,16 +98,20 @@ def delete_filters(request, filter_id):
 
 
 @otp_required
-def open_file(request, filename, att):
+def open_file(request, submission_id, att):
+# def open_file(request, filename, att):
     owner = request.user
-    if Submissions.is_users_file(owner, filename, (att == "1")):
+    filename = Submissions.get_submission_filename(owner, submission_id, (att == "1"))
+    if filename:
+    # if Submissions.is_users_file(owner, filename, (att == "1")):
         bucket_name = settings.GCP_APP_DOC_BUCKET
         file_blob = read_blob(bucket_name=bucket_name, blob_name=filename)
         file_bytes = file_blob.download_as_bytes()
         logger.info(f"[INFO] File {filename} accessed by '{owner}' for reading from [{bucket_name}].")
         return HttpResponse(file_bytes, content_type=file_blob.content_type)
     else:
-        return JsonResponse({'error': "Unable to access the file"})
+        return render(request, '400.html', {'error': "Unable to find the requested file."})
+        # return JsonResponse({'error': "Unable to access the file"})
 
 
 @otp_required
@@ -269,7 +274,7 @@ def application_submit(request):
             
             A Chernobyl tissue bank application has been submitted.
             A copy of the application is attached to this email for you to review.
-            Please contact feedback@isb-cgc.org if you have any questions or concerns.
+            Please contact ctb-support@isb-cgc.org if you have any questions or concerns.
             
             ISB-CGC Team''',
                 settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
