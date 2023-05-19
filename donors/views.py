@@ -18,7 +18,6 @@ from django.conf import settings
 from django.core.mail import EmailMessage
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponse
-# from django.contrib.auth.decorators import login_required
 from django_otp.decorators import otp_required
 from django.template.loader import get_template
 from .metadata_count import get_sample_case_counts, get_clinical_case_counts, get_driver_case_counts
@@ -84,7 +83,6 @@ def get_saved_searches(owner):
                 'case_count': u_filter.case_count,
                 'filter_encoded_url': u_filter.value,
                 'saved_date': datetime.strftime(u_filter.last_date_saved, '%b %-d %Y at %-I:%M %p (%Z)')
-                # 'saved_date': u_filter.last_date_saved
             }
         )
     return saved_search_list
@@ -99,11 +97,9 @@ def delete_filters(request, filter_id):
 
 @otp_required
 def open_file(request, submission_id, att):
-# def open_file(request, filename, att):
     owner = request.user
     filename = Submissions.get_submission_filename(owner, submission_id, (att == "1"))
     if filename:
-    # if Submissions.is_users_file(owner, filename, (att == "1")):
         bucket_name = settings.GCP_APP_DOC_BUCKET
         file_blob = read_blob(bucket_name=bucket_name, blob_name=filename)
         file_bytes = file_blob.download_as_bytes()
@@ -111,7 +107,6 @@ def open_file(request, submission_id, att):
         return HttpResponse(file_bytes, content_type=file_blob.content_type)
     else:
         return render(request, '400.html', {'error': "Unable to find the requested file."})
-        # return JsonResponse({'error': "Unable to access the file"})
 
 
 @otp_required
@@ -173,14 +168,13 @@ def search_tissue_samples(request):
 
 
 @otp_required
-def get_filters(request, for_save=False):
+def get_filters(request):
     sample_filters = {}
     request_method = request.GET if request.method == 'GET' else request.POST
     for key in request_method:
         if key.endswith('[]'):
             sample_filters[key] = request_method.getlist(key)
         else:
-        # elif for_save or key != 'title':
             val = request_method.get(key)
             if val:
                 sample_filters[key] = request_method.get(key)
