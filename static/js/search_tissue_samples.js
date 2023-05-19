@@ -58,23 +58,6 @@ require([
                 }
             }
         }
-        // $('.table').DataTable({
-        //     dom: 't',
-        //     columns: [
-        //         null,
-        //         {
-        //             class: 'text-end'
-        //         },
-        //         {
-        //             class: 'text-end'
-        //         },
-        //         {
-        //             class: 'text-end'
-        //         }
-        //     ],
-        //     ordering: false
-        //
-        // });
 
         search_samples();
 
@@ -99,16 +82,6 @@ require([
     // };
 
 
-    // let save_filters = function () {
-    //     $.ajax({
-    //         type: "post",
-    //         url: BASE_URL + "/search_facility/save_filters",
-    //         data: $('#search-tissue-form').serialize() +'&search_type=Biosample',
-    //         success: function(data) {
-    //             $('#save_message').html('<i class="fas fa-check-circle"></i> '+data['message']);
-    //         }
-    //     });
-    // };
     let search_samples = function () {
         let form_inputs = $("input.form-check-input:checkbox, input.form-check-input:radio, button.btn-reset, :input[type='number']");
         $('#total-input').val('');
