@@ -50,23 +50,19 @@ require([
                 },
                 {
                     data: 'submission_id',
-                    // data: 'entry_form_path',
                     class: 'text-center',
-                    render: function (data, type, row) {
+                    render: function (data) {
                         if (data){
                             return "<a target=\"_blank\" class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/0'>View Submitted Form</a>";
-                            // return "<a target=\"_blank\" class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/0'>View Submitted Form</a>";
                         }
                     }
                 },
                 {
                     data: 'submission_id',
-                    // data: 'summary_file_path',
                     class: 'text-center',
                     render: function (data, type, row) {
                         if (row.summary_file_path){
                             return "<a target='_blank' title='View Attached Summary File' class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/1'><i class=\"fa-solid fa-paperclip\"></i> File</a>";
-                            // return "<a target='_blank' title='View Attached Summary File' class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/1'><i class=\"fa-solid fa-paperclip\"></i> File</a>";
                         }
                         else
                             return ""
