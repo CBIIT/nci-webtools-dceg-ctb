@@ -13,7 +13,27 @@
 
 {% block content %}
     <div class="container py-3">
-        <h5>Search Tissue Samples</h5>
+        <div class="row">
+            <div class="col-lg-4"><h5 class="fw-bold">Search Tissue Samples</h5></div>
+            <div class="col-lg-8">
+                <div role="group" aria-label="action buttons" class="d-flex gap-1 mb-2 justify-content-end">
+                    <button id="search-save-btn" type="button" class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#saveModal"><i
+                            class="fa-solid fa-floppy-disk"></i> Save
+                    </button>
+                    <a id="clinical-search-facility-btn" type="button" class="btn btn-primary"
+                       href="{% url 'clinical_search_facility' %}">Proceed to Clinical Search <i
+                            class="fas fa-angle-double-right"></i>
+                    </a>
+                    <a id="make-app-btn" type="button" class="btn btn-primary"
+                       href="{% url 'make_application' %}"><i
+                            class="fas fa-edit"></i> Make
+                        Application
+                    </a>
+                </div>
+            </div>
+        </div>
         <div id="general-message"></div>
 
         <div class="row">
@@ -26,26 +46,10 @@
                     <div class="container-fluid">
                         <div class="mb-2">
                             <div class="float-end">
-                                <div role="group" aria-label="action buttons">
-                                    <button id="search-save-btn" type="button" class="btn btn-primary btn-sm"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#saveModal"><i
-                                            class="fa-solid fa-floppy-disk"></i> Save
-                                    </button>
-                                    <a id="clinical-search-facility-btn" type="button" class="btn btn-primary btn-sm"
-                                       href="{% url 'clinical_search_facility' %}">Proceed to Clinical Search <i
-                                            class="fas fa-angle-double-right"></i>
-                                    </a>
-                                    <a id="make-app-btn" type="button" class="btn btn-primary btn-sm"
-                                       href="{% url 'make_application' %}"><i
-                                            class="fas fa-edit"></i> Make
-                                        Application
-                                    </a>
-                                    <button type="reset"
-                                            class="btn btn-reset btn-sm btn-outline-secondary"
-                                            data-target="#search-tissue-form">Reset All
-                                    </button>
-                                </div>
+                                <button type="reset"
+                                        class="btn btn-reset btn-sm btn-outline-secondary"
+                                        data-target="#search-tissue-form">Reset All
+                                </button>
                             </div>
                             <div class="text-muted fw-light pb-1">
                                 Please tick all that apply.
@@ -438,19 +442,19 @@
                             <tr>
                                 <td>RNA</td>
                                 <td class="text-end pe-0"><span id="tissue-rna-normal"
-                                                           class="fw-bold">{{ tissue.rna.normal|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.rna.normal|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.normal|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-rna-tumour"
-                                                           class="fw-bold">{{ tissue.rna.tumour|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.rna.tumour|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.tumour|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-rna-metastatic"
-                                                           class="fw-bold">{{ tissue.rna.metastatic|format_num_with_commmas|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.rna.metastatic|format_num_with_commmas|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.metastatic|format_num_with_commmas }}</span>
@@ -459,19 +463,19 @@
                             <tr>
                                 <td>DNA</td>
                                 <td class="text-end pe-0"><span id="tissue-dna-normal"
-                                                           class="fw-bold">{{ tissue.dna.normal|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.dna.normal|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.normal|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-dna-tumour"
-                                                           class="fw-bold">{{ tissue.dna.tumour|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.dna.tumour|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.tumour|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-dna-metastatic"
-                                                           class="fw-bold">{{ tissue.dna.metastatic|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.dna.metastatic|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.metastatic|format_num_with_commmas }}</span>
@@ -480,19 +484,19 @@
                             <tr>
                                 <td>FFPE</td>
                                 <td class="text-end pe-0"><span id="tissue-ffpe-normal"
-                                                           class="fw-bold">{{ tissue.ffpe.normal|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.ffpe.normal|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.normal|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-ffpe-tumour"
-                                                           class="fw-bold">{{ tissue.ffpe.tumour|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.ffpe.tumour|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.tumour|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-ffpe-metastatic"
-                                                           class="fw-bold">{{ tissue.ffpe.metastatic|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.ffpe.metastatic|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.metastatic|format_num_with_commmas }}</span>
@@ -516,7 +520,7 @@
                             <tr>
                                 <td>Serum</td>
                                 <td class="text-end pe-0"><span id="blood-serum"
-                                                           class="fw-bold">{{ blood.serum|default:0 }}</span>
+                                                                class="fw-bold">{{ blood.serum|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.blood.serum|format_num_with_commmas }}</span>
@@ -527,7 +531,7 @@
                             <tr>
                                 <td>DNA</td>
                                 <td class="text-end pe-0"><span id="blood-dna"
-                                                           class="fw-bold">{{ blood.dna|default:0 }}</span>
+                                                                class="fw-bold">{{ blood.dna|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.blood.dna|format_num_with_commmas }}</span>
@@ -538,7 +542,7 @@
                             <tr>
                                 <td>Blood</td>
                                 <td class="text-end pe-0"><span id="blood-blood"
-                                                           class="fw-bold">{{ blood.blood|default:0 }}</span>
+                                                                class="fw-bold">{{ blood.blood|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.blood.blood|format_num_with_commmas }}</span>
