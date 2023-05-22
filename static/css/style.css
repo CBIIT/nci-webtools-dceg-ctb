@@ -11,12 +11,16 @@ body {
 }
 
 .navbar-ctb {
-    padding: 5px 0;
+    padding-top: 5px;
 }
 
 .page-banner{
-  text-align: center;
-  padding: 20px;
+    background-color: #3f9385;
+    text-align: center;
+    padding: 20px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
 }
 
 #ctb-main-navbar{
@@ -49,7 +53,7 @@ body {
 
 .stat-card{
     color: #666666;
-    margin: -150px 9px 9px 9px;
+    margin: -135px 9px 9px 9px;
     padding: 15px;
     background-color: #FDFDFD;
     border-radius: 5px;
@@ -65,10 +69,29 @@ a.fill-div {
 .stat-card:hover{
     background-color: #eeeeee;
 }
+.stat-card a{
+    color: inherit;
+}
 .stat-card a:hover{
     color: inherit;
 }
-@media (min-width: 600px) and (max-width: 1200px) {
+.btn-primary {
+    /*color: #fff;*/
+    background-color: #3F9385;
+    border-color: #3F9385;
+}
+.btn-primary:hover {
+    /*color: #fff;*/
+    background-color: #2c665d;
+    border-color: #2c665d;
+}
+.page-item.active .page-link {
+    /*z-index: 3;*/
+    /*color: #fff;*/
+    background-color: #2c665d;
+    border-color: #2c665d;
+}
+@media (min-width: 480px) and (max-width: 1200px) {
     .stat-card {
         margin: 5px 5px 5px 5px;
         /*font-size: 1.5rem;*/
@@ -82,25 +105,36 @@ a.fill-div {
 #ctb-collapsible-navbar .nav-item > a.active, #ctb-main-navbar a.navbar-brand.active{
     border-bottom: 4px solid #3f9385;
 }
-
+#ctb-secondary-navbar{
+    padding-top: 10px;
+    background-color: #ddd798;
+    /*background-color: #c0bd81;*/
+}
 #ctb-secondary-navbar .navbar-brand{
-    height: 36px;
+    height: 40px;
+    /*height: 36px;*/
 }
 
 #ctb-secondary-navbar a{
-    color: #4d5869;
+    border-top: 4px solid #ddd798;
+    color: #86845a;
     border-radius: 2px;
     margin: 0 .25rem;
+    font-size: 1.1rem;
 }
 #ctb-secondary-navbar a:hover{
-    background-color: rgba(0, 0, 0, .2);
-    color: white;
+    /*background-color: rgba(0, 0, 0, .2);*/
+    color: #b67c57 !important;
+
 }
 
 
 #ctb-secondary-navbar a.active {
-    background-color: #c0bd81;
-    color: white;
+    background-color: white;
+    color: #32756a;
+    border-top: 4px solid #c0bd81;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
 }
 
 footer, footer a{
@@ -113,6 +147,10 @@ footer a:hover{
     color: #3f9385;
 }
 
+main {
+    font-size: 1.2rem;
+    color: #444444;
+}
 main a{
     text-decoration: none;
     color: #4d6ea0;

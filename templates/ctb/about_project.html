@@ -13,18 +13,15 @@
 {% block page_name %}about_page{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <h3 class="page-banner">About the Project</h3>
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">About</li>
-                    <li class="breadcrumb-item active" aria-current="page">About the Project</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="page-banner">About the Project</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">About</li>
+                <li class="breadcrumb-item active" aria-current="page">About the Project</li>
+            </ol>
+        </nav>
     </div>
-
 {% endblock %}
 
 {% block subcontent %}
