@@ -166,7 +166,7 @@ INSTALLED_APPS = [
     'adminrestrict',
     'axes',
     'donors',
-    'searches',
+    # 'searches',
 ]
 
 MIDDLEWARE = [
@@ -294,7 +294,7 @@ INSTALLED_APPS += (
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
-# 2FA support
+    # 2FA support
     'django_otp',
     'django_otp.plugins.otp_static',
     'django_otp.plugins.otp_totp',
@@ -590,7 +590,7 @@ CTB_FORM_FILE_SIZE_UPLOAD_MAX = 65536
 # REQUEST_LOGGING_MAX_BODY_LENGTH = 5242880
 # Explicitly check for known problems in descrpitions and names provided by users
 BLACKLIST_RE = r'((?i)<script>|(?i)</script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|(?i)<iframe>|(?i)</iframe>)'
-BLANK_TISSUE_FILTERS = {'country': 'both', 'patient_residency': 'both', 'patient_gender': 'both', 'dob': 'both'}
+BLANK_TISSUE_FILTERS = {'country': 'ukraine', 'patient_residency': 'both', 'patient_gender': 'both', 'dob': 'both'}
     # ,
     #                     'age_at_operation_min': '',
     #                     'age_at_operation_max': '', 'age_at_exposure_min': '', 'age_at_exposure_max': ''}
@@ -598,28 +598,28 @@ BLANK_TISSUE_FILTERS = {'country': 'both', 'patient_residency': 'both', 'patient
 BLANK_TISSUE_FILTER_CASE_COUNT = {
     'tissue': {
         'rna': {
-            'normal': 3980,
-            'tumour': 4158,
-            'metastatic': 434
+            'normal': 2839,
+            'tumour': 3034,
+            'metastatic': 370
         },
         'dna': {
-            'normal': 3968,
-            'tumour': 4148,
-            'metastatic': 434
+            'normal': 2827,
+            'tumour': 3022,
+            'metastatic': 370
         },
         'ffpe': {
-            'normal': 2010,
-            'tumour': 5082,
-            'metastatic': 1191
+            'normal': 1967,
+            'tumour': 3691,
+            'metastatic': 858
 
         }
     },
     'blood': {
-        'dna': 3623,
-        'serum': 3265,
-        'blood': 3420
+        'dna': 2379,
+        'serum': 2017,
+        'blood': 2239
     },
-    'total': 5546
+    'total': 4052
 }
 
 GCP_APP_DOC_BUCKET = os.environ.get('GCP_APP_DOC_BUCKET', 'ctb-dev-app-doc-files')

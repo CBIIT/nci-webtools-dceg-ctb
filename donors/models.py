@@ -186,10 +186,9 @@ class Submissions(models.Model):
         return submission_list
 
     @classmethod
-    def is_users_file(cls, owner, filename, is_attachment):
-        # filelist = []
-        if is_attachment:
-            submission = cls.objects.get(owner=owner, summary_file_path=filename, active=True)
-        else:
-            submission = cls.objects.get(owner=owner, entry_form_path=filename, active=True)
-        return submission is not None
+    def get_submission_filename(cls, owner, submission_id, is_attachment):
+        submission = cls.objects.get(owner=owner, id=submission_id, active=True)
+        get_submission_filename = None
+        if submission:
+            get_submission_filename = submission.summary_file_path if is_attachment else submission.entry_form_path
+        return get_submission_filename

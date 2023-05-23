@@ -12,32 +12,27 @@
 {% block page_name %}contact{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <h3 class="page-banner">Contact Us</h3>
-    </div>
+    <div class="page-banner">Contact Us</div>
 {% endblock %}
 
 {% block content %}
-    <div class="container mb-5">
-
-        <div class="fw-light text-center">
+    <div class="row justify-content-center">
+        <div class="col-lg-4 pt-5">
             If you would like any further information or have any queries regarding the Tissue Bank, please
             contact:
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-5">
-                <div class="card mt-3">
-                    <div class="card-header py-2 px-5"><h5>Stephen J. Chanock, M.D.</h5>
+                <div class="card my-3">
+                    <div class="card-header py-3 px-5">
+                        <div class="fw-bold">Stephen J. Chanock, M.D.</div>
                         <div class="card-subtitle text-muted"><strong>Director</strong>
                         </div>
                     </div>
-                    <div class="card-body py-2 px-5">
+                    <div class="card-body py-3 px-5">
                         <p class="card-text">
                             Division of Cancer Epidemiology & Genetics<br>
                             NCI Shady Grove | Room 7E412<br>
                         </p>
 
-                        <div class="text-muted">Email: <a href="mailto:ctb-info@isb-cgc.org">ctb-info@isb-cgc.org</a>
+                        <div class="text-muted">Email: <a href="mailto:ctb-support@isb-cgc.org">ctb-support@isb-cgc.org</a>
                         </div>
                         <div class="text-muted">Phone: 240-276-7150 </a>
                         </div>
@@ -45,7 +40,7 @@
                 </div>
             </div>
         </div>
-    </div>
+{#    </div>#}
 {% endblock %}
 {% block js_file %}
     {{ block.super }}

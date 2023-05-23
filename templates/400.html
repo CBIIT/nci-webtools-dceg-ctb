@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n l10n %}
+{% comment %}
+
+   Copyright 2023, Institute for Systems Biology
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+{% endcomment %}
+
+
+{% block title %}Server error{% endblock %}
+
+{% block content %}
+    <div class="row justify-content-center my-5">
+        <div class="col-lg-4 accounts-col">
+            <div class="card p-3">
+                <div class="card-body">
+                    <h4 class="card-title"><i class="fas fa-exclamation-triangle"></i> {% trans "400: Bad Request Error" %}</h4>
+                    {% if error %}
+                        <p class="fw-bold">{{ error }}</p>
+                    {% endif %}
+                    <p>We apologize for the inconvenience. Please <a href="ctb-support@isb-cgc.org">contact us</a> and let us know what happened.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js_file %}
+    {{ block.super }}
+    <script type="text/javascript" src="{% static 'js/base.js' %}?v={{ APP_VERSION }}"></script>
+{% endblock %}

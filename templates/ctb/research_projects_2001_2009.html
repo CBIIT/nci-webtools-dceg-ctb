@@ -13,20 +13,17 @@
 {% block page_name %}research_projects_2001_2009{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <h3 class="page-banner">Research Projects - 2001-2009</h3>
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Research</li>
-                    <li class="breadcrumb-item"><a href="{% url 'research_projects' %}">Research Projects Using CTB
-                        Materials</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Research Projects - 2001-2009</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="page-banner">Research Projects - 2001-2009</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Research</li>
+                <li class="breadcrumb-item"><a href="{% url 'research_projects' %}">Research Projects Using CTB
+                    Materials</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Research Projects - 2001-2009</li>
+            </ol>
+        </nav>
     </div>
-
 {% endblock %}
 
 {% block subcontent %}
