@@ -13,20 +13,17 @@
 {% block page_name %}research_projects_2010_2019{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <h3 class="page-banner">Research Projects - 2010-2019</h3>
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Research</li>
-                    <li class="breadcrumb-item"><a href="{% url 'research_projects' %}">Research Projects Using CTB
-                        Materials</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Research Projects - 2010-2019</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="page-banner">Research Projects - 2010-2019</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Research</li>
+                <li class="breadcrumb-item"><a href="{% url 'research_projects' %}">Research Projects Using CTB
+                    Materials</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Research Projects - 2010-2019</li>
+            </ol>
+        </nav>
     </div>
-
 {% endblock %}
 
 {% block subcontent %}

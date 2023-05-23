@@ -13,6 +13,8 @@
 
 {% block page_name %}dashboard{% endblock %}
 
+{% block page_class %}biosample_tab{% endblock %}
+
 {% block page_header %}
 
 {% endblock %}
@@ -108,9 +110,9 @@
                             class="fas fa-angle-double-right"></i></a>
                 </div>
                 <div class="border rounded bg-light p-3">
-                    <h6 class="bold">
+                    <h5 class="fw-bold">
                         My Saved Searches
-                    </h6>
+                    </h5>
                     <hr>
                     {% include 'donors/filter_saved_searches.html' %}
                 </div>
@@ -121,9 +123,9 @@
                 </div>
                 <div class="border rounded bg-light p-3">
                     <div>
-                        <h6>
+                        <h5 class="fw-bold">
                             My Submissions
-                        </h6>
+                        </h5>
                     </div>
                     <hr>
                     {% include 'donors/my_applications.html' %}
