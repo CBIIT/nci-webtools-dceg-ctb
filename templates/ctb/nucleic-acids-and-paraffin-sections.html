@@ -13,19 +13,16 @@
 {% block page_name %}nucleic_acids_and_paraffin_sections{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <h3 class="page-banner">Nucleic Acids and Paraffin Sections</h3>
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Research</li>
-                    <li class="breadcrumb-item"><a href="{% url 'material_available' %}">Material Available</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Nucleic Acids and Paraffin Sections</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="page-banner">Nucleic Acids and Paraffin Sections</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Research</li>
+                <li class="breadcrumb-item"><a href="{% url 'material_available' %}">Material Available</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nucleic Acids and Paraffin Sections</li>
+            </ol>
+        </nav>
     </div>
-
 {% endblock %}
 
 {% block subcontent %}

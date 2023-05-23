@@ -13,19 +13,16 @@
 {% block page_name %}tissue_microarrays{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <h3 class="page-banner">Tissue Microarrays</h3>
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Research</li>
-                    <li class="breadcrumb-item"><a href="{% url 'material_available' %}">Material Available</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tissue Microarrays</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="page-banner">Tissue Microarrays</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Research</li>
+                <li class="breadcrumb-item"><a href="{% url 'material_available' %}">Material Available</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tissue Microarrays</li>
+            </ol>
+        </nav>
     </div>
-
 {% endblock %}
 
 {% block subcontent %}
