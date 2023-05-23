@@ -11,6 +11,8 @@
 
 {% block page_name %}search_tissue_samples{% endblock %}
 
+{% block page_class %}biosample_tab{% endblock %}
+
 {% block content %}
     <div class="container py-3">
         <div class="row">
@@ -43,6 +45,7 @@
                     <input id="total-input" type="hidden" name="total" value="{{ total }}">
                     <input type="hidden" name="search_type" value="Biosample"/>
                     <input type="hidden" name="title" id="search-save-title"/>
+                    <input type="hidden" name="country" id="country-ukraine" value="ukraine">
                     <div class="container-fluid">
                         <div class="mb-2">
                             <div class="float-end">
@@ -146,75 +149,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="country-card" class="card my-2">
-                                    <div class="card-header">Country of Residence
-                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
-                                           data-bs-html="true"
-                                           data-bs-placement="right"
-                                           title="<div class='text-start'>Country of residence at the time of the accident</div>"></i>
-
-                                        <button type="button"
-                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
-                                                data-target="#country-card">Reset
-                                        </button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="country-ukraine"
-                                                   name="country" value="ukraine">
-                                            <label class="form-check-label" for="country-ukraine">Ukraine</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="country-russia"
-                                                   name="country" value="russia">
-                                            <label class="form-check-label" for="country-russia">Russia</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="country-both"
-                                                   name="country" value="both" checked>
-                                            <label class="form-check-label" for="country-both">Both</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="dosemetry-card" class="card my-2">
-                                    <div class="card-header">Dosemetry
-                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
-                                           data-bs-html="true"
-                                           data-bs-placement="right"
-                                           title="<div class='text-start'>The donors in the CTB are currently operated in either Ukraine or Russia. For patients operated in Ukraine, the thyroid dose is calculated by Professor Ilya Likhtarev's group at the Institute of Radiation Protection in Kiev. For donors operated in Russia, the thyroid dose is calculated by Professor Stepanenko's group in MRRC RAMS, in Obninsk. Direct measurement of thyroid dose was carried out in only a few donors in Ukraine, and none in Russia. The majority of the dose estimation is therefore made retrospectively. The thyroid dose given in this portal is the arithmetic mean and is in mGy.</div>">
-                                        </i>
-                                        <button type="button"
-                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
-                                                data-target="#dosemetry-card">Reset
-                                        </button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy"
-                                                   name="dosemetry[]" value="100mGy">
-                                            <label class="form-check-label" for="dosemetry-100mGy">&lt; 100mGy</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy500mGy"
-                                                   name="dosemetry[]" value="100mGy500mGy">
-                                            <label class="form-check-label" for="dosemetry-100mGy500mGy">100mGy -
-                                                500mGy</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-500mGy"
-                                                   name="dosemetry[]" value="500mGy">
-                                            <label class="form-check-label" for="dosemetry-500mGy">&gt; 500mGy</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-Unknown"
-                                                   name="dosemetry[]" value="Unknown">
-                                            <label class="form-check-label" for="dosemetry-Unknown">Unknown</label>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg">
                                 <div id="sample-origin-card" class="card mb-2">
                                     <div class="card-header">Sample Origin
                                         <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
@@ -255,7 +189,76 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="residency-card" class="card my-2">
+                                {#                                <div id="country-card" class="card my-2">#}
+                                {#                                    <div class="card-header">Country of Residence#}
+                                {#                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"#}
+                                {#                                           data-bs-html="true"#}
+                                {#                                           data-bs-placement="right"#}
+                                {#                                           title="<div class='text-start'>Country of residence at the time of the accident</div>"></i>#}
+                                {##}
+                                {#                                        <button type="button"#}
+                                {#                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"#}
+                                {#                                                data-target="#country-card">Reset#}
+                                {#                                        </button>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="card-body">#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" id="country-ukraine"#}
+                                {#                                                   name="country" value="ukraine">#}
+                                {#                                            <label class="form-check-label" for="country-ukraine">Ukraine</label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" id="country-russia"#}
+                                {#                                                   name="country" value="russia">#}
+                                {#                                            <label class="form-check-label" for="country-russia">Russia</label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" id="country-both"#}
+                                {#                                                   name="country" value="both" checked>#}
+                                {#                                            <label class="form-check-label" for="country-both">Both</label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
+                                <div id="dosemetry-card" class="card my-2">
+                                    <div class="card-header">Dosemetry
+                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                           data-bs-html="true"
+                                           data-bs-placement="right"
+                                           title="<div class='text-start'>The donors in the CTB are currently operated in either Ukraine or Russia. For patients operated in Ukraine, the thyroid dose is calculated by Professor Ilya Likhtarev's group at the Institute of Radiation Protection in Kiev. For donors operated in Russia, the thyroid dose is calculated by Professor Stepanenko's group in MRRC RAMS, in Obninsk. Direct measurement of thyroid dose was carried out in only a few donors in Ukraine, and none in Russia. The majority of the dose estimation is therefore made retrospectively. The thyroid dose given in this portal is the arithmetic mean and is in mGy.</div>">
+                                        </i>
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#dosemetry-card">Reset
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy"
+                                                   name="dosemetry[]" value="100mGy">
+                                            <label class="form-check-label" for="dosemetry-100mGy">&lt; 100mGy</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy500mGy"
+                                                   name="dosemetry[]" value="100mGy500mGy">
+                                            <label class="form-check-label" for="dosemetry-100mGy500mGy">100mGy -
+                                                500mGy</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-500mGy"
+                                                   name="dosemetry[]" value="500mGy">
+                                            <label class="form-check-label" for="dosemetry-500mGy">&gt; 500mGy</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-Unknown"
+                                                   name="dosemetry[]" value="Unknown">
+                                            <label class="form-check-label" for="dosemetry-Unknown">Unknown</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div id="residency-card" class="card mb-2">
                                     <div class="card-header">Patient Residency
                                         <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
                                            data-bs-html="true"
@@ -420,7 +423,7 @@
             </div>
             <div class="col-lg-5">
                 <div class="border rounded bg-light p-4 mb-3">
-                    <h5>Available Cases
+                    <h5 class="fw-bold">Available Cases
                     </h5>
                     <div class="fw-normal fs-5 text-end"><span
                             id="total-case-count" class="fw-bold">{{ total|default:0 }}</span><span
@@ -589,8 +592,7 @@
                         {#                            </div>#}
                         {#                        </div>#}
                         <div class="text-end mb-3">
-
-                            <div id="alert_message" class="text-primary fst-italic my-2"></div>
+                            <div id="alert_message" class="alert-text fst-italic my-2"></div>
                         </div>
 
                     </div>

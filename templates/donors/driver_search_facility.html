@@ -11,6 +11,8 @@
 
 {% block page_name %}driver_search_facility{% endblock %}
 
+{% block page_class %}biosample_tab{% endblock %}
+
 {% block page_header %}
     <div class="container">
         <div class="pt-3">
@@ -301,7 +303,7 @@ Refine by Clinical Parameters
                                     available for your study will depend on the biospecimens you require plus
                                     any
                                     clinical data also
-                                    requested. In brackets are the drivers that also meet the search criteria
+                                    requested. Filtered cases are the drivers that also meet the search criteria
                                     you
                                     entered in the
                                     biosample search and the clinical search.
@@ -345,7 +347,7 @@ Refine by Clinical Parameters
                             </div>
                             <div class="text-end mb-3">
 
-                                <div id="alert_message" class="text-primary fst-italic my-2"></div>
+                                <div id="alert_message" class="alert-text fst-italic my-2"></div>
                             </div>
 
                         </div>

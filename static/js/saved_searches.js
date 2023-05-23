@@ -54,7 +54,7 @@ require([
                         } else {
                             search_type_url = 'driver_search_facility';
                         }
-                        let search_url = BASE_URL + "/search_facility/" + search_type_url + row.filter_encoded_url + '&title='+row.name;
+                        let search_url = BASE_URL + "/search_facility/search_samples/" + search_type_url + row.filter_encoded_url + '&title='+row.name;
                         return "<a href='" + search_url + "'>" + row.name + "</a>";
                     }
                 },

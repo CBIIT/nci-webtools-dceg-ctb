@@ -82,8 +82,12 @@ a.fill-div {
 }
 .btn-primary:hover {
     /*color: #fff;*/
-    background-color: #2B81A2;
-    border-color: #2B81A2;
+    background-color: #267491;
+    border-color: #267491;
+}
+btn-primary:active{
+    background-color: #1e5c74;
+    border-color: #1e5c74;
 }
 .page-item.active .page-link {
     /*z-index: 3;*/
@@ -91,6 +95,17 @@ a.fill-div {
     background-color: #2B81A2;
     border-color: #2B81A2;
 }
+
+.alert-primary {
+    color: #2f455e;
+    background-color: rgba(43,129,162,.1);
+    border-color: rgba(43,129,162,.2);
+}
+
+.alert-text{
+    color: #1e5c74;
+}
+
 @media (min-width: 540px) and (max-width: 1200px) {
     .stat-card {
         margin: 5px 5px 5px 5px;
@@ -105,11 +120,15 @@ a.fill-div {
 #ctb-collapsible-navbar .nav-item > a.active, #ctb-main-navbar a.navbar-brand.active{
     border-bottom: 4px solid #2B81A2;
 }
+
 #ctb-secondary-navbar{
     padding-top: 10px;
     background-color: #ddd798;
-    /*background-color: #ddd798;*/
-    /*background-color: #ddd798;*/
+    position: fixed;
+    top: 87px;
+    right: 0;
+    left: 0;
+    z-index: 900;
 }
 /*#ctb-secondary-navbar .navbar-brand{*/
 /*    height: 66px;*/
@@ -153,6 +172,7 @@ footer a:hover{
 
 main {
     font-size: 1.2rem;
+    /*color: #2f455e;*/
     color: #444444;
 }
 main a{
@@ -192,7 +212,9 @@ main a:hover{
 /*.btn-default:hover {*/
 /*    background-color: #c36149;*/
 /*}*/
-
+.biosample_tab{
+    margin-top: 90px;
+}
 .hover-grey-button {
     background-color: transparent;
     border-width: 0;

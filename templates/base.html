@@ -61,7 +61,7 @@
 <!--Include site main header-->
 {% include 'share/site_header.html' %}
 
-<main id="{% block page_name %}content{% endblock %}" class="main-content">
+<main id="{% block page_name %}content{% endblock %}" class="main-content {% block page_class %}content{% endblock %}">
     <div class="page-heading">
         {% block page_header %}{% endblock %}
     </div>
