@@ -25,12 +25,12 @@ urlpatterns = [
     url(r'^save_filters', views.save_filters, name='save_filters'),
     url(r'^delete_filters/(?P<filter_id>\d+)/', views.delete_filters, name='delete_filters'),
     url(r'^open_file/(?P<submission_id>.*)/(?P<att>\d+)/', views.open_file, name='open_file'),
-    url(r'^search_tissue_samples', views.search_tissue_samples, name='search_tissue_samples'),
-    url(r'^filter_tissue_samples', views.filter_tissue_samples, name='filter_tissue_samples'),
-    url(r'^search_clinical', views.search_clinical, name='search_clinical'),
-    url(r'^clinical_search_facility', views.clinical_search_facility, name='clinical_search_facility'),
-    url(r'^driver_search_facility', views.driver_search_facility, name='driver_search_facility'),
-    url(r'^make_application', views.make_application, name='make_application'),
-    url(r'^application_submit', views.application_submit, name='application_submit')
+    url(r'^search_samples/search_tissue_samples', views.search_tissue_samples, name='search_tissue_samples'),
+    url(r'^search_samples/filter_tissue_samples', views.filter_tissue_samples, name='filter_tissue_samples'),
+    url(r'^search_samples/search_clinical', views.search_clinical, name='search_clinical'),
+    url(r'^search_samples/clinical_search_facility', views.clinical_search_facility, name='clinical_search_facility'),
+    url(r'^search_samples/driver_search_facility', views.driver_search_facility, name='driver_search_facility'),
+    url(r'^search_samples/make_application', views.make_application, name='make_application'),
+    url(r'^search_samples/application_submit', views.application_submit, name='application_submit')
 
 ]

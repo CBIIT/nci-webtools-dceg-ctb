@@ -13,14 +13,17 @@
 
 {% block page_name %}saved_searches{% endblock %}
 
+{% block page_class %}biosample_tab{% endblock %}
+
 {% block content %}
     <div class="container py-3">
         <div class="row">
             <div class="col">
                 <div class="border rounded bg-light p-3">
-                    <h4>
+                    <h5 class="fw-bold">
                         My Saved Searches
-                    </h4>
+                    </h5>
+                    <hr>
                     <div>
                         {% include 'donors/filter_saved_searches.html' %}
                     </div>

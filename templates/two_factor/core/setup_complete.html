@@ -1,14 +1,16 @@
 {% extends "two_factor/_base_focus.html" %}
 {% load i18n %}
-
+{% block page_header %}
+    <div class="page-banner">{% block title %}{% trans "Two-factor Authentication Setup Complete" %}{% endblock %}</div>
+{% endblock %}
 {% block content %}
     <div class="row justify-content-center my-5">
         <div class="col-lg-5 accounts-col">
             <div class="card user-panel">
-                <div class="card-header">
-                    <h5>{% block title %}{% trans "Enable Two-Factor Authentication" %}{% endblock %}
-                    </h5>
-                </div>
+{#                <div class="card-header">#}
+{#                    <h5>{% block title %}{% trans "Enable Two-Factor Authentication" %}{% endblock %}#}
+{#                    </h5>#}
+{#                </div>#}
                 <div class="card-body px-4 py-3">
 
                     <p>{% blocktrans trimmed %}Congratulations, you've successfully enabled two-factor

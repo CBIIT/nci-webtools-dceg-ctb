@@ -111,7 +111,7 @@ def open_file(request, submission_id, att):
 
 @otp_required
 def save_filters(request):
-    filters = get_filters(request, for_save=True)
+    filters = get_filters(request)
     name = filters.get('title', 'Untitled')
     if 'title' in filters:
         filters.pop('title')
