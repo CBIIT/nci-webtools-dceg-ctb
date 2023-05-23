@@ -11,6 +11,8 @@
 
 {% block page_name %}clinical_search_facility_result{% endblock %}
 
+{% block page_class %}biosample_tab{% endblock %}
+
 {% block page_header %}
     <div class="container">
         <div class="pt-3">
@@ -96,7 +98,7 @@
                                class="form-control" value="" placeholder="Search Name"
                                aria-label="Save Search" aria-describedby="search-save">
                         <div class="text-end mb-3">
-                            <div id="alert_message" class="text-primary fst-italic my-2"></div>
+                            <div id="alert_message" class="alert-text fst-italic my-2"></div>
                         </div>
                     </div>
                     <div class="modal-footer">

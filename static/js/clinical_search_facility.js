@@ -27,7 +27,7 @@ require([
     'base',
 ], function() {
     $(document).ready(function () {
-        $("#driver-search-btn").attr("href", BASE_URL + "/search_facility/driver_search_facility"+window.location.search)
+        $("#driver-search-btn").attr("href", BASE_URL + "/search_facility/search_samples/driver_search_facility"+window.location.search)
         let step = 0;
         $('#next-btn, #clinic-skip, #proceed-btn').on("click", function () {
             $('#form-clinic-' + step).addClass('d-none');
