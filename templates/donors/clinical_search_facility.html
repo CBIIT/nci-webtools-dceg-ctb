@@ -56,7 +56,7 @@
                         <div class="py-2">
                             <fieldset id="form-clinic-0">
                                 <div>
-                                    <h6><strong>General Information</strong></h6>
+                                    <h5><strong>General Information</strong></h5>
                                 </div>
                                 <div class="fw-light">The clinical search facility is only for use in projects that are
                                     requesting
@@ -121,57 +121,229 @@
 
                             </fieldset>
                             <fieldset id="form-clinic-1" class="d-none">
-                                <div>
-                                    <h6><strong>Operation Type</strong></h6>
-                                </div>
-                                <div>There are two categories for operation type:</div>
-                                <div class="border rounded-2 p-2 m-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="op_type"
-                                               id="optype-total" value="total">
-                                        <label class="form-check-label" for="optype-total">
-                                            Total Thyroidectomy<br>
-                                            <span class="text-muted fw-light">Where all of the thyroid gland is removed.</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="border rounded-2 p-2 m-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="op_type"
-                                               id="optype-ltotal" value="ltotal">
-                                        <label class="form-check-label" for="optype-ltotal">
-                                            Less Than Total Thyroidectomy<br>
-                                            <span class="text-muted fw-light">Where only the area of the thyroid gland that contains the
+                                <div class="py-3">
+                                    <h5><strong>Operation Type</strong></h5>
+                                    <div class="border rounded-2 p-2 m-1">
+                                        <div class="form-check py-2">
+                                            <input class="form-check-input" type="radio" name="op_type"
+                                                   id="optype-total" value="total">
+                                            <label class="form-check-label" for="optype-total">
+                                                Total Thyroidectomy<br>
+                                                <span class="text-muted fw-light">Where all of the thyroid gland is removed.</span>
+                                            </label>
+                                        </div>
+                                        <div class="form-check py-2">
+                                            <input class="form-check-input" type="radio" name="op_type"
+                                                   id="optype-ltotal" value="ltotal">
+                                            <label class="form-check-label" for="optype-ltotal">
+                                                Less Than Total Thyroidectomy<br>
+                                                <span class="text-muted fw-light">Where only the area of the thyroid gland that contains the
                                                             tumor is removed.</span>
-                                        </label>
+                                            </label>
+                                        </div>
+                                        <div class="form-check py-2">
+                                            <input class="form-check-input" type="radio" name="op_type"
+                                                   id="optype-any" value="any">
+                                            <label class="form-check-label" for="optype-any">
+                                                Any Thyroidectomy<br>
+                                                <span class="text-muted fw-light">Includes both total and less than total thyroidectomy.</span>
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="border rounded-2 p-2 m-1">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="op_type"
-                                               id="optype-any" value="any">
-                                        <label class="form-check-label" for="optype-any">
-                                            Any Thyroidectomy<br>
-                                            <span class="text-muted fw-light">Includes both total and less than total thyroidectomy.</span>
-                                        </label>
+                                <div class="py-4">
+                                    <h5><strong>Treatment and Outcome</strong></h5>
+                                    <div>Information on clinical treatment and outcome is still being added for some
+                                        cases.
+                                        Please note that at the present time clinical information is only available on a
+                                        proportion of the cases from Ukraine.
+                                    </div>
+                                    <div class="border rounded p-3 mx-1 my-2" id="options-pt6">
+                                        <div><strong>
+                                            Treatment with Radioiodine
+                                        </strong></div>
+                                        <div class="readmore-acc accordion accordion-flush" id="radioiodine-intro-acc">
+                                            <div class="accordion-item bg-light">
+                                                <h2 class="accordion-header d-md-flex justify-content-md-end"
+                                                    id="radioiodine-intro-acc-headingOne">
+                                                    <button class="accordion-button collapsed bg-light" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#radioiodine-intro-one"
+                                                            aria-expanded="false"
+                                                            aria-controls="radioiodine-intro-one">
+                                                        Learn More
+                                                    </button>
+                                                </h2>
+                                                <div id="radioiodine-intro-one" class="accordion-collapse collapse"
+                                                     aria-labelledby="radioiodine-intro-acc-headingOne"
+                                                     data-bs-parent="#radioiodine-intro-acc">
+                                                    <div class="accordion-body p-2 mb-2">
+                                                        Patients with PTC, FC and WDCA NOS often receive treatment with
+                                                        radioiodine following surgery. The following dropdown menu will
+                                                        enable you to refine your search by selecting Yes or No. By
+                                                        selecting Yes, results will only be returned on those patients
+                                                        for which we currently have information that have received
+                                                        radioiodine treatment, by selecting No, information will only be
+                                                        returned on those patients who have not received radioiodine
+                                                        treatment. Further information on treatment (e.g. doses
+                                                        administered) could be made available on request.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="treat_radio"
+                                                       id="treat-radio-yes" value="yes">
+                                                <label class="form-check-label" for="treat-radio-yes">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="treat_radio"
+                                                       id="treat-radio-no" value="no">
+                                                <label class="form-check-label" for="treat-radio-no">
+                                                    No
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="treat_radio"
+                                                       id="treat-radio-neither" value="neither">
+                                                <label class="form-check-label" for="treat-radio-neither">
+                                                    Neither
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border rounded p-3 mx-1 my-2" id="options-pt7">
+                                        <div><strong>
+                                            TSH Suppression
+                                        </strong>
+                                        </div>
+                                        <div class="readmore-acc accordion accordion-flush" id="tshsupp-intro-acc">
+                                            <div class="accordion-item bg-light">
+                                                <h2 class="accordion-header d-md-flex justify-content-md-end"
+                                                    id="tshsupp-intro-acc-headingOne">
+                                                    <button class="accordion-button collapsed bg-light" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#tshsupp-intro-one"
+                                                            aria-expanded="false"
+                                                            aria-controls="tshsupp-intro-one">
+                                                        Learn More
+                                                    </button>
+                                                </h2>
+                                                <div id="tshsupp-intro-one" class="accordion-collapse collapse"
+                                                     aria-labelledby="tshsupp-intro-acc-headingOne"
+                                                     data-bs-parent="#tshsupp-intro-acc">
+                                                    <div class="accordion-body p-2 mb-2">
+                                                        {#                                        <div class="mt-2">#}
+                                                        Patients with PTC, FC and WDCA NOS often receive treatment
+                                                        with
+                                                        radioiodine following surgery and are sometimes are given
+                                                        therapy to reduce the levels of thyroid stimulating hormone,
+                                                        therefore reducing the hormone that stimulates growth of
+                                                        thyroid
+                                                        cells. There is conflicting evidence with respect to whether
+                                                        this has a major effect on outcome.
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="tsh_supress"
+                                                       id="tsh-supress-yes" value="yes">
+                                                <label class="form-check-label" for="tsh-supress-yes">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="tsh_supress"
+                                                       id="tsh-supress-no" value="no">
+                                                <label class="form-check-label" for="tsh-supress-no">
+                                                    No
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="tsh_supress"
+                                                       id="tsh-supress-neither" value="neither">
+                                                <label class="form-check-label" for="tsh-supress-neither">
+                                                    Neither
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="border rounded p-3 mx-1 my-2" id="options-pt8">
+                                        <div><strong>Clinical Outcome</strong></div>
+                                        <div class="readmore-acc accordion accordion-flush" id="outcome-intro-acc">
+                                            <div class="accordion-item bg-light">
+                                                <h2 class="accordion-header d-md-flex justify-content-end"
+                                                    id="outcome-intro-acc-headingOne">
+                                                    <button class="accordion-button collapsed bg-light" type="button"
+                                                            data-bs-toggle="collapse"
+                                                            data-bs-target="#outcome-intro-one" aria-expanded="false"
+                                                            aria-controls="outcome-intro-one">
+                                                        Learn More
+                                                    </button>
+                                                </h2>
+                                                <div id="outcome-intro-one" class="accordion-collapse collapse"
+                                                     aria-labelledby="outcome-intro-acc-headingOne"
+                                                     data-bs-parent="#outcome-intro-acc">
+                                                    <div class="accordion-body">
+                                                        <div class="mt-2">Unfortunately, some patients will suffer a
+                                                            relapse of their
+                                                            cancer. Relapse is defined as being the presence of a
+                                                            further
+                                                            deposit of thyroid cancer identified more than 6 months
+                                                            after
+                                                            the date of the primary operation. In the case of thyroid
+                                                            cancer, it is likely that over several decades around 30% of
+                                                            the
+                                                            cases will relapse. Very few of the cases in the CTB (around
+                                                            1%)
+                                                            would be predicted to die from their disease over a period
+                                                            of
+                                                            several decades.
+                                                        </div>
+                                                        <div class="mt-2">You can refine your search by selecting Yes if
+                                                            you wish to
+                                                            search
+                                                            only for those cases that have suffered a relapse of their
+                                                            disease.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="clinic_outcome"
+                                                       id="clinic-outcome-yes" value="yes">
+                                                <label class="form-check-label" for="clinic-outcome-yes">
+                                                    Yes
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="clinic_outcome"
+                                                       id="clinic-outcome-no" value="no">
+                                                <label class="form-check-label" for="clinic-outcome-no">
+                                                    No
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="clinic_outcome"
+                                                       id="clinic-outcome-neither" value="neither">
+                                                <label class="form-check-label" for="clinic-outcome-neither">
+                                                    Neither
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="my-2 fw-light">The selection criteria is set to any operation type, so if
-                                    you wish set this category to total or less than total, please select this box –
-                                    you may select only one.
-                                </div>
-
-
                             </fieldset>
                             <fieldset id="form-clinic-2" class="d-none">
-                                {#                                <div>#}
-                                <h6><strong>TNM Status (8th Edition)</strong>
-                                    {#                                    - <a#}
-                                    {#                                        href="https://www.pathologyoutlines.com/topic/thyroidstaging.html"#}
-                                    {#                                        target="_blank">Read more</a>#}
-                                </h6>
+                                <h5><strong>TNM Status (8th Edition)</strong>
+                                </h5>
                                 <div class="readmore-acc accordion accordion-flush" id="tnm-status-intro-acc">
                                     <div class="accordion-item bg-light">
                                         <h2 class="accordion-header d-md-flex justify-content-md-end"
@@ -575,10 +747,7 @@
                                 </div>
                             </fieldset>
                             <fieldset id="form-clinic-3" class="d-none">
-                                <h6><strong>AJCC Clinical Stage</strong></h6>
-                                {#                                    - <a#}
-                                {#                                        href="https://www.cancer.org/cancer/thyroid-cancer/detection-diagnosis-staging/staging.html"#}
-                                {#                                        target="_blank">Read more</a>#}
+                                <h5><strong>AJCC Clinical Stage</strong></h5>
                                 <div class="readmore-acc accordion accordion-flush" id="ajcc-clinical-intro-acc">
                                     <div class="accordion-item bg-light">
                                         <h2 class="accordion-header d-md-flex justify-content-md-end"
@@ -707,129 +876,129 @@
                                     </div>
                                 </div>
                             </fieldset>
-                            <fieldset id="form-clinic-4" class="d-none">
-                                <h6><strong>Treatment and Outcome</strong></h6>
-                                <div>Information on clinical treatment and outcome is still being added for some cases.
-                                    Please note that at the present time clinical information is only available on a
-                                    proportion of the cases from Ukraine.
-                                </div>
-                                <div class="border rounded p-3 mx-1 my-2" id="options-pt6">
-                                    <div><strong>
-                                        Treatment with Radioiodine
-                                    </strong></div>
-                                    <div class="mt-2">
-                                        Patients with PTC, FC and WDCA NOS often receive treatment with
-                                        radioiodine following surgery. The following dropdown menu will
-                                        enable you to refine your search by selecting Yes or No. By
-                                        selecting Yes, results will only be returned on those patients
-                                        for which we currently have information that have received
-                                        radioiodine treatment, by selecting No, information will only be
-                                        returned on those patients who have not received radioiodine
-                                        treatment. Further information on treatment (e.g. doses
-                                        administered) could be made available on request.
-                                    </div>
-                                    <div class="mt-2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="treat_radio"
-                                                   id="treat-radio-yes" value="yes">
-                                            <label class="form-check-label" for="treat-radio-yes">
-                                                Yes
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="treat_radio"
-                                                   id="treat-radio-no" value="no">
-                                            <label class="form-check-label" for="treat-radio-no">
-                                                No
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="treat_radio"
-                                                   id="treat-radio-neither" value="neither">
-                                            <label class="form-check-label" for="treat-radio-neither">
-                                                Neither
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="border rounded p-3 mx-1 my-2" id="options-pt7">
-                                    <div><strong>
-                                        TSH Suppression
-                                    </strong>
-                                    </div>
-                                    <div class="mt-2">Patients with PTC, FC and WDCA NOS often receive treatment
-                                        with
-                                        radioiodine following surgery and are sometimes are given
-                                        therapy to reduce the levels of thyroid stimulating hormone,
-                                        therefore reducing the hormone that stimulates growth of
-                                        thyroid
-                                        cells. There is conflicting evidence with respect to whether
-                                        this has a major effect on outcome.
-                                    </div>
-                                    <div class="mt-2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tsh_supress"
-                                                   id="tsh-supress-yes" value="yes">
-                                            <label class="form-check-label" for="tsh-supress-yes">
-                                                Yes
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tsh_supress"
-                                                   id="tsh-supress-no" value="no">
-                                            <label class="form-check-label" for="tsh-supress-no">
-                                                No
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="tsh_supress"
-                                                   id="tsh-supress-neither" value="neither">
-                                            <label class="form-check-label" for="tsh-supress-neither">
-                                                Neither
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="border rounded p-3 mx-1 my-2" id="options-pt8">
-                                    <div><strong>Clinical Outcome</strong></div>
-                                    <div class="mt-2">Unfortunately, some patients will suffer a relapse of their
-                                        cancer. Relapse is defined as being the presence of a further
-                                        deposit of thyroid cancer identified more than 6 months after
-                                        the date of the primary operation. In the case of thyroid
-                                        cancer, it is likely that over several decades around 30% of the
-                                        cases will relapse. Very few of the cases in the CTB (around 1%)
-                                        would be predicted to die from their disease over a period of
-                                        several decades.
-                                    </div>
-                                    <div class="mt-2">You can refine your search by selecting Yes if you wish to search
-                                        only for those cases that have suffered a relapse of their
-                                        disease.
-                                    </div>
-                                    <div class="mt-2">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="clinic_outcome"
-                                                   id="clinic-outcome-yes" value="yes">
-                                            <label class="form-check-label" for="clinic-outcome-yes">
-                                                Yes
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="clinic_outcome"
-                                                   id="clinic-outcome-no" value="no">
-                                            <label class="form-check-label" for="clinic-outcome-no">
-                                                No
-                                            </label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" name="clinic_outcome"
-                                                   id="clinic-outcome-neither" value="neither">
-                                            <label class="form-check-label" for="clinic-outcome-neither">
-                                                Neither
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
+{#                            <fieldset id="form-clinic-4" class="d-none">#}
+                                {#                                <h6><strong>Treatment and Outcome</strong></h6>#}
+                                {#                                <div>Information on clinical treatment and outcome is still being added for some cases.#}
+                                {#                                    Please note that at the present time clinical information is only available on a#}
+                                {#                                    proportion of the cases from Ukraine.#}
+                                {#                                </div>#}
+                                {#                                <div class="border rounded p-3 mx-1 my-2" id="options-pt6">#}
+                                {#                                    <div><strong>#}
+                                {#                                        Treatment with Radioiodine#}
+                                {#                                    </strong></div>#}
+                                {#                                    <div class="mt-2">#}
+                                {#                                        Patients with PTC, FC and WDCA NOS often receive treatment with#}
+                                {#                                        radioiodine following surgery. The following dropdown menu will#}
+                                {#                                        enable you to refine your search by selecting Yes or No. By#}
+                                {#                                        selecting Yes, results will only be returned on those patients#}
+                                {#                                        for which we currently have information that have received#}
+                                {#                                        radioiodine treatment, by selecting No, information will only be#}
+                                {#                                        returned on those patients who have not received radioiodine#}
+                                {#                                        treatment. Further information on treatment (e.g. doses#}
+                                {#                                        administered) could be made available on request.#}
+                                {#                                    </div>#}
+                                {#                                    <div class="mt-2">#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" name="treat_radio"#}
+                                {#                                                   id="treat-radio-yes" value="yes">#}
+                                {#                                            <label class="form-check-label" for="treat-radio-yes">#}
+                                {#                                                Yes#}
+                                {#                                            </label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" name="treat_radio"#}
+                                {#                                                   id="treat-radio-no" value="no">#}
+                                {#                                            <label class="form-check-label" for="treat-radio-no">#}
+                                {#                                                No#}
+                                {#                                            </label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" name="treat_radio"#}
+                                {#                                                   id="treat-radio-neither" value="neither">#}
+                                {#                                            <label class="form-check-label" for="treat-radio-neither">#}
+                                {#                                                Neither#}
+                                {#                                            </label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
+                                {#                                <div class="border rounded p-3 mx-1 my-2" id="options-pt7">#}
+                                {#                                    <div><strong>#}
+                                {#                                        TSH Suppression#}
+                                {#                                    </strong>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="mt-2">Patients with PTC, FC and WDCA NOS often receive treatment#}
+                                {#                                        with#}
+                                {#                                        radioiodine following surgery and are sometimes are given#}
+                                {#                                        therapy to reduce the levels of thyroid stimulating hormone,#}
+                                {#                                        therefore reducing the hormone that stimulates growth of#}
+                                {#                                        thyroid#}
+                                {#                                        cells. There is conflicting evidence with respect to whether#}
+                                {#                                        this has a major effect on outcome.#}
+                                {#                                    </div>#}
+                                {#                                    <div class="mt-2">#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" name="tsh_supress"#}
+                                {#                                                   id="tsh-supress-yes" value="yes">#}
+                                {#                                            <label class="form-check-label" for="tsh-supress-yes">#}
+                                {#                                                Yes#}
+                                {#                                            </label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" name="tsh_supress"#}
+                                {#                                                   id="tsh-supress-no" value="no">#}
+                                {#                                            <label class="form-check-label" for="tsh-supress-no">#}
+                                {#                                                No#}
+                                {#                                            </label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" name="tsh_supress"#}
+                                {#                                                   id="tsh-supress-neither" value="neither">#}
+                                {#                                            <label class="form-check-label" for="tsh-supress-neither">#}
+                                {#                                                Neither#}
+                                {#                                            </label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
+                                {#                                <div class="border rounded p-3 mx-1 my-2" id="options-pt8">#}
+                                {#                                    <div><strong>Clinical Outcome</strong></div>#}
+                                {#                                    <div class="mt-2">Unfortunately, some patients will suffer a relapse of their#}
+                                {#                                        cancer. Relapse is defined as being the presence of a further#}
+                                {#                                        deposit of thyroid cancer identified more than 6 months after#}
+                                {#                                        the date of the primary operation. In the case of thyroid#}
+                                {#                                        cancer, it is likely that over several decades around 30% of the#}
+                                {#                                        cases will relapse. Very few of the cases in the CTB (around 1%)#}
+                                {#                                        would be predicted to die from their disease over a period of#}
+                                {#                                        several decades.#}
+                                {#                                    </div>#}
+                                {#                                    <div class="mt-2">You can refine your search by selecting Yes if you wish to search#}
+                                {#                                        only for those cases that have suffered a relapse of their#}
+                                {#                                        disease.#}
+                                {#                                    </div>#}
+                                {#                                    <div class="mt-2">#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" name="clinic_outcome"#}
+                                {#                                                   id="clinic-outcome-yes" value="yes">#}
+                                {#                                            <label class="form-check-label" for="clinic-outcome-yes">#}
+                                {#                                                Yes#}
+                                {#                                            </label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" name="clinic_outcome"#}
+                                {#                                                   id="clinic-outcome-no" value="no">#}
+                                {#                                            <label class="form-check-label" for="clinic-outcome-no">#}
+                                {#                                                No#}
+                                {#                                            </label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" name="clinic_outcome"#}
+                                {#                                                   id="clinic-outcome-neither" value="neither">#}
+                                {#                                            <label class="form-check-label" for="clinic-outcome-neither">#}
+                                {#                                                Neither#}
+                                {#                                            </label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
+{#                            </fieldset>#}
                         </div>
                         <hr>
                         <div>
@@ -867,7 +1036,7 @@
                                 <div class="circle"></div>
                             </div>
                             <div>
-                                <div class="title">Operation Type</div>
+                                <div class="title">Operation Type, Treatment & Outcome</div>
                             </div>
                         </div>
                         <div id="clinical-step-2" class="clinical-step">
@@ -887,14 +1056,6 @@
                             </div>
                         </div>
                         <div id="clinical-step-4" class="clinical-step">
-                            <div>
-                                <div class="circle"></div>
-                            </div>
-                            <div>
-                                <div class="title">Treatment & Outcome</div>
-                            </div>
-                        </div>
-                        <div id="clinical-step-5" class="clinical-step">
                             <div>
                                 <div class="circle"></div>
                             </div>
