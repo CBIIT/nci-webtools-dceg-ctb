@@ -85,7 +85,7 @@ a.fill-div {
     background-color: #267491;
     border-color: #267491;
 }
-btn-primary:active{
+.btn-primary:active, .btn-primary:focus{
     background-color: #1e5c74;
     border-color: #1e5c74;
 }
