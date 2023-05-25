@@ -367,7 +367,7 @@ def get_sample_case_counts(filters=None):
                                                     sample_where_clause=sample_where_clause,
                                                     group_clause=group_clause)
         # print(grouped_count_query)
-        # print(total_count_query)
+        print(total_count_query)
         with connection.cursor() as cursor:
             cursor.execute(total_count_query)
             case_counts['total'] = cursor.fetchone()[0]
