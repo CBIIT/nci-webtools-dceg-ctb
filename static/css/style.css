@@ -106,11 +106,9 @@ a.fill-div {
     color: #1e5c74;
 }
 
-@media (min-width: 540px) and (max-width: 1200px) {
+@media screen and (max-width: 1020px) {
     .stat-card {
-        margin: 5px 5px 5px 5px;
-        /*font-size: 1.5rem;*/
-        /*max-width: 145px;*/
+        margin: 5px;
     }
 }
 
