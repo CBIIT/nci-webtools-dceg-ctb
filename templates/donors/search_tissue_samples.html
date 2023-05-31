@@ -11,41 +11,48 @@
 
 {% block page_name %}search_tissue_samples{% endblock %}
 
+{% block page_class %}biosample_tab{% endblock %}
+
 {% block content %}
     <div class="container py-3">
-        <h5>Search Tissue Samples</h5>
+        <div class="row">
+            <div class="col-lg-4"><h5 class="fw-bold">Search Tissue Samples</h5></div>
+            <div class="col-lg-8">
+                <div role="group" aria-label="action buttons" class="d-flex gap-1 mb-2 justify-content-end">
+                    <button id="search-save-btn" type="button" class="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#saveModal"><i
+                            class="fa-solid fa-floppy-disk"></i> Save
+                    </button>
+                    <a id="clinical-search-facility-btn" type="button" class="btn btn-primary"
+                       href="{% url 'clinical_search_facility' %}">Proceed to Clinical Search <i
+                            class="fas fa-angle-double-right"></i>
+                    </a>
+                    <a id="make-app-btn" type="button" class="btn btn-primary"
+                       href="{% url 'make_application' %}"><i
+                            class="fas fa-edit"></i> Make
+                        Application
+                    </a>
+                </div>
+            </div>
+        </div>
         <div id="general-message"></div>
 
         <div class="row">
             <div class="col-lg-7 pe-0">
-                <form id="search-tissue-form" class="bg-light border rounded py-3 mb-3">
+                <form id="search-tissue-form" class="border light-grey rounded py-3 mb-3">
                     {% csrf_token %}
                     <input id="total-input" type="hidden" name="total" value="{{ total }}">
                     <input type="hidden" name="search_type" value="Biosample"/>
                     <input type="hidden" name="title" id="search-save-title"/>
+                    <input type="hidden" name="country" id="country-ukraine" value="ukraine">
                     <div class="container-fluid">
                         <div class="mb-2">
                             <div class="float-end">
-                                <div role="group" aria-label="action buttons">
-                                    <button id="search-save-btn" type="button" class="btn btn-primary btn-sm"
-                                            data-bs-toggle="modal"
-                                            data-bs-target="#saveModal"><i
-                                            class="fa-solid fa-floppy-disk"></i> Save
-                                    </button>
-                                    <a id="clinical-search-facility-btn" type="button" class="btn btn-primary btn-sm"
-                                       href="{% url 'clinical_search_facility' %}">Proceed to Clinical Search <i
-                                            class="fas fa-angle-double-right"></i>
-                                    </a>
-                                    <a id="make-app-btn" type="button" class="btn btn-primary btn-sm"
-                                       href="{% url 'make_application' %}"><i
-                                            class="fas fa-edit"></i> Make
-                                        Application
-                                    </a>
-                                    <button type="reset"
-                                            class="btn btn-reset btn-sm btn-outline-secondary"
-                                            data-target="#search-tissue-form">Reset All
-                                    </button>
-                                </div>
+                                <button type="reset"
+                                        class="btn btn-reset btn-sm btn-outline-secondary"
+                                        data-target="#search-tissue-form">Reset All
+                                </button>
                             </div>
                             <div class="text-muted fw-light pb-1">
                                 Please tick all that apply.
@@ -101,7 +108,7 @@
                                             <i class="fa-solid fa-circle-question info-color" data-bs-toggle="tooltip"
                                                data-bs-html="true"
                                                data-bs-placement="right"
-                                               title="<div class='text-start'> There are small numbers of other tumors that are categorised by the Pathology Panel in the following way:<br><ol><li>Well differentiated carcinoma not otherwise specified<li>Poorly differentiated carcinoma<li>Two synchronous tumors sampled from the same patient<li>Other</ol>If you wish to request any of these please email us (ctb-info@isb-cgc.org).</div>">
+                                               title="<div class='text-start'> There are small numbers of other tumors that are categorised by the Pathology Panel in the following way:<br><ol><li>Well differentiated carcinoma not otherwise specified<li>Poorly differentiated carcinoma<li>Two synchronous tumors sampled from the same patient<li>Other</ol>If you wish to request any of these please email us (ctb-support@isb-cgc.org).</div>">
                                             </i>
                                             Other special tumors
                                         </div>
@@ -142,75 +149,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div id="country-card" class="card my-2">
-                                    <div class="card-header">Country of Residence
-                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
-                                           data-bs-html="true"
-                                           data-bs-placement="right"
-                                           title="<div class='text-start'>Country of residence at the time of the accident</div>"></i>
-
-                                        <button type="button"
-                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
-                                                data-target="#country-card">Reset
-                                        </button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="country-ukraine"
-                                                   name="country" value="ukraine">
-                                            <label class="form-check-label" for="country-ukraine">Ukraine</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="country-russia"
-                                                   name="country" value="russia">
-                                            <label class="form-check-label" for="country-russia">Russia</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="radio" id="country-both"
-                                                   name="country" value="both" checked>
-                                            <label class="form-check-label" for="country-both">Both</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="dosemetry-card" class="card my-2">
-                                    <div class="card-header">Dosemetry
-                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
-                                           data-bs-html="true"
-                                           data-bs-placement="right"
-                                           title="<div class='text-start'>The donors in the CTB are currently operated in either Ukraine or Russia. For patients operated in Ukraine, the thyroid dose is calculated by Professor Ilya Likhtarev's group at the Institute of Radiation Protection in Kiev. For donors operated in Russia, the thyroid dose is calculated by Professor Stepanenko's group in MRRC RAMS, in Obninsk. Direct measurement of thyroid dose was carried out in only a few donors in Ukraine, and none in Russia. The majority of the dose estimation is therefore made retrospectively. The thyroid dose given in this portal is the arithmetic mean and is in mGy.</div>">
-                                        </i>
-                                        <button type="button"
-                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
-                                                data-target="#dosemetry-card">Reset
-                                        </button>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy"
-                                                   name="dosemetry[]" value="100mGy">
-                                            <label class="form-check-label" for="dosemetry-100mGy">&lt; 100mGy</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy500mGy"
-                                                   name="dosemetry[]" value="100mGy500mGy">
-                                            <label class="form-check-label" for="dosemetry-100mGy500mGy">100mGy -
-                                                500mGy</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-500mGy"
-                                                   name="dosemetry[]" value="500mGy">
-                                            <label class="form-check-label" for="dosemetry-500mGy">&gt; 500mGy</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="dosemetry-Unknown"
-                                                   name="dosemetry[]" value="Unknown">
-                                            <label class="form-check-label" for="dosemetry-Unknown">Unknown</label>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="col-lg">
                                 <div id="sample-origin-card" class="card mb-2">
                                     <div class="card-header">Sample Origin
                                         <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
@@ -247,11 +185,81 @@
                                                    id="sample_origin-metastatic"
                                                    name="sample_origin[]" value="metastatic">
                                             <label class="form-check-label"
-                                                   for="sampleorigin-metastatic">Metastatic</label>
+                                                   for="sample_origin-metastatic">Metastatic</label>
                                         </div>
                                     </div>
                                 </div>
-                                <div id="residency-card" class="card my-2">
+                                {#                                <div id="country-card" class="card my-2">#}
+                                {#                                    <div class="card-header">Country of Residence#}
+                                {#                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"#}
+                                {#                                           data-bs-html="true"#}
+                                {#                                           data-bs-placement="right"#}
+                                {#                                           title="<div class='text-start'>Country of residence at the time of the accident</div>"></i>#}
+                                {##}
+                                {#                                        <button type="button"#}
+                                {#                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"#}
+                                {#                                                data-target="#country-card">Reset#}
+                                {#                                        </button>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="card-body">#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" id="country-ukraine"#}
+                                {#                                                   name="country" value="ukraine">#}
+                                {#                                            <label class="form-check-label" for="country-ukraine">Ukraine</label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" id="country-russia"#}
+                                {#                                                   name="country" value="russia">#}
+                                {#                                            <label class="form-check-label" for="country-russia">Russia</label>#}
+                                {#                                        </div>#}
+                                {#                                        <div class="form-check">#}
+                                {#                                            <input class="form-check-input" type="radio" id="country-both"#}
+                                {#                                                   name="country" value="both" checked>#}
+                                {#                                            <label class="form-check-label" for="country-both">Both</label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
+                                <div id="dosemetry-card" class="card my-2">
+                                    <div class="card-header">Dosemetry
+                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                           data-bs-html="true"
+                                           data-bs-placement="right"
+                                           title="<div class='text-start'>The donors in the CTB are currently operated in Ukraine. For patients operated in Ukraine, the thyroid dose is calculated by Professor Ilya Likhtarev's group at the Institute of Radiation Protection in Kiev. Direct measurement of thyroid dose was carried out in only a few donors in Ukraine. The majority of the dose estimation is therefore made retrospectively. The thyroid dose given in this portal is the arithmetic mean and is in mGy.</div>">
+{#                                           title="<div class='text-start'>The donors in the CTB are currently operated in either Ukraine or Russia. For patients operated in Ukraine, the thyroid dose is calculated by Professor Ilya Likhtarev's group at the Institute of Radiation Protection in Kiev. For donors operated in Russia, the thyroid dose is calculated by Professor Stepanenko's group in MRRC RAMS, in Obninsk. Direct measurement of thyroid dose was carried out in only a few donors in Ukraine, and none in Russia. The majority of the dose estimation is therefore made retrospectively. The thyroid dose given in this portal is the arithmetic mean and is in mGy.</div>">#}
+                                        </i>
+                                        <button type="button"
+                                                class="btn btn-reset btn-sm btn-outline-secondary float-end"
+                                                data-target="#dosemetry-card">Reset
+                                        </button>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy"
+                                                   name="dosemetry[]" value="100mGy">
+                                            <label class="form-check-label" for="dosemetry-100mGy">&lt; 100mGy</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-100mGy500mGy"
+                                                   name="dosemetry[]" value="100mGy500mGy">
+                                            <label class="form-check-label" for="dosemetry-100mGy500mGy">100mGy -
+                                                500mGy</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-500mGy"
+                                                   name="dosemetry[]" value="500mGy">
+                                            <label class="form-check-label" for="dosemetry-500mGy">&gt; 500mGy</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="dosemetry-Unknown"
+                                                   name="dosemetry[]" value="Unknown">
+                                            <label class="form-check-label" for="dosemetry-Unknown">Unknown</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col-lg">
+                                <div id="residency-card" class="card mb-2">
                                     <div class="card-header">Patient Residency
                                         <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
                                            data-bs-html="true"
@@ -356,17 +364,20 @@
                                         </button>
                                     </div>
                                     <div class="card-body">
-                                        <div><label for="bslider-0" class="form-label">Age at First Operation (Range in
-                                            Years) <i class="fa-solid fa-circle-question info-color"
-                                                      data-bs-toggle="tooltip"
-                                                      data-bs-html="true"
-                                                      data-bs-placement="right"
-                                                      title="<div class='text-start'>The selector gives the current maximum age of cases in the CTB cohort (aged under 19 at the time of the accident + time since the accident). By this age the incidence of thyroid cancers is increasing irrespective of any contributing effect of radiation. Samples are becoming available for this older cohort, who were in their late teens at the time of the accident, but applicants should be aware that any effects of radiation will be diluted by the increasing incidence of spontaneous thyroid cancers in this particular age group.</div>">
-                                            </i>:</label>
+                                        <div>
+                                            <div for="bslider-0" class="form-label">Age at First Operation (Range in
+                                                Years) <i class="fa-solid fa-circle-question info-color"
+                                                          data-bs-toggle="tooltip"
+                                                          data-bs-html="true"
+                                                          data-bs-placement="right"
+                                                          title="<div class='text-start'>The selector gives the current maximum age of cases in the CTB cohort (aged under 19 at the time of the accident + time since the accident). By this age the incidence of thyroid cancers is increasing irrespective of any contributing effect of radiation. Samples are becoming available for this older cohort, who were in their late teens at the time of the accident, but applicants should be aware that any effects of radiation will be diluted by the increasing incidence of spontaneous thyroid cancers in this particular age group.</div>">
+                                                </i>:
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
+                                                    <label for="min-age-first-operation" class="sr-only">First Operation Age (Min)</label>
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
                                                     <input id="min-age-first-operation" type="number"
                                                            class="form-control" name="age_at_operation_min"
@@ -375,6 +386,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
+                                                    <label for="max-age-first-operation" class="sr-only">First Operation Age (Max)</label>
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
                                                     <input id="max-age-first-operation" type="number"
                                                            class="form-control" name="age_at_operation_max"
@@ -382,16 +394,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div><label for="bslider-0" class="form-label">Age at Exposure (Range in
+                                        <div><div for="bslider-0" class="form-label">Age at Exposure (Range in
                                             Years) <i class="fa-solid fa-circle-question info-color"
                                                       data-bs-toggle="tooltip"
                                                       data-bs-html="true"
                                                       data-bs-placement="right"
                                                       title="<div class='text-start'>Age at exposure for cases in Group: Researchers wishing to study the cohort that were in utero at the time of the accident should contact the secretariat for more information about the gestational age of the cases in the CTB.</div>">
-                                            </i>:</label></div>
+                                            </i>:</div></div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
+                                                    <label for="min-age-first-exposure" class="sr-only">Age at Exposure (Min)</label>
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
                                                     <input id="min-age-first-exposure" type="number"
                                                            class="form-control" name="age_at_exposure_min"
@@ -400,6 +413,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
+                                                    <label for="max-age-first-exposure" class="sr-only">Age at Exposure (Max)</label>
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
                                                     <input id="max-age-first-exposure" type="number"
                                                            class="form-control" name="age_at_exposure_max"
@@ -415,8 +429,8 @@
                 </form>
             </div>
             <div class="col-lg-5">
-                <div class="border rounded bg-light p-4 mb-3">
-                    <h5>Available Cases
+                <div class="border rounded light-grey p-4 mb-3">
+                    <h5 class="fw-bold">Available Cases
                     </h5>
                     <div class="fw-normal fs-5 text-end"><span
                             id="total-case-count" class="fw-bold">{{ total|default:0 }}</span><span
@@ -428,7 +442,7 @@
                         <table id="tissue-table" class="table table-striped tissue-samples-table">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th><span class="sr-only">Sample Type</span></th>
                                 <th class="text-center" colspan="2">Normal</th>
                                 <th class="text-center" colspan="2">Tumor</th>
                                 <th class="text-center" colspan="2">Metastatic</th>
@@ -438,19 +452,19 @@
                             <tr>
                                 <td>RNA</td>
                                 <td class="text-end pe-0"><span id="tissue-rna-normal"
-                                                           class="fw-bold">{{ tissue.rna.normal|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.rna.normal|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.normal|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-rna-tumour"
-                                                           class="fw-bold">{{ tissue.rna.tumour|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.rna.tumour|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.tumour|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-rna-metastatic"
-                                                           class="fw-bold">{{ tissue.rna.metastatic|format_num_with_commmas|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.rna.metastatic|format_num_with_commmas|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.rna.metastatic|format_num_with_commmas }}</span>
@@ -459,19 +473,19 @@
                             <tr>
                                 <td>DNA</td>
                                 <td class="text-end pe-0"><span id="tissue-dna-normal"
-                                                           class="fw-bold">{{ tissue.dna.normal|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.dna.normal|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.normal|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-dna-tumour"
-                                                           class="fw-bold">{{ tissue.dna.tumour|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.dna.tumour|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.tumour|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-dna-metastatic"
-                                                           class="fw-bold">{{ tissue.dna.metastatic|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.dna.metastatic|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.dna.metastatic|format_num_with_commmas }}</span>
@@ -480,19 +494,19 @@
                             <tr>
                                 <td>FFPE</td>
                                 <td class="text-end pe-0"><span id="tissue-ffpe-normal"
-                                                           class="fw-bold">{{ tissue.ffpe.normal|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.ffpe.normal|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.normal|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-ffpe-tumour"
-                                                           class="fw-bold">{{ tissue.ffpe.tumour|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.ffpe.tumour|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.tumour|format_num_with_commmas }}</span>
                                 </td>
                                 <td class="text-end pe-0"><span id="tissue-ffpe-metastatic"
-                                                           class="fw-bold">{{ tissue.ffpe.metastatic|default:0 }}</span>
+                                                                class="fw-bold">{{ tissue.ffpe.metastatic|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.tissue.ffpe.metastatic|format_num_with_commmas }}</span>
@@ -506,45 +520,45 @@
                         <table id="blood-table" class="table table-striped tissue-samples-table">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th><span class="sr-only">Sample Type</span></th>
                                 <th class="text-center" colspan="2">Blood</th>
-                                <th class="col-3"></th>
-                                <th class="col-3"></th>
+                                <th class="col-3"><span class="sr-only">-blank-</span></th>
+                                <th class="col-3"><span class="sr-only">-blank-</span></th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr>
                                 <td>Serum</td>
                                 <td class="text-end pe-0"><span id="blood-serum"
-                                                           class="fw-bold">{{ blood.serum|default:0 }}</span>
+                                                                class="fw-bold">{{ blood.serum|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.blood.serum|format_num_with_commmas }}</span>
                                 </td>
-                                <th></th>
-                                <th></th>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>DNA</td>
                                 <td class="text-end pe-0"><span id="blood-dna"
-                                                           class="fw-bold">{{ blood.dna|default:0 }}</span>
+                                                                class="fw-bold">{{ blood.dna|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.blood.dna|format_num_with_commmas }}</span>
                                 </td>
-                                <th></th>
-                                <th></th>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>Blood</td>
                                 <td class="text-end pe-0"><span id="blood-blood"
-                                                           class="fw-bold">{{ blood.blood|default:0 }}</span>
+                                                                class="fw-bold">{{ blood.blood|default:0 }}</span>
                                 </td>
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.blood.blood|format_num_with_commmas }}</span>
                                 </td>
-                                <th></th>
-                                <th></th>
+                                <td></td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>
@@ -585,8 +599,7 @@
                         {#                            </div>#}
                         {#                        </div>#}
                         <div class="text-end mb-3">
-
-                            <div id="alert_message" class="text-primary fst-italic my-2"></div>
+                            <div id="alert_message" class="alert-text fst-italic my-2"></div>
                         </div>
 
                     </div>

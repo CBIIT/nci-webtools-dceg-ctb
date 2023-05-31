@@ -1,6 +1,6 @@
 <!--
 
- Copyright 2022, Institute for Systems Biology
+ Copyright 2023, Institute for Systems Biology
 
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
@@ -29,22 +29,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     {% block extra_css_libs %}{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}" />
-    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
+    <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
 
     {% block header %}{% endblock %}
 
     {% if SITE_GOOGLE_ANALYTICS %}
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id={{ SITE_GOOGLE_ANALYTICS_TRACKING_ID }}"></script>
+        <script async
+                src="https://www.googletagmanager.com/gtag/js?id={{ SITE_GOOGLE_ANALYTICS_TRACKING_ID }}"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
 
-          gtag('config', '{{ SITE_GOOGLE_ANALYTICS_TRACKING_ID }}');
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+
+            gtag('config', '{{ SITE_GOOGLE_ANALYTICS_TRACKING_ID }}');
         </script>
-    {%  endif %}
+    {% endif %}
     <script>
         var STATIC_FILES_URL = '{{ STATIC_FILES_URL }}';
         var BASE_URL = '{{ BASE_URL }}' || "";
@@ -54,53 +59,62 @@
 </head>
 <body class="{% block body_class %}content{% endblock %} h-100 d-flex flex-column" id="body">
 <!--Include site main header-->
-{% include 'share/site_header.html'  %}
+{% include 'share/site_header.html' %}
 
-<main id="{% block page_name %}content{% endblock %}" class="main-content">
+<main id="{% block page_name %}content{% endblock %}" class="main-content {% block page_class %}content{% endblock %}">
     <div class="page-heading">
         {% block page_header %}{% endblock %}
     </div>
     <div class="container-fluid">
         <!-- Site Messages -->
-        <div class="row">
-            <div class="col" style="z-index: 100;">
-                {% if messages %}
-                    {% autoescape off %}
-                        {% for message in messages %}
-                            {% if message.tags == 'error' or message.tags == 'warning' %}
+        {#        <div class="row">#}
+        <div class="col" style="z-index: 100;">
+            {% if messages %}
+                {% autoescape off %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' or message.tags == 'warning' %}
                             <div class="alert alert-{{ message.tags }} alert-dismissible">
-                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span
+                                        class="sr-only">Close</span></button>
                                 {{ message }}
                             </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endautoescape %}
-                {% endif %}
-                <div id="js-messages"></div>
-            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endautoescape %}
+            {% endif %}
+            <div id="js-messages"></div>
         </div>
+        {#        </div>#}
         <!-- Page Content -->
         {% block content %}{% endblock %}
     </div>
 
 </main>
-{% include 'share/site_footer.html'  %}
+{% include 'share/site_footer.html' %}
 <!-- Warning Modal -->
-<div class="modal fade" id="gov_warning" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="gov_warning-header" aria-hidden="true">
+<div class="modal fade" id="gov_warning" tabindex="-1" role="dialog" data-backdrop="static"
+     aria-labelledby="gov_warning-header" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="gov_warning-header">Warning</h4>
             </div>
             <div class="modal-body">
-            <p>You are accessing a US Government web site which may contain information that must be protected under the
-                US Privacy Act or other sensitive information and is intended for Government authorized use only. </p>
-            <p>Unauthorized attempts to upload information, change information, or use of this web site may result in
-                disciplinary action, civil, and/or criminal penalties. Unauthorized users of this website should have no
-                expectation of privacy regarding any communications or data processed by this website.</p>
-            <p> Anyone accessing this website expressly consents to monitoring of their actions and all communications
-                or data transiting or stored on related to this website and is advised that if such monitoring reveals
-                possible evidence of criminal activity, NIH may provide that evidence to law enforcement officials</p>
+                <p>You are accessing a US Government web site which may contain information that must be protected under
+                    the
+                    US Privacy Act or other sensitive information and is intended for Government authorized use
+                    only. </p>
+                <p>Unauthorized attempts to upload information, change information, or use of this web site may result
+                    in
+                    disciplinary action, civil, and/or criminal penalties. Unauthorized users of this website should
+                    have no
+                    expectation of privacy regarding any communications or data processed by this website.</p>
+                <p> Anyone accessing this website expressly consents to monitoring of their actions and all
+                    communications
+                    or data transiting or stored on related to this website and is advised that if such monitoring
+                    reveals
+                    possible evidence of criminal activity, NIH may provide that evidence to law enforcement
+                    officials</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</button>
@@ -110,34 +124,37 @@
 </div>
 
 
-
-<!-- External Web Warning Modal -->
-<div class="modal fade" id="external-web-warning" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="external-web-warning-header" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Leaving NCI website</h4>
-            </div>
-            <div class="modal-body">
-                <p>This link will take you to an external web site. Linking to a non-federal website does not indicate an endorsement by NCI of the sponsors
-                    or of the information and products presented on the website. You will be subject to the external website’s privacy policy when you leave
-                    NCI’s website.</p>
-            </div>
-            <div class="modal-footer">
-                <a type="button" class="btn btn-primary btn-warn" data-dismiss="modal">Cancel</a>
-                <a type="button" href="" class="btn btn-primary btn-warn" id="go-to-external-link" target="_blank" rel="noopener noreferrer">OK</a>
-            </div>
-        </div>
-    </div>
-</div>
+{#<!-- External Web Warning Modal -->#}
+{#<div class="modal fade" id="external-web-warning" tabindex="-1" role="dialog" data-backdrop="static"#}
+{#     aria-labelledby="external-web-warning-header" aria-hidden="true">#}
+{#    <div class="modal-dialog">#}
+{#        <div class="modal-content">#}
+{#            <div class="modal-header">#}
+{#                <h4 class="modal-title">Leaving NCI website</h4>#}
+{#            </div>#}
+{#            <div class="modal-body">#}
+{#                <p>This link will take you to an external web site. Linking to a non-federal website does not indicate#}
+{#                    an endorsement by NCI of the sponsors#}
+{#                    or of the information and products presented on the website. You will be subject to the external#}
+{#                    website’s privacy policy when you leave#}
+{#                    NCI’s website.</p>#}
+{#            </div>#}
+{#            <div class="modal-footer">#}
+{#                <a type="button" class="btn btn-primary btn-warn" data-dismiss="modal">Cancel</a>#}
+{#                <a type="button" href="" class="btn btn-primary btn-warn" id="go-to-external-link" target="_blank"#}
+{#                   rel="noopener noreferrer">OK</a>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
 
 <!-- Logout Modal -->
 
-<div id="logout-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+<div id="logout-modal" class="modal" tabindex="-1" role="dialog" aria-labelledby="logoutModalTitle" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Logout</h4>
+                <h4 id="logoutModalTitle" class="modal-title">Logout</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="post" action="{% url 'account_logout' %}">
@@ -170,14 +187,14 @@
     {# Include the template that actually contains the modal dialog #}
     {% include 'session_security/dialog.html' %}
     {% localize off %}
-    <script>
-        var pingUrl = '{% url 'session_security_ping' %}';
-        var warnAfter = {{ request|warn_after|unlocalize }};
-        var expireAfter = {{ request|expire_after|unlocalize }};
-        var confirmFormDiscard = "{% trans 'You have unsaved changes in a form of this page.' %}";
-        var returnToUrl = '{% url 'landing_page' %}';
-        var showWarning = false;
-    </script>
+        <script>
+            var pingUrl = '{% url 'session_security_ping' %}';
+            var warnAfter = {{ request|warn_after|unlocalize }};
+            var expireAfter = {{ request|expire_after|unlocalize }};
+            var confirmFormDiscard = "{% trans 'You have unsaved changes in a form of this page.' %}";
+            var returnToUrl = '{% url 'landing_page' %}';
+            var showWarning = false;
+        </script>
     {% endlocalize %}
 {% endif %}
 

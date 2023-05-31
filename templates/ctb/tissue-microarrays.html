@@ -13,19 +13,16 @@
 {% block page_name %}tissue_microarrays{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <h3 class="page-banner">Tissue Microarrays</h3>
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Research</li>
-                    <li class="breadcrumb-item"><a href="{% url 'material_available' %}">Material Available</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Tissue Microarrays</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="page-banner">Tissue Microarrays</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Research</li>
+                <li class="breadcrumb-item"><a href="{% url 'material_available' %}">Material Available</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Tissue Microarrays</li>
+            </ol>
+        </nav>
     </div>
-
 {% endblock %}
 
 {% block subcontent %}
@@ -50,15 +47,17 @@
                                   src="{% static 'img/tissue-microarray3.jpeg' %}"
                                   alt="tissue-microarray3.jpeg" width="197" height="130"></div>
     <p>Use of a 0.6mm diameter core has been validated in a number of studies, and is judged to be
-        sufficient for assessing morphological features of the analysed tissues and allows the combination of up to
+        sufficient for assessing morphological features of the analyzed tissues and allows the combination of up to
         1000 cores on a single paraffin block. The position of each core taken from each block is recorded as a set
         of coordinates on a simple computer database. Sections of the TMA block are cut in the same way as the
         conventional paraffin blocks which contain material from a single patient are cut. Up to 250-300 5 micron
         sections can be obtained from a single TMA block. These are then mounted on a glass slide and can be used
-        for a variety of studies, usually involving localisation of proteins using immunocytochemistry or mRNA using
-        in situ hybridisation. In addition to the tissues of interest, control tissue material can be included in
-        the block.<br><br>Custom made arrays will be considered. Please contact the secretariat for further details
-        and prices.</p>
+        for a variety of studies, usually involving localization of proteins using immunocytochemistry or mRNA using
+        in situ hybridization. In addition to the tissues of interest, control tissue material can be included in
+        the block.
+{#        <br><br>Custom made arrays will be considered. Please contact the secretariat for further details#}
+{#        and prices.#}
+    </p>
 
 
 {% endblock %}

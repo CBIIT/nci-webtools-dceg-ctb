@@ -54,7 +54,7 @@ require([
                         } else {
                             search_type_url = 'driver_search_facility';
                         }
-                        let search_url = BASE_URL + "/search_facility/" + search_type_url + row.filter_encoded_url + '&title='+row.name;
+                        let search_url = BASE_URL + "/search_facility/search_samples/" + search_type_url + row.filter_encoded_url + '&title='+row.name;
                         return "<a href='" + search_url + "'>" + row.name + "</a>";
                     }
                 },
@@ -76,7 +76,7 @@ require([
                 {
                     class: 'text-center',
                     render: function (data, type, row, meta) {
-                        return "<a class='delete-search-btn' href='#' data-filter-id='" + row.filter_id + "'><i class='fa-solid fa-trash-can'></i></a>";
+                        return "<a class='delete-search-btn' href='#' data-filter-id='" + row.filter_id + "'><i class='fa-solid fa-trash-can'></i><span class=\"sr-only\">Delete</span></a>";
                     },
                 },
             ]

@@ -27,7 +27,7 @@ require([
     'base',
 ], function() {
     $(document).ready(function () {
-        $("#driver-search-btn").attr("href", BASE_URL + "/search_facility/driver_search_facility"+window.location.search)
+        $("#driver-search-btn").attr("href", BASE_URL + "/search_facility/search_samples/driver_search_facility"+window.location.search)
         let step = 0;
         $('#next-btn, #clinic-skip, #proceed-btn').on("click", function () {
             $('#form-clinic-' + step).addClass('d-none');
@@ -43,7 +43,7 @@ require([
             $('#submit-btn, #next-btn, #back-btn, #proceed-btn, #clinic-skip, #clinic-sidebar').addClass('d-none');
             if (step) {
                 $('#back-btn').removeClass('d-none');
-                if (step > 3) {
+                if (step > 2) {
                     $('#submit-btn').removeClass('d-none');
                     $('#clinic-skip').addClass('d-none');
                 } else {
@@ -58,7 +58,7 @@ require([
                 $('#clinic-sidebar-buttons').removeClass('d-none');
             }
             //update progress bar
-            for (let i=0; i<6; i++){
+            for (let i=0; i<5; i++){
                 if (i > step)
                     $('#clinical-step-'+i).removeClass('step-active step-done');
                 else if (i == step)
