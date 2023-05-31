@@ -25,6 +25,23 @@
         <h5 class="mb-2 fw-bold">
             Contact Details For Principal Investigator
         </h5>
+        {% if not pdf %}
+            <div class="p-3 border border-secondary rounded-1">
+                The contact information that you are providing here can be considered Personally
+                Identifiable Information by the US Government. Please only enter PUBLIC BUSINESS RELATED contact
+                information into this form (such as institutional points of contact used in public publications). DO
+                NOT add private contact information here. This information will not be made available to the public.
+                If you need to update the contact information while the application is being processed, please email us
+                at <a href="mailto:ctb-support@isb-cgc.org">ctb-support@isb-cgc.org</a>.
+                <div class="form-check mt-2">
+                <input class="form-check-input" type="checkbox" value="" id="pii-warning-check" required>
+                <label class="form-check-label fw-bold" for="pii-warning-checkk">
+                    I have read and acknowledge this *
+                </label>
+            </div>
+        </div>
+        {% endif %}
+
         <div class="my-3 row g-3">
             <div class="col-md-4">
                 <label for="first-name" class="form-label">First Name *</label>

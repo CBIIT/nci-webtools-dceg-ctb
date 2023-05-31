@@ -11,6 +11,8 @@
 
 {% block page_name %}clinical_search_facility_result{% endblock %}
 
+{% block page_class %}biosample_tab{% endblock %}
+
 {% block page_header %}
     <div class="container">
         <div class="pt-3">
@@ -50,16 +52,15 @@
                         criteria.
                     </div>
                     <hr>
-                    <div class="mt-2">
-                        <a type="button" class="btn btn-secondary"
-                           href="{% url 'clinical_search_facility' %}"><i
-                                class="fas fa-angle-double-left"></i> Back to Clinical Search
-                        </a>
-                        <a type="button" class="btn btn-secondary"
-                           href="{% url 'search_tissue_samples' %}"><i
-                                class="fas fa-angle-double-left"></i> Back to Search Tissue Samples
-                        </a>
-                        <div class="float-end" role="group" aria-label="action buttons">
+                    <div class="mt-2 d-flex gap-1 justify-content-end">
+                            <a type="button" class="btn btn-secondary"
+                               href="{% url 'clinical_search_facility' %}"><i
+                                    class="fas fa-angle-double-left"></i> Back to Clinical Search
+                            </a>
+                            <a type="button" class="btn btn-secondary"
+                               href="{% url 'search_tissue_samples' %}"><i
+                                    class="fas fa-angle-double-left"></i> Back to Search Tissue Samples
+                            </a>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#saveModal"><i
                                     class="fa-solid fa-floppy-disk"></i> Save
@@ -72,7 +73,6 @@
                                href="{% url 'driver_search_facility' %}">Search by Driver Mutation <i
                                     class="fas fa-angle-double-right"></i>
                             </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -96,7 +96,7 @@
                                class="form-control" value="" placeholder="Search Name"
                                aria-label="Save Search" aria-describedby="search-save">
                         <div class="text-end mb-3">
-                            <div id="alert_message" class="text-primary fst-italic my-2"></div>
+                            <div id="alert_message" class="alert-text fst-italic my-2"></div>
                         </div>
                     </div>
                     <div class="modal-footer">

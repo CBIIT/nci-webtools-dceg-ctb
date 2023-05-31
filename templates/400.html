@@ -3,7 +3,7 @@
 {% load i18n l10n %}
 {% comment %}
 
-   Copyright 2022, Institute for Systems Biology
+   Copyright 2023, Institute for Systems Biology
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -20,7 +20,7 @@
 {% endcomment %}
 
 
-{% block title %}Forbidden{% endblock %}
+{% block title %}Server error{% endblock %}
 
 {% block content %}
     <div class="container">
@@ -29,13 +29,18 @@
                 <div class="card p-3">
                     <div class="card-body">
                         <h4 class="card-title"><i
-                                class="fas fa-exclamation-triangle"></i> {% trans "403: Access Forbidden" %}</h4>
-                        <h5>You do not have permission to access this page.</h5>
+                                class="fas fa-exclamation-triangle"></i> {% trans "400: Bad Request Error" %}</h4>
+                        {% if error %}
+                            <p class="fw-bold">{{ error }}</p>
+                        {% endif %}
+                        <p>We apologize for the inconvenience. Please <a href="ctb-support@isb-cgc.org">contact us</a>
+                            and let us know what happened.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
 
 {% block js_file %}

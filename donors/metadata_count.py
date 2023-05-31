@@ -240,7 +240,7 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
 def get_driver_case_counts(filters=None):
     # donor_where_clause, sample_where_clause = \
     #     build_sample_where_clause(filters, 'dc', 's') if filters else 'TRUE', 'TRUE'
-    (donor_where_clause, sample_where_clause) = build_sample_where_clause(filters, 'dc', 's') if filters else ('TRUE', 'TRUE')
+    (donor_where_clause, sample_where_clause) = build_sample_where_clause(filters, 'd', 's') if filters else ('TRUE', 'TRUE')
     clinical_where_clause = build_clinical_where_clause(filters, 'c', 'd') if filters else 'TRUE'
     query_template = '''
     SELECT dr.gene, COUNT(DISTINCT(sdc.id))
@@ -272,6 +272,8 @@ def get_driver_case_counts(filters=None):
     total_avail_count_query = query_template.format(donor_where_clause='TRUE',
                                                     sample_where_clause='TRUE',
                                                     clinical_where_clause='TRUE')
+    print(count_query)
+    # print(total_avail_count_query)
     counts = {
     }
     total_filtered_case_count = 0
@@ -364,8 +366,6 @@ def get_sample_case_counts(filters=None):
                                                     donor_where_clause=donor_where_clause,
                                                     sample_where_clause=sample_where_clause,
                                                     group_clause=group_clause)
-        # print(grouped_count_query)
-        # print(total_count_query)
         with connection.cursor() as cursor:
             cursor.execute(total_count_query)
             case_counts['total'] = cursor.fetchone()[0]

@@ -4,15 +4,14 @@
 {% block extra_media %}
     {{ form.media }}
 {% endblock %}
-
+{% block page_header %}
+    <div class="page-banner">{% block title %}{% trans "Enable Two-factor Authentication" %}{% endblock %}</div>
+{% endblock %}
 {% block content %}
+    <div class="container">
     <div class="row justify-content-center my-5">
-        <div class="col-lg-5 accounts-col">
+        <div class="col-lg-6">
             <div class="card user-panel">
-                <div class="card-header">
-                    <h5>{% block title %}{% trans "Enable Two-Factor Authentication" %}{% endblock %}
-                    </h5>
-                </div>
                 <div class="card-body px-4 py-3">
                     {% if wizard.steps.current == 'welcome' %}
                         <div>{% blocktrans trimmed %}You are about to take your account security to the
@@ -82,5 +81,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}

@@ -13,44 +13,37 @@
 {% block page_name %}nucleic_acids_and_paraffin_sections{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <h3 class="page-banner">Nucleic Acids and Paraffin Sections</h3>
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item">Research</li>
-                    <li class="breadcrumb-item"><a href="{% url 'material_available' %}">Material Available</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Nucleic Acids and Paraffin Sections</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="page-banner">Nucleic Acids and Paraffin Sections</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Research</li>
+                <li class="breadcrumb-item"><a href="{% url 'material_available' %}">Material Available</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Nucleic Acids and Paraffin Sections</li>
+            </ol>
+        </nav>
     </div>
-
 {% endblock %}
 
 {% block subcontent %}
 
-    <h5>Aliquots of nucleic acid</h5>
-    <p>RNA and DNA are extracted from histologically
-        verified frozen specimens in Ukraine and Russia. Extraction is carried out to internationally agreed SOPs. The
-        Institutes in Ukraine and Russia and the Coordinating Centre carry our detailed quality assurance using Agilent
-        Bioanalysers.</p>
+    <h4 class="pt-3">Aliquots of nucleic acid</h4>
+    <p>RNA and DNA are extracted from histologically verified frozen specimens in Ukraine. Extraction is carried out
+        based on the agreed SOPs. The Institute in Ukraine and the Coordinating Centre carry our detailed quality
+        assurance using Agilent Bioanalysers.</p>
     <p>Information about the availability of DNA and RNA extracted from frozen tissue can be viewed
         using the CTB Biosample Search Facility.&nbsp;The numbers change frequently as samples are issued to researchers
         and new extracts are prepared.</p>
-    <p>Aliquots of DNA from blood are also available and in the majority of cases these can be
-        paired with samples of RNA and DNA from tissue from the same patient. DNA is extracted using Qiagen kits.</p>
-    <h5>Serum</h5>
-    <p>Aliquots of serum are also available. These are prepared to an
-        agreed SOP.</p>
-    <p>There is no fee payable for provision of aliquots of nucleic acid or serum, but
-        investigators will be asked to cover the costs of transport of the samples. An estimate of the shipping costs
-        can be obtained from the secretariat (chernobyltissuebank@imperial.ac.uk).</p>
-    <h5>Paraffin sections</h5>
+    <p>Aliquots of DNA from blood are also available and in the majority of cases these can be paired with samples of
+        RNA and DNA from tissue from the same patient. DNA is extracted using Qiagen kits.</p>
+    <h4 class="pt-3">Serum</h4>
+    <p>Aliquots of serum are also available. These are prepared per agreed SOP.</p>
+    <p>There is no fee payable for provision of aliquots of nucleic acid or serum, but investigators will be asked to
+        cover the costs of transport of the samples and any other additional costs.</p>
+    <h4 class="pt-3">Paraffin sections</h4>
     <p>Sections are available from routine formalin fixed, paraffin embedded tissue and from
         tissue microarrays (click here for information on <a href="{% url 'tissue_microarrays' %}">tissue
-            microarrays</a>). The CTB is required to recover the costs
-        of provision of this material. Please contact the secretariat (chernobyltissuebank@imperial.ac.uk) for details
-        of prices.</p>
+            microarrays</a>).
+    </p>
 
 {% endblock %}

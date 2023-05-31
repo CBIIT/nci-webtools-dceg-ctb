@@ -11,6 +11,8 @@
 
 {% block page_name %}driver_search_facility{% endblock %}
 
+{% block page_class %}biosample_tab{% endblock %}
+
 {% block page_header %}
     <div class="container">
         <div class="pt-3">
@@ -22,6 +24,8 @@
         </div>
     </div>
 {% endblock %}
+Search Tissue Samples
+Refine by Clinical Parameters
 
 {% block content %}
     <div class="container">
@@ -39,13 +43,13 @@
                 {% endif %}
             </div>
             <div class="col mb-3">
-                <div class="border rounded bg-light p-4">
+                <div class="border rounded light-grey p-4">
 
                     <div class="readmore-acc accordion accordion-flush" id="driver-intro-acc">
-                        <div class="accordion-item bg-light">
+                        <div class="accordion-item light-grey">
                             <h2 class="accordion-header d-md-flex justify-content-md-end"
                                 id="driver-intro-acc-headingOne">
-                                <button class="accordion-button collapsed bg-light" type="button"
+                                <button class="accordion-button collapsed" type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#driver-intro-one" aria-expanded="false"
                                         aria-controls="driver-intro-one">
@@ -277,10 +281,10 @@
                     </table>
                     <hr>
                     <div class="readmore-acc accordion accordion-flush" id="table-intro-acc">
-                        <div class="accordion-item bg-light">
+                        <div class="accordion-item light-grey">
                             <h2 class="accordion-header d-md-flex justify-content-md-end"
                                 id="table-intro-acc-headingOne">
-                                <button class="accordion-button collapsed bg-light" type="button"
+                                <button class="accordion-button collapsed" type="button"
                                         data-bs-toggle="collapse"
                                         data-bs-target="#table-intro-one" aria-expanded="false"
                                         aria-controls="table-intro-one">
@@ -299,7 +303,7 @@
                                     available for your study will depend on the biospecimens you require plus
                                     any
                                     clinical data also
-                                    requested. In brackets are the drivers that also meet the search criteria
+                                    requested. Filtered cases are the drivers that also meet the search criteria
                                     you
                                     entered in the
                                     biosample search and the clinical search.
@@ -343,7 +347,7 @@
                             </div>
                             <div class="text-end mb-3">
 
-                                <div id="alert_message" class="text-primary fst-italic my-2"></div>
+                                <div id="alert_message" class="alert-text fst-italic my-2"></div>
                             </div>
 
                         </div>
