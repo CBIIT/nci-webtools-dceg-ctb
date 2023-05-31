@@ -6,7 +6,7 @@
 <nav id="ctb-main-navbar" class="navbar navbar-expand-lg fixed-top navbar-dark py-4" aria-label="Main navigation">
     <div class="container">
         <a class="navbar-brand {% if request.path == '/' %} active {% endif %}" href="{% url 'landing_page' %}"><i
-                class="fas fa-home"></i></a>
+                class="fas fa-home"></i><span class="sr-only">CTB Home</span></a>
         <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" data-bs-toggle="collapse"
                 data-bs-target="#ctb-collapsible-navbar"
                 aria-label="Toggle navigation">
@@ -17,10 +17,8 @@
                 <li class="nav-item">
                     <a class="nav-link
                         {% if 'search_facility' in request.path %} active {% endif %}"
-                       aria-current="page" {% if user.is_authenticated %} href="{% url 'dashboard' %}"
-                    {% else %}
-                       href="{% url 'two_factor:login' %}"
-                    {% endif %}>
+                       aria-current="page"
+                       href="{% url 'dashboard' %}">
                         Biosample Search
                     </a>
                 </li>
@@ -77,7 +75,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if 'users/' in request.path or 'account' in request.path %} active {% endif %}"
                            data-bs-toggle="dropdown" href="#" role="button"
-                           aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+                           aria-expanded="false"><i class="fa-solid fa-user"></i><span class="sr-only">User Menu</span></a>
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="{% url 'user_detail' user.id %}"
@@ -92,6 +90,13 @@
                                 </a>
                             </li>
                         </ul>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           href="{% url 'two_factor:login' %}">
+                            <i class="fas fa-sign-in-alt"></i><span class="sr-only">Sign-In</span>
+                        </a>
                     </li>
                 {% endif %}
             </ul>

@@ -23,15 +23,19 @@
 {% block title %}Server error{% endblock %}
 
 {% block content %}
-    <div class="row justify-content-center my-5">
-        <div class="col-lg-4 accounts-col">
-            <div class="card p-3">
-                <div class="card-body">
-                    <h4 class="card-title"><i class="fas fa-exclamation-triangle"></i> {% trans "400: Bad Request Error" %}</h4>
-                    {% if error %}
-                        <p class="fw-bold">{{ error }}</p>
-                    {% endif %}
-                    <p>We apologize for the inconvenience. Please <a href="ctb-support@isb-cgc.org">contact us</a> and let us know what happened.</p>
+    <div class="container">
+        <div class="row justify-content-center my-5">
+            <div class="col-lg-6">
+                <div class="card p-3">
+                    <div class="card-body">
+                        <h4 class="card-title"><i
+                                class="fas fa-exclamation-triangle"></i> {% trans "400: Bad Request Error" %}</h4>
+                        {% if error %}
+                            <p class="fw-bold">{{ error }}</p>
+                        {% endif %}
+                        <p>We apologize for the inconvenience. Please <a href="ctb-support@isb-cgc.org">contact us</a>
+                            and let us know what happened.</p>
+                    </div>
                 </div>
             </div>
         </div>
