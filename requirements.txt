@@ -1,4 +1,4 @@
-requests==2.30.0
+requests==2.31.0
 django==3.2.19
 PyYAML==5.4
 pyOpenSSL==23.1.1

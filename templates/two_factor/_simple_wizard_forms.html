@@ -2,7 +2,8 @@
 <table class="mb-3">
     {{ wizard.management_form }}
     {% for field in wizard.form %}
-        <label class="form-label">{{ field.label }}</label>
+        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
         {{ field|add_classes:'form-control mb-2' }}
+
     {% endfor %}
 </table>

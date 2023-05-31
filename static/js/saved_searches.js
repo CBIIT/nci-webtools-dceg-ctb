@@ -76,7 +76,7 @@ require([
                 {
                     class: 'text-center',
                     render: function (data, type, row, meta) {
-                        return "<a class='delete-search-btn' href='#' data-filter-id='" + row.filter_id + "'><i class='fa-solid fa-trash-can'></i></a>";
+                        return "<a class='delete-search-btn' href='#' data-filter-id='" + row.filter_id + "'><i class='fa-solid fa-trash-can'></i><span class=\"sr-only\">Delete</span></a>";
                     },
                 },
             ]
