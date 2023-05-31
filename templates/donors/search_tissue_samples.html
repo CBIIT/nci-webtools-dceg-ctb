@@ -40,7 +40,7 @@
 
         <div class="row">
             <div class="col-lg-7 pe-0">
-                <form id="search-tissue-form" class="bg-light border rounded py-3 mb-3">
+                <form id="search-tissue-form" class="border light-grey rounded py-3 mb-3">
                     {% csrf_token %}
                     <input id="total-input" type="hidden" name="total" value="{{ total }}">
                     <input type="hidden" name="search_type" value="Biosample"/>
@@ -185,7 +185,7 @@
                                                    id="sample_origin-metastatic"
                                                    name="sample_origin[]" value="metastatic">
                                             <label class="form-check-label"
-                                                   for="sampleorigin-metastatic">Metastatic</label>
+                                                   for="sample_origin-metastatic">Metastatic</label>
                                         </div>
                                     </div>
                                 </div>
@@ -364,17 +364,20 @@
                                         </button>
                                     </div>
                                     <div class="card-body">
-                                        <div><label for="bslider-0" class="form-label">Age at First Operation (Range in
-                                            Years) <i class="fa-solid fa-circle-question info-color"
-                                                      data-bs-toggle="tooltip"
-                                                      data-bs-html="true"
-                                                      data-bs-placement="right"
-                                                      title="<div class='text-start'>The selector gives the current maximum age of cases in the CTB cohort (aged under 19 at the time of the accident + time since the accident). By this age the incidence of thyroid cancers is increasing irrespective of any contributing effect of radiation. Samples are becoming available for this older cohort, who were in their late teens at the time of the accident, but applicants should be aware that any effects of radiation will be diluted by the increasing incidence of spontaneous thyroid cancers in this particular age group.</div>">
-                                            </i>:</label>
+                                        <div>
+                                            <div for="bslider-0" class="form-label">Age at First Operation (Range in
+                                                Years) <i class="fa-solid fa-circle-question info-color"
+                                                          data-bs-toggle="tooltip"
+                                                          data-bs-html="true"
+                                                          data-bs-placement="right"
+                                                          title="<div class='text-start'>The selector gives the current maximum age of cases in the CTB cohort (aged under 19 at the time of the accident + time since the accident). By this age the incidence of thyroid cancers is increasing irrespective of any contributing effect of radiation. Samples are becoming available for this older cohort, who were in their late teens at the time of the accident, but applicants should be aware that any effects of radiation will be diluted by the increasing incidence of spontaneous thyroid cancers in this particular age group.</div>">
+                                                </i>:
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
+                                                    <label for="min-age-first-operation" class="sr-only">First Operation Age (Min)</label>
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
                                                     <input id="min-age-first-operation" type="number"
                                                            class="form-control" name="age_at_operation_min"
@@ -383,6 +386,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
+                                                    <label for="max-age-first-operation" class="sr-only">First Operation Age (Max)</label>
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
                                                     <input id="max-age-first-operation" type="number"
                                                            class="form-control" name="age_at_operation_max"
@@ -390,16 +394,17 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div><label for="bslider-0" class="form-label">Age at Exposure (Range in
+                                        <div><div for="bslider-0" class="form-label">Age at Exposure (Range in
                                             Years) <i class="fa-solid fa-circle-question info-color"
                                                       data-bs-toggle="tooltip"
                                                       data-bs-html="true"
                                                       data-bs-placement="right"
                                                       title="<div class='text-start'>Age at exposure for cases in Group: Researchers wishing to study the cohort that were in utero at the time of the accident should contact the secretariat for more information about the gestational age of the cases in the CTB.</div>">
-                                            </i>:</label></div>
+                                            </i>:</div></div>
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
+                                                    <label for="min-age-first-exposure" class="sr-only">Age at Exposure (Min)</label>
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Min</span>
                                                     <input id="min-age-first-exposure" type="number"
                                                            class="form-control" name="age_at_exposure_min"
@@ -408,6 +413,7 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="input-group input-group-sm mb-3">
+                                                    <label for="max-age-first-exposure" class="sr-only">Age at Exposure (Max)</label>
                                                     <span class="input-group-text" id="inputGroup-sizing-sm">Max</span>
                                                     <input id="max-age-first-exposure" type="number"
                                                            class="form-control" name="age_at_exposure_max"
@@ -423,7 +429,7 @@
                 </form>
             </div>
             <div class="col-lg-5">
-                <div class="border rounded bg-light p-4 mb-3">
+                <div class="border rounded light-grey p-4 mb-3">
                     <h5 class="fw-bold">Available Cases
                     </h5>
                     <div class="fw-normal fs-5 text-end"><span
@@ -436,7 +442,7 @@
                         <table id="tissue-table" class="table table-striped tissue-samples-table">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th><span class="sr-only">Sample Type</span></th>
                                 <th class="text-center" colspan="2">Normal</th>
                                 <th class="text-center" colspan="2">Tumor</th>
                                 <th class="text-center" colspan="2">Metastatic</th>
@@ -514,10 +520,10 @@
                         <table id="blood-table" class="table table-striped tissue-samples-table">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th><span class="sr-only">Sample Type</span></th>
                                 <th class="text-center" colspan="2">Blood</th>
-                                <th class="col-3"></th>
-                                <th class="col-3"></th>
+                                <th class="col-3"><span class="sr-only">-blank-</span></th>
+                                <th class="col-3"><span class="sr-only">-blank-</span></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -529,8 +535,8 @@
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.blood.serum|format_num_with_commmas }}</span>
                                 </td>
-                                <th></th>
-                                <th></th>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>DNA</td>
@@ -540,8 +546,8 @@
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.blood.dna|format_num_with_commmas }}</span>
                                 </td>
-                                <th></th>
-                                <th></th>
+                                <td></td>
+                                <td></td>
                             </tr>
                             <tr>
                                 <td>Blood</td>
@@ -551,8 +557,8 @@
                                 <td><span
                                         class="fst-italic text-muted small"> /{{ total_counts.blood.blood|format_num_with_commmas }}</span>
                                 </td>
-                                <th></th>
-                                <th></th>
+                                <td></td>
+                                <td></td>
                             </tr>
                             </tbody>
                         </table>
