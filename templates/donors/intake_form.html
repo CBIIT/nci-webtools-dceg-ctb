@@ -35,7 +35,7 @@
                 at <a href="mailto:ctb-support@isb-cgc.org">ctb-support@isb-cgc.org</a>.
                 <div class="form-check mt-2">
                 <input class="form-check-input" type="checkbox" value="" id="pii-warning-check" required>
-                <label class="form-check-label fw-bold" for="pii-warning-checkk">
+                <label class="form-check-label fw-bold" for="pii-warning-check">
                     I have read and acknowledge this *
                 </label>
             </div>
@@ -86,22 +86,25 @@
             </div>
             {% if not pdf %}
                 <div class="col-md-8">
+                    <label for="address2" class="sr-only">Address 2</label>
                     <input type="text" class="form-control" id="address2" name="address2" placeholder="Address 2"  maxlength="250">
                 </div>
                 <div class="col-md-4">
+                    <label for="zipcode" class="sr-only">Zipcode</label>
                     <input type="text" class="form-control" id="zipcode" name="zipcode" placeholder="Post/Zip Code" maxlength="10" required>
                 </div>
                 <div class="col-12">
+                    <label for="country" class="sr-only">Country</label>
                     <input type="text" class="form-control" id="country" name="country" placeholder="Country" maxlength="100" required>
                 </div>
             {% endif %}
             <div class="col-md-6">
-                <label for="telephone" class="form-label">Telephone *</label>
+                <label for="phone" class="form-label">Telephone *</label>
                 {% if pdf %}
                     <div class="greyed-field"><strong>{{ phone }}</strong></div>
                 {% else %}
                     <input type="text" class="form-control" id="phone" name="phone" maxlength="25" required>
-                    <div class="fw-light text-muted fst-italic small">Include international dialing code</div>
+                    <div class="fw-light fst-italic small">Include international dialing code</div>
                 {% endif %}
             </div>
             <div class="col-md-6">
@@ -126,7 +129,7 @@
         </div>
         <div class="my-3 row g-4">
             <div class="col-12">
-                <label for="prj-title" class="form-label">Title *</label>
+                <label for="research-title" class="form-label">Title *</label>
                 {% if pdf %}
                     <div class="greyed-field"><strong>{{ prj_title }}</strong></div>
                 {% else %}
@@ -134,8 +137,8 @@
                 {% endif %}
             </div>
             <div class="col-12">
-                <label for="project_summary" class="form-label">Project summary *
-                    <span class="text-muted fw-light ms-3"><small>
+                <label id="project_summary_text_label" for="project_summary_text" class="form-label">Project summary *
+                    <span class="fw-light ms-3"><small>
                                 Turn on the "Upload file" switch below if you wish to provide summary in a pdf or word file (max 10,000 chars)</small></span>
                 </label>
                 {% if pdf %}
@@ -146,12 +149,12 @@
                     <div class="form-check form-switch my-2">
                         <input class="form-check-input" type="checkbox" id="switchCheckUpload" name="upload_option">
                         <label class="form-check-label" for="switchCheckUpload">Upload
-                            file <span class="text-muted fw-light ms-3"><small>
+                            file <span class="fw-light ms-3"><small>
                                 Max 2 pages (file size max 64 KB)</small></span></label>
                     </div>
                     <div class="input-group mb-3" id="project_summary_file">
                         <input type="file" class="form-control" name="project-summary-file"
-                               aria-describedby="fileAddon" aria-label="Upload" accept=".pdf, .docx, .doc" required>
+                               aria-describedby="project_summary_text_label" aria-label="Upload" accept=".pdf, .docx, .doc" required>
                     </div>
                 {% endif %}
             </div>
@@ -165,7 +168,7 @@
                 {% endif %}
             </div>
             <div class="col-12">
-                <label for="aims" class="form-label">Aim(s) *<span class="text-muted fw-light ms-3"><small>Please clearly state the aim(s) of your project</small></span></label>
+                <label for="aims" class="form-label">Aim(s) *<span class="fw-light ms-3"><small>Please clearly state the aim(s) of your project</small></span></label>
                 {% if pdf %}
                     <div class="greyed-field"><strong>{{ aims|linebreaksbr }}</strong></div>
                 {% else %}
@@ -175,7 +178,7 @@
             </div>
             <div class="col-12">
                 <label for="experience" class="form-label">Experience of group carrying out analysis *
-                    <span class="text-muted fw-light ms-3">
+                    <span class="fw-light ms-3">
                         <small>Please provide information to indicate that your research group has experience in the
                             techniques you intend to use, either by use of preliminary data from other work carried out
                             in your group or by providing references to publications from your group that are relevant
@@ -192,7 +195,7 @@
             </div>
             <div class="col-12">
                 <label for="methods" class="form-label">Methods * <span
-                        class="text-muted fw-light ms-3"><small>Please detail the methods you intend to use, study design, analysis, planned publications and presentations, and data sharing plan</small></span></label>
+                        class="fw-light ms-3"><small>Please detail the methods you intend to use, study design, analysis, planned publications and presentations, and data sharing plan</small></span></label>
                 {% if pdf %}
                     <div class="greyed-field"><strong>{{ methods|linebreaksbr }}</strong></div>
                 {% else %}
