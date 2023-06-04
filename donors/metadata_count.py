@@ -272,7 +272,7 @@ def get_driver_case_counts(filters=None):
     total_avail_count_query = query_template.format(donor_where_clause='TRUE',
                                                     sample_where_clause='TRUE',
                                                     clinical_where_clause='TRUE')
-    print(count_query)
+    # print(count_query)
     # print(total_avail_count_query)
     counts = {
     }
