@@ -93,6 +93,7 @@ def user_login_failed_callback(sender, credentials, **kwargs):
 # Extended login view so we can track user logins, redirects to data exploration page
 def extended_login_view(request):
     try:
+        print("EXTENDED_LOGIN_VIEW")
         # Write log entry
         st_logger = StackDriverLogger.build_from_django_settings()
         log_name = WEBAPP_LOGIN_LOG_NAME
@@ -105,7 +106,11 @@ def extended_login_view(request):
 
     except Exception as e:
         logger.exception(e)
-
+    # next_page = request.GET.get('next')
+    # print(next_page)
+    # if not next_page:
+    #     next_page = 'two_factor:profile'
+    # return redirect(next_page)
     return redirect(reverse('dashboard'))
 
 
