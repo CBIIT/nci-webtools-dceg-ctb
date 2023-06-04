@@ -163,8 +163,8 @@ def research_projects_2010_2019(request):
 
 
 # Schema Review of Applications
-def schema_review_of_applications(request):
-    return render(request, 'ctb/schema_review_of_applications.html')
+# def schema_review_of_applications(request):
+#     return render(request, 'ctb/schema_review_of_applications.html')
 
 
 # Material Available
@@ -176,10 +176,6 @@ def material_available(request):
 def nucleic_acids_and_paraffin_sections(request):
     return render(request, 'ctb/nucleic-acids-and-paraffin-sections.html')
 
-
-# Tissue Microarrays
-def tissue_microarrays(request):
-    return render(request, 'ctb/tissue-microarrays.html')
 
 
 # #Resources
@@ -193,8 +189,8 @@ def bibliography(request):
 
 
 # Useful links: Links to further information on the Chernobyl accident
-def useful_links(request):
-    return render(request, 'ctb/useful_links.html')
+# def useful_links(request):
+#     return render(request, 'ctb/useful_links.html')
 
 
 # Useful podcasts and videos: Podcasts and Videos by CTB project participants
