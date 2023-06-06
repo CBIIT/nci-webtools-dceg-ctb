@@ -276,7 +276,7 @@ def application_submit(request):
             
             ISB-CGC Team''',
                 settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
-                settings.CTB_APPLICATION_RECEIVER_EMAIL.split(",").append(user_email))
+                [settings.CTB_APPLICATION_RECEIVER_EMAIL, user_email])
             # attach a copy of the application in pdf to the email after rewinding result (ByteIO)
             result.seek(0)
             mail.attach(destination_file_name, result.read(), 'application/pdf')
