@@ -92,6 +92,10 @@ def get_saved_searches(owner):
 def delete_filters(request, filter_id):
     owner = request.user
     message = Filter.destroy(filter_id=filter_id, owner=owner)
+    if message['success']:
+        logger.info(f"[INFO] User '{owner}': {message['success']}")
+    elif message['error']:
+        logger.error(f"[ERROR] User '{owner}': {message['error']}")
     return JsonResponse(message)
 
 
