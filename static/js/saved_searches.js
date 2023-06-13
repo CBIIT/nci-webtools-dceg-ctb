@@ -39,22 +39,22 @@ require([
             scrollX: true,
             ordering: false,
             ajax: {
-                url: BASE_URL + "/search_facility/get_search_list/",
+                url: get_search_list_url,
                 dataSrc: ''
             },
             columns: [
                 {
                     class: 'text-end',
                     render: function (data, type, row, meta) {
-                        let search_type_url;
+                        let search_samples_url;
                         if (row.search_type == 'Biosample') {
-                            search_type_url = 'search_tissue_samples';
+                            search_samples_url = search_tissue_samples_url;
                         } else if (row.search_type == 'Clinical') {
-                            search_type_url = 'search_clinical';
+                            search_samples_url = search_clinical_url;
                         } else {
-                            search_type_url = 'driver_search_facility';
+                            search_samples_url = driver_search_facility_url;
                         }
-                        let search_url = BASE_URL + "/search_facility/search_samples/" + search_type_url + row.filter_encoded_url + '&title='+row.name;
+                        let search_url =  search_samples_url + row.filter_encoded_url + '&title='+row.name;
                         return "<a href='" + search_url + "'>" + row.name + "</a>";
                     }
                 },
@@ -88,7 +88,7 @@ require([
         let delete_filter = function (filter_id) {
             $.ajax({
                 type: "post",
-                url: BASE_URL + "/search_facility/delete_filters/" + filter_id + "/",
+                url: delete_filters_url.replace('0', filter_id),
                 success: function (data) {
                     my_search_tbl.ajax.reload();
                     $('#delete_success_message').text('');
