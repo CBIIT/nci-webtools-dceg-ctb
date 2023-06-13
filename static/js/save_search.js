@@ -47,7 +47,7 @@ require([
     let save_filters = function (form_id) {
         $.ajax({
             type: "post",
-            url: BASE_URL + "/search_facility/save_filters",
+            url: save_filters_url,
             data: $('#'+form_id).serialize(),
             success: function(data) {
                 $('#save-icon').removeClass('d-none');
