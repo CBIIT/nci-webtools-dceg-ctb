@@ -35,19 +35,18 @@ ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
 RUN apt-get install -y wget
 RUN wget "http://repo.mysql.com/mysql-apt-config_0.8.9-1_all.deb" -P /tmp
-
 # install lsb-release (a dependency of mysql-apt-config), since dpkg doesn't
 # do dependency resolution
 RUN apt-get install -y lsb-release
-# add a debconf entry to select mysql-5.7 as the server version when we install
+# add a debconf entry to select mysql-8.0 as the server version when we install
 # the mysql config package
-RUN echo "mysql-apt-config mysql-apt-config/select-server select mysql-5.7" | debconf-set-selections
-# having 'selected' mysql-5.7 for 'server', install the mysql config package
+RUN echo "mysql-apt-config mysql-apt-config/select-server select mysql-8.0" | debconf-set-selections
+# having 'selected' mysql-8.0 for 'server', install the mysql config package
 RUN echo 'download mysql public build key'
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 467B942D3A79BD29
 RUN dpkg --install /tmp/mysql-apt-config_0.8.9-1_all.deb
 
-# fetch the updated package metadata (in particular, mysql-server-5.7)
+# fetch the updated package metadata (in particular, mysql-server-8.0)
 RUN apt-get update
 
 # aaaand now let's install mysql-server
