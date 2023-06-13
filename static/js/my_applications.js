@@ -35,11 +35,11 @@ require([
     'datatables.bootstrap'
 ], function(base) {
     $(document).ready(function () {
-        let my_search_tbl = $('#my_applications_tbl').DataTable({
+        $('#my_applications_tbl').DataTable({
             ordering: false,
             searching: false,
             ajax: {
-                url: BASE_URL + "/search_facility/get_submissions_list/",
+                url: get_submissions_list_url,
                 dataSrc: ''
             },
             columns: [
@@ -53,7 +53,7 @@ require([
                     class: 'text-center',
                     render: function (data) {
                         if (data){
-                            return "<a target=\"_blank\" class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/0'>View Submitted Form</a>";
+                            return "<a target=\"_blank\" class='view-submissions-btn' href=\'"+(open_application_url.replace('submission_id',data))+"\'>View Submitted Form</a>";
                         }
                     }
                 },
@@ -62,7 +62,7 @@ require([
                     class: 'text-center',
                     render: function (data, type, row) {
                         if (row.summary_file_path){
-                            return "<a target='_blank' title='View Attached Summary File' class='view-submissions-btn' href='"+BASE_URL+"/search_facility/open_file/"+data+"/1'><i class=\"fa-solid fa-paperclip\"></i> File</a>";
+                            return "<a target=\"_blank\" title='View Attached Summary File' class='view-submissions-btn' href=\'"+(open_summary_url.replace('submission_id',data))+"\'><i class=\"fa-solid fa-paperclip\"></i> File</a>";
                         }
                         else
                             return ""
