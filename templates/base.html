@@ -51,9 +51,19 @@
         </script>
     {% endif %}
     <script>
-        var STATIC_FILES_URL = '{{ STATIC_FILES_URL }}';
-        var BASE_URL = '{{ BASE_URL }}' || "";
-        {#var STORAGE_URI = '{{ STORAGE_URI }}';#}
+        let STATIC_FILES_URL = '{{ STATIC_FILES_URL }}';
+        let BASE_URL = '{{ BASE_URL }}' || "";
+        let search_tissue_samples_url = "{% url 'search_tissue_samples' %}";
+        let filter_tissue_samples_url = "{% url 'filter_tissue_samples' %}";
+        let clinical_search_facility_url = "{% url 'clinical_search_facility' %}";
+        let search_clinical_url = "{% url 'search_clinical' %}";
+        let delete_filters_url = "{% url 'delete_filters' '0' %}";
+        let driver_search_facility_url = "{% url 'driver_search_facility' %}";
+        let open_summary_url = "{% url 'open_file' 'submission_id' '1' %}";
+        let open_application_url = "{% url 'open_file' 'submission_id' '0' %}";
+        let get_search_list_url = "{% url 'get_search_list' %}";
+        let get_submissions_list_url = "{% url 'get_submissions_list' %}";
+        let save_filters_url = "{% url 'save_filters' %}";
     </script>
 
 </head>

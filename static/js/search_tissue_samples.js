@@ -90,7 +90,7 @@ require([
         $("#make-app-btn, #clinical-search-facility-btn, #search-save-btn").addClass('disabled')
         $.ajax({
             type: "post",
-            url: BASE_URL + "/search_facility/search_samples/filter_tissue_samples",
+            url: filter_tissue_samples_url,
             data: $('#search-tissue-form').serialize(),
             beforeSend: function(){
                 form_inputs.attr("disabled", true);
@@ -114,7 +114,7 @@ require([
                 $('#blood-dna').text(numberWithCommas(case_counts['blood']['dna']));
                 $('#blood-blood').text(numberWithCommas(case_counts['blood']['blood']));
 
-                $('#clinical-search-facility-btn').attr('href', BASE_URL + "/search_facility/search_samples/clinical_search_facility?" + $('#search-tissue-form').serialize())
+                $('#clinical-search-facility-btn').attr('href', clinical_search_facility_url+"?" + $('#search-tissue-form').serialize())
                 $('#general-message').html($('#general-message').data('title')?"<div role=\"alert\" class=\"alert alert-primary alert-dismissible fade show fst-italic\"><i class=\"fas fa-check-circle\"></i> Search '"+$('#general-message').data('title')+"' is loaded<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>":"")
 
             }
