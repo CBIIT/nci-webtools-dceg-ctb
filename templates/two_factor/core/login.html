@@ -27,7 +27,13 @@
                                 {% endif %}
 
                                 {% csrf_token %}
+
+                                {% if form.non_field_errors %}
+                                    <div role="alert" class="alert alert-primary">{{ form.non_field_errors }}</div>
+                                {% endif %}
+
                                 {% include "two_factor/_simple_wizard_forms.html" %}
+
 
                                 <input type="submit" value="" aria-label="submit" hidden/>
 
