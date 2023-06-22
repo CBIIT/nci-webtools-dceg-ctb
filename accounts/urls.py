@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^login', views.redirect_login_view, name='account_login'),
     url(r'^', include(allauth_urls)),
     url(r'^logout', views.extended_logout_view, name='account_logout'),
+    url(r'^lockout', views.lockout_view, name='account_lockout'),
 ]
