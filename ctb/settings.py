@@ -339,8 +339,9 @@ AUTHENTICATION_BACKENDS = (
     "axes.backends.AxesBackend",
     # Local account logins
     "django.contrib.auth.backends.ModelBackend",
-    # `allauth` specific authentication methods (Google)
-    "allauth.account.auth_backends.AuthenticationBackend",
+    # Custom Authentication Backend, subclassed of allauth.account.auth_backends.AuthenticationBackend
+    "accounts.auth_backends.CustomAuthenticationBackend",
+    # "allauth.account.auth_backends.AuthenticationBackend",
 )
 
 ACCOUNT_AUTHENTICATION_METHOD = "email"
@@ -515,7 +516,7 @@ AXES_META_PRECEDENCE_ORDER = [
 AXES_PROXY_COUNT = 1
 AXES_COOLOFF_TIME = int(os.environ.get('AXES_COOLOFF_TIME', '5'))
 AXES_USERNAME_FORM_FIELD = "email"
-
+# AXES_LOCKOUT_CALLABLE = "example.views.lockout"
 
 #########################################
 # Request Logging
@@ -544,7 +545,7 @@ ANYMAIL = {
 }
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = NOTIFICATION_EMAIL_FROM_ADDRESS
-SERVER_EMAIL = "feedback@isb-cgc.org"
+SERVER_EMAIL = "ctb-support@isb-cgc.org"
 
 GOOGLE_APPLICATION_CREDENTIALS  = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH,os.environ.get('GOOGLE_APPLICATION_CREDENTIALS', '')))
 OAUTH2_CLIENT_ID                = os.environ.get('OAUTH2_CLIENT_ID', '')
