@@ -10,11 +10,11 @@
         <div class="row justify-content-center my-5">
             <div class="col-lg-6 accounts-col">
                 <form class="login" action="" method="post">
-                    <div class="card px-4 pt-1 mb-3">
+                    <div class="card p-4 mb-3">
                         <div class="card-body">
                             <div class="ctb-login">
                                 {% if wizard.steps.current == 'auth' %}
-                                    <h4 class="card-title mt-2 mb-4">Sign In</h4>
+                                    <h4 class="card-title mb-4">Sign In</h4>
                                 {% elif wizard.steps.current == 'token' %}
                                     <h4 class="card-title my-3"><i class="fa-solid fa-shield"></i> Authenticate Your
                                         Account</h4>
@@ -29,7 +29,7 @@
                                 {% csrf_token %}
 
                                 {% if form.non_field_errors %}
-                                    <div role="alert" class="alert alert-primary">{{ form.non_field_errors }}</div>
+                                    <div role="alert" class="alert alert-primary pb-0">{{ form.non_field_errors }}</div>
                                 {% endif %}
 
                                 {% include "two_factor/_simple_wizard_forms.html" %}
