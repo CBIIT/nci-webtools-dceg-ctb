@@ -17,16 +17,19 @@ from __future__ import absolute_import
 from allauth.account import views as account_views
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import *
-
 logger = logging.getLogger('main_logger')
 
 
 def redirect_login_view(request):
     response = redirect('/account/login/')
     return response
+
+
+def lockout_view(request):
+    return render(request, 'account/lockout.html', {'axes_cooloff_time': settings.AXES_COOLOFF_TIME})
 
 
 @login_required

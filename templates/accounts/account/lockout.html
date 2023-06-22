@@ -1,0 +1,30 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Account Lockout{% endblock %}
+
+{% block page_header %}{% endblock %}
+
+{% block page_name %}account-lockout{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center py-5">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header"><h4><i class="fas fa-lock me-2"></i> Account Locked</h4></div>
+                    <div class="card-body p-4">
+                        <div><span class="fw-bold mb-2">Your CTB account has been locked</span> due to too many failed
+                            login attempts.
+                            An account lock lasts for {{ axes_cooloff_time }} hour{% if axes_cooloff_time > 1 %}(s){% endif %}.
+                        </div>
+                        <div class="mt-2">Try again later, or contact <a href="mailto:ctb-support@isb-cgc.org">ctb-support@isb-cgc.org</a>
+                            for help.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
