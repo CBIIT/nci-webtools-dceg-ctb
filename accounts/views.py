@@ -28,8 +28,8 @@ def redirect_login_view(request):
     return response
 
 
-def lockout_view(request):
-    return render(request, 'account/lockout.html', {'axes_cooloff_time': settings.AXES_COOLOFF_TIME})
+# def lockout_view(request, credentials):
+#     return render(request, 'account/lockout.html', {'axes_cooloff_time': settings.AXES_COOLOFF_TIME})
 
 
 @login_required
