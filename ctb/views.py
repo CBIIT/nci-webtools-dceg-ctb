@@ -83,7 +83,7 @@ def user_login_failed_callback(sender, credentials, **kwargs):
         log_name = WEBAPP_LOGIN_LOG_NAME
         st_logger.write_text_log_entry(
             log_name,
-            '[WEBAPP LOGIN] Login FAILED for: {credentials}'.format(credentials=credentials)
+            '[CTB LOGIN] Login FAILED for: {credentials}'.format(credentials=credentials)
         )
 
     except Exception as e:
@@ -93,16 +93,17 @@ def user_login_failed_callback(sender, credentials, **kwargs):
 # Extended login view so we can track user logins, redirects to data exploration page
 def extended_login_view(request):
     try:
-        print("EXTENDED_LOGIN_VIEW")
         # Write log entry
         st_logger = StackDriverLogger.build_from_django_settings()
         log_name = WEBAPP_LOGIN_LOG_NAME
         user = User.objects.get(id=request.user.id)
         st_logger.write_text_log_entry(
             log_name,
-            "[WEBAPP LOGIN] User {} logged in to the web application at {}".format(user.email,
+            "[CTB LOGIN] User {} logged in to the web application at {}".format(user.email,
                                                                                    datetime.datetime.utcnow())
         )
+        if user.passwordexpiration.expired():
+            return redirect(reverse('account_change_password'))
 
     except Exception as e:
         logger.exception(e)
