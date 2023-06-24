@@ -50,3 +50,15 @@ def add_classes(value, arg):
             classes.append(c)
 
     return value.as_widget(attrs={"class": " ".join(classes)})
+
+
+@register.filter(name="duration")
+def duration(td):
+    total_seconds = int(td.total_seconds())
+    hours = total_seconds // 3600
+    minutes = (total_seconds % 3600) // 60
+    if hours:
+        if minutes:
+            return '{} hr {} min'.format(hours, minutes)
+        else:
+            return '{} hr'.format(hours)
