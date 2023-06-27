@@ -29,12 +29,14 @@ from io import BytesIO
 from xhtml2pdf import pisa
 from datetime import datetime
 import logging
+from accounts.decorators import password_change_required
 
 logger = logging.getLogger('main_logger')
 
 
 # @login_required
 @otp_required
+@password_change_required
 def dashboard(request):
     message = request.POST.get('message')
     return render(request, 'donors/dashboard.html', {'message': message})
@@ -42,6 +44,7 @@ def dashboard(request):
 
 # My Saved Searches
 @otp_required
+@password_change_required
 def saved_searches(request):
     return render(request, 'donors/saved_searches.html')
 
@@ -135,6 +138,7 @@ def save_filters(request):
 
 
 @otp_required
+@password_change_required
 def search_clinical(request):
     filters = get_filters(request)
     total = filters.get('total', 5516)
@@ -155,6 +159,7 @@ def search_clinical(request):
 
 # Driver Search Facility
 @otp_required
+@password_change_required
 def driver_search_facility(request):
     filters = get_filters(request)
     title = filters.get('title', '')
@@ -167,6 +172,7 @@ def driver_search_facility(request):
 
 
 @otp_required
+@password_change_required
 def search_tissue_samples(request):
     return render(request, 'donors/search_tissue_samples.html', {'total_counts': settings.BLANK_TISSUE_FILTER_CASE_COUNT})
 
@@ -194,6 +200,7 @@ def filter_tissue_samples(request):
 
 # Clinical Search Facility
 @otp_required
+@password_change_required
 def clinical_search_facility(request):
     filters = get_filters(request)
     title = filters.get('title', '')
@@ -204,6 +211,7 @@ def clinical_search_facility(request):
 
 
 @otp_required
+@password_change_required
 def make_application(request):
     return render(request, 'donors/application_form.html')
 
