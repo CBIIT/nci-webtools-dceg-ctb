@@ -29,7 +29,13 @@
                                 {% csrf_token %}
 
                                 {% if form.non_field_errors %}
-                                    <div role="alert" class="alert alert-primary pb-0">{{ form.non_field_errors }}</div>
+                                    <div role="alert" class="alert alert-primary">
+                                        {{ form.non_field_errors }}
+                                        <div class="small ms-2">Can't sign in? Contact <a href="mailto:ctb-support@isb-cgc.org">ctb-support@isb-cgc.org</a>
+                                            for help.
+                                        </div>
+                                    </div>
+
                                 {% endif %}
 
                                 {% include "two_factor/_simple_wizard_forms.html" %}
