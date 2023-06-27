@@ -17,7 +17,7 @@ from __future__ import absolute_import
 from allauth.account import views as account_views
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import *
 
@@ -36,6 +36,6 @@ def extended_logout_view(request):
     except Exception as e:
         logger.error("[ERROR] While attempting to log out:")
         logger.exception(e)
-        messages.error(request, "There was an error while attempting to log out - please contact feedback@isb-cgc.org")
+        messages.error(request, "There was an error while attempting to log out - please contact ctb-support@isb-cgc.org")
         return redirect(reverse('user_detail', args=[request.user.id]))
     return response
