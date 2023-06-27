@@ -29,6 +29,7 @@ from google_helpers.stackdriver import StackDriverLogger
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.signals import user_login_failed
 from django.dispatch import receiver
+from accounts.decorators import password_change_required
 
 debug = settings.DEBUG
 logger = logging.getLogger('main_logger')
@@ -57,6 +58,7 @@ def search(request):
 
 # User details page
 @login_required
+@password_change_required
 def user_detail(request, user_id):
     if debug: logger.debug('Called ' + sys._getframe().f_code.co_name)
 
@@ -83,7 +85,7 @@ def user_login_failed_callback(sender, credentials, **kwargs):
         log_name = WEBAPP_LOGIN_LOG_NAME
         st_logger.write_text_log_entry(
             log_name,
-            '[WEBAPP LOGIN] Login FAILED for: {credentials}'.format(credentials=credentials)
+            '[CTB LOGIN] Login FAILED for: {credentials}'.format(credentials=credentials)
         )
 
     except Exception as e:
@@ -91,18 +93,21 @@ def user_login_failed_callback(sender, credentials, **kwargs):
 
 
 # Extended login view so we can track user logins, redirects to data exploration page
+@password_change_required
 def extended_login_view(request):
     try:
-        print("EXTENDED_LOGIN_VIEW")
         # Write log entry
         st_logger = StackDriverLogger.build_from_django_settings()
         log_name = WEBAPP_LOGIN_LOG_NAME
         user = User.objects.get(id=request.user.id)
         st_logger.write_text_log_entry(
             log_name,
-            "[WEBAPP LOGIN] User {} logged in to the web application at {}".format(user.email,
+            "[CTB LOGIN] User {} logged in to the web application at {}".format(user.email,
                                                                                    datetime.datetime.utcnow())
         )
+        # if user.passwordexpiration.expired():
+        #     messages.success(request, "PASSWORD_EXPIRED", extra_tags="password_expired")
+        #     return redirect(reverse('account_change_password'))
 
     except Exception as e:
         logger.exception(e)
