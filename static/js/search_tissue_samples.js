@@ -34,10 +34,6 @@ require([
     'datatables.net',
     'datatables.bootstrap'
 ], function(base) {
-    // To ensure the search is not run while the user is still actively entering the inputs
-    // the system will wait for at least 1.5 seconds to see if there are any other inputs being entered
-    // let lastInputChangeTimeLog = 0;    // 0 indicates a reset timer
-    // let TIME_TO_WAIT = 1500; // 1.5 secs
     $(document).ready(function () {
 
         let queryString = window.location.search;
@@ -63,25 +59,14 @@ require([
 
         $("#search-tissue-filters input").not("#search-save-title").on("change", function () {
             search_samples();
-            // lastInputChangeTimeLog = Date.now();
-            // setTimeout(run_search_after_sleep, TIME_TO_WAIT);
         });
-
-        // $("#search-save").on("click", function(e){
-        //     $('#save_message').html('');
-        //     if (is_input_valid(e))
-        //         save_filters();
-        //
-        // });
+        // $(window).off('beforeunload.windowReload');
     });
-    // let run_search_after_sleep = function(){
-    //     if (lastInputChangeTimeLog && Date.now() - lastInputChangeTimeLog > TIME_TO_WAIT){
-    //         lastInputChangeTimeLog = 0; // reset timer
-    //         search_samples();
-    //     }
-    // };
-
-
+    window.onbeforeunload = function () {
+        // overwrite onbeforeunload, so it does not trigger warnings for dirty forms when
+        // leaving the page
+        // blank function do nothing
+    }
     let search_samples = function () {
         let form_inputs = $("input.form-check-input:checkbox, input.form-check-input:radio, button.btn-reset, :input[type='number']");
         $('#total-input').val('');
