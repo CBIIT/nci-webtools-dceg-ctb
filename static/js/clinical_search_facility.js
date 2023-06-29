@@ -70,6 +70,11 @@ require([
             }
             window.scrollTo(0, 0);
         }
+        window.onbeforeunload = function () {
+            // overwrite onbeforeunload, so it does not trigger warnings for dirty forms when
+            // leaving the page
+            // blank function do nothing
+        }
     });
 
 
