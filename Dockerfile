@@ -21,8 +21,8 @@
 FROM gcr.io/google_appengine/python
 
 ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get update
-RUN apt-get upgrade
+RUN apt-get -y update
+RUN apt-get -y upgrade
 
 # Create a virtualenv for dependencies. This isolates these packages from
 # system-level packages.
