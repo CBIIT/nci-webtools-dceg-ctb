@@ -31,10 +31,12 @@ body {
     background-color: #2B81A2;
     color: white;
 }
+
 .bg-mustard-theme{
     background-color: #ddd798;
     color: #222222;
 }
+
 .bg-lightgrey-theme{
     background-color: #efefef;
     color: #222222;
@@ -42,15 +44,15 @@ body {
 
 .orange-text{
     color: #C76C2E;
-    /*color: #cb8a61;*/
 }
+
 .dark-aqua-text{
     color: #2f455e;
 }
+
 .aqua-green-text{
     color: #2B81A2;
 }
-
 
 .stat-card{
     color: #666666;
@@ -60,6 +62,7 @@ body {
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
+
 a.fill-div {
     display: block;
     height: 100%;
@@ -70,40 +73,37 @@ a.fill-div {
 .stat-card:hover{
     background-color: #eeeeee;
 }
+
 .stat-card a{
     color: inherit;
 }
+
 .stat-card a:hover{
     color: inherit;
 }
+
 .btn-primary {
     background-color: #267491;
     border-color: #267491;
 }
+
 .btn-primary:hover {
-    /*color: #fff;*/
     background-color: #267491;
     border-color: #267491;
 }
+
 .btn-primary:active, .btn-primary:focus{
     background-color: #1e5c74;
     border-color: #1e5c74;
 }
+
 .light-grey{
     background-color: #fcfcfc;
-    /*background-color: rgba(0,0,0,0.01);*/
 }
-/*#search-tissue-form .btn-outline-secondary{*/
-/*    color: #565d64;*/
-/*}*/
 
 .page-item.active .page-link {
-    /*z-index: 3;*/
-    /*color: #fff;*/
     background-color: #267491;
-    /*background-color: #2B81A2;*/
     border-color: #267491;
-    /*border-color: #2B81A2;*/
 }
 
 .alert-primary {
@@ -125,14 +125,13 @@ a.fill-div {
 #ctb-collapsible-navbar .nav-item > a, #ctb-main-navbar a.navbar-brand{
     border-bottom: 4px solid #2f455e;
 }
+
 #ctb-collapsible-navbar .nav-item > a.active, #ctb-main-navbar a.navbar-brand.active{
     border-bottom: 4px solid #2B81A2;
 }
 
 #ctb-secondary-navbar{
     padding-top: 10px;
-    /*background-color: white;*/
-    /*background-color: #eae7c1;*/
     background-color: #ddd798;
     position: fixed;
     top: 87px;
@@ -140,27 +139,17 @@ a.fill-div {
     left: 0;
     z-index: 900;
 }
-/*#ctb-secondary-navbar .navbar-brand{*/
-/*    height: 66px;*/
-/*    !*height: 40px;*!*/
-/*}*/
 
 #ctb-secondary-navbar a{
-    /*padding-top: 10px;*/
     height: 56px;
     border-top: 4px solid #ddd798;
     color: #5d5c3e;
-    /*color: #86845a;*/
-    /*border-radius: 2px;*/
-    /*margin: 0 .25rem;*/
     font-size: 1.1rem;
 }
+
 #ctb-secondary-navbar a:hover{
-    /*background-color: rgba(0, 0, 0, .2);*/
     color: #b67c57 !important;
-
 }
-
 
 #ctb-secondary-navbar a.active {
     background-color: white;
@@ -186,6 +175,7 @@ main {
     /*color: #2f455e;*/
     color: #444444;
 }
+
 main a{
     text-decoration: none;
     color: #267491;
@@ -195,11 +185,13 @@ main a{
 main a:hover{
     color: #b67c57;
 }
+
 .nav-link, .navbar-brand{
     font-size: 1.2rem;
     font-weight: bold;
     color: #aaaaaa;
 }
+
 .nav-link:hover, .navbar-brand:hover{
     color: #cb8a61 !important;
 }
@@ -209,24 +201,10 @@ main a:hover{
     background-color: rgba(0, 0, 0, .5);
 }
 
-/*.btn-special {*/
-/*    background-color: #6a4188;*/
-/*    border: 1px solid #4f2f67;*/
-/*}*/
-/*.btn-special:hover {*/
-/*    background-color: #8255a4;*/
-/*}*/
-
-/*.btn-default {*/
-/*    background-color: #a9503a;*/
-/*    border: 1px solid #8a4230;*/
-/*}*/
-/*.btn-default:hover {*/
-/*    background-color: #c36149;*/
-/*}*/
 .biosample_tab{
     margin-top: 90px;
 }
+
 .hover-grey-button {
     background-color: transparent;
     border-width: 0;
@@ -239,6 +217,7 @@ main a:hover{
 .card-login img{
     padding: 1rem 1.5rem;
 }
+
 .login-intro div {
     font-size: 1.3rem;
     padding: 0.4rem;
@@ -254,7 +233,6 @@ main a:hover{
 
 td.date-col{
     color: #616970!important;
-    /*color: #6c757d!important;*/
     font-size: .8rem;
 }
 
@@ -262,32 +240,18 @@ td.date-col{
     padding: 0;
     margin: 0;
 }
+
 .readmore-acc.accordion-flush .accordion-item .accordion-button {
     border-radius: calc(1rem - 1px);
-    /*border-top-left-radius: 0px;*/
-    /*border-top-right-radius: 0px;*/
-    /*border-bottom-right-radius: 0px;*/
-    /*border-bottom-left-radius: 0px;*/
 }
+
 .readmore-acc .accordion-button{
     width: inherit;
     padding: .3rem .5rem;
-    /*padding-top: 0;*/
-    /*padding-left: 0;*/
-    /*padding-right: 0;*/
-    /*padding-bottom: .4rem;*/
     box-shadow: none;
     color: #267491;
     background-color: transparent;
-    /*background-color: #fcfcfc;*/
-    /*background-color: rgba(0,0,0,0.01);*/
-    /*border-radius: 20px;*/
 }
-
-/*.readmore-acc .accordion-item:last-of-type .accordion-button.collapsed {*/
-/*    border-bottom-right-radius: calc(1rem - 1px);*/
-/*    border-bottom-left-radius: calc(1rem - 1px);*/
-/*}*/
 
 .accordion-flush .accordion-item:first-child {
     border-top: 0;
@@ -295,32 +259,29 @@ td.date-col{
     border-top-style: initial;
     border-top-color: initial;
 }
+
 .accordion-flush .accordion-item {
     border-right: 0;
-    border-right-width: 0px;
+    border-right-width: 0;
     border-right-style: initial;
     border-right-color: initial;
     border-left: 0;
-    border-left-width: 0px;
+    border-left-width: 0;
     border-left-style: initial;
     border-left-color: initial;
     border-radius: 0;
 }
-/*.bg-light {*/
-/*    --bs-bg-opacity: 1;*/
-/*    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;*/
-/*}*/
+
 .readmore-acc .accordion-item{
     border: none;
 }
+
 .readmore-acc .accordion-button:after{
     margin-left: .5rem;
 }
 
 #ctb-intro-acc .accordion-item, #ctb-intro-acc{
-/*#ctb-intro-acc .accordion-item, #ctb-intro-acc .accordion-button{*/
     background-color: transparent;
-    /*background-color: #e2e3e5;*/
 }
 
 .signup input:not([type='checkbox']), .login input, .password_reset input, #password-change input, .password_set input, .email-verify input {
@@ -330,6 +291,7 @@ td.date-col{
     border: 1px solid slategray;
     background-color: #ececec;
 }
+
 .setup-form ul{
     list-style-type: none;
 }
@@ -348,26 +310,31 @@ td.date-col{
   position: relative;
   min-height: 1em;
   color: #868686;
-  /*color: #a8a8a8;*/
 }
+
 .title {
   line-height: 1.5em;
   font-weight: bold;
 }
+
 .caption {
   font-size: 0.8em;
 }
+
 .clinical-step + .clinical-step {
   margin-top: 1.5em
 }
+
 .clinical-step > div:first-child {
   position: static;
   height: 0;
 }
+
 .clinical-step > div:not(:first-child) {
   margin-left: 1.5em;
   padding-left: 1em;
 }
+
 /* Circle */
 .circle {
   background: #a8a8a8;
@@ -381,6 +348,7 @@ td.date-col{
   box-shadow: 0 0 0 3px #fff;
     z-index: 10;
 }
+
 /* Vertical Line */
 .circle:after {
   content: ' ';
