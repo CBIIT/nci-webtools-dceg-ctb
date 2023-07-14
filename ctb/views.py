@@ -113,7 +113,7 @@ def extended_login_view(request):
         #     return redirect(reverse('account_change_password'))
 
     except Exception as e:
-        "[CTB LOGIN] User {} logged in to the web application at {}"
+        logger.error("[ERROR] While attempting to log in:")
         logger.exception(e)
     return redirect(reverse('dashboard'))
 
