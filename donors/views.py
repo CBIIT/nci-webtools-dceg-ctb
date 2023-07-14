@@ -296,8 +296,11 @@ def application_submit(request):
             raise Exception('Invalid request was made.')
         Submissions.create(entry_form_path=destination_file_name, summary_file_path=destination_att_file_name, owner=request.user)
     except Exception as e:
+        logger.error("[ERROR] While attempting to submit an application of user {}:".format(user_email))
+        logger.exception(e)
         return render(request, 'donors/application_post_submit.html', {'request': request,
                                                                        'error': e})
+    logger.info("[CTB APPLICATION] Application is submitted and a copy of the application is sent to {}".format(user_email))
     return render(request, 'donors/application_post_submit.html',
                   {
                       'request': request,
