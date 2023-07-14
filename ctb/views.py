@@ -34,7 +34,7 @@ from accounts.decorators import password_change_required
 debug = settings.DEBUG
 logger = logging.getLogger('main_logger')
 
-WEBAPP_LOGIN_LOG_NAME = settings.WEBAPP_LOGIN_LOG_NAME
+# WEBAPP_LOGIN_LOG_NAME = settings.WEBAPP_LOGIN_LOG_NAME
 
 
 # The site's homepage
@@ -81,12 +81,13 @@ def user_detail(request, user_id):
 def user_login_failed_callback(sender, credentials, **kwargs):
     try:
         # Write log entry
-        st_logger = StackDriverLogger.build_from_django_settings()
-        log_name = WEBAPP_LOGIN_LOG_NAME
-        st_logger.write_text_log_entry(
-            log_name,
-            '[CTB LOGIN] Login FAILED for: {credentials}'.format(credentials=credentials)
-        )
+        # st_logger = StackDriverLogger.build_from_django_settings()
+        # log_name = WEBAPP_LOGIN_LOG_NAME
+        # st_logger.write_text_log_entry(
+        #     log_name,
+        #     '[CTB LOGIN] Login FAILED for: {credentials}'.format(credentials=credentials)
+        # )
+        logger.info('[CTB LOGIN] Login FAILED for: {credentials}'.format(credentials=credentials))
 
     except Exception as e:
         logger.exception(e)
@@ -97,19 +98,22 @@ def user_login_failed_callback(sender, credentials, **kwargs):
 def extended_login_view(request):
     try:
         # Write log entry
-        st_logger = StackDriverLogger.build_from_django_settings()
-        log_name = WEBAPP_LOGIN_LOG_NAME
+        # st_logger = StackDriverLogger.build_from_django_settings()
+        # log_name = WEBAPP_LOGIN_LOG_NAME
         user = User.objects.get(id=request.user.id)
-        st_logger.write_text_log_entry(
-            log_name,
-            "[CTB LOGIN] User {} logged in to the web application at {}".format(user.email,
-                                                                                   datetime.datetime.utcnow())
-        )
+        # st_logger.write_text_log_entry(
+        #     log_name,
+        #     "[CTB LOGIN] User {} logged in to the web application at {}".format(user.email,
+        #                                                                            datetime.datetime.utcnow())
+        # )
+        logger.info("[CTB LOGIN] User {} logged in to the web application at {}".format(user.email,
+                                                                                   datetime.datetime.utcnow()))
         # if user.passwordexpiration.expired():
         #     messages.success(request, "PASSWORD_EXPIRED", extra_tags="password_expired")
         #     return redirect(reverse('account_change_password'))
 
     except Exception as e:
+        "[CTB LOGIN] User {} logged in to the web application at {}"
         logger.exception(e)
     return redirect(reverse('dashboard'))
 
