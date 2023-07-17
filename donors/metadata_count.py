@@ -238,28 +238,26 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
 
 
 def get_driver_case_counts(filters=None):
-    # donor_where_clause, sample_where_clause = \
-    #     build_sample_where_clause(filters, 'dc', 's') if filters else 'TRUE', 'TRUE'
     (donor_where_clause, sample_where_clause) = build_sample_where_clause(filters, 'd', 's') if filters else ('TRUE', 'TRUE')
-    clinical_where_clause = build_clinical_where_clause(filters, 'c', 'd') if filters else 'TRUE'
+    clinical_where_clause = build_clinical_where_clause(filters, 'cl', 'ti') if filters else 'TRUE'
     query_template = '''
     SELECT dr.gene, COUNT(DISTINCT(sdc.id))
     FROM (
-            SELECT DISTINCT dc.id, dc.patient_uid
-            FROM (
-                SELECT DISTINCT d.id, d.patient_id, d.patient_uid
-                FROM `donors_donor` AS d
-                JOIN (
-                    SELECT DISTINCT patient_id
-				    FROM `donors_clinical_treatment` AS c
-                ) AS cl
-                ON cl.patient_id = d.patient_id
-                WHERE {donor_where_clause}
-                AND {clinical_where_clause}
-            ) AS dc
-            JOIN `donors_sample` AS s
-            ON dc.patient_id = s.donor_id
-		    WHERE {sample_where_clause}
+        SELECT DISTINCT ti.id, ti.patient_uid, ti.diagnosis
+        FROM (
+            SELECT DISTINCT d.id, d.patient_uid, d.patient_id, d.diagnosis
+            FROM `donors_donor` as d
+            JOIN (
+                SELECT distinct s.donor_id
+                FROM `donors_sample` AS s
+                WHERE {sample_where_clause}
+            ) AS sl
+            ON d.patient_id = sl.donor_id
+            WHERE {donor_where_clause}
+        ) AS ti
+        JOIN `donors_clinical_treatment` as cl
+        ON cl.patient_id = ti.patient_id
+        WHERE {clinical_where_clause}
         ) AS sdc
     JOIN `donors_driver` as dr
     ON dr.patient_uid = sdc.patient_uid
