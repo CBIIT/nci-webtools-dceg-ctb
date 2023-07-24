@@ -57,7 +57,7 @@
                 <div class="col-lg-8 mx-auto p-5">
                     <div class="row">
                         <div class="col stat-card">
-                            <a href="{% if user.is_authenticated %} {% url 'dashboard' %} {% else %} {% url 'two_factor:login' %}" {% endif %}
+                            <a href="{% if user.is_verified %} {% url 'dashboard' %} {% else %} {% url 'two_factor:login' %}" {% endif %}
                                class="fill-div">
                                 <h4 class="fw-bold dark-aqua-text"><i class="fas fa-search"></i><br/>Biosample Search
                                 </h4>
