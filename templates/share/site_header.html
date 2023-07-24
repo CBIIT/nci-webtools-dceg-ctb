@@ -71,7 +71,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav col-1">
-                {% if user.is_authenticated %}
+                {% if user.is_verified %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if 'users/' in request.path or 'account' in request.path %} active {% endif %}"
                            data-bs-toggle="dropdown" href="#" role="button"
@@ -107,7 +107,7 @@
     <div id="ctb-secondary-navbar">
         <div class="container pt-2">
             <nav class="nav navbar-ctb" aria-label="Secondary navigation">
-                {% if user.is_authenticated %}
+                {% if user.is_verified %}
                     <a class="nav-link {% if 'dashboard/' in request.path %} active {% endif %}"
                        href="{% url 'dashboard' %}">
                         Dashboard
