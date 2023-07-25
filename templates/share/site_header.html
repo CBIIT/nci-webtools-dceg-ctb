@@ -38,7 +38,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle {% if 'researchers/' in request.path %} active {% endif %}"
                        id="dropdown-researchers" data-bs-toggle="dropdown"
-                       aria-expanded="false">Research</a>
+                       aria-expanded="false" role="button">Research</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown-researchers">
                         <li><a class="dropdown-item" href="{% url 'researchers_page' %}">For Researchers</a></li>
                         <li><a class="dropdown-item" href="{% url 'access_to_materials' %}">Access to Materials</a></li>
