@@ -6,7 +6,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
 
 body {
-    padding-top: 87px;
+    padding-top: 141px;
+    /*padding-top: 87px;*/
     font-family: 'Source Sans Pro', sans-serif;
 }
 
@@ -39,7 +40,6 @@ body {
 
 .bg-lightgrey-theme{
     background-color: #efefef;
-    color: #222222;
 }
 
 .orange-text{
@@ -134,7 +134,8 @@ a.fill-div {
     padding-top: 10px;
     background-color: #ddd798;
     position: fixed;
-    top: 87px;
+    top: 141px;
+    /*top: 87px;*/
     right: 0;
     left: 0;
     z-index: 900;
@@ -186,6 +187,9 @@ main a:hover{
     color: #b67c57;
 }
 
+.navbar-brand{
+    padding: .5rem 1rem;
+}
 .nav-link, .navbar-brand{
     font-size: 1.2rem;
     font-weight: bold;
@@ -298,7 +302,8 @@ td.date-col{
 
 
 .anchor-section{
-	scroll-margin-top: 87px;
+	scroll-margin-top: 141px;
+	/*scroll-margin-top: 87px;*/
 }
 
 /* User Details */
