@@ -142,8 +142,8 @@ def fact_sheet(request):
 
 
 # Management of the Project
-def management_page(request):
-    return render(request, 'ctb/management_page.html')
+# def management_page(request):
+#     return render(request, 'ctb/management_page.html')
 
 
 # For Researchers
