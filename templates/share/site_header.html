@@ -3,32 +3,16 @@
 
 {% is_allowed user as has_access %}
 <div class="fixed-top">
-    <div class="bg-lightgrey-theme py-1">
+    <nav id="ctb-main-navbar" class="navbar navbar-expand-lg shadow navbar-light" aria-label="Main navigation">
         <div class="container">
-            <img class="me-2" src="{% static 'img/nci-logo.svg' %}" height="40px" alt="nci-logo">
-        </div>
-    </div>
-    <nav id="ctb-main-navbar" class="navbar navbar-expand-lg navbar-dark py-4" aria-label="Main navigation">
-
-        <div class="container">
-            <a class="navbar-brand {% if request.path == '/' %} active {% endif %}" href="{% url 'landing_page' %}"><i
-                    class="fas fa-home"></i><span class="sr-only">CTB Home</span></a>
+            <a class="navbar-brand" href="{% url 'landing_page' %}"><img class="me-2" src="{% static 'img/ctb-nci-logo.svg' %}" height="50px" alt="nci-logo"></a>
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" data-bs-toggle="collapse"
                     data-bs-target="#ctb-collapsible-navbar"
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse" id="ctb-collapsible-navbar">
-                <ul class="navbar-nav col-10 justify-content-evenly">
-                    <li class="nav-item">
-                        <a class="nav-link
-                        {% if 'search_facility' in request.path %} active {% endif %}"
-                           aria-current="page"
-                           href="{% url 'dashboard' %}">
-                            Biosample Search
-                        </a>
-                    </li>
-
+                <ul class="navbar-nav col-11">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if 'about/' in request.path %} active {% endif %}"
                            id="dropdown-about" data-bs-toggle="dropdown"
@@ -44,7 +28,7 @@
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle {% if 'researchers/' in request.path %} active {% endif %}"
                            id="dropdown-researchers" data-bs-toggle="dropdown"
-                           aria-expanded="false" role="button">Research</a>
+                           aria-expanded="false" role="button">Research and Data Access</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown-researchers">
                             <li><a class="dropdown-item" href="{% url 'researchers_page' %}">For Researchers</a></li>
                             <li><a class="dropdown-item" href="{% url 'access_to_materials' %}">Access to Materials</a>
@@ -68,15 +52,20 @@
                     {#                            Videos</a></li>#}
                     {#                    </ul>#}
                     {#                </li>#}
-
-
                     {#                <li class="nav-item">#}
                     {#                    <a class="nav-link {% if 'news' in request.path %} active {% endif %}" href="{% url 'latest_news' %}">Latest#}
                     {#                        News</a>#}
                     {#                </li>#}
+{#                    <li class="nav-item">#}
+{#                        <a class="nav-link {% if 'contact/' in request.path %} active {% endif %}"#}
+{#                           href="{% url 'contact' %}">Contact Us</a>#}
+{#                    </li>#}
                     <li class="nav-item">
-                        <a class="nav-link {% if 'contact/' in request.path %} active {% endif %}"
-                           href="{% url 'contact' %}">Contact Us</a>
+                        <a class="nav-link {% if 'search_facility' in request.path %} active {% endif %}"
+                           aria-current="page"
+                           href="{% url 'dashboard' %}">
+                            Search the Biorepository
+                        </a>
                     </li>
                 </ul>
                 <ul class="navbar-nav col-1">

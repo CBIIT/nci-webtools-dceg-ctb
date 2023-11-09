@@ -3,19 +3,50 @@
     <div class="container">
         <div class="px-2 py-3 my-1">
             <div class="row">
-                <div class="col-lg-10">
-                    <div>
-                        ©2023 National Cancer Institute (NCI) of the National Institutes of Health, Bethesda, Maryland 20892
-                        <div><a href="https://www.hhs.gov/vulnerability-disclosure-policy/index.html" target="_blank" rel="noopener noreferrer">HHS Vulnerability Disclosure</a>
-
-                         | This website is built and maintained by <a href="https://www.isb-cgc.org/" target="_blank" rel="noopener noreferrer"><img class="me-1" style="height: 24px;" alt="isb-cgc logo" src="{% static 'img/isb-cgc.png' %}">ISB-CGC</a>
-
-                        </div>
-                    </div>
-
+                <div class="col">
+                    <div class="fw-bold fs-3">Chernobyl Tissue Bank</div>
+                    <div class="fs-6">at the National Cancer Institute</div>
                 </div>
-                <div class="col-lg-2 text-end my-auto">
-                    <a class="fw-bold" href="#">Back to top</a>
+                <div class="col text-end">
+                    <div class="fw-bold fs-5">Policies</div>
+                    <div class=""><a href="https://www.cancer.gov/policies/accessibility" target="_blank"
+                                     rel="noopener noreferrer">Accessibility</a></div>
+                    <div class=""><a href="https://www.cancer.gov/policies/foia" target="_blank"
+                                     rel="noopener noreferrer">FOIA</a></div>
+                    <div class=""><a href="{% url 'privacy' %}">Privacy Policy</a></div>
+                    <div class=""><a href="https://www.hhs.gov/vulnerability-disclosure-policy/index.html"
+                                     target="_blank" rel="noopener noreferrer">HHS Vulnerability Disclosure</a></div>
+                </div>
+
+
+                <div class="col text-end">
+                    <div class="fw-bold fs-4">Contact Us</div>
+                    <div>
+                        <a href="mailto:ncicontactdceg@mail.nih.gov" class="me-3">ncicontactdceg@mail.nih.gov</a>
+                        <span class=""><a href="{% url 'contact' %}">Website Support</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col text-end">
+                    <div>
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.hhs.gov/">U.S. Department of
+                            Health and Human Services
+                        </a>
+                    </div>
+                    <div>
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.nih.gov/">National Institutes of
+                            Health
+                        </a>
+                    </div>
+                    <div>
+                        <a target="_blank" rel="noopener noreferrer" href="https://www.cancer.gov/">National Cancer
+                            Institute </a>
+                    </div>
+                    <div>
+                        <a target="_blank" rel="noopener noreferrer" href="https://usa.gov/">USA.gov</a>
+                    </div>
+                    <div class="mt-4"><a class="fw-bold fs-5" href="#">Back to Top</a></div>
                 </div>
             </div>
         </div>

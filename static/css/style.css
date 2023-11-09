@@ -3,12 +3,14 @@
 /********************************************
  * Generic style resets
  *******************************************/
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');
+/*@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap');*/
 
 body {
-    padding-top: 141px;
+    padding-top: 85px;
+    /*padding-top: 141px;*/
     /*padding-top: 87px;*/
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: Poppins,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif,serif;
+    /*font-family: 'Source Sans Pro', sans-serif;*/
 }
 
 .navbar-ctb {
@@ -25,7 +27,9 @@ body {
 }
 
 #ctb-main-navbar{
-    background-color: #2f455e;
+    /*color: #565c65;*/
+    background-color: white;
+    /*background-color: #2f455e;*/
 }
 
 .bg-aqua-green-theme{
@@ -123,11 +127,15 @@ a.fill-div {
 }
 
 #ctb-collapsible-navbar .nav-item > a, #ctb-main-navbar a.navbar-brand{
-    border-bottom: 4px solid #2f455e;
+    /*border-bottom: 4px solid #2f455e;*/
+    border-bottom: 4px solid transparent;
+    margin-right: 1rem;
 }
 
-#ctb-collapsible-navbar .nav-item > a.active, #ctb-main-navbar a.navbar-brand.active{
-    border-bottom: 4px solid #2B81A2;
+#ctb-collapsible-navbar .nav-item > a.active{
+/*#ctb-collapsible-navbar .nav-item > a.active, #ctb-main-navbar a.navbar-brand.active{*/
+    border-bottom: 4px solid #2f455e;
+    /*border-bottom: 4px solid #2B81A2;*/
 }
 
 #ctb-secondary-navbar{
@@ -162,9 +170,10 @@ a.fill-div {
 
 footer, footer a{
     color: rgba(255,255,255,.55);
-    font-size: 1.1rem;
-    font-weight: bold;
+    /*font-size: 1.17rem;*/
+    /*font-weight: bold;*/
     background-color: #2f455e;
+    text-decoration: none;
 }
 
 footer a:hover{
@@ -193,15 +202,20 @@ main a:hover{
 .nav-link, .navbar-brand{
     font-size: 1.2rem;
     font-weight: bold;
-    color: #aaaaaa;
+    color: #565c65;
+    /*color: #aaaaaa;*/
 }
 
-.nav-link:hover, .navbar-brand:hover{
-    color: #cb8a61 !important;
+.nav-link:hover{
+/*.nav-link:hover, .navbar-brand:hover{*/
+    /*color: #cb8a61 !important;*/
+    color: #007bbd !important;
+    border-bottom: 4px solid #007bbd !important;
+    /*border-bottom: 4px solid transparent;*/
 }
 
 .list-group-item-header{
-    color: white;
+    /*color: white;*/
     background-color: rgba(0, 0, 0, .5);
 }
 
