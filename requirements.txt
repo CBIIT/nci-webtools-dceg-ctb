@@ -1,7 +1,7 @@
 requests==2.31.0
 django==3.2.23
 PyYAML==6.0.1
-pyOpenSSL==23.2.0
+pyOpenSSL==23.3.0
 mysqlclient==2.0.1
 WebOb==1.5.0
 ecdsa==0.18.0
@@ -16,21 +16,21 @@ simplejson==3.8.1
 six==1.13.0
 uritemplate==3.0.0
 django-dotenv==1.4.2
-django-allauth==0.54.0
-django-two-factor-auth==1.15.2
-phonenumbers==8.13.11
-pexpect==4.0.1
+django-allauth==0.58.2
+django-two-factor-auth==1.15.5
+phonenumbers==8.13.24
+pexpect==4.8.0
 jsonschema==2.6.0
 oauth2client==3.0.0
 pyjwt==2.4.0
 django-finalware==1.0.0
-cryptography==41.0.4
+cryptography==41.0.5
 future==0.18.3
-google-cloud-storage==2.9.0
-django-session-security==2.6.5
+google-cloud-storage==2.13.0
+django-session-security==2.6.7
 django-anymail[mailgun]
 django-axes==5.20.0
-django-redis==5.0.0
+django-redis==5.4.0
 xhtml2pdf
 
 # If you are seeing an error about django-debug-toolbar not being installed,
