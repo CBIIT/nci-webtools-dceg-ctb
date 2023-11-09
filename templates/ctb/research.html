@@ -1,29 +1,214 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | Research and CTB Data Access
+{% endblock %}
+
+{% block description %}
+    Research and CTB Data Access
+{% endblock %}
+
+{% block page_name %}research_page{% endblock %}
+
+{% block page_header %}
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Research and CTB Data Access</li>
+            </ol>
+        </nav>
+    </div>
+{% endblock %}
+
 
 {% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col-lg-9 pb-4">
-                {% block subcontent %}
-                {% endblock %}
-            </div>
-            <div class="col-lg-3 pb-4">
+        <div class="row my-3">
+            <div class="col-lg-3 pt-5">
                 <div class="list-group">
-                    <div class="list-group-item list-group-item-header">
-                        Research
+                    {#                    <div class="list-group-item list-group-item-header">#}
+                    {##}
+                    {#                    </div>#}
+                    <a href="#research" class="list-group-item list-group-item-action">
+                        Research and CTB Data Access
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="#evaluation">
+                        Evaluation of Applications
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="#criteria">
+                        Criteria for Evaluation
+                    </a>
+                    <a class="list-group-item list-group-item-action" href="#procedures">
+                        Procedures for Approved Projects
+                    </a>
+                </div>
+            </div>
+
+            <div class="col-lg-9 px-4">
+                <div id="research" class="pt-5">
+                    <h3 class="pt-5">Research and CTB Data Access</h3>
+                    <div class="mt-3">
+                        Researchers interested in using material, information, or data for research purposes must submit
+                        a proposal via the online application system, accessed through the search function. Researchers
+                        can refine their search by sample type and/or data required and obtain an instant report on the
+                        availability of samples and data that match the search criteria. Interested researchers can
+                        submit a request for data and materials using an application form and entering key information
+                        on the research question, study design, laboratory and analytic methods, as well as researcher
+                        qualifications. View a sample application here.
                     </div>
-                    <a href="{% url 'researchers_page' %}" class="list-group-item list-group-item-action">
-                        For Researchers
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="{% url 'access_to_materials' %}">
-                        Access to Materials
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="{% url 'research_projects' %}">
-                        Research Projects Using CTB Materials
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="{% url 'material_available' %}">
-                        Material Available
-                    </a>
+                    <div class="mt-3">The CTB will communicate with researchers who submit a request, if the questions
+                        in their proposal have been addressed by previous projects or questions or is likely to produce
+                        results that complement other studies. Projects which have used or are using CTB materials are
+                        listed here.
+                    </div>
+                    <div class="mt-3">The CTB does not provide funding for research projects.</div>
+
+                </div>
+                <div id="evaluation" class="pt-5">
+                    <h3 class="pt-5">Evaluation of Applications</h3>
+                    <div class="mt-3">Applications are evaluated for scientific merit and appropriate use of CTB
+                        resources by a Review Panel comprised of scientists from the centers contributing samples
+                        (currently V.P. Komisarenko Institute of Endocrinology and Metabolism), the coordinating center,
+                        managed by the NCI, and other independent, multi-disciplinary senior researchers in the fields
+                        of thyroid cancer and radiobiological research.
+                    </div>
+                    <div class="mt-3">Projects may be submitted at any time and the review procedures are, in most
+                        cases, completed by email. After evaluating applications according to the criteria below, each
+                        application will be: 1) approved for access, 2) returned with comments and reconsidered after
+                        the Principal Investigator responses to reviewers, or 2) rejected.
+                    </div>
+                </div>
+                <div id="criteria" class="pt-5">
+                    <h3 class="pt-5">Criteria for Evaluation</h3>
+                    <div class="mt-3">
+                        Researchers applying for CTB samples and data must provide evidence that the following criteria
+                        are satisfied:
+                        <ul>
+                            <li>The research question is of considerable scientific and/or medical interest.
+                            </li>
+                            <li>
+                                The study design is appropriate to address the question.
+                            </li>
+                            <li>
+                                The requested sample size is sufficient to provide a good chance of answering the
+                                question.
+                            </li>
+                            <li>
+                                The researcher and research team have appropriate qualifications and experience to
+                                conduct the study, including fluency with the accepted standards and quality control
+                                relevant to necessary laboratory analytical procedures as well as appropriate
+                                permissions from human subjects’ research and/or research ethics committees.
+                            </li>
+                            <li>
+                                The researchers demonstrate familiarity with the relevant literature.
+                            </li>
+                            <li>
+                                The proposed work cannot be undertaken without the data and/or materials of the type
+                                available through the CTB.
+                            </li>
+                            <li>
+                                If case information other than the standard data set (date of birth, date of operation,
+                                sex, oblast of residence, calculated dose, and international Pathology Panel review
+                                diagnosis) are required, the costs of obtaining these data and ethical and consent
+                                should be adequately addressed.
+                            </li>
+                            <li>
+                                The researchers can cover the costs of shipping the material.
+                            </li>
+                            <li>
+                                The amounts of material requested are appropriate for the specified study, and not
+                                excessive, given the limited availability of material.
+                            </li>
+                            <li>
+                                The research can be undertaken within the time consistent with the researchers funding
+                                and the availability of the necessary data and materials.
+                            </li>
+                            <li>
+                                The researchers agree to share immediately with the CTB coordinating center any data
+                                that may be clinically relevant uncovered during the course of the study.
+                            </li>
+                            <li>The researchers agree to provide within three months of the completion of their project
+                                a brief report on their work, including the results of their investigations on each
+                                sample studied, using the CTB sample code number. This report will not be disseminated
+                                beyond the CTB without the agreement of the Principal Investigator. The aim of the CTB
+                                is to maximize the value of the research data derived from the unique tissue collection
+                                and researchers are therefore required to submit their research data back to the CTB.
+                            </li>
+                            <li>The researchers will inform the CTB coordinating center if any material has not been
+                                used in the performance of their study and will return this material, if requested, to
+                                the CTB coordinating center.
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        The researchers agree not to use the material for any purpose other than those explicitly
+                        proposed in their approved project, or to pass any material supplied by the CTB to third parties
+                        without the explicit permission of the CTB coordinating center.
+                    </div>
+                </div>
+                <div id="procedures" class="py-5">
+                    <h3 class="pt-5">Procedures for Approved Projects</h3>
+
+                    <div class="mt-3">
+                        Once approved, researchers will sign a Material and Data Transfer Agreement with the CTB
+                        Coordinating Center, then biospecimens and data will be sent to the researcher. Samples are
+                        provided free of charge, but shipping costs will be covered by the researchers. Where possible,
+                        material for a given project will be provided in one batch, however, in some cases, materials
+                        may be sent in stages.
+                    </div>
+
+                    <div class="mt-3">
+                        Each sample will be accompanied by a minimum data set comprising the following information:
+                    </div>
+                    <div>
+                        <ul>
+                            <li>
+                                Age at accident - complying with HIPAA regulations
+                            </li>
+                            <li>
+                                Age at surgical treatment - complying with HIPAA regulations
+                            </li>
+                            <li>
+                                Sex
+                            </li>
+                            <li>
+                                Oblast of residence
+                            </li>
+                            <li>
+                                International Pathology Review Panel diagnosis
+                            </li>
+                            <li>
+                                Estimated thyroid radiation dose (if requested)
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-3">
+                        Access to additional research data, if requested, may be made available. Additional clinical
+                        information may require collaboration with IEM and NCI.
+                    </div>
+
+                    <div class="mt-3">
+                        Researchers are strongly encouraged to publish their data and are asked to ensure that the CTB
+                        is acknowledged in any publications arising from their study.
+                    </div>
+                    <div class="mt-3">
+                        Principal Investigators who receive materials are required to:
+                    </div>
+                    <div>
+                        <ol>
+                            <li>
+                                Agree to conform to the conditions set out in the Material and Data Transfer Agreement
+                            </li>
+                            <li>
+                                Notify the CTB coordinating center of any proposed modification of the number and size
+                                of samples required (modification dependent on approval and the availability of the
+                                material).
+                            </li>
+
+                        </ol>
+                    </div>
                 </div>
             </div>
         </div>
