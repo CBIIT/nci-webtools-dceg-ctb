@@ -25,7 +25,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from google_helpers.stackdriver import StackDriverLogger
+# from google_helpers.stackdriver import StackDriverLogger
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.signals import user_login_failed
 from django.dispatch import receiver
