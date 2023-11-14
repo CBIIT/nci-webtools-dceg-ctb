@@ -6,12 +6,20 @@
 {% block link_page_name %}two-factor-auth-settings{% endblock %}
 {% block page_name %}two-factor-auth-settings{% endblock %}
 {% block page_header %}
-    <div class="page-banner">Account Security</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Account Security</li>
+            </ol>
+        </nav>
+    </div>
 {% endblock %}
 {% block content %}
     <div class="container my-5">
         <div class="row user-row justify-content-center">
             <div class="col-lg-10">
+                <h3 class="mb-4">Account Security</h3>
                 <div class="card">
                     <div class="card-body px-5 py-3">
                         <h5 class="card-title fw-bold pb-2"><i class="fa-solid fa-shield"></i> Two-Factor Authentication

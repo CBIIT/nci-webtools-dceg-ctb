@@ -25,7 +25,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from google_helpers.stackdriver import StackDriverLogger
+# from google_helpers.stackdriver import StackDriverLogger
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.signals import user_login_failed
 from django.dispatch import receiver
@@ -43,8 +43,8 @@ def landing_page(request):
     return render(request, 'ctb/landing.html')
 
 # About the Project > Aims of the Project
-def aims(request):
-    return render(request, 'ctb/aims.html')
+# def aims(request):
+#     return render(request, 'ctb/aims.html')
 
 # Displays the privacy policy
 def privacy_policy(request):
@@ -133,42 +133,33 @@ def warn_page(request):
 
 
 # About page
-def about_project(request):
-    return render(request, 'ctb/about_project.html')
-
-# Fact Sheet
-def fact_sheet(request):
-    return render(request, 'ctb/fact_sheet.html')
-
-
-# Management of the Project
-# def management_page(request):
-#     return render(request, 'ctb/management_page.html')
+def about(request):
+    return render(request, 'ctb/about.html')
 
 
 # For Researchers
-def researchers_page(request):
-    return render(request, 'ctb/researchers_page.html')
+def research(request):
+    return render(request, 'ctb/research.html')
 
 
 # Access to materials
-def access_to_materials(request):
-    return render(request, 'ctb/access_to_materials.html')
+# def access_to_materials(request):
+#     return render(request, 'ctb/access_to_materials.html')
 
 
 # research-projects
-def research_projects(request):
-    return render(request, 'ctb/research_projects.html')
+# def research_projects(request):
+#     return render(request, 'ctb/research_projects.html')
 
 
 # research-projects 2001-2009
-def research_projects_2001_2009(request):
-    return render(request, 'ctb/research_projects_2001_2009.html')
+# def research_projects_2001_2009(request):
+#     return render(request, 'ctb/research_projects_2001_2009.html')
 
 
 # research-projects 2010-2019
-def research_projects_2010_2019(request):
-    return render(request, 'ctb/research_projects_2010_2019.html')
+# def research_projects_2010_2019(request):
+#     return render(request, 'ctb/research_projects_2010_2019.html')
 
 
 # Schema Review of Applications
@@ -177,13 +168,13 @@ def research_projects_2010_2019(request):
 
 
 # Material Available
-def material_available(request):
-    return render(request, 'ctb/material_available.html')
+# def material_available(request):
+#     return render(request, 'ctb/material_available.html')
 
 
 # Nuclear Acids and Paraffin Sections
-def nucleic_acids_and_paraffin_sections(request):
-    return render(request, 'ctb/nucleic-acids-and-paraffin-sections.html')
+# def nucleic_acids_and_paraffin_sections(request):
+#     return render(request, 'ctb/nucleic-acids-and-paraffin-sections.html')
 
 
 
@@ -193,8 +184,8 @@ def nucleic_acids_and_paraffin_sections(request):
 
 
 # Bibliography: Publications using CTB samples and data
-def bibliography(request):
-    return render(request, 'ctb/bibliography.html')
+# def bibliography(request):
+#     return render(request, 'ctb/bibliography.html')
 
 
 # Useful links: Links to further information on the Chernobyl accident
@@ -203,18 +194,18 @@ def bibliography(request):
 
 
 # Useful podcasts and videos: Podcasts and Videos by CTB project participants
-def podcasts_and_videos(request):
-    return render(request, 'ctb/podcasts_and_videos.html')
+# def podcasts_and_videos(request):
+#     return render(request, 'ctb/podcasts_and_videos.html')
 
 
-# Latest News
-def latest_news(request):
-    return render(request, 'ctb/latest_news.html')
+# # Latest News
+# def latest_news(request):
+#     return render(request, 'ctb/latest_news.html')
 
 
-def news(request, news_id=1):
-    news_item= whatsup.get(news_id)
-    return render(request, 'ctb/news.html', {'news': news_item})
+# def news(request, news_id=1):
+#     news_item= whatsup.get(news_id)
+#     return render(request, 'ctb/news.html', {'news': news_item})
 
 
 # Contact

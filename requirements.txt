@@ -1,5 +1,5 @@
 requests==2.31.0
-django==3.2.20
+django==3.2.23
 PyYAML==6.0.1
 pyOpenSSL==23.2.0
 mysqlclient==2.0.1
@@ -28,10 +28,10 @@ cryptography==41.0.4
 future==0.18.3
 google-cloud-storage==2.9.0
 django-session-security==2.6.5
-django-anymail[mailgun]
+django-anymail[mailgun]==10.1
 django-axes==5.20.0
 django-redis==5.0.0
-xhtml2pdf
+xhtml2pdf==0.2.10
 
 # If you are seeing an error about django-debug-toolbar not being installed,
 # the problem is almost certainly that your developer .env wasn't found

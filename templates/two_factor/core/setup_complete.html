@@ -1,15 +1,25 @@
 {% extends "two_factor/_base_focus.html" %}
 {% load i18n %}
 {% block page_header %}
-    <div class="page-banner">{% block title %}{% trans "Two-factor Authentication Setup Complete" %}{% endblock %}</div>
+    <div class="container mt-2">
+        <div>
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'two_factor:profile' %}">Account Security</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Two-factor Authentication Setup Complete</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
 {% endblock %}
 {% block content %}
     <div class="container">
         <div class="row justify-content-center my-5">
             <div class="col-lg-6">
+                <h3 class="mb-4">Two-factor Authentication Setup Complete</h3>
                 <div class="card user-panel">
                     <div class="card-body px-4 py-3">
-
                         <p>{% blocktrans trimmed %}Congratulations, you've successfully enabled two-factor
                             authentication.{% endblocktrans %}</p>
 

@@ -35,31 +35,10 @@ urlpatterns = [
     url(r'^$', views.landing_page, name='landing_page'),
 
     # About
-    url(r'^about/$', views.about_project, name='about_project'),
-    url(r'^about/aims/$', views.aims, name='aims_page'),
-    url(r'^about/fact_sheet/$', views.fact_sheet, name='fact_sheet'),
-    # url(r'^about/management_page/$', views.management_page, name='management_page'),
+    url(r'^about/$', views.about, name='about'),
 
     # For Researchers
-    url(r'^researchers/$', views.researchers_page, name='researchers_page'),
-    url(r'^researchers/access_to_materials/$', views.access_to_materials, name='access_to_materials'),
-    url(r'^researchers/research_projects/$', views.research_projects, name='research_projects'),
-    url(r'^researchers/research_projects_2001_2009/$', views.research_projects_2001_2009, name='research_projects_2001_2009'),
-    url(r'^researchers/research_projects_2010_2019/$', views.research_projects_2010_2019, name='research_projects_2010_2019'),
-    url(r'^researchers/material_available/$', views.material_available, name='material_available'),
-    url(r'^researchers/nucleic_acids_and_paraffin_sections/$', views.nucleic_acids_and_paraffin_sections, name='nucleic_acids_and_paraffin_sections'),
-    # url(r'^researchers/schema_review_of_applications/$', views.schema_review_of_applications, name='schema_review_of_applications'),
-
-
-    # Resources
-    # url(r'^resources/$', views.resources, name='resources'),
-    url(r'^resources/bibliography/$', views.bibliography, name='bibliography'),
-    # url(r'^resources/useful_links/$', views.useful_links, name='useful_links'),
-    url(r'^resources/podcasts_and_videos/$', views.podcasts_and_videos, name='podcasts_and_videos'),
-
-    # Latest News
-    url(r'^latest_news/$', views.latest_news, name='latest_news'),
-    url(r'^latest_news/(?P<news_id>\d+)/$', views.news, name='news'),
+    url(r'^research/$', views.research, name='research'),
 
     # Contact Us
     url(r'^contact/', views.contact, name='contact'),
@@ -74,15 +53,13 @@ urlpatterns = [
 
     # Privacy
     url(r'^privacy/', views.privacy_policy, name='privacy'),
+
     path('admin/', admin.site.urls),
     url(r'session_security/', include('session_security.urls')),
     url(r'^_ah/(vm_)?health$', views.health_check),
     url(r'^warning/', views.warn_page, name='warn'),
-
     url(r'^searcg/', views.search, name='search'),
     url(r'^extended_login/$', views.extended_login_view, name='extended_login'),
-
-    # url(r'^share/', include('sharing.urls')),
     path('', include(tf_urls)),
 ]
 

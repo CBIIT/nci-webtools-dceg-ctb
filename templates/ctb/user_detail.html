@@ -28,12 +28,21 @@
 {% block link_page_name %}user-details{% endblock %}
 {% block page_name %}user-details{% endblock %}
 {% block page_header %}
-    <div class="page-banner">My Profile</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                <li class="breadcrumb-item active" aria-current="page">My Profile</li>
+            </ol>
+        </nav>
+    </div>
+
 {% endblock %}
 {% block content %}
     <div class="container my-5">
         <div class="row user-row justify-content-center">
             <div class="col-lg-10">
+                <h3 class="mb-4">My Profile</h3>
                 <div class="d-flex justify-content-end">
                     <a href="{% url 'account_change_password' %}"
                        class="btn btn-outline-secondary ms-2"><i
