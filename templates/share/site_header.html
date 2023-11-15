@@ -3,84 +3,36 @@
 
 {% is_allowed user as has_access %}
 <div class="fixed-top">
-    <div class="bg-lightgrey-theme py-1">
+    <nav id="ctb-main-navbar" class="navbar navbar-expand-lg shadow navbar-light" aria-label="Main navigation">
         <div class="container">
-            <img class="me-2" src="{% static 'img/nci-logo.svg' %}" height="40px" alt="nci-logo">
-        </div>
-    </div>
-    <nav id="ctb-main-navbar" class="navbar navbar-expand-lg navbar-dark py-4" aria-label="Main navigation">
-
-        <div class="container">
-            <a class="navbar-brand {% if request.path == '/' %} active {% endif %}" href="{% url 'landing_page' %}"><i
-                    class="fas fa-home"></i><span class="sr-only">CTB Home</span></a>
+            <a class="navbar-brand" href="{% url 'landing_page' %}"><img class="me-2"
+                                                                         src="{% static 'img/ctb-nci-logo.svg' %}"
+                                                                         height="50px" alt="nci-logo"></a>
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" data-bs-toggle="collapse"
                     data-bs-target="#ctb-collapsible-navbar"
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="navbar-collapse collapse" id="ctb-collapsible-navbar">
-                <ul class="navbar-nav col-10 justify-content-evenly">
+                <ul class="navbar-nav col-11">
                     <li class="nav-item">
-                        <a class="nav-link
-                        {% if 'search_facility' in request.path %} active {% endif %}"
+                        <a class="nav-link {% if 'about/' in request.path %} active {% endif %}"
+                           href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'research/' in request.path %} active {% endif %}"
+                           href="{% url 'research' %}">Research and Data Access</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'search_facility' in request.path %} active {% endif %}"
                            aria-current="page"
                            href="{% url 'dashboard' %}">
-                            Biosample Search
+                            Search the Biorepository
                         </a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if 'about/' in request.path %} active {% endif %}"
-                           id="dropdown-about" data-bs-toggle="dropdown"
-                           aria-expanded="false" role="button">About</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown-about">
-                            <li><a class="dropdown-item" href="{% url 'about_project' %}">About the Project</a></li>
-                            <li><a class="dropdown-item" href="{% url 'aims_page' %}">Aims of the Project</a></li>
-                            <li><a class="dropdown-item" href="{% url 'fact_sheet' %}">Fact Sheet</a></li>
-                            {#                        <li><a class="dropdown-item" href="{% url 'management_page' %}">Management of the Project</a>#}
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if 'researchers/' in request.path %} active {% endif %}"
-                           id="dropdown-researchers" data-bs-toggle="dropdown"
-                           aria-expanded="false" role="button">Research</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown-researchers">
-                            <li><a class="dropdown-item" href="{% url 'researchers_page' %}">For Researchers</a></li>
-                            <li><a class="dropdown-item" href="{% url 'access_to_materials' %}">Access to Materials</a>
-                            </li>
-                            <li><a class="dropdown-item" href="{% url 'research_projects' %}">Research Projects Using
-                                CTB
-                                Materials</a></li>
-                            <li><a class="dropdown-item" href="{% url 'material_available' %}">Material Available</a>
-                            </li>
-                        </ul>
-                    </li>
-                    {#                <li class="nav-item dropdown">#}
-                    {#                    <a class="nav-link dropdown-toggle {% if 'resources/' in request.path %} active {% endif %}"#}
-                    {#                       id="dropdown-resources" data-bs-toggle="dropdown"#}
-                    {#                       aria-expanded="false">Resources</a>#}
-                    {#                    <ul class="dropdown-menu" aria-labelledby="dropdown-resources">#}
-                    {#                        <li><a class="dropdown-item" href="{% url 'bibliography' %}">Publications using CTB Samples and#}
-                    {#                            Data</a></li>#}
-                    {#                        <li><a class="dropdown-item" href="{% url 'useful_links' %}">Useful External Links</a></li>#}
-                    {#                        <li><a class="dropdown-item" href="{% url 'podcasts_and_videos' %}">Useful Podcasts and#}
-                    {#                            Videos</a></li>#}
-                    {#                    </ul>#}
-                    {#                </li>#}
-
-
-                    {#                <li class="nav-item">#}
-                    {#                    <a class="nav-link {% if 'news' in request.path %} active {% endif %}" href="{% url 'latest_news' %}">Latest#}
-                    {#                        News</a>#}
-                    {#                </li>#}
-                    <li class="nav-item">
-                        <a class="nav-link {% if 'contact/' in request.path %} active {% endif %}"
-                           href="{% url 'contact' %}">Contact Us</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav col-1">
-                    {% if user.is_verified %}
+                    {% if user.is_authenticated %}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle {% if 'users/' in request.path or 'account' in request.path %} active {% endif %}"
                                data-bs-toggle="dropdown" href="#" role="button"
@@ -103,7 +55,7 @@
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link"
+                            <a class="nav-link {% if 'login/' in request.path %} active {% endif %}"
                                href="{% url 'two_factor:login' %}">
                                 <i class="fas fa-sign-in-alt"></i><span class="sr-only">Sign-In</span>
                             </a>
@@ -115,8 +67,8 @@
     </nav>
 </div>
 {% if 'search_facility/' in request.path %}
-    <div id="ctb-secondary-navbar">
-        <div class="container pt-2">
+    <div id="ctb-secondary-navbar" class="d-flex justify-content-center">
+        <div class="col-lg-9 pt-2">
             <nav class="nav navbar-ctb" aria-label="Secondary navigation">
                 {% if user.is_verified %}
                     <a class="nav-link {% if 'dashboard/' in request.path %} active {% endif %}"

@@ -1,5 +1,5 @@
 ###
-# Copyright 2015-2022, Institute for Systems Biology
+# Copyright 2015-2023, Institute for Systems Biology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -125,7 +125,6 @@ def build_clinical_where_clause(filters=None, clinical_alias='cl', sample_alias=
 def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias='s'):
     donor_where_clause_items = []
     sample_where_clause_items = []
-    # where_clause_items = []
     if sample_filters:
         diagnosis = sample_filters.get('diagnosis[]')
         sample_type = sample_filters.get('sample_type[]')
@@ -227,14 +226,14 @@ def build_sample_where_clause(sample_filters=None, donor_alias='d', sample_alias
         if len(age_at_exposure_items):
             donor_where_clause_items.append(' AND '.join(age_at_exposure_items))
     if len(sample_where_clause_items):
-        sample_where_clause_items = '({})'.format(')\n\t\t\tAND ('.join(sample_where_clause_items))
+        sample_where_clause = '({})'.format(')\n\t\t\tAND ('.join(sample_where_clause_items))
     else:
-        sample_where_clause_items = 'TRUE'
+        sample_where_clause = 'TRUE'
     if len(donor_where_clause_items):
-        donor_where_clause_items = '({})'.format(')\n\t\t\tAND ('.join(donor_where_clause_items))
+        donor_where_clause = '({})'.format(')\n\t\t\tAND ('.join(donor_where_clause_items))
     else:
-        donor_where_clause_items = 'TRUE'
-    return donor_where_clause_items, sample_where_clause_items
+        donor_where_clause = 'TRUE'
+    return donor_where_clause, sample_where_clause
 
 
 def get_driver_case_counts(filters=None):

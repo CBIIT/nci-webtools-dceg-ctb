@@ -34,7 +34,6 @@ from accounts.decorators import password_change_required
 logger = logging.getLogger('main_logger')
 
 
-# @login_required
 @otp_required
 @password_change_required
 def dashboard(request):
