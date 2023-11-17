@@ -6,7 +6,7 @@
 {% block link_page_name %}two-factor-auth-settings{% endblock %}
 {% block page_name %}two-factor-auth-settings{% endblock %}
 {% block page_header %}
-    <div class="container mt-2">
+    <div class="container mt-4">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
@@ -21,7 +21,7 @@
             <div class="col-lg-10">
                 <h3 class="mb-4">Account Security</h3>
                 <div class="card">
-                    <div class="card-body px-5 py-3">
+                    <div class="card-body px-md-5 py-3">
                         <h5 class="card-title fw-bold pb-2"><i class="fa-solid fa-shield"></i> Two-Factor Authentication
                         </h5>
                         {% if default_device %}

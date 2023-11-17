@@ -1,16 +1,14 @@
 {% extends "two_factor/_base_focus.html" %}
 {% load i18n %}
 {% block page_header %}
-    <div class="container mt-2">
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'two_factor:profile' %}">Account Security</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Backup Tokens</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="container mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'two_factor:profile' %}">Account Security</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Backup Tokens</li>
+            </ol>
+        </nav>
     </div>
 {% endblock %}
 
@@ -20,7 +18,7 @@
             <div class="col-lg-10">
                 <h3 class="mb-4">Backup Tokens</h3>
                 <div class="card user-panel">
-                    <div class="card-body px-5 py-3">
+                    <div class="card-body px-md-5 py-3">
                         <p>{% blocktrans trimmed %}Backup tokens can be used when your primary and backup
                             phone numbers aren't available. The backup tokens below can be used
                             for login verification. If you've used up all your backup tokens, you
@@ -33,7 +31,8 @@
                                     <li>{{ token.token }}</li>
                                 {% endfor %}
                             </ul>
-                            <p class="fw-light fst-italic">{% blocktrans %}Print these tokens and keep them somewhere safe.{% endblocktrans %}</p>
+                            <p class="fw-light fst-italic">{% blocktrans %}Print these tokens and keep them somewhere
+                                safe.{% endblocktrans %}</p>
                         {% else %}
                             <p>{% trans "You don't have any backup codes yet." %}</p>
                         {% endif %}
