@@ -39,6 +39,7 @@ urlpatterns = [
 
     # For Researchers
     url(r'^research/$', views.research, name='research'),
+    url(r'^research/sample_application$', views.sample_application, name='sample_application'),
 
     # Contact Us
     url(r'^contact/', views.contact, name='contact'),

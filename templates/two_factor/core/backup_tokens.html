@@ -1,7 +1,7 @@
 {% extends "two_factor/_base_focus.html" %}
 {% load i18n %}
 {% block page_header %}
-    <div class="container mt-4">
+    <div class="container-lg mt-4">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
@@ -13,7 +13,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container my-5">
+    <div class="container-lg my-5">
         <div class="row user-row justify-content-center">
             <div class="col-lg-10">
                 <h3 class="mb-4">Backup Tokens</h3>
@@ -38,9 +38,12 @@
                         {% endif %}
 
                         <form method="post">{% csrf_token %}{{ form.as_p }}
-                            <a href="{% url 'two_factor:profile' %}"
-                               class="btn btn-secondary">{% trans "Back to Account Security" %}</a>
-                            <button class="btn btn-primary ms-2" type="submit">{% trans "Generate Tokens" %}</button>
+                            <div class="d-grid gap-2 d-flex">
+                                <a href="{% url 'two_factor:profile' %}"
+                                   class="btn btn-secondary">{% trans "Back to Account Security" %}</a>
+                                <button class="btn btn-primary ms-2"
+                                        type="submit">{% trans "Generate Tokens" %}</button>
+                            </div>
                         </form>
                     </div>
                 </div>

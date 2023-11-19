@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block title %}
-    CTB | Refine by Clinical Parameters
+    CTB | Clinical Search Facility
 {% endblock %}
 
 {% block description %}
-    Refine by Clinical Parameters
+    Clinical Search Facility
 {% endblock %}
 
 {% block page_name %}clinical_search_facility{% endblock %}
@@ -14,23 +14,21 @@
 {% block page_class %}biosample_tab{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <div class="container mt-4">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Refine by Clinical Parameters</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="container-lg mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Clinical Search Facility</li>
+            </ol>
+        </nav>
     </div>
 {% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container-lg">
         <div class="row">
-            <div class="col-lg-8 col mb-3 pe-0">
+            <div class="col-lg-8 col mb-3 pe-lg-0">
                 <div class="border light-grey rounded p-3 pb-5">
                     <div class="d-flex justify-content-between">
                         <h5>Clinical Search Facility</h5>
@@ -1000,7 +998,7 @@
                             {#                            </fieldset>#}
                         </div>
                         <hr>
-                        <div>
+                        <div class="pb-4">
                             <a id="back-btn" class="btn btn-outline-secondary d-none"><i
                                     class="fa-solid fa-chevron-left"></i> Back</a>
                             <a id="proceed-btn" class="btn btn-primary float-end">Proceed to Refine by Clinical
@@ -1015,7 +1013,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-lg-4 mb-3">
+            <div class="col-lg-4 mb-3 d-flex d-none d-lg-block">
                 <div class="border rounded light-grey p-3">
                     <div id="clinic-sidebar" class="d-none">
                         <h6>
