@@ -26,7 +26,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 # from google_helpers.stackdriver import StackDriverLogger
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, FileResponse, Http404
 from django.contrib.auth.signals import user_login_failed
 from django.dispatch import receiver
 from accounts.decorators import password_change_required
@@ -140,6 +140,12 @@ def about(request):
 # For Researchers
 def research(request):
     return render(request, 'ctb/research.html')
+
+def sample_application(request):
+    try:
+        return FileResponse(open('static/ctb_sample_application.pdf', 'rb'), content_type='application/pdf')
+    except FileNotFoundError:
+        raise Http404()
 
 
 # Access to materials
