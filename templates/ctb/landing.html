@@ -25,7 +25,7 @@
 {% block page_name %}landing{% endblock %}
 {% block body_class %}landing{% endblock %}
 {% block content %}
-    <div class="row">
+    <div class="row d-flex d-none d-lg-block">
         <div class="bg-aqua-green-theme text-center py-5">
             <div class="d-flex justify-content-center py-5">
                 <div class="col-8">
@@ -42,20 +42,18 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="bg-lightgrey-theme d-flex text-center justify-content-center py-5">
-            <div class="col-8 pb-3 fs-4">The CTB website is hosted by the U.S. National Cancer Institute (NCI), <a
+            <div class="col-10 pb-3 fs-4">The CTB website is hosted by the U.S. National Cancer Institute (NCI), <a
                     href="https://dceg.cancer.gov/" target="_blank" rel="noopener noreferrer">Division of Cancer
-                Epidemiology and Genetics</a>. Learn about DCEG research on the Chernobyl <a target="_blank"
-                                                                                             rel="noopener noreferrer"
-                                                                                             href="https://dceg.cancer.gov/research/what-we-study/chernobyl-nuclear-accident">accident</a>.
+                Epidemiology and Genetics</a>.
             </div>
         </div>
         <div class="bg-mustard-theme text-center py-5">
             <div class="d-flex justify-content-center">
-                <div class="col-6 mx-auto p-5">
+                <div class="col-xl-6 col-lg-8 col-md-6 mx-auto p-lg-5">
+{#                <div class="col-xl-6 col-lg-8 col-md-6 mx-auto p-5">#}
                     <div class="row">
                         <div class="col stat-card">
                             <a href="{% url 'about' %}" class="fill-div">
@@ -65,7 +63,8 @@
                         </div>
                         <div class="col stat-card">
                             <a href="{% url 'research' %}" class="fill-div">
-                                <h4 class="fw-bold orange-text"><i class="fas fa-atom pb-2"></i><br>Research and Data Access
+                                <h4 class="fw-bold orange-text"><i class="fas fa-atom pb-2"></i><br>Research and Data
+                                    Access
                                 </h4>
                                 <div class="mt-3">Information to research into the Chernobyl accident</div>
                             </a>
@@ -80,6 +79,56 @@
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex d-lg-none d-block">
+        <div class="bg-aqua-green-theme d-flex justify-content-center py-2">
+            <div class="col-10">
+                <h1 class="fw-bold py-3">
+                    Chernobyl Tissue Bank
+                </h1>
+                <div class="pb-3">
+                    The Chernobyl <span class="fst-italic">(Chornobyl in Ukrainian)</span> Tissue Bank (CTB) is
+                    a repository of samples donated by patients with thyroid tumors who live in the areas
+                    affected by the accident at the Chernobyl Nuclear Power Plant. The purpose of the CTB is to
+                    collect, document, and store these materials, and to facilitate access to these unique
+                    resources by bona fide researchers.
+                </div>
+            </div>
+        </div>
+        <div class="bg-lightgrey-theme d-flex justify-content-center py-2">
+            <div class="col-10 py-3">
+                The CTB website is hosted by the U.S. National Cancer Institute (NCI), <a
+                    href="https://dceg.cancer.gov/" target="_blank" rel="noopener noreferrer">Division of Cancer
+                Epidemiology and Genetics</a>.
+            </div>
+        </div>
+        <div class="bg-mustard-theme d-flex justify-content-center py-2">
+            <div class="col-10 col-md-8 mx-auto py-3">
+                <div class="stat-card mb-4">
+                    <a href="{% url 'about' %}" class="fill-div">
+                        <h5 class="fw-bold aqua-green-text"><i class="fas fa-radiation pb-2"></i> About</h5>
+                        <div class="mt-3">An introduction to the CTB project</div>
+                    </a>
+                </div>
+                <div class="stat-card mb-4">
+                    <a href="{% url 'research' %}" class="fill-div">
+                        <h5 class="fw-bold orange-text"><i class="fas fa-atom pb-2"></i> Research & Data
+                            Access
+                        </h5>
+                        <div class="mt-3">Information to research into the Chernobyl accident</div>
+                    </a>
+                </div>
+                <div class="stat-card mb-4">
+                    <a href="{% if user.is_verified %} {% url 'dashboard' %} {% else %} {% url 'two_factor:login' %}" {% endif %}
+                       class="fill-div">
+                        <h5 class="fw-bold dark-aqua-text"><i class="fas fa-search pb-2"></i> Search the
+                            Biorepository
+                        </h5>
+                        <div class="mt-3">Find your biological samples for your study</div>
+                    </a>
                 </div>
             </div>
         </div>

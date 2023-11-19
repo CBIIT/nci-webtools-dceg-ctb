@@ -82,12 +82,26 @@
                 </div>
             </div>
         </div>
-        <div class="row pb-5">
-            <div class="col-lg-6">
-                <div class="d-grid gap-2 mb-3">
+        <div class="row pb-3">
+            <div class="col">
+                <div class="d-grid">
                     <a class="btn btn-primary" href="{% url 'search_tissue_samples' %}">Proceed to Search Samples <i
-                            class="fas fa-angle-double-right"></i></a>
+                            class="fas fa-angle-double-right d-lg-inline d-none"></i></a>
                 </div>
+            </div>
+            <div class="col">
+                <div class="d-grid">
+                    <a class="btn btn-primary" href="{% url 'make_application' %}"><i class="fas fa-edit"></i> Make
+                        Application</a>
+                </div>
+            </div>
+        </div>
+        <div class="row pb-5">
+            <div class="col-lg-6 mb-3">
+{#                <div class="d-grid gap-2 mb-3">#}
+{#                    <a class="btn btn-primary" href="{% url 'search_tissue_samples' %}">Proceed to Search Samples <i#}
+{#                            class="fas fa-angle-double-right"></i></a>#}
+{#                </div>#}
                 <div class="border rounded bg-light p-3">
                     <h5 class="fw-bold">
                         My Saved Searches
@@ -97,10 +111,10 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="d-grid gap-2 mb-3">
-                    <a class="btn btn-primary" href="{% url 'make_application' %}"><i class="fas fa-edit"></i> Make
-                        Application</a>
-                </div>
+{#                <div class="d-grid gap-2 mb-3">#}
+{#                    <a class="btn btn-primary" href="{% url 'make_application' %}"><i class="fas fa-edit"></i> Make#}
+{#                        Application</a>#}
+{#                </div>#}
                 <div class="border rounded bg-light p-3">
                     <div>
                         <h5 class="fw-bold">

@@ -3,11 +3,19 @@
 
 {% is_allowed user as has_access %}
 <div class="fixed-top">
-    <nav id="ctb-main-navbar" class="navbar navbar-expand-lg shadow navbar-light" aria-label="Main navigation">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'landing_page' %}"><img class="me-2"
-                                                                         src="{% static 'img/ctb-nci-logo.svg' %}"
-                                                                         height="50px" alt="nci-logo"></a>
+    <nav id="ctb-main-navbar" class="navbar navbar-expand-xl shadow navbar-light" aria-label="Main navigation">
+        <div class="container my-2">
+            <div class="d-none d-xl-inline-block">
+                <a class="navbar-brand ps-0" href="{% url 'landing_page' %}">
+                    <img class="me-2"
+                         src="{% static 'img/ctb-nci-logo.svg' %}"
+                         height="50px" alt="nci-logo"></a>
+            </div>
+            <div class="d-xl-none d-inline-block">
+                <a class="navbar-brand ps-0" href="{% url 'landing_page' %}"><img
+                                                                             src="{% static 'img/ctb-nci-logo.svg' %}"
+                                                                             height="35px" alt="nci-logo"></a>
+            </div>
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" data-bs-toggle="collapse"
                     data-bs-target="#ctb-collapsible-navbar"
                     aria-label="Toggle navigation">
@@ -67,8 +75,8 @@
     </nav>
 </div>
 {% if 'search_facility/' in request.path %}
-    <div id="ctb-secondary-navbar" class="d-flex justify-content-center">
-        <div class="col-lg-9 pt-2">
+    <div id="ctb-secondary-navbar" class="d-flex">
+        <div class="container-md container-fluid pt-2">
             <nav class="nav navbar-ctb" aria-label="Secondary navigation">
                 {% if user.is_verified %}
                     <a class="nav-link {% if 'dashboard/' in request.path %} active {% endif %}"
@@ -77,9 +85,8 @@
                     </a>
                     <a class="nav-link {% if 'search_samples/' in request.path %} active {% endif %}"
                        href="{% url 'search_tissue_samples' %}">Search Samples</a>
-                    <a class="nav-link {% if 'saved_searches/' in request.path %} active {% endif %}"
+                    <a class="nav-link {% if 'saved_searches/' in request.path %} active {% endif %} d-sm-inline d-none"
                        href="{% url 'saved_searches' %}">My Saved Searches</a>
-
                 {% endif %}
             </nav>
 

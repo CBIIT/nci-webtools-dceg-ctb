@@ -12,7 +12,7 @@
 {% block page_name %}research_page{% endblock %}
 
 {% block page_header %}
-    <div class="container mt-2">
+    <div class="container mt-4">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
@@ -25,27 +25,10 @@
 
 {% block content %}
     <div class="container">
-        <div class="row my-3">
-            <div class="col-lg-4 pt-5 d-none d-lg-block">
-                <div class="list-group pt-5">
-                    <a href="#research" class="list-group-item list-group-item-action">
-                        Research and CTB Data Access
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="#evaluation">
-                        Evaluation of Applications
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="#criteria">
-                        Criteria for Evaluation
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="#procedures">
-                        Procedures for Approved Projects
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-lg-8 px-4">
-                <div id="research" class="pt-5">
-                    <h3 class="pt-5">Research and CTB Data Access</h3>
+        <div class="row my-3 d-flex justify-content-center">
+            <div class="col-lg-10 px-md-4">
+                <div id="research" class="pt-3">
+                    <h3 class="pt-3">Research and CTB Data Access</h3>
                     <div class="mt-3">
                         Researchers interested in using material, information, or data for research purposes must submit
                         a proposal via the online application system, accessed through the search function. Researchers
@@ -53,8 +36,9 @@
                         availability of samples and data that match the search criteria. Interested researchers can
                         submit a request for data and materials using an application form and entering key information
                         on the research question, study design, laboratory and analytic methods, as well as researcher
-                        qualifications. View a sample application <a href="{% static 'ctb_sample_application.pdf' %}"
-                                                                     rel="noopener noreferrer" target="_blank">here</a>.
+                        qualifications. <a href="{% url 'sample_application' %}"
+                                           rel="noopener noreferrer" target="_blank">View a sample application here <i
+                            class="fas fa-external-link-alt"></i></a>.
                     </div>
                     <div class="mt-3">The CTB will communicate with researchers who submit a request, if the questions
                         in their proposal have been addressed by previous projects or questions or is likely to produce
@@ -64,7 +48,7 @@
                     <div class="mt-3">The CTB does not provide funding for research projects.</div>
 
                 </div>
-                <div id="evaluation" class="pt-5">
+                <div id="evaluation" class="pt-3">
                     <h3 class="pt-5">Evaluation of Applications</h3>
                     <div class="mt-3">Applications are evaluated for scientific merit and appropriate use of CTB
                         resources by a Review Panel comprised of scientists from the centers contributing samples
@@ -78,7 +62,7 @@
                         the Principal Investigator responses to reviewers, or 3) rejected.
                     </div>
                 </div>
-                <div id="criteria" class="pt-5">
+                <div id="criteria" class="pt-3">
                     <h3 class="pt-5">Criteria for Evaluation</h3>
                     <div class="mt-3">
                         Researchers applying for CTB samples and data must provide evidence that the following criteria
@@ -146,7 +130,7 @@
                         without the explicit permission of the CTB coordinating center.
                     </div>
                 </div>
-                <div id="procedures" class="py-5">
+                <div id="procedures" class="py-3">
                     <h3 class="pt-5">Procedures for Approved Projects</h3>
 
                     <div class="mt-3">
