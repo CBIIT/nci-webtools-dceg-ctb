@@ -26,7 +26,7 @@
                             <div class="mb-2">
                                 {% for field in form %}
                                     {{ field|add_classes:'form-check-input' }}
-                                    <label class="form-check-label ms-1">{{ field.label }}</label>
+                                    <label for="{{ field.auto_id }}" class="form-check-label ms-1">{{ field.label }}</label>
                                 {% endfor %}
                             </div>
                             <a href="{% url 'two_factor:profile' %}"
