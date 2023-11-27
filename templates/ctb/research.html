@@ -12,7 +12,7 @@
 {% block page_name %}research_page{% endblock %}
 
 {% block page_header %}
-    <div class="container mt-4">
+    <div class="container-lg mt-4">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
@@ -24,7 +24,7 @@
 
 
 {% block content %}
-    <div class="container">
+    <div class="container-lg">
         <div class="row my-3 d-flex justify-content-center">
             <div class="col-lg-10 px-md-4">
                 <div id="research" class="pt-3">
@@ -36,14 +36,16 @@
                         availability of samples and data that match the search criteria. Interested researchers can
                         submit a request for data and materials using an application form and entering key information
                         on the research question, study design, laboratory and analytic methods, as well as researcher
-                        qualifications. <a href="{% url 'sample_application' %}"
-                                           rel="noopener noreferrer" target="_blank">View a sample application here <i
-                            class="fas fa-external-link-alt"></i></a>.
+                        qualifications.<br><a href="{% url 'sample_application' %}"
+                                           rel="noopener noreferrer" target="_blank">View a sample application <i
+                            class="fas fa-external-link-alt"></i></a>
                     </div>
                     <div class="mt-3">The CTB will communicate with researchers who submit a request, if the questions
                         in their proposal have been addressed by previous projects or questions or is likely to produce
-                        results that complement other studies. Projects which have used or are using CTB materials are
-                        listed here.
+                        results that complement other studies. <br><a href="{% url 'research_projects' %}"
+                                                                  rel="noopener noreferrer" target="_blank">List of
+                            projects which have used or are using CTB materials <i
+                                    class="fas fa-external-link-alt"></i></a>
                     </div>
                     <div class="mt-3">The CTB does not provide funding for research projects.</div>
 

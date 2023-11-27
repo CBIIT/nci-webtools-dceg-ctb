@@ -154,8 +154,8 @@ def sample_application(request):
 
 
 # research-projects
-# def research_projects(request):
-#     return render(request, 'ctb/research_projects.html')
+def research_projects(request):
+    return render(request, 'ctb/research_projects.html')
 
 
 # research-projects 2001-2009
