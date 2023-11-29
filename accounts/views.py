@@ -65,6 +65,6 @@ def lockout(request, credentials, *args, **kwargs):
                 "cooloff_timedelta": cool_off,
             }
         )
-    logger.info("[CTB LOCKOUT] User {} is locked out due to too many login failures [{}].".format(context.username,
+    logger.info("[CTB LOCKOUT] User {} is locked out due to too many login failures [{}].".format(context['username'],
                                                                                                   datetime.datetime.utcnow()))
     return render(request, 'accounts/account/lockout.html', context, status=status)
