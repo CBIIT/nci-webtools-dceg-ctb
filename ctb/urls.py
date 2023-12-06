@@ -49,6 +49,8 @@ urlpatterns = [
     # Contact Us
     url(r'^contact/', views.contact, name='contact'),
 
+    url(r'^ctb_search', views.ctb_search, name='ctb_search'),
+
     url(r'^search_facility/', include('donors.urls')),
 
     # User Details
@@ -67,6 +69,7 @@ urlpatterns = [
     url(r'^searcg/', views.search, name='search'),
     url(r'^extended_login/$', views.extended_login_view, name='extended_login'),
     path('', include(tf_urls)),
+
 ]
 
 if settings.IS_DEV:
