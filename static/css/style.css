@@ -150,7 +150,7 @@ a.fill-div {
     border-bottom: 4px solid #007bbd;
 }
 
-#SearchBarCollapse:not(.collapsed),#SearchBarCollapse2:not(.collapsed){
+#SearchBarCollapse:not(.collapsed),#SearchBarCollapse2:not(.collapsed), #navbarSideCollapse:not(.collapsed){
     color: #007bbd;
 }
 
