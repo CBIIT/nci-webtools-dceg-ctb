@@ -17,7 +17,7 @@
 {% block content %}
     <div class="container py-3">
         <div class="row">
-            <div class="col-lg-4"><h5 class="fw-bold">Search Tissue Samples</h5></div>
+            <div class="col-lg-4"><div class="fw-bold fs-5">Search Tissue Samples</div></div>
             <div class="col-lg-8">
                 <div role="group" aria-label="action buttons" class="gap-1 mb-2 justify-content-end d-lg-flex d-none">
                     <button id="search-save-btn" type="button" class="btn btn-primary"
@@ -407,8 +407,8 @@
             </div>
             <div class="col-lg-5">
                 <div class="border rounded light-grey p-4 mb-3">
-                    <h5 class="fw-bold">Available Cases
-                    </h5>
+                    <div class="fs-5 fw-bold">Available Cases
+                    </div>
                     <div class="fw-normal fs-5 text-end"><span
                             id="total-case-count" class="fw-bold">{{ total|default:0 }}</span><span
                             class="fst-italic text-muted small"> /{{ total_counts.total|format_num_with_commmas }}</span>

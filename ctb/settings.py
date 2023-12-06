@@ -626,7 +626,8 @@ BLANK_TISSUE_FILTER_CASE_COUNT = {
 
 GCP_APP_DOC_BUCKET = os.environ.get('GCP_APP_DOC_BUCKET', 'ctb-dev-app-doc-files')
 CTB_APPLICATION_RECEIVER_EMAIL = os.environ.get('CTB_APPLICATION_RECEIVER_EMAIL', 'ctb-support@isb-cgc.org')
-
+GOOGLE_SE_ID = os.environ.get('GOOGLE_SE_ID', None)
+# print(GOOGLE_SE_ID)
 if DEBUG and DEBUG_TOOLBAR:
     INSTALLED_APPS += ('debug_toolbar',)
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware',)
