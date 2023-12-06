@@ -30,7 +30,7 @@
     <div class="container-lg py-2">
         <div class="row">
             <div class="col">
-                <h5>Clinical Search Facility</h5>
+                <div class="fw-bold fs-5 mb-3">Clinical Search Facility</div>
                 <div id="general-message">
                     {% if title %}
                         <div role="alert" class="alert alert-primary alert-dismissible fade show fst-italic"><i
@@ -51,32 +51,32 @@
                     </div>
                     <hr>
                     <div class="mt-2 d-none d-lg-block">
-                    <div class="justify-content-between d-flex d-block">
-                        {#                    <div class="mt-2 d-flex gap-1 justify-content-end d-none d-md-block">#}
-                        <div class="d-lg-inline">
-                            <a type="button" class="btn btn-secondary"
-                               href="{% url 'clinical_search_facility' %}"><i
-                                    class="fas fa-angle-double-left d-lg-none"></i> Back to Clinical Search
-                            </a>
-                            <a type="button" class="btn btn-secondary"
-                               href="{% url 'search_tissue_samples' %}"><i
-                                    class="fas fa-angle-double-left d-lg-none"></i> Back to Search Tissue Samples
-                            </a>
+                        <div class="justify-content-between d-flex d-block">
+                            {#                    <div class="mt-2 d-flex gap-1 justify-content-end d-none d-md-block">#}
+                            <div class="d-lg-inline">
+                                <a type="button" class="btn btn-secondary"
+                                   href="{% url 'clinical_search_facility' %}"><i
+                                        class="fas fa-angle-double-left d-lg-none"></i> Back to Clinical Search
+                                </a>
+                                <a type="button" class="btn btn-secondary"
+                                   href="{% url 'search_tissue_samples' %}"><i
+                                        class="fas fa-angle-double-left d-lg-none"></i> Back to Search Tissue Samples
+                                </a>
+                            </div>
+                            <div class="d-lg-inline">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#saveModal"><i
+                                        class="fa-solid fa-floppy-disk d-lg-none"></i> Save
+                                </button>
+                                <a type="button" class="btn btn-primary" href="{% url 'make_application' %}"><i
+                                        class="fas fa-edit d-lg-none"></i> Make Application
+                                </a>
+                                <a type="button" class="btn btn-primary"
+                                   href="{% url 'driver_search_facility' %}&{{ filter_encoded_url }}">Search by Driver
+                                    Mutation <i class="fas fa-angle-double-right d-lg-none"></i>
+                                </a>
+                            </div>
                         </div>
-                        <div class="d-lg-inline">
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#saveModal"><i
-                                    class="fa-solid fa-floppy-disk d-lg-none"></i> Save
-                            </button>
-                            <a type="button" class="btn btn-primary" href="{% url 'make_application' %}"><i
-                                    class="fas fa-edit d-lg-none"></i> Make Application
-                            </a>
-                            <a type="button" class="btn btn-primary"
-                               href="{% url 'driver_search_facility' %}&{{ filter_encoded_url }}">Search by Driver
-                                Mutation <i class="fas fa-angle-double-right d-lg-none"></i>
-                            </a>
-                        </div>
-                    </div>
                     </div>
                     <div class="mt-2 gap-2 d-lg-none d-block d-grid">
                         <a type="button" class="btn btn-secondary"
@@ -133,8 +133,10 @@
                         <button id="close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
                         </button>
                         <button id="search-save" data-formid="save-form" data-titleid="search-save-title"
-                                type="button" class="btn btn-primary"><i id="save-icon" class="fas fa-save"></i><i
-                                id="load-icon" class="d-none d-md-inline-flex fas fa-circle-notch fa-spin"></i> Save
+                                type="button"
+                                class="btn btn-primary"><i id="save-icon"
+                                                           class="fas fa-save"></i><i
+                                id="load-icon" class="d-none fas fa-circle-notch fa-spin"></i> Save
                         </button>
                     </div>
                 </div>
