@@ -584,6 +584,7 @@ CONN_MAX_AGE = 60
 ############################
 SITE_GOOGLE_ANALYTICS             = bool(os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', None) is not None)
 SITE_GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', '')
+GOOGLE_SITE_VERIFICATION_CODE = os.environ.get('GOOGLE_SITE_VERIFICATION_CODE', '')
 
 # Rough max file size to allow for eg. barcode list upload, to prevent triggering RequestDataTooBig
 FILE_SIZE_UPLOAD_MAX = 1950000
