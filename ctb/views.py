@@ -117,11 +117,11 @@ def research(request):
     return render(request, 'ctb/research.html')
 
 
-def sample_application(request):
-    try:
-        return FileResponse(open('static/ctb_sample_application.pdf', 'rb'), content_type='application/pdf')
-    except FileNotFoundError:
-        raise Http404()
+# def sample_application(request):
+#     try:
+#         return FileResponse(open('static/ctb_sample_application.pdf', 'rb'), content_type='application/pdf')
+#     except FileNotFoundError:
+#         raise Http404()
 
 
 # research-projects
