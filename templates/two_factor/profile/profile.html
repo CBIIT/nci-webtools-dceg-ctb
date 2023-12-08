@@ -6,79 +6,91 @@
 {% block link_page_name %}two-factor-auth-settings{% endblock %}
 {% block page_name %}two-factor-auth-settings{% endblock %}
 {% block page_header %}
-    <div class="page-banner">Account Security</div>
+    <div class="container-lg mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Account Security</li>
+            </ol>
+        </nav>
+    </div>
 {% endblock %}
 {% block content %}
-    <div class="container my-5">
+    <div class="container-lg my-5">
         <div class="row user-row justify-content-center">
             <div class="col-lg-10">
+                <h3 class="mb-4">Account Security</h3>
                 <div class="card">
-                    <div class="card-body px-5 py-3">
+                    <div class="card-body px-md-5 py-3">
                         <h5 class="card-title fw-bold pb-2"><i class="fa-solid fa-shield"></i> Two-Factor Authentication
                         </h5>
                         {% if default_device %}
-                            <table class="table" role="presentation">
-                                <tr>
-                                    {% blocktrans with primary=default_device|as_action %}
-                                        <th scope="row">Primary method</th>
-                                        <td>{{ primary }}</td>
-                                    {% endblocktrans %}
-                                </tr>
-                                {% if available_phone_methods %}
+                            <div class="table-responsive">
+                                <table class="table" role="presentation">
                                     <tr>
-                                    <th scope="row">{% trans "Backup Phone Numbers" %}</th>
-                                    <td>{% blocktrans trimmed %}If your primary method is not available, we are able
-                                        to
-                                        send backup tokens to the phone numbers listed
-                                        below.{% endblocktrans %}<br/>
+                                        {% blocktrans with primary=default_device|as_action %}
+                                            <th scope="row">Primary method</th>
+                                            <td>{{ primary }}</td>
+                                        {% endblocktrans %}
+                                    </tr>
+                                    {% if available_phone_methods %}
+                                        <tr>
+                                        <th scope="row">{% trans "Backup Phone Numbers" %}</th>
+                                        <td>{% blocktrans trimmed %}If your primary method is not available, we are able
+                                            to
+                                            send backup tokens to the phone numbers listed
+                                            below.{% endblocktrans %}<br/>
 
-                                        <ul>
-                                            {% for phone in backup_phones %}
-                                                <li>
-                                                    {{ phone|as_action }}
-                                                    <form method="post"
-                                                          action="{% url 'two_factor:phone_delete' phone.id %}"
-                                                          onsubmit="return confirm({% trans 'Are you sure?' %})">
-                                                        {% csrf_token %}
-                                                        <button class="btn btn-sm btn-warning"
-                                                                type="submit">{% trans "Unregister" %}</button>
-                                                    </form>
-                                                </li>
-                                            {% endfor %}
-                                        </ul>
+                                            <ul>
+                                                {% for phone in backup_phones %}
+                                                    <li>
+                                                        {{ phone|as_action }}
+                                                        <form method="post"
+                                                              action="{% url 'two_factor:phone_delete' phone.id %}"
+                                                              onsubmit="return confirm({% trans 'Are you sure?' %})">
+                                                            {% csrf_token %}
+                                                            <button class="btn btn-sm btn-warning"
+                                                                    type="submit">{% trans "Unregister" %}</button>
+                                                        </form>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
 
-                                        <p><a href="{% url 'two_factor:phone_create' %}"
-                                              class="btn btn-info">{% trans "Add Phone Number" %}</a></p>
-                                    </td>
+                                            <p><a href="{% url 'two_factor:phone_create' %}"
+                                                  class="btn btn-info">{% trans "Add Phone Number" %}</a></p>
+                                        </td>
 
-                                {% endif %}
-                                <tr>
-                                    <th>{% trans "Backup Tokens" %}</th>
-                                    <td>{% blocktrans trimmed %}If you don't have any device with you, you can access
-                                        your account using backup tokens.{% endblocktrans %}
-                                        {% blocktrans trimmed count counter=backup_tokens %}
-                                            You have only one backup token remaining.
-                                        {% plural %}
-                                            You have {{ counter }} backup tokens remaining.
-                                        {% endblocktrans %}<br/>
-                                        <a href="{% url 'two_factor:backup_tokens' %}"
-                                           class="btn btn-outline-secondary btn-sm mt-2"><i
-                                                class="fa-solid fa-angles-right"></i> {% trans "Show Codes" %}</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        {% trans "Disable Two-Factor Authentication" %}
-                                    </th>
-                                    <td>{% blocktrans trimmed %}However we strongly discourage you to do so, you can
-                                        also disable two-factor authentication for your account.{% endblocktrans %}<br>
-                                        <a class="btn btn-outline-secondary btn-sm mt-2"
-                                           href="{% url 'two_factor:disable' %}">
-                                            <i class="fas fa-ban"></i> {% trans "Disable Two-Factor Authentication" %}
-                                        </a>
-                                    </td>
-                                </tr>
-                            </table>
+                                    {% endif %}
+                                    <tr>
+                                        <th>{% trans "Backup Tokens" %}</th>
+                                        <td>{% blocktrans trimmed %}If you don't have any device with you, you can
+                                            access
+                                            your account using backup tokens.{% endblocktrans %}
+                                            {% blocktrans trimmed count counter=backup_tokens %}
+                                                You have only one backup token remaining.
+                                            {% plural %}
+                                                You have {{ counter }} backup tokens remaining.
+                                            {% endblocktrans %}<br/>
+                                            <a href="{% url 'two_factor:backup_tokens' %}"
+                                               class="btn btn-outline-secondary btn-sm mt-2"><i
+                                                    class="fa-solid fa-angles-right"></i> {% trans "Show Codes" %}</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            {% trans "Disable Two-Factor Authentication" %}
+                                        </th>
+                                        <td>{% blocktrans trimmed %}However we strongly discourage you to do so, you can
+                                            also disable two-factor authentication for your account.{% endblocktrans %}
+                                            <br>
+                                            <a class="btn btn-outline-secondary btn-sm mt-2"
+                                               href="{% url 'two_factor:disable' %}">
+                                                <i class="fas fa-ban"></i> {% trans "Disable Two-Factor Authentication" %}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
                         {% else %}
                             <p>{% blocktrans trimmed %}Two-factor authentication is not enabled for your
                                 account. Enable two-factor authentication for enhanced account

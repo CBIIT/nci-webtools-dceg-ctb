@@ -516,7 +516,8 @@ AXES_META_PRECEDENCE_ORDER = [
 AXES_PROXY_COUNT = 1
 AXES_COOLOFF_TIME = int(os.environ.get('AXES_COOLOFF_TIME', '5'))
 AXES_USERNAME_FORM_FIELD = "email"
-AXES_LOCKOUT_TEMPLATE = "accounts/account/lockout.html"
+AXES_LOCKOUT_CALLABLE = "accounts.views.lockout"
+# AXES_LOCKOUT_TEMPLATE = "accounts/account/lockout.html"
 #########################################
 # Request Logging
 #########################################
@@ -530,7 +531,9 @@ REQUEST_LOGGING_ENABLE_COLORIZE = bool(os.environ.get('REQUEST_LOGGING_ENABLE_CO
 #
 # These settings allow use of MailGun as a simple API call
 EMAIL_SERVICE_API_URL           = os.environ.get('EMAIL_SERVICE_API_URL', '')
+
 EMAIL_SERVICE_API_KEY           = os.environ.get('EMAIL_SERVICE_API_KEY', '')
+
 NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATION_EMAIL_FROM_ADDRESS', 'noreply@isb-cgc.org')
 
 #########################
@@ -581,6 +584,7 @@ CONN_MAX_AGE = 60
 ############################
 SITE_GOOGLE_ANALYTICS             = bool(os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', None) is not None)
 SITE_GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', '')
+GOOGLE_SITE_VERIFICATION_CODE = os.environ.get('GOOGLE_SITE_VERIFICATION_CODE', '')
 
 # Rough max file size to allow for eg. barcode list upload, to prevent triggering RequestDataTooBig
 FILE_SIZE_UPLOAD_MAX = 1950000
@@ -623,7 +627,8 @@ BLANK_TISSUE_FILTER_CASE_COUNT = {
 
 GCP_APP_DOC_BUCKET = os.environ.get('GCP_APP_DOC_BUCKET', 'ctb-dev-app-doc-files')
 CTB_APPLICATION_RECEIVER_EMAIL = os.environ.get('CTB_APPLICATION_RECEIVER_EMAIL', 'ctb-support@isb-cgc.org')
-
+GOOGLE_SE_ID = os.environ.get('GOOGLE_SE_ID', None)
+# print(GOOGLE_SE_ID)
 if DEBUG and DEBUG_TOOLBAR:
     INSTALLED_APPS += ('debug_toolbar',)
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware',)
