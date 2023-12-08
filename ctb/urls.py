@@ -37,20 +37,17 @@ urlpatterns = [
     # About
     url(r'^about/$', views.about, name='about'),
 
-    # For Researchers
+    # For Research
     url(r'^research/$', views.research, name='research'),
-    # url(r'^research/sample_application$', views.sample_application, name='sample_application'),
     url(r'^research/research_projects/$', views.research_projects, name='research_projects'),
-    # url(r'^research/research_projects_2001_2009/$', views.research_projects_2001_2009,
-    #     name='research_projects_2001_2009'),
-    # url(r'^research/research_projects_2010_2019/$', views.research_projects_2010_2019,
-        # name='research_projects_2010_2019'),
 
     # Contact Us
     url(r'^contact/', views.contact, name='contact'),
 
+    # CTB keyword search
     url(r'^ctb_search', views.ctb_search, name='ctb_search'),
 
+    # Search Facility
     url(r'^search_facility/', include('donors.urls')),
 
     # User Details
@@ -70,6 +67,8 @@ urlpatterns = [
     url(r'^extended_login/$', views.extended_login_view, name='extended_login'),
     path('', include(tf_urls)),
 
+    # sitemap
+    url(r'^sitemap/', views.sitemap, name='sitemap')
 ]
 
 if settings.IS_DEV:
