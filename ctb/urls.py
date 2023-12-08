@@ -39,7 +39,7 @@ urlpatterns = [
 
     # For Researchers
     url(r'^research/$', views.research, name='research'),
-    url(r'^research/sample_application$', views.sample_application, name='sample_application'),
+    # url(r'^research/sample_application$', views.sample_application, name='sample_application'),
     url(r'^research/research_projects/$', views.research_projects, name='research_projects'),
     # url(r'^research/research_projects_2001_2009/$', views.research_projects_2001_2009,
     #     name='research_projects_2001_2009'),
