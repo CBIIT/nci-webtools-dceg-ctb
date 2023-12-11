@@ -117,13 +117,6 @@ def research(request):
     return render(request, 'ctb/research.html')
 
 
-# def sample_application(request):
-#     try:
-#         return FileResponse(open('static/ctb_sample_application.pdf', 'rb'), content_type='application/pdf')
-#     except FileNotFoundError:
-#         raise Http404()
-
-
 # research-projects
 def research_projects(request):
     return render(request, 'ctb/research_projects.html')
@@ -145,4 +138,12 @@ def ctb_search(request):
             q_keyword = ''
         return render(request, 'ctb/ctb_search.html', {'google_se_id':settings.GOOGLE_SE_ID, 'q_keyword': q_keyword})
     else:
+        raise Http404()
+
+
+# sitemap.xml
+def sitemap(request):
+    try:
+        return FileResponse(open('static/sitemap.xml', 'rb'), content_type='text/xml')
+    except FileNotFoundError:
         raise Http404()
