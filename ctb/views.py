@@ -144,6 +144,6 @@ def ctb_search(request):
 # sitemap.xml
 def sitemap(request):
     try:
-        return FileResponse(open('./sitemap.xml', 'rb'), content_type='text/xml')
+        return FileResponse(open('static/sitemap.xml', 'rb'), content_type='text/xml')
     except FileNotFoundError:
         raise Http404()
