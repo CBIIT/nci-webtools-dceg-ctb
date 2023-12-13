@@ -463,7 +463,6 @@ table.loading tbody:after {
     background-size: 50px 50px;
     content: "";
 }
-
 /* overwriting google search css */
 
 .gsc-adBlock, .gcsc-more-maybe-branding-root, .gsc-orderby-container, .gcsc-find-more-on-google-root, .gcsc-branding {
@@ -472,7 +471,6 @@ table.loading tbody:after {
 
 .gs-result .gs-title *, .gsc-cursor-page, .gs-spelling a {
     color: #01679d !important; !important;
-    font-family: Poppins, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif, serif !important;
 }
 
 .gs-result .gs-title *:hover, .gsc-cursor-page, .gs-spelling a:hover {
@@ -484,6 +482,7 @@ table.loading tbody:after {
 /*    color: rgba(58, 124, 117, 0.9) !important;*/
 /*}*/
 .gsc-control-cse, .gsc-control-cse .gsc-table-result {
+    font-family: Poppins, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif, serif !important;
     font-size: 1.1rem !important;
 }
 
