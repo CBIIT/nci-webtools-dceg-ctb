@@ -4,8 +4,6 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-
 <url>
   <loc>https://isb-cgc-ctb-dev.appspot.com/</loc>
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
@@ -22,11 +20,6 @@
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://isb-cgc-ctb-dev.appspot.com/account/login/</loc>
-  <lastmod>2023-12-08T20:43:43+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
-<url>
   <loc>https://isb-cgc-ctb-dev.appspot.com/privacy/</loc>
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
   <priority>0.80</priority>
@@ -36,16 +29,4 @@
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-<url>
-  <loc>https://isb-cgc-ctb-dev.appspot.com/accounts/password/reset/</loc>
-  <lastmod>2023-12-08T20:43:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-<url>
-  <loc>https://isb-cgc-ctb-dev.appspot.com/accounts/signup/</loc>
-  <lastmod>2023-12-08T20:43:43+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
-
 </urlset>
