@@ -13,47 +13,38 @@
 {% block page_name %}privacy{% endblock %}
 
 {% block page_header %}
-    <div class="container mt-2">
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>
-                </ol>
-            </nav>
-        </div>
+<div class="container">
+        <h3 class="page-banner">Privacy Policy</h3>
+{#        <div>#}
+{#            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">#}
+{#                <ol class="breadcrumb">#}
+{#                    <li class="breadcrumb-item active" aria-current="page">Privacy Policy</li>#}
+{#                </ol>#}
+{#            </nav>#}
+{#        </div>#}
     </div>
 {% endblock %}
 {% block content %}
-    <div class="container my-5">
+    <div class="container">
         <div class="col-lg-12 col-md-12 col-sm-12">
-            <h3 class="mb-4">Privacy Policy</h3>
             <div>
                 <p>
-                    Protecting your privacy is very important to us. Our Web site links to other National Institutes of
-                    Health (NIH) sites,
-                    federal agency sites, and private organizations. Once you leave the primary CTB site, you are
-                    subject to the privacy
-                    policy for the site(s) you are visiting. In addition to name and email address, we collect some data
-                    about your visit to
-                    our Web site to help us better understand how the public uses the site and how to make it more
-                    helpful. We collect
-                    information from visitors who read, browse, and/or download information from our Web site. We never
-                    collect information
+                    Protecting your privacy is very important to us. Our Web site links to other National Institutes of Health (NIH) sites,
+                    federal agency sites, and private organizations. Once you leave the primary CTB site, you are subject to the privacy
+                    policy for the site(s) you are visiting. In addition to name and email address, we collect some data about your visit to
+                    our Web site to help us better understand how the public uses the site and how to make it more helpful. We collect
+                    information from visitors who read, browse, and/or download information from our Web site. We never collect information
                     for commercial marketing or any purpose unrelated to the CTB mission and goals.
                 </p>
 
                 <h5>Types of Information Collected</h5>
                 <p>
-                    When you browse through any Web site, certain information about your visit can be collected. We
-                    automatically collect and
+                    When you browse through any Web site, certain information about your visit can be collected. We automatically collect and
                     store the following type of information about your visit:
                 </p>
                 <ul>
                     <li>Domain from which you access the Internet</li>
-                    <li>IP address (an IP address is a number that is automatically assigned to a computer when surfing
-                        the Web)
-                    </li>
+                    <li>IP address (an IP address is a number that is automatically assigned to a computer when surfing the Web)</li>
                     <li>Operating system and information about the browser used when visiting the site</li>
                     <li>Date and time of your visit</li>
                     <li>Pages you visited</li>
@@ -61,136 +52,94 @@
                     <li>Email address associated to your Google Account</li>
                     <li>Name (as available in your Google Account profile)</li>
                     <li>Information about what datasets are visited, linked to the IP address used to visit it</li>
-                    <li>Information about the datasets that were accessed from Google Cloud Storage requester pays, and
-                        the associated IP address, and Collection ID
-                    </li>
+                    <li>Information about the datasets that were accessed from Google Cloud Storage requester pays, and the associated IP address, and Collection ID</li>
                 </ul>
                 <p>
-                    We use this information to measure the number of visitors to our site and its various sections and
-                    datasets to help make our site more useful to visitors.
+                    We use this information to measure the number of visitors to our site and its various sections and datasets to help make our site more useful to visitors.
                 </p>
 
                 <h5>How CTB Collects Information</h5>
                 <p>
-                    CTB uses Google Analytics, Google Cloud Platform StackDriver Logging, and the CTB login process to
-                    collect
-                    the information in the bulleted list in the Types of Information Collected section above. Google
-                    Analytics and
-                    StackDriver gather information automatically and continuously. No Personally Identifiable
-                    Information (PII) is
-                    collected from these two systems. When you log in to our CTB site using a Google Account or a
-                    personal email,
-                    we collect your email address and name (as stored in your Google Account profile if applicable). CTB
-                    staff
-                    conducts analyses and reports on the aggregated data, and those reports are only available to the
-                    NCI and NIH.
+                    CTB uses Google Analytics, Google Cloud Platform StackDriver Logging, and the CTB login process to collect
+                    the information in the bulleted list in the Types of Information Collected section above. Google Analytics and
+                    StackDriver gather information automatically and continuously. No Personally Identifiable Information (PII) is
+                    collected from these two systems. When you log in to our CTB site using a Google Account or a personal email,
+                    we collect your email address and name (as stored in your Google Account profile if applicable). CTB staff
+                    conducts analyses and reports on the aggregated data, and those reports are only available to the NCI and NIH.
                 </p>
                 <p>
-                    CTB retains the data from Google Analytics, StackDriver, and the login process as long as needed to
-                    support
+                    CTB retains the data from Google Analytics, StackDriver, and the login process as long as needed to support
                     the mission of the CTB website and the NCI.
                 </p>
 
                 <h5>How CTB Uses Cookies</h5>
                 <p>
                     The Office of Management and Budget Memo
-                    <a href="https://www.whitehouse.gov/wp-content/uploads/2022/04/M-22-10.pdf" target="_blank"
-                       rel="noopener noreferrer">
-                        M-10-22, Guidance for Online Use of Web Measurement and Customization Technologies</a> (link is
-                    external) allows
+                    <a href="https://www.whitehouse.gov/wp-content/uploads/2022/04/M-22-10.pdf" target="_blank" rel="noopener noreferrer">
+                    M-10-22, Guidance for Online Use of Web Measurement and Customization Technologies</a> (link is external) allows
                     Federal agencies to use session and persistent cookies.
-                </p>
+                    </p>
 
                 <p>
-                    When you visit any Web site, its server may generate a piece of text known as a "cookie" to place on
-                    your
-                    computer. The cookie allows the server to "remember" specific information about your visit while you
-                    are
+                    When you visit any Web site, its server may generate a piece of text known as a "cookie" to place on your
+                    computer. The cookie allows the server to "remember" specific information about your visit while you are
                     connected.
                 </p>
                 <p>
-                    The cookie makes it easier for you to use the dynamic features of Web pages. Cookies from CTB pages
-                    only
-                    collect information about your browser’s visit to the site; they do not collect personal information
-                    about you.
+                    The cookie makes it easier for you to use the dynamic features of Web pages. Cookies from CTB pages only
+                    collect information about your browser’s visit to the site; they do not collect personal information about you.
                 </p>
                 <p>
-                    There are two types of cookies, single session (temporary), and multi-session (persistent). Session
-                    cookies last
-                    only as long as your Web browser is open. Once you close your browser, the cookie disappears.
-                    Persistent cookies
+                    There are two types of cookies, single session (temporary), and multi-session (persistent). Session cookies last
+                    only as long as your Web browser is open. Once you close your browser, the cookie disappears. Persistent cookies
                     are stored on your computer for longer periods.
                 </p>
 
                 <h3>Session Cookies</h3>
                 <p>
-                    CTB uses session cookies for technical purposes such as to enable better navigation through our
-                    site. These
-                    cookies let our server know that you are continuing a visit to our site. The OMB Memo 10-22 Guidance
-                    defines our
-                    use of session cookies as "Usage Tier 1 — Single Session.” The policy says, "This tier encompasses
-                    any use of
+                    CTB uses session cookies for technical purposes such as to enable better navigation through our site. These
+                    cookies let our server know that you are continuing a visit to our site. The OMB Memo 10-22 Guidance defines our
+                    use of session cookies as "Usage Tier 1 — Single Session.” The policy says, "This tier encompasses any use of
                     single session web measurement and customization technologies."
                 </p>
 
                 <h3>Persistent Cookies</h3>
                 <p>
-                    CTB uses persistent cookies to enable Google Analytics to differentiate between new and returning
-                    CTB
-                    visitors. Persistent cookies remain on your computer between visits to CTB until they expire. The
-                    OMB Memo
-                    10-22 Guidance defines our use of persistent cookies as "Usage Tier 2 — Multi-session without
-                    Personally
-                    Identifiable Information (PII).” The policy says, "This tier encompasses any use of multi-session
-                    Web
+                    CTB  uses persistent cookies to enable Google Analytics to differentiate between new and returning CTB
+                    visitors. Persistent cookies remain on your computer between visits to CTB until they expire. The OMB Memo
+                    10-22 Guidance defines our use of persistent cookies as "Usage Tier 2 — Multi-session without Personally
+                    Identifiable Information (PII).” The policy says, "This tier encompasses any use of multi-session Web
                     measurement and customization technologies when no PII is collected."
                 </p>
 
                 <h5>How Personal Information Is Protected</h5>
                 <p>
-                    If you choose to log in to our site with your Google Account we will receive your email address and
-                    name as
-                    listed in your Google Account profile. If you choose to make an account on our site using a personal
-                    email
-                    address, we will receive only that email address; any other profile information is optional and must
-                    be entered
-                    by you. We will maintain this information for security purposes only. We will safeguard the
-                    information you
+                    If you choose to log in to our site with your Google Account we will receive your email address and name as
+                    listed in your Google Account profile. If you choose to make an account on our site using a personal email
+                    address, we will receive only that email address; any other profile information is optional and must be entered
+                    by you. We will maintain this information for security purposes only. We will safeguard the information you
                     provide to us in accordance with the Privacy Act of 1974, as amended (5 U.S.C. Section 552a).
                 </p>
 
                 <h5>Data Safeguarding and Privacy</h5>
 
                 <p>
-                    CTB uses web measurement and customization technologies to help our Web sites function better for
-                    visitors
-                    and to better understand how the public uses the online resources we provide. All uses of web-based
-                    technologies
-                    comply with existing policies with respect to privacy and data safeguarding standards. Information
-                    Technology
-                    (IT) systems operated by CTB are assessed using Privacy Impact Assessments (PIAs) posted for public
-                    view on
-                    the <a href="http://www.hhs.gov/pia/" target="_blank" rel="noopener noreferrer">Department of Health
-                    and Human Services (DHHS) Web site</a>
-                    (link is external). CTB conducts and publishes a PIA for each use of a third-party website and
-                    application
-                    (TPWA) as they may have a different functionality or practice. TPWA PIAs are posted for public view
-                    on the
-                    <a href="http://www.hhs.gov/pia/#Third-Party" target="_blank" rel="noopener noreferrer">DHHS Web
-                        site</a> (link is external).
+                    CTB uses web measurement and customization technologies to help our Web sites function better for visitors
+                    and to better understand how the public uses the online resources we provide. All uses of web-based technologies
+                    comply with existing policies with respect to privacy and data safeguarding standards. Information Technology
+                    (IT) systems operated by CTB are assessed using Privacy Impact Assessments (PIAs) posted for public view on
+                    the <a href="http://www.hhs.gov/pia/" target="_blank" rel="noopener noreferrer">Department of Health and Human Services (DHHS) Web site</a>
+                    (link is external). CTB conducts and publishes a PIA for each use of a third-party website and application
+                    (TPWA) as they may have a different functionality or practice. TPWA PIAs are posted for public view on the
+                    <a href="http://www.hhs.gov/pia/#Third-Party" target="_blank" rel="noopener noreferrer">DHHS Web site</a> (link is external).
                 </p>
 
                 <p>
-                    Groups of records that contain information about an individual and are designed to be retrieved by
-                    the
-                    individual’s name or other personal identifier linked to the individual are covered by the Privacy
-                    Act of 1974,
-                    as amended (5 U.S.C. Section 552a). For these records, NIH Systems of Record Notices are published
-                    in the
-                    Federal Register and posted on the <a href="https://oma.od.nih.gov/DMS/Pages/Privacy-Program.aspx"
-                                                          target="_blank" rel="noopener noreferrer">
-                    NIH Senior Official for Privacy Website</a> (link is external). When web measurement and
-                    customization
+                    Groups of records that contain information about an individual and are designed to be retrieved by the
+                    individual’s name or other personal identifier linked to the individual are covered by the Privacy Act of 1974,
+                    as amended (5 U.S.C. Section 552a). For these records, NIH Systems of Record Notices are published in the
+                    Federal Register and posted on the <a href="https://oma.od.nih.gov/DMS/Pages/Privacy-Program.aspx" target="_blank" rel="noopener noreferrer">
+                    NIH Senior Official for Privacy Website</a> (link is external). When web measurement and customization
                     technologies are used, the Privacy Policy/Notice must provide:
                 </p>
                 <ul>
@@ -209,16 +158,13 @@
                 <h5>Data Retention and Access Limits</h5>
                 <p>
                     CTB will retain data collected using the following technologies long enough to achieve the specified
-                    objective for which they were collected. The data generated from these activities falls under the
-                    National
-                    Archives and Records Administration (NARA) General Records Schedule (GRS) 20-item IC 'Electronic
-                    Records,' and
-                    will be handled per the <a href="http://www.archives.gov/records-mgmt/grs/grs20.html"
-                                               target="_blank" rel="noopener noreferrer">
+                    objective for which they were collected. The data generated from these activities falls under the National
+                    Archives and Records Administration (NARA) General Records Schedule (GRS) 20-item IC 'Electronic Records,' and
+                    will be handled per the <a href="http://www.archives.gov/records-mgmt/grs/grs20.html" target="_blank" rel="noopener noreferrer">
                     requirements of that schedule</a> (link is external).
                 </p>
             </div>
         </div>
     </div>
-    </div>
+</div>
 {% endblock %}

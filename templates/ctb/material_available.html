@@ -1,0 +1,118 @@
+{% extends 'ctb/research.html' %}
+
+{% load static %}
+
+{% block title %}
+    CTB | Material Available
+{% endblock %}
+
+{% block description %}
+    Material Available
+{% endblock %}
+
+{% block page_name %}material_available{% endblock %}
+
+{% block page_header %}
+    <div class="page-banner">Material Available</div>
+    <div class="container mt-2">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Research</li>
+                <li class="breadcrumb-item active" aria-current="page">Material Available</li>
+            </ol>
+        </nav>
+    </div>
+
+{% endblock %}
+
+{% block subcontent %}
+    <p><strong>Material available </strong></p>
+    <p>The study cohort includes all those who were resident in the areas of Ukraine contaminated
+        by radioactive fallout from the accident and who were aged under 19 at exposure (i.e. born after
+        26<sup>th</sup> April 1967). Thyroid cancer in those who were children or adolescents at exposure is
+        the only cancer to have shown a substantial increase in these areas and it is clearly related to
+        exposure to radioiodine (predominantly the short lived isotopes particularly <sup>131</sup>I, which
+        has a half life of 8.1 days). This is evidenced by the sharp decrease in the frequency of thyroid
+        cancer (returning to pre-accident levels) in those who were born after 1/1/87 and were therefore not
+        exposed to radioiodine either in utero (the thyroid concentrates iodine from 3 months of
+        intrauterine age) or in childhood. The cohort now includes a significant number of cases of thyroid
+        tumors from patients who are resident in the areas&nbsp; contaminated by fallout from Chernobyl,
+        but by virtue of the fact that they were born after 1/1/87 have not been exposed to radioiodine.&nbsp;
+        This is an extremely valuable cohort that serves as a control population for thyroid cancer
+        associated with radioiodine exposure.</p>
+    <p>The CTB collects a variety of biospecimen from patients undergoing operations for thyroid cancer or adenoma at
+        the Institute of Endocrinology and Metabolism in Kiev, Ukraine who consent to donate to the project. Tissue
+        collection follows an approved standard operating procedure (SOP) and is snap frozen; the presence or absence of
+        tumor is verified by frozen section. A representative paraffin block is also obtained for each case. Where
+        appropriate, we also collect fresh and paraffin-embedded tissue from loco-regional metastases.</p>
+    <p>Histological slides from all tumors are reviewed by the CTB Pathology Panel - an international group
+        of expert thyroid pathologists, and a consensus diagnosis agreed before any materials are released
+        to researchers.</p>
+    <p>The CTB provides materials and data to research groups worldwide. The aim of the project is to ensure
+        that the maximum amount of information can be gathered from what is a unique and limited resource.
+        The surgical samples of thyroid tissue are generally small, therefore the CTB does not currently
+        issue tissue, but provides extracted nucleic acids, paraffin sections and sections from tissue
+        microarrays prepared from this material. Researchers are required to return research data to the CTB
+        so that the information can be shared with other researchers and could lead to better patient care
+        and assessment of risk from radiation exposure to a young population in the future.</p>
+    <p>For information on how you can apply to access biomaterials or research data <a
+            href="{% url 'access_to_materials' %}">click here</a>.<br><br>The on-line application process allows a
+        potential applicant to review whether samples or data matching the researchers search criteria are
+        available in the CTB. The table below provides a summary of the cumulative total of cases from Ukraine which have been reviewed by the Pathology Panel and a consensus diagnosis agreed; the number of cases for which frozen material is available is given in brackets.
+    </p>
+    <table class="table table-striped mb-5">
+        <caption>Table updated on May 24th, 2023</caption>
+        <thead>
+        <tr>
+            <th class="text-end">Diagnosis</th>
+            <th class="text-center" colspan="2">Cases in Ukraine</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="text-end">Papillary Carcinoma (incl micro PTC)</td>
+            <td class="text-end">2,463</td>
+            <td class="text-start">(1,793)</td>
+        </tr>
+        <tr>
+            <td class="text-end">Follicular Carcinoma</td>
+            <td class="text-end">122</td>
+            <td class="text-start">(104)</td>
+        </tr>
+        <tr>
+            <td class="text-end">Medullary Carcinoma</td>
+            <td class="text-end">58</td>
+            <td class="text-start">(49)</td>
+        </tr>
+        <tr>
+            <td class="text-end">Other thyroid cancers<br>(WDCA NOS, PDC)</td>
+            <td class="text-end">77</td>
+            <td class="text-start">(67)</td>
+        </tr>
+        <tr>
+            <td class="text-end">Follicular Adenoma</td>
+            <td class="text-end">729</td>
+            <td class="text-start">(579)</td>
+        </tr>
+        <tr>
+            <td class="text-end">Other Benign Follicular Tumors<br>(FT UMP and WDT UMP)</td>
+            <td class="text-end">143</td>
+            <td class="text-start">(123)</td>
+        </tr>
+        <tr>
+            <td class="text-end">Miscellaneous Thyroid Tumors<br>(Other and Nodule, TTT)</td>
+            <td class="text-end">150</td>
+            <td class="text-start">(96)</td>
+        </tr>
+        <tr>
+            <td class="text-end">Total</td>
+            <td class="text-end">3,742</td>
+            <td class="text-start">(2,811)</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p><strong>More information:</strong></p>
+    <p><a href="{% url 'nucleic_acids_and_paraffin_sections' %}">Aliquots of nucleic acid</a><br><a
+            href="{% url 'nucleic_acids_and_paraffin_sections' %}">Paraffin sections</a></p>
+{% endblock %}
