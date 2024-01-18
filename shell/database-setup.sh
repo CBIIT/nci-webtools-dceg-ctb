@@ -1,3 +1,19 @@
+###
+# Copyright 2015-2023, Institute for Systems Biology
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#    http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+###
+
 if [ -n "$CI" ]; then
     export HOME=/home/circleci/${CIRCLE_PROJECT_REPONAME}
     export HOMEROOT=/home/circleci/${CIRCLE_PROJECT_REPONAME}
@@ -14,6 +30,11 @@ if [ -n "$CI" ]; then
 else
     if ( "/home/vagrant/www/shell/get_env.sh" ) ; then
         export $(cat ${ENV_FILE_PATH} | grep -v ^# | xargs) 2> /dev/null
+        if [ -z "${SECURE_LOCAL_PATH}" ] || [ "${SECURE_LOCAL_PATH}" == "" ] ; then
+            echo "[ERROR] SECURE_LOCAL_PATH not found, but this is a VM build! Something might be wrong with your .env file"
+            echo "or your secure_files directory."
+            exit 1
+        fi
     else
         exit 1
     fi
@@ -29,9 +50,9 @@ echo "PYTHONPATH is ${PYTHONPATH}"
 echo "Increase group_concat max, for longer data type names"
 mysql -u$MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -e "SET GLOBAL group_concat_max_len=18446744073709547520;"
 
-echo "Creating database users..."
-mysql -u $MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -e "CREATE USER '${DATABASE_USER}'@'%' IDENTIFIED BY '${DATABASE_PASSWORD}';"
-mysql -u $MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -e "CREATE USER '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_PASSWORD}';"
+echo "Creating database users for web application..."
+mysql -u $MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -e "CREATE USER IF NOT EXISTS '${DATABASE_USER}'@'%' IDENTIFIED BY '${DATABASE_PASSWORD}';"
+mysql -u $MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -e "CREATE USER IF NOT EXISTS '${DATABASE_USER}'@'localhost' IDENTIFIED BY '${DATABASE_PASSWORD}';"
 
 echo "Granting permissions to database users..."
 mysql -u $MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL PRIVILEGES ON *.* TO '${DATABASE_USER}'@'%';"
@@ -39,6 +60,7 @@ mysql -u $MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -e "GRANT ALL
 
 # If we have migrations for older, pre-migrations apps which haven't yet been or will never be added to the database dump, make them here eg.:
 # python3 ${HOMEROOT}/manage.py makemigrations <appname>
+
 # Now run migrations
 echo "Running Migrations..."
 python3 ${HOMEROOT}/manage.py migrate --noinput
@@ -71,14 +93,6 @@ fi
 
 echo "Adding Django site IDs..."
 python3 ${HOMEROOT}/scripts/add_site_ids.py
-
-# We have to use '' around the statement due to the need to use `` around name and key, which are MySQL keywords, so concatenation is needed to
-# preserve expansion of GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET
-#echo "Setting Up Social Application Login..."
-#mysql -u$MYSQL_ROOT_USER -h $MYSQL_DB_HOST -p$MYSQL_ROOT_PASSWORD -D$DATABASE_NAME -e 'BEGIN; INSERT INTO socialaccount_socialapp (provider, `name`, client_id, secret, `key`) VALUES("google", "Google", "'$OAUTH2_CLIENT_ID'", "'$OAUTH2_CLIENT_SECRET'", " "); INSERT INTO socialaccount_socialapp_sites (socialapp_id, site_id) VALUES(1, 2), (1, 3); COMMIT;'
-
-# Setting up API token
-#python3 ${HOMEROOT}/scripts/create_api_token.py
 
 # Check system config
 python3 ${HOMEROOT}/manage.py check
