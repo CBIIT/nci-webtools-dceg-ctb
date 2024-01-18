@@ -1,24 +1,13 @@
 {% extends "two_factor/_base_focus.html" %}
 {% load i18n %}
 {% block page_header %}
-    <div class="container mt-2">
-        <div>
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'two_factor:profile' %}">Account Security</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Backup Tokens</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
+    <div class="page-banner">{% block title %}{% trans "Backup Tokens" %}{% endblock %}</div>
 {% endblock %}
 
 {% block content %}
     <div class="container my-5">
         <div class="row user-row justify-content-center">
             <div class="col-lg-10">
-                <h3 class="mb-4">Backup Tokens</h3>
                 <div class="card user-panel">
                     <div class="card-body px-5 py-3">
                         <p>{% blocktrans trimmed %}Backup tokens can be used when your primary and backup

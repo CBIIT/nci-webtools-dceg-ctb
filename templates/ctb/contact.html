@@ -12,49 +12,37 @@
 {% block page_name %}contact{% endblock %}
 
 {% block page_header %}
-    <div class="container mt-2">
-        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Contact Us</li>
-            </ol>
-        </nav>
-    </div>
+    <div class="page-banner">Contact Us</div>
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-            </div>
-            <div class="col-lg-9">
-                {#            <div class="row justify-content-center">#}
-                <div class="py-5">
-                    <h2 class="py-2">Contact Us</h2>
-                    {#                    <div class="p-3">#}
-                    <div>
-                        <div class="fw-bold">For queries regarding the Chernobyl Tissue Bank:</div>
-                        <div class=""><a href="mailto:ncicontactdceg@mail.nih.gov"><i
-                                class="fas fa-envelope me-2"></i>
-                            Please contact us via email</a></div>
-                    </div>
-                    <hr>
-                    <div>
-                        <div class="fw-bold">For questions on the operation of the CTB website:</div>
-                        <div class=""><a href="mailto:ctb-support@isb-cgc.org"><i class="fas fa-envelope me-2"></i>
-                            Please contact the ISB-CGC Support Team via email</a>.
+        <div class="row justify-content-center">
+            <div class="col-lg-6 pt-5">
+
+{#                If you would like any further information or have any queries regarding the Tissue Bank, please#}
+{#                contact us.#}
+                <div class="card my-3">
+{#                    <div class="card-header text-center fw-bold"><i class="far fa-envelope"></i></div>#}
+                    <div class="card-body py-3 px-5">
+                        <div class="card-text">
+                            <div><i class="far fa-question-circle me-2"></i> For any queries regarding the tissue bank, please email us at:</div>
+                            <div class="ps-5"><a
+                                    href="mailto:ncicontactdceg@mail.nih.gov">ncicontactdceg@mail.nih.gov</a></div>
                         </div>
-                    </div>
-                    <hr>
-                    <div>
-                        <div class="fw-bold">For more information, please visit:</div>
-                        <a target="_blank" rel="noopener noreferrer" href="https://dceg.cancer.gov/"><i
-                                class="fas fa-globe me-2"></i> Division of Cancer Epidemiology and Genetics (DCEG),
-                            NCI</a>
-                    </div>
-                    {#                    </div>#}
+                        <hr>
+                        <div class="card-text">
+                            <div><i class="fas fa-desktop me-2"></i> For questions on the website please email us at: </div>
+                            <div class="ps-5"><a
+                                    href="mailto:ctb-support@isb-cgc.org">ctb-support@isb-cgc.org</a></div>
+                            </div>
+
+                        </div>
                 </div>
-                {#            </div>#}
+
+
+
+
             </div>
         </div>
     </div>
