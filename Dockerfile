@@ -34,7 +34,7 @@ RUN virtualenv /env -p python3
 ENV VIRTUAL_ENV /env
 ENV PATH /env/bin:$PATH
 RUN apt-get install -y wget
-RUN wget "http://repo.mysql.com/mysql-apt-config_0.8.9-1_all.deb" -P /tmp
+RUN wget "http://repo.mysql.com/mysql-apt-config_0.8.29-1_all.deb" -P /tmp
 # install lsb-release (a dependency of mysql-apt-config), since dpkg doesn't
 # do dependency resolution
 RUN apt-get install -y lsb-release
@@ -43,8 +43,8 @@ RUN apt-get install -y lsb-release
 RUN echo "mysql-apt-config mysql-apt-config/select-server select mysql-8.0" | debconf-set-selections
 # having 'selected' mysql-8.0 for 'server', install the mysql config package
 RUN echo 'download mysql public build key'
-RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 467B942D3A79BD29
-RUN dpkg --install /tmp/mysql-apt-config_0.8.9-1_all.deb
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv A8D3785C
+RUN dpkg --install /tmp/mysql-apt-config_0.8.29-1_all.deb
 
 # fetch the updated package metadata (in particular, mysql-server-8.0)
 RUN apt-get update

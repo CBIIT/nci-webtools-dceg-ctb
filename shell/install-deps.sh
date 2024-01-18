@@ -23,12 +23,11 @@ apt-get -y --force-yes install software-properties-common
 if [ -n "$CI" ]; then
     # Use these next 4 lines to update mysql public build key
     echo 'download mysql public build key'
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 5072E1F5
-    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 467B942D3A79BD29
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv A8D3785C
     echo 'mysql build key update done.'
-    wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
+    wget https://dev.mysql.com/get/mysql-apt-config_0.8.29-1_all.deb
     apt-get install -y lsb-release
-    dpkg -i mysql-apt-config_0.8.9-1_all.deb
+    dpkg -i mysql-apt-config_0.8.29-1_all.deb
 fi
 
 apt-get update -qq
