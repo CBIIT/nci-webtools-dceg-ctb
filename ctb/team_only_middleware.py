@@ -47,7 +47,7 @@ class TeamOnly(object):
                             #         "s" if len(settings.RESTRICTED_ACCESS_GROUPS) > 1 else '')
                             # )
                             messages.warning(
-                                request,"Your account will need to be evaluated before you can fully access your account. The evaluation process can take up to 3 business days. You will get an email once your account is approved. If you have any questions, please emmail us at ctb-support@@isb-cgc.org.")
+                                request,"Your account will need to be evaluated before you can fully access your account. The evaluation process can take up to 3 business days. You will get an email once your account is approved. If you have any questions, please email us at <a href='mailto:ctb-support@isb-cgc.org'>ctb-support@isb-cgc.org</a>")
                             return redirect('landing_page')
 
         response = self.get_response(request)
