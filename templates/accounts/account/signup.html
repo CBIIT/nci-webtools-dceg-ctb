@@ -15,10 +15,10 @@
             <div class="col-lg-6 accounts-col">
                 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                     <div class="card">
-                        <div class="card-header"><h5>Register</h5></div>
+                        <div class="card-header"><h5>Apply for an Account</h5></div>
                         <div class="card-body p-4">
                             <p>Already have an account? Please <a href="{% url 'two_factor:login' %}"><b>sign in</b></a>
-                                instead.</p>
+                                instead. <br/>Otherwise, you will need to apply for an account:</p>
                             {% csrf_token %}
                             {{ form.as_p }}
                             {% if redirect_field_value %}
@@ -47,7 +47,7 @@
                             </div>
 
                             <div class="fst-italic my-3">
-                                Your account will need to be evaluated before you can fully access your account. The evaluation process can take up to 3 business days. You will get an email once your account is approved.
+                                Your application will need to be evaluated before an account can be approved. You will get an email at the above address asking for more information.
                             </div>
                         </div>
                     </div>
