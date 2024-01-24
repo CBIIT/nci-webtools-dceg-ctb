@@ -14,5 +14,7 @@ def additional_context(request):
             'RESTRICTED_ACCESS': settings.RESTRICT_ACCESS,
             'RESTRICTED_ACCESS_GROUPS': settings.RESTRICTED_ACCESS_GROUPS,
             'APP_VERSION': settings.APP_VERSION,
-            'DEV_TIER': settings.DEV_TIER
+            'DEV_TIER': settings.DEV_TIER,
+            'ADOBE_DTM_PATH': settings.ADOBE_DTM_PATH,
+            'ADOBE_N_DAP_ANALYTICS': settings.ADOBE_N_DAP_ANALYTICS
     }
