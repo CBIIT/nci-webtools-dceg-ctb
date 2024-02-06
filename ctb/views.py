@@ -1,5 +1,5 @@
 ###
-# Copyright 2023, Institute for Systems Biology
+# Copyright 2024, Institute for Systems Biology
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,17 +17,13 @@
 import logging
 import sys
 import datetime
-
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import never_cache
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.urls import reverse
-
 from django.http import HttpResponse, JsonResponse, FileResponse, Http404
-from django.contrib.auth.signals import user_login_failed
-from django.dispatch import receiver
 from accounts.decorators import password_change_required
 
 debug = settings.DEBUG
@@ -69,14 +65,6 @@ def user_detail(request, user_id):
                        })
     else:
         return render(request, '403.html')
-
-
-@receiver(user_login_failed)
-def user_login_failed_callback(sender, credentials, **kwargs):
-    try:
-        logger.info('[CTB LOGIN] Login FAILED for: {credentials}'.format(credentials=credentials))
-    except Exception as e:
-        logger.exception(e)
 
 
 # Extended login view so we can track user logins, redirects to data exploration page
