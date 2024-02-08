@@ -69,7 +69,7 @@ def email_confirmed_callback(sender, email_address, **kwargs):
         
         
         Sincerely,
-        ISB-CGC Team''',
+        Chernobyl Tissue Bank Team''',
             settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
             [settings.CTB_APPLICATION_RECEIVER_EMAIL])
         notification_mail_to_ctb_team.send()
@@ -86,7 +86,7 @@ def email_confirmed_callback(sender, email_address, **kwargs):
 
 
                 Sincerely,
-                Chernobyl Tissue Bank''',
+                Chernobyl Tissue Bank Team''',
             settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
             [email_address])
         notification_mail_to_user.send()
