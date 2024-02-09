@@ -38,7 +38,7 @@ try:
     delete_str = 'DELETE FROM django_site WHERE id in (2, 3, 4, 5);'
     insert_str = 'INSERT INTO django_site (id, domain, name) VALUES (%s, %s, %s), (%s, %s, %s);'
 
-    insert_tuple = ('2', 'localhost:8086', 'localhost:8086', '3', 'isb-cgc-ctb-dev.appspot.com', 'isb-cgc-ctb-dev.appspot.com')
+    insert_tuple = ('2', 'localhost:8086', 'localhost:8086', '3', 'dev-ctb.isb-cgc.org', 'dev-ctb.isb-cgc.org')
 
     cursor = db.cursor()
     cursor.execute(delete_str)
