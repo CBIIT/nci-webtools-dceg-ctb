@@ -41,7 +41,7 @@ class TeamOnly(object):
                                 reduce(lambda q, g: q | Q(name__icontains=g), settings.RESTRICTED_ACCESS_GROUPS, Q())).exists():
                         messages.warning(
                             request,
-                            "Your account application will need to be evaluated before an account cant be approved. You will get an email asking for more information. you can fully access your account. If you have any questions, please email us at <a href='mailto:ctb-support@isb-cgc.org'>ctb-support@isb-cgc.org</a>")
+                            "Your account application will need to be evaluated before an account can be approved. You will get an email about approval. If you have any questions, please email us at <a href='mailto:ctb-support@isb-cgc.org'>ctb-support@isb-cgc.org</a>")
                         return redirect('landing_page')
         response = self.get_response(request)
         return response

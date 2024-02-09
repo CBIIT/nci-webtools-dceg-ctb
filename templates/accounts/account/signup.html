@@ -15,7 +15,7 @@
             <div class="col-lg-6 accounts-col">
                 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
                     <div class="card">
-                        <div class="card-header"><h5>Apply for an Account</h5></div>
+                        <div class="card-header"><h5>Create an Account</h5></div>
                         <div class="card-body p-4">
                             <p>Already have an account? Please <a href="{% url 'two_factor:login' %}"><b>sign in</b></a>
                                 instead. <br/>Otherwise, you will need to apply for an account:</p>
@@ -42,7 +42,7 @@
                             </div>
 
                             <div class="d-grid gap-2 pt-3">
-                                <button class="btn btn-primary" type="submit">{% trans "Apply" %} &raquo;
+                                <button class="btn btn-primary" type="submit">{% trans "Create" %} &raquo;
                                 </button>
                             </div>
 
