@@ -47,36 +47,39 @@ SHARED_SOURCE_DIRECTORIES = []
 for directory_name in SHARED_SOURCE_DIRECTORIES:
     sys.path.append(os.path.join(BASE_DIR, directory_name))
 
-DEBUG                   = (os.environ.get('DEBUG', 'False') == 'True')
-CONNECTION_IS_LOCAL     = (os.environ.get('DATABASE_HOST', '127.0.0.1') == 'localhost')
-IS_CIRCLE               = (os.environ.get('CI', None) is not None)
-DEBUG_TOOLBAR           = ((os.environ.get('DEBUG_TOOLBAR', 'False') == 'True') and CONNECTION_IS_LOCAL)
-LOCAL_RESPONSE_PAGES    = (os.environ.get('LOCAL_RESPONSE_PAGES', 'False') == 'True')
+DEBUG = (os.environ.get('DEBUG', 'False') == 'True')
+CONNECTION_IS_LOCAL = (os.environ.get('DATABASE_HOST', '127.0.0.1') == 'localhost')
+IS_CIRCLE = (os.environ.get('CI', None) is not None)
+DEBUG_TOOLBAR = ((os.environ.get('DEBUG_TOOLBAR', 'False') == 'True') and CONNECTION_IS_LOCAL)
+LOCAL_RESPONSE_PAGES = (os.environ.get('LOCAL_RESPONSE_PAGES', 'False') == 'True')
 
 print("[STATUS] DEBUG mode is {}".format(str(DEBUG)), file=sys.stdout)
 
-RESTRICT_ACCESS          = (os.environ.get('RESTRICT_ACCESS', 'True') == 'True')
+RESTRICT_ACCESS = (os.environ.get('RESTRICT_ACCESS', 'True') == 'True')
 RESTRICTED_ACCESS_GROUPS = os.environ.get('RESTRICTED_ACCESS_GROUPS', '').split(',')
 
 if RESTRICT_ACCESS:
-    print("[STATUS] Access to the site is restricted to members of the {} group(s).".format(", ".join(RESTRICTED_ACCESS_GROUPS)), file=sys.stdout)
+    print("[STATUS] Access to the site is restricted to members of the {} group(s).".format(
+        ", ".join(RESTRICTED_ACCESS_GROUPS)), file=sys.stdout)
 else:
     print("[STATUS] Access to the site is NOT restricted!", file=sys.stdout)
 
 # Theoretically Nginx allows us to use '*' for ALLOWED_HOSTS but...
-ALLOWED_HOSTS = list(set(os.environ.get('ALLOWED_HOST', 'localhost').split(',') + ['localhost', '127.0.0.1', '[::1]', gethostname(), gethostbyname(gethostname()),]))
-#ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = list(
+    set(os.environ.get('ALLOWED_HOST', 'localhost').split(',') + ['localhost', '127.0.0.1', '[::1]', gethostname(),
+                                                                  gethostbyname(gethostname()), ]))
+# ALLOWED_HOSTS = ['*']
 
-SSL_DIR = os.path.abspath(os.path.dirname(__file__))+os.sep
+SSL_DIR = os.path.abspath(os.path.dirname(__file__)) + os.sep
 
-ADMINS                  = ()
-MANAGERS                = ADMINS
+ADMINS = ()
+MANAGERS = ADMINS
 
-GCLOUD_PROJECT_ID              = os.environ.get('GCLOUD_PROJECT_ID', '')
-GCLOUD_PROJECT_NUMBER          = os.environ.get('GCLOUD_PROJECT_NUMBER', '')
-BIGQUERY_PROJECT_ID            = os.environ.get('BIGQUERY_PROJECT_ID', GCLOUD_PROJECT_ID)
-BIGQUERY_DATA_PROJECT_ID       = os.environ.get('BIGQUERY_DATA_PROJECT_ID', GCLOUD_PROJECT_ID)
-BIGQUERY_USER_DATA_PROJECT_ID  = os.environ.get('BIGQUERY_USER_DATA_PROJECT_ID', GCLOUD_PROJECT_ID)
+GCLOUD_PROJECT_ID = os.environ.get('GCLOUD_PROJECT_ID', '')
+GCLOUD_PROJECT_NUMBER = os.environ.get('GCLOUD_PROJECT_NUMBER', '')
+BIGQUERY_PROJECT_ID = os.environ.get('BIGQUERY_PROJECT_ID', GCLOUD_PROJECT_ID)
+BIGQUERY_DATA_PROJECT_ID = os.environ.get('BIGQUERY_DATA_PROJECT_ID', GCLOUD_PROJECT_ID)
+BIGQUERY_USER_DATA_PROJECT_ID = os.environ.get('BIGQUERY_USER_DATA_PROJECT_ID', GCLOUD_PROJECT_ID)
 BIGQUERY_USER_MANIFEST_DATASET = os.environ.get('BIGQUERY_USER_MANIFEST_DATASET', 'dev_user_dataset')
 BIGQUERY_USER_MANIFEST_TIMEOUT = int(os.environ.get('BIGQUERY_USER_MANIFEST_TIMEOUT', '7'))
 
@@ -84,12 +87,12 @@ BIGQUERY_USER_MANIFEST_TIMEOUT = int(os.environ.get('BIGQUERY_USER_MANIFEST_TIME
 # WEBAPP_LOGIN_LOG_NAME         = os.environ.get('WEBAPP_LOGIN_LOG_NAME', 'local_dev_logging')
 # COHORT_CREATION_LOG_NAME      = os.environ.get('COHORT_CREATION_LOG_NAME', 'local_dev_logging')
 
-BASE_URL                = os.environ.get('BASE_URL', 'https://isb-cgc-ctb-dev.appspot.com')
+BASE_URL = os.environ.get('BASE_URL', 'https://isb-cgc-ctb-dev.appspot.com')
 
 # BigQuery cohort storage settings
-BIGQUERY_COHORT_DATASET_ID           = os.environ.get('BIGQUERY_COHORT_DATASET_ID', 'cohort_dataset')
-BIGQUERY_COHORT_TABLE_ID             = os.environ.get('BIGQUERY_COHORT_TABLE_ID', 'developer_cohorts')
-MAX_BQ_INSERT                        = int(os.environ.get('MAX_BQ_INSERT', '500'))
+BIGQUERY_COHORT_DATASET_ID = os.environ.get('BIGQUERY_COHORT_DATASET_ID', 'cohort_dataset')
+BIGQUERY_COHORT_TABLE_ID = os.environ.get('BIGQUERY_COHORT_TABLE_ID', 'developer_cohorts')
+MAX_BQ_INSERT = int(os.environ.get('MAX_BQ_INSERT', '500'))
 
 database_config = {
     'default': {
@@ -128,7 +131,7 @@ if exists(join(dirname(__file__), '../version.env')):
 
 APP_VERSION = os.environ.get("APP_VERSION", VERSION)
 
-DEV_TIER = bool(DEBUG or re.search(r'^dev\.',APP_VERSION))
+DEV_TIER = bool(DEBUG or re.search(r'^dev\.', APP_VERSION))
 
 # If this is a GAE-Flex deployment, we don't need to specify SSL; the proxy will take
 # care of that for us
@@ -188,9 +191,9 @@ MIDDLEWARE = [
 #  django-session-security  #
 #############################
 INSTALLED_APPS += ('session_security',)
-SESSION_SECURITY_WARN_AFTER        = int(os.environ.get('SESSION_SECURITY_WARN_AFTER','540'))
-SESSION_SECURITY_EXPIRE_AFTER      = int(os.environ.get('SESSION_SECURITY_EXPIRE_AFTER','600'))
-SESSION_EXPIRE_AT_BROWSER_CLOSE    = True
+SESSION_SECURITY_WARN_AFTER = int(os.environ.get('SESSION_SECURITY_WARN_AFTER', '540'))
+SESSION_SECURITY_EXPIRE_AFTER = int(os.environ.get('SESSION_SECURITY_EXPIRE_AFTER', '600'))
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 MIDDLEWARE.append(
     # for django-session-security -- must go *after* AuthenticationMiddleware
     'session_security.middleware.SessionSecurityMiddleware',
@@ -345,14 +348,14 @@ AUTHENTICATION_BACKENDS = (
 )
 
 ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_REQUIRED        = True
-ACCOUNT_USERNAME_REQUIRED     = bool(os.environ.get('ACCOUNT_USERNAME_REQUIRED', 'False') == 'True')
-ACCOUNT_EMAIL_VERIFICATION    = os.environ.get('ACCOUNT_EMAIL_VERIFICATION', 'mandatory').lower()
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = bool(os.environ.get('ACCOUNT_USERNAME_REQUIRED', 'False') == 'True')
+ACCOUNT_EMAIL_VERIFICATION = os.environ.get('ACCOUNT_EMAIL_VERIFICATION', 'mandatory').lower()
 
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Chernobyl Tissue Bank] "
 ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION', 120)  # Max password age in days
-ACCOUNTS_PASSWORD_HISTORY    = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5)  # Max password history kept
-ACCOUNTS_ALLOWANCES          = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
+ACCOUNTS_PASSWORD_HISTORY = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5)  # Max password history kept
+ACCOUNTS_ALLOWANCES = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
 
 ##########################
 #   End django-allauth   #
@@ -391,12 +394,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
-SECURE_PROXY_SSL_HEADER        = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-CSRF_COOKIE_SECURE             = bool(os.environ.get('CSRF_COOKIE_SECURE', 'True') == 'True')
-SESSION_COOKIE_SECURE          = bool(os.environ.get('SESSION_COOKIE_SECURE', 'True') == 'True')
-SECURE_SSL_REDIRECT            = bool(os.environ.get('SECURE_SSL_REDIRECT', 'True') == 'True')
+CSRF_COOKIE_SECURE = bool(os.environ.get('CSRF_COOKIE_SECURE', 'True') == 'True')
+SESSION_COOKIE_SECURE = bool(os.environ.get('SESSION_COOKIE_SECURE', 'True') == 'True')
+SECURE_SSL_REDIRECT = bool(os.environ.get('SECURE_SSL_REDIRECT', 'True') == 'True')
 
 SECURE_REDIRECT_EXEMPT = []
 
@@ -431,8 +433,8 @@ USE_TZ = True
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
 MEDIA_FOLDER = os.environ.get('MEDIA_FOLDER', 'uploads/')
-MEDIA_ROOT   = os.path.join(os.path.dirname(__file__), '..', '..', MEDIA_FOLDER)
-MEDIA_ROOT   = os.path.normpath(MEDIA_ROOT)
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), '..', '..', MEDIA_FOLDER)
+MEDIA_ROOT = os.path.normpath(MEDIA_ROOT)
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -469,9 +471,9 @@ STATICFILES_FINDERS = (
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 
-SECURE_HSTS_INCLUDE_SUBDOMAINS = (os.environ.get('SECURE_HSTS_INCLUDE_SUBDOMAINS','True') == 'True')
-SECURE_HSTS_PRELOAD            = (os.environ.get('SECURE_HSTS_PRELOAD','True') == 'True')
-SECURE_HSTS_SECONDS            = int(os.environ.get('SECURE_HSTS_SECONDS','3600'))
+SECURE_HSTS_INCLUDE_SUBDOMAINS = (os.environ.get('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'True') == 'True')
+SECURE_HSTS_PRELOAD = (os.environ.get('SECURE_HSTS_PRELOAD', 'True') == 'True')
+SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', '3600'))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -524,15 +526,14 @@ AXES_LOCKOUT_CALLABLE = "accounts.views.lockout"
 REQUEST_LOGGING_MAX_BODY_LENGTH = int(os.environ.get('REQUEST_LOGGING_MAX_BODY_LENGTH', '1000'))
 REQUEST_LOGGING_ENABLE_COLORIZE = bool(os.environ.get('REQUEST_LOGGING_ENABLE_COLORIZE', 'False') == 'True')
 
-
 #########################################
 #   MailGun Email Settings for requests #
 #########################################
 #
 # These settings allow use of MailGun as a simple API call
-EMAIL_SERVICE_API_URL           = os.environ.get('EMAIL_SERVICE_API_URL', '')
+EMAIL_SERVICE_API_URL = os.environ.get('EMAIL_SERVICE_API_URL', '')
 
-EMAIL_SERVICE_API_KEY           = os.environ.get('EMAIL_SERVICE_API_KEY', '')
+EMAIL_SERVICE_API_KEY = os.environ.get('EMAIL_SERVICE_API_KEY', '')
 
 NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATION_EMAIL_FROM_ADDRESS', 'noreply@isb-cgc.org')
 
@@ -549,12 +550,14 @@ EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = NOTIFICATION_EMAIL_FROM_ADDRESS
 SERVER_EMAIL = "ctb-support@isb-cgc.org"
 
-GOOGLE_APPLICATION_CREDENTIALS  = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH,os.environ.get('GOOGLE_APPLICATION_CREDENTIALS', '')))
-OAUTH2_CLIENT_ID                = os.environ.get('OAUTH2_CLIENT_ID', '')
-OAUTH2_CLIENT_SECRET            = os.environ.get('OAUTH2_CLIENT_SECRET', '')
+GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(
+    'GOOGLE_APPLICATION_CREDENTIALS', '')))
+OAUTH2_CLIENT_ID = os.environ.get('OAUTH2_CLIENT_ID', '')
+OAUTH2_CLIENT_SECRET = os.environ.get('OAUTH2_CLIENT_SECRET', '')
 
 if not exists(GOOGLE_APPLICATION_CREDENTIALS):
-    print("[ERROR] Google application credentials file wasn't found! Provided path: {}".format(GOOGLE_APPLICATION_CREDENTIALS))
+    print("[ERROR] Google application credentials file wasn't found! Provided path: {}".format(
+        GOOGLE_APPLICATION_CREDENTIALS))
     exit(1)
 
 ##############################
@@ -582,7 +585,7 @@ CONN_MAX_AGE = 60
 ############################
 #   METRICS SETTINGS
 ############################
-SITE_GOOGLE_ANALYTICS             = bool(os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', None) is not None)
+SITE_GOOGLE_ANALYTICS = bool(os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', None) is not None)
 SITE_GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', '')
 GOOGLE_SITE_VERIFICATION_CODE = os.environ.get('GOOGLE_SITE_VERIFICATION_CODE', '')
 ADOBE_DTM_PATH = os.environ.get('ADOBE_DTM_PATH', None)
@@ -596,9 +599,9 @@ CTB_FORM_FILE_SIZE_UPLOAD_MAX = 65536
 # Explicitly check for known problems in descrpitions and names provided by users
 BLACKLIST_RE = r'((?i)<script>|(?i)</script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|(?i)<iframe>|(?i)</iframe>)'
 BLANK_TISSUE_FILTERS = {'country': 'ukraine', 'patient_residency': 'both', 'patient_gender': 'both', 'dob': 'both'}
-    # ,
-    #                     'age_at_operation_min': '',
-    #                     'age_at_operation_max': '', 'age_at_exposure_min': '', 'age_at_exposure_max': ''}
+# ,
+#                     'age_at_operation_min': '',
+#                     'age_at_operation_max': '', 'age_at_exposure_min': '', 'age_at_exposure_max': ''}
 
 BLANK_TISSUE_FILTER_CASE_COUNT = {
     'tissue': {
@@ -633,7 +636,7 @@ GOOGLE_SE_ID = os.environ.get('GOOGLE_SE_ID', None)
 # print(GOOGLE_SE_ID)
 if DEBUG and DEBUG_TOOLBAR:
     INSTALLED_APPS += ('debug_toolbar',)
-    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware',)
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware', )
     DEBUG_TOOLBAR_PANELS = [
         'debug_toolbar.panels.versions.VersionsPanel',
         'debug_toolbar.panels.timer.TimerPanel',
@@ -656,8 +659,8 @@ if DEBUG and DEBUG_TOOLBAR:
 # on failed user authentication attempts from login views.
 # If you do not want Axes to override the authentication response
 # you can skip installing the middleware and use your own views.
-MIDDLEWARE.append('axes.middleware.AxesMiddleware',)
-MIDDLEWARE.append('django_otp.middleware.OTPMiddleware',)
+MIDDLEWARE.append('axes.middleware.AxesMiddleware', )
+MIDDLEWARE.append('django_otp.middleware.OTPMiddleware', )
 # LOGIN_URL = 'bogus'
 # REDIRECT_FIELD_NAME = 'bogus'
 
