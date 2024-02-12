@@ -6,6 +6,7 @@ def additional_context(request):
     return {
             'SITE_GOOGLE_ANALYTICS_TRACKING_ID': settings.SITE_GOOGLE_ANALYTICS_TRACKING_ID,
             'SITE_GOOGLE_ANALYTICS': settings.SITE_GOOGLE_ANALYTICS,
+            'GOOGLE_SITE_VERIFICATION_CODE': settings.GOOGLE_SITE_VERIFICATION_CODE,
             'BASE_URL': settings.BASE_URL,
             'STATIC_FILES_URL': settings.STATIC_URL,
             'STORAGE_URI': settings.GCS_STORAGE_URI,
@@ -13,5 +14,7 @@ def additional_context(request):
             'RESTRICTED_ACCESS': settings.RESTRICT_ACCESS,
             'RESTRICTED_ACCESS_GROUPS': settings.RESTRICTED_ACCESS_GROUPS,
             'APP_VERSION': settings.APP_VERSION,
-            'DEV_TIER': settings.DEV_TIER
+            'DEV_TIER': settings.DEV_TIER,
+            'ADOBE_DTM_PATH': settings.ADOBE_DTM_PATH,
+            'ADOBE_N_DAP_ANALYTICS': settings.ADOBE_N_DAP_ANALYTICS
     }

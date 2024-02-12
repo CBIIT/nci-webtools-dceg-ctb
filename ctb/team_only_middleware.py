@@ -38,17 +38,10 @@ class TeamOnly(object):
             if request.path != '/' and not re.match('/?accounts(/google)?/log(out|in)/?.*', request.path, re.I):
                 if request.user.is_authenticated:
                     if not (request.user.is_superuser and re.match('/admin/?.*', request.path, re.I)) and not request.user.groups.filter(
-                                reduce(lambda q, g: q | Q(name__icontains=g), settings.RESTRICTED_ACCESS_GROUPS, Q())
-                        ).exists():
-
-                            # messages.warning(
-                            #     request, "Only members of the {} group{} may access the development server.".format(
-                            #         ", ".join(settings.RESTRICTED_ACCESS_GROUPS),
-                            #         "s" if len(settings.RESTRICTED_ACCESS_GROUPS) > 1 else '')
-                            # )
-                            messages.warning(
-                                request,"Your account will need to be evaluated before you can fully access your account. The evaluation process can take up to 3 business days. You will get an email once your account is approved. If you have any questions, please email us at <a href='mailto:ctb-support@isb-cgc.org'>ctb-support@isb-cgc.org</a>")
-                            return redirect('landing_page')
-
+                                reduce(lambda q, g: q | Q(name__icontains=g), settings.RESTRICTED_ACCESS_GROUPS, Q())).exists():
+                        messages.warning(
+                            request,
+                            "Your account application will need to be evaluated before an account can be approved. You will get an email about approval. If you have any questions, please email us at <a href='mailto:ctb-support@isb-cgc.org'>ctb-support@isb-cgc.org</a>")
+                        return redirect('landing_page')
         response = self.get_response(request)
         return response
