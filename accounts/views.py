@@ -21,6 +21,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .models import *
 import datetime
+from axes.helpers import get_failure_limit, get_client_username, get_cool_off, get_cool_off_iso8601
 
 logger = logging.getLogger('main_logger')
 
@@ -38,9 +39,32 @@ def extended_logout_view(request):
     except Exception as e:
         logger.error("[ERROR] While attempting to log out:")
         logger.exception(e)
-        messages.error(request, "There was an error while attempting to log out - please contact ctb-support@isb-cgc.org")
+        messages.error(request,
+                       "There was an error while attempting to log out - please contact ctb-support@isb-cgc.org")
         return redirect(reverse('user_detail', args=[request.user.id]))
 
     logger.info("[CTB LOGOUT] User {} logged out from the web application at {}".format(user.email,
-                                                                        datetime.datetime.utcnow()))
+                                                                                        datetime.datetime.utcnow()))
     return response
+
+
+def lockout(request, credentials, *args, **kwargs):
+    status = 403
+    context = {
+        "failure_limit": get_failure_limit(request, credentials),
+        "username": get_client_username(request, credentials) or "",
+    }
+
+    cool_off = get_cool_off()
+    if cool_off:
+        context.update(
+            {
+                "cooloff_time": get_cool_off_iso8601(
+                    cool_off
+                ),  # differing old name is kept for backwards compatibility
+                "cooloff_timedelta": cool_off,
+            }
+        )
+    logger.info("[CTB LOCKOUT] User {} is locked out due to too many login failures [{}].".format(context['username'],
+                                                                                                  datetime.datetime.utcnow()))
+    return render(request, 'accounts/account/lockout.html', context, status=status)

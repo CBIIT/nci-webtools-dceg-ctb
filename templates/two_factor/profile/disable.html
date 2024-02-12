@@ -2,14 +2,23 @@
 {% load i18n %}
 {% load custom_tags %}
 {% block page_header %}
-    <div class="page-banner">{% block title %}{% trans "Disable Two-factor Authentication" %}{% endblock %}</div>
+    <div class="container mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'two_factor:profile' %}">Account Security</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Disable Two-factor Authentication</li>
+            </ol>
+        </nav>
+    </div>
 {% endblock %}
 {% block content %}
     <div class="container">
         <div class="row justify-content-center my-5">
             <div class="col-lg-6">
+                <h3 class="mb-4">Disable Two-factor Authentication</h3>
                 <div class="card user-panel">
-                    <div class="card-body px-4 py-3">
+                    <div class="card-body px-md-4 py-3">
                         <p>{% blocktrans trimmed %}You are about to disable two-factor authentication. This
                             weakens your account security, are you sure?{% endblocktrans %}</p>
                         <form method="post">
@@ -17,7 +26,7 @@
                             <div class="mb-2">
                                 {% for field in form %}
                                     {{ field|add_classes:'form-check-input' }}
-                                    <label class="form-check-label ms-1">{{ field.label }}</label>
+                                    <label for="{{ field.auto_id }}" class="form-check-label ms-1">{{ field.label }}</label>
                                 {% endfor %}
                             </div>
                             <a href="{% url 'two_factor:profile' %}"

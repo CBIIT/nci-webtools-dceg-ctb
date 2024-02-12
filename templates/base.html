@@ -27,12 +27,16 @@
     <title>{% block title %}Chernobyl Tissue Bank{% endblock %}</title>
     <meta name="description" content="{% block description %}Chernobyl Tissue Bank{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="google-site-verification" content="{{ GOOGLE_SITE_VERIFICATION_CODE }}" />
 
     {% block extra_css_libs %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{% static 'img/favicon.ico' %}"/>
     <link type="text/css" rel="stylesheet" href="{% static 'css/style.css' %}"/>
 
     {% block header %}{% endblock %}
+    {% if ADOBE_N_DAP_ANALYTICS and not user.is_authenticated %}
+        <script src="https://assets.adobedtm.com/{{ ADOBE_DTM_PATH }}" async></script>
+    {% endif %}
 
     {% if SITE_GOOGLE_ANALYTICS %}
         <!-- Global site tag (gtag.js) - Google Analytics -->

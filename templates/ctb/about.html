@@ -1,29 +1,185 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    CTB | About the CTB
+{% endblock %}
+
+{% block description %}
+    About the Project
+{% endblock %}
+
+{% block page_name %}about_page{% endblock %}
+
+{% block page_header %}
+    <div class="container-lg mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                <li class="breadcrumb-item active" aria-current="page">About</li>
+            </ol>
+        </nav>
+    </div>
+{% endblock %}
+
 
 {% block content %}
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-9 pb-4">
-                {% block subcontent %}
-                {% endblock %}
-            </div>
-            <div class="col-lg-3 pb-4">
-                <div class="list-group">
-                    <div class="list-group-item list-group-item-header">
-                        About
+    <div class="container-lg">
+        <div class="row my-3 d-flex justify-content-center">
+            <div class="col-lg-10 px-md-4">
+                <div id="about" class="pt-3">
+                    <h3 class="pt-3">About the CTB</h3>
+                    <div class="mt-3">
+                        The Chernobyl (Chornobyl in Ukrainian) Tissue Bank (CTB) is a repository of biological material
+                        and data from patients with thyroid tumors who were exposed as children or adolescents to
+                        radioactive fallout from the April 26, 1986, accident at the Chernobyl nuclear power plant in
+                        Ukraine. The CTB also houses a digital collection of data derived by researchers using our
+                        samples.
                     </div>
-                    <a href="{% url 'about_project' %}" class="list-group-item list-group-item-action">
-                        About the Project
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="{% url 'aims_page' %}">
-                        Aims of the Project
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="{% url 'fact_sheet' %}">
-                        Fact Sheet
-                    </a>
-                    <a class="list-group-item list-group-item-action" href="{% url 'management_page' %}">
-                        Management of the Project
-                    </a>
+                </div>
+                <div id="history" class="pt-3">
+                    <h3 class="pt-5">History, Funding, and Organization</h3>
+                    <div class="mt-3">Since CTB was found in October 1998, the project has been supported by a number of
+                        sponsors including the European Commission, the World Health Organization, the U.S. National
+                        Cancer Institute (NCI), and the Sasakawa Health Foundation of Japan (SHF). At the time of its
+                        founding, the CTB established a Coordinating Center at Imperial College, London, UK. In 2023,
+                        the Coordinating Center moved to the Division of Cancer Epidemiology and Genetics at the NCI,
+                        part of the National Institutes of Health, which now funds and coordinates the CTB in
+                        collaboration with the V.P. Komisarenko Institute of Endocrinology (IEM) and Metabolism of the
+                        National Academy of Medical Sciences of Ukraine in Kiev, with the full support of the Government
+                        of Ukraine. Initially, Belarus and Russia were included in the project, but those collaborations
+                        are currently suspended for political reasons.
+                    </div>
+                </div>
+                <div id="purpose" class="pt-3">
+                    <h3 class="pt-5">Purpose of the CTB</h3>
+                    <div class="mt-3">
+                        The objective of the CTB is to provide a research resource for studies of the health
+                        consequences of the Chernobyl accident. It aims to:
+                        <ul>
+                            <li>Ensure that specimens of thyroid cancer removed on or after October 1, 1998, are
+                                consistently described and sampled; that the materials (extracted tumor and normal
+                                DNA/RNA, blood samples, and in some cases fixed tissue sections) along with the
+                                demographic, clinical and pathological information, are available for appropriate
+                                research studies; and that all specimens and data are collected and shared with
+                                appropriate informed consent.
+                            </li>
+                            <li>Review tumor specimens and provide a consensus diagnosis by an international committee
+                                of expert pathologists for all cases. Diagnostic information is available to research
+                                groups carrying out molecular biological, therapeutic, epidemiological, and other
+                                studies.
+                            </li>
+                            <li>Maximize the amount of information obtained from small pieces of tumor and promote
+                                collaborative, rather than competitive, research on a limited biological resource.
+                            </li>
+                            <li>Ensure that knowledge pertaining to the consequences of this accident may benefit the
+                                patients affected and be of value in responding to future nuclear accidents as well as
+                                in understanding and treating thyroid tumors more generally.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="location" class="pt-3">
+                    <h3 class="pt-5">CTB Location</h3>
+                    <div class="mt-3">
+                        The tissue bank is located at the V.P. Komisarenko Institute of Endocrinology and Metabolism
+                        (IEM) in Kiev, Ukraine. The staff of the CTB obtains informed consent from patients and prepares
+                        and stores their donated materials. (Historically, a separate tissue bank was also maintained in
+                        Russia.) The CTB maintains a database of samples and data that are shared via an integrated
+                        database managed by the coordinating center. The CTB staff work closely with the coordinating
+                        center staff who make key information available to researchers wishing to access the material.
+                    </div>
+                </div>
+                <div id="consent" class="pt-3">
+                    <h3 class="pt-5">Informed Consent and Privacy Protection</h3>
+                    <div class="mt-3">
+                        The CTB obtains informed consent for each sample collected and ensures proper description,
+                        sampling, and preservation of donated materials (frozen tissue, fixed tissue sections, extracted
+                        DNA/RNA and blood samples). The CTB has in place a robust security system to protect patient
+                        privacy while ensuring their valuable information is available for research studies.
+                    </div>
+                    <div class="mt-3">
+                        Each specimen is given a unique identifier. The age, sex, age at operation, oblast, and a
+                        measured or calculated dose received are recorded. All data accessible by researchers are
+                        anonymized. Standard operating procedures, approved by relevant authorities for each country
+                        involved, are followed to ensure privacy.
+                    </div>
+                </div>
+                <div id="samples" class="pt-3">
+                    <h3 class="pt-5">Description of Available Samples and Sample Access</h3>
+                    <div class="mt-3">
+                        The CTB currently includes material and information from patients with thyroid carcinomas and
+                        cellular follicular adenomas from the contaminated oblasts of Ukraine (Kiev, Kiev city,
+                        Cherkasse, Chernigov, Rovno, Zhitomyr and Sumy) who were born after April 26, 1967, (i.e.,
+                        younger than 19 years of age at the time of the Chernobyl accident), were treated with surgery
+                        on or after October 1,1998, at the Institute of Endocrinology and Metabolism in Kiev, Ukraine,
+                        and who consent to donate to the project. The CTB also includes patients who were born after the
+                        accident, and thus were not exposed to radioactive iodine, as a comparison.
+                    </div>
+                    <div class="mt-3">The CTB collects a variety of biospecimen from patients undergoing operations for
+                        thyroid
+                        cancer or adenoma. Tissue collection follows an approved standard operating procedure (SOP) and
+                        is snap frozen whenever possible; the presence or absence of tumor is verified by frozen
+                        section. A representative paraffin block is also obtained for each case. Where appropriate, the
+                        CTB also collects fresh and paraffin-embedded tissue from loco-regional metastases.
+                    </div>
+                    <div class="mt-3">Histological slides from all tumors are reviewed by the CTB Pathology Panel, an
+                        international
+                        group of expert thyroid pathologists, and a consensus diagnosis agreed before any materials are
+                        released to researchers.
+                    </div>
+                    <div class="mt-3">Available samples include frozen aliquots of DNA and RNA extracted from normal and
+                        neoplastic
+                        thyroid tissue and DNA extracted from blood. A frozen section is taken from each portion of
+                        tissue before extraction to verify its nature. Quality control is performed on nucleic acid
+                        extracted from all tissues and blood samples. In addition, paraffin sections and tissue
+                        microarrays are available. Researchers who <a href="{% url 'research' %}">request access</a> to
+                        samples are provided with extracted
+                        nucleic acid from thyroid tissue, rather than a small piece of tissue. This maximizes the amount
+                        of data that can potentially be obtained from a single specimen and enables multiple molecular
+                        biological studies to be carried out for each case. Aliquots of serum are also available.
+                    </div>
+                    <div class="mt-3">The CTB website is equipped with a robust search function that allows researchers
+                        wishing to
+                        access biomaterials to select cases from which they would wish to receive samples. The search
+                        function returns information on specimen type, patient characteristics, tumor characteristics,
+                        and, for certain tumor specimens, the driver mutation(s) identified to date.
+                    </div>
+                </div>
+                <div id="archives" class="pt-3">
+                    <h3 class="pt-5">Maintaining an Archive of Findings</h3>
+                    <div class="mt-3">All data generated with samples from the CTB are collected and maintained in an
+                        online
+                        archive that can be accessed for future studies. Researchers who obtain material from the CTB
+                        agree
+                        to provide the results of their investigation on a case-by-case basis. This information will not
+                        be
+                        available until after publication of their findings.
+                    </div>
+                </div>
+                <div id="archives" class="pt-3 pb-5">
+                    <h3 class="pt-5">Contact CTB</h3>
+                    <div class="mt-3">
+                        <div>
+                            <div class="">For queries regarding the Chernobyl Tissue Bank:</div>
+                            <div class="pb-3"><a href="mailto:ncicontactdceg@mail.nih.gov"><i
+                                    class="fas fa-envelope me-2"></i>
+                                Please contact us via email</a></div>
+                        </div>
+                        <div>
+                            <div class="">For questions on the operation of the CTB website:</div>
+                            <div class="pb-3"><a href="mailto:ctb-support@isb-cgc.org"><i class="fas fa-envelope me-2"></i>
+                                Please contact the ISB-CGC Support Team via email</a>.
+                            </div>
+                        </div>
+                        <div>
+                            <div class="">For more information, please visit:</div>
+                            <div class="pb-3"><a target="_blank" rel="noopener noreferrer" href="https://dceg.cancer.gov/"><i
+                                    class="fas fa-globe me-2"></i> Division of Cancer Epidemiology and Genetics (DCEG),
+                                NCI</a></div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

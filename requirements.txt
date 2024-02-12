@@ -31,7 +31,7 @@ django-session-security==2.6.5
 django-anymail[mailgun]==10.1
 django-axes==5.20.0
 django-redis==5.0.0
-xhtml2pdf==0.2.10
+xhtml2pdf==0.2.15
 
 # If you are seeing an error about django-debug-toolbar not being installed,
 # the problem is almost certainly that your developer .env wasn't found
