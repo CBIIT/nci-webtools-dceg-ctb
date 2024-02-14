@@ -495,3 +495,8 @@ table.loading tbody:after {
     padding: 0 !important;
     border: none !important;
 }
+
+/*overwrite bootstrap text color*/
+.text-danger{
+    color: #bb0e3e !important;
+}

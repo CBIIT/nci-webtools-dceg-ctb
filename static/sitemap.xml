@@ -5,27 +5,27 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <url>
-  <loc>https://isb-cgc-ctb-test.appspot.com/</loc>
+  <loc>https://test-ctb.isb-cgc.org/</loc>
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
-  <loc>https://isb-cgc-ctb-test.appspot.com/about/</loc>
+  <loc>https://test-ctb.isb-cgc.org/about/</loc>
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://isb-cgc-ctb-test.appspot.com/research/</loc>
+  <loc>https://test-ctb.isb-cgc.org/research/</loc>
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://isb-cgc-ctb-test.appspot.com/privacy/</loc>
+  <loc>https://test-ctb.isb-cgc.org/privacy/</loc>
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
-  <loc>https://isb-cgc-ctb-test.appspot.com/research/research_projects/</loc>
+  <loc>https://test-ctb.isb-cgc.org/research/research_projects/</loc>
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
   <priority>0.64</priority>
 </url>

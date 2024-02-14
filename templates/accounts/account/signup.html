@@ -20,7 +20,18 @@
                             <p>Already have an account? Please <a href="{% url 'two_factor:login' %}"><b>sign in</b></a>
                                 instead.</p>
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    <div class="text-danger">
+                                    {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for field in form %}
+                                <p>{{ field.label_tag }} {{ field }}</p>
+                            {% endfor %}
+
                             {% if redirect_field_value %}
                                 <input type="hidden" name="{{ redirect_field_name }}"
                                        value="{{ redirect_field_value }}"/>
