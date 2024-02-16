@@ -98,7 +98,7 @@ def email_confirmed_callback(sender, email_address, **kwargs):
 
 @receiver(user_logged_in)
 @verified_email_required
-def user_logged_in_callback(sender, request, user, **kwargs):
+def user_logged_in_callback(*args, **kwargs):
     try:
         logger.info(f"[CTB LOGIN] user_logged_in_callback")
     except Exception as e:
