@@ -41,7 +41,7 @@ def privacy_policy(request):
     return render(request, 'ctb/privacy.html')
 
 
-# Displays the privacy policy
+# Displays the search result page
 def search(request):
     return render(request, 'ctb/search.html')
 
