@@ -19,9 +19,10 @@ import datetime
 from pytz import timezone
 from django.conf import settings
 from django.core.mail import EmailMessage
-from django.contrib.auth.signals import user_login_failed
+from django.contrib.auth.signals import user_login_failed, user_logged_in
 from allauth.account.signals import password_changed, email_confirmed, password_reset
 from django.dispatch import receiver
+from allauth.account.decorators import verified_email_required
 
 # debug = settings.DEBUG
 logger = logging.getLogger('main_logger')
@@ -92,6 +93,15 @@ def email_confirmed_callback(sender, email_address, **kwargs):
         notification_mail_to_user.send()
     except Exception as e:
         logger.error("[ERROR] While attempting to send a new account notification email")
+        logger.exception(e)
+
+
+@receiver(user_logged_in)
+@verified_email_required
+def user_logged_in_callback(user, *args, **kwargs):
+    try:
+        logger.info(f"[CTB LOGIN] User email \'{user}\' was validated")
+    except Exception as e:
         logger.exception(e)
 
 
