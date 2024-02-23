@@ -463,27 +463,26 @@ table.loading tbody:after {
     background-size: 50px 50px;
     content: "";
 }
-
 /* overwriting google search css */
 
 .gsc-adBlock, .gcsc-more-maybe-branding-root, .gsc-orderby-container, .gcsc-find-more-on-google-root, .gcsc-branding {
     display: none !important;
 }
 
-/*.gs-result .gs-title *, .gsc-cursor-page, .gs-spelling a {*/
-/*    color: #007bbd !important;*/
-/*}*/
+.gs-result .gs-title *, .gsc-cursor-page, .gs-spelling a {
+    color: #01679d !important; !important;
+}
 
-/*.gs-result .gs-title *:hover, .gsc-cursor-page, .gs-spelling a:hover {*/
-/*    color: #C76C2E !important;*/
-/*}*/
+.gs-result .gs-title *:hover, .gsc-cursor-page, .gs-spelling a:hover {
+    color: #004971 !important;
+    text-decoration: underline !important;
+}
 
 /*.gs-promotion .gs-visibleUrl, .gs-webResult .gs-visibleUrl {*/
 /*    color: rgba(58, 124, 117, 0.9) !important;*/
 /*}*/
 .gsc-control-cse, .gsc-control-cse .gsc-table-result {
-    /*width: auto;*/
-    /*font-family: Arial, sans-serif;*/
+    font-family: Poppins, Helvetica Neue, Helvetica, Roboto, Arial, sans-serif, serif !important;
     font-size: 1.1rem !important;
 }
 
@@ -494,14 +493,10 @@ table.loading tbody:after {
     font-style: italic !important;
     margin: 0 !important;
     padding: 0 !important;
-    /*background-color: rgba(0, 123, 189, .5) !important;;*/
     border: none !important;
-    /*border: 1px solid rgba(0, 123, 189, .5) !important;;*/
-    /*display: inline-block;*/
-    /*margin: 5px;*/
-    /*padding: 5px;*/
 }
 
-/*.grey-text{*/
-/*    color: #495057;*/
-/*}*/
+/*overwrite bootstrap text color*/
+.text-danger{
+    color: #bb0e3e !important;
+}

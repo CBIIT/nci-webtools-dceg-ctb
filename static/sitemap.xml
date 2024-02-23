@@ -4,8 +4,6 @@
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-
 <url>
   <loc>https://chernobyltissuebank.cancer.gov/</loc>
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
@@ -46,6 +44,4 @@
   <lastmod>2023-12-08T20:43:43+00:00</lastmod>
   <priority>0.64</priority>
 </url>
-
-
 </urlset>
