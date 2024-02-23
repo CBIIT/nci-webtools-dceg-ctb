@@ -20,7 +20,8 @@ from pytz import timezone
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.contrib.auth.signals import user_login_failed, user_logged_in
-from allauth.account.signals import password_changed, email_confirmed, password_reset, user_signed_up
+from allauth.account.signals import email_confirmed, user_signed_up
+# from allauth.account.signals import password_changed, email_confirmed, password_reset, user_signed_up
 from django.dispatch import receiver
 from allauth.account.decorators import verified_email_required
 
