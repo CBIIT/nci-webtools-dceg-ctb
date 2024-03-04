@@ -20,33 +20,11 @@ from pytz import timezone
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.contrib.auth.signals import user_login_failed, user_logged_in
-from allauth.account.signals import password_changed, email_confirmed, password_reset, user_signed_up
+from allauth.account.signals import email_confirmed, user_signed_up
 from django.dispatch import receiver
 from allauth.account.decorators import verified_email_required
 
-# debug = settings.DEBUG
 logger = logging.getLogger('main_logger')
-
-
-
-# @receiver(password_changed)
-# def password_changed_callback(**kwargs):
-#     print('password changed ')
-#     # print(user)
-#     try:
-#         logger.info('[CTB PASSWORD CHANGED] Password changed')
-#         # logger.info('[CTB PASSWORD CHANGED] Password changed for: {credentials}'.format(user=user))
-#     except Exception as e:
-#         logger.exception(e)
-
-
-# @receiver(password_reset)
-# def password_reset_callback(credentials, **kwargs):
-#     print('password_reset')
-#     try:
-#         logger.info('[CTB PASSWORD RESET] Password is reset for: {credentials}'.format(credentials=credentials))
-#     except Exception as e:
-#         logger.exception(e)
 
 
 @receiver(email_confirmed)
@@ -117,4 +95,3 @@ def user_login_failed_callback(sender, credentials, **kwargs):
         logger.info('[CTB LOGIN] Login FAILED for: {credentials}'.format(credentials=credentials))
     except Exception as e:
         logger.exception(e)
-
