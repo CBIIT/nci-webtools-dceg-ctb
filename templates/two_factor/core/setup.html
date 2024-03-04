@@ -64,9 +64,15 @@
                         {% if wizard.steps.current == 'method' %}
                             {{ wizard.management_form }}
                             <div class="setup-form mt-2">
-                                {% for field in wizard.form %}
-                                    {{ field }}
+                                {% for x, y in wizard.form reversed %}
+                                    {{ y }}
+                                    <br>
+                                    {{ x }}
                                 {% endfor %}
+                                <script>
+                                    document.getElementById('id_method-method_0').checked=false;
+                                    document.getElementById('id_method-method_1').checked=true;
+                                </script>
                             </div>
                         {% else %}
                             {% include "two_factor/_simple_wizard_forms.html" %}
