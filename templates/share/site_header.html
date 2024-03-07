@@ -2,110 +2,124 @@
 {% load custom_tags %}
 
 {% is_allowed user as has_access %}
-
-<nav id="ctb-main-navbar" class="navbar navbar-expand-lg fixed-top navbar-dark py-4" aria-label="Main navigation">
-    <div class="container">
-        <a class="navbar-brand {% if request.path == '/' %} active {% endif %}" href="{% url 'landing_page' %}"><i
-                class="fas fa-home"></i><span class="sr-only">CTB Home</span></a>
-        <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" data-bs-toggle="collapse"
-                data-bs-target="#ctb-collapsible-navbar"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse" id="ctb-collapsible-navbar">
-            <ul class="navbar-nav col-10 justify-content-evenly">
-                <li class="nav-item">
-                    <a class="nav-link
-                        {% if 'search_facility' in request.path %} active {% endif %}"
-                       aria-current="page"
-                       href="{% url 'dashboard' %}">
-                        Biosample Search
-                    </a>
-                </li>
-
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {% if 'about/' in request.path %} active {% endif %}"
-                       id="dropdown-about" data-bs-toggle="dropdown"
-                       aria-expanded="false" role="button">About</a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown-about">
-                        <li><a class="dropdown-item" href="{% url 'about_project' %}">About the Project</a></li>
-                        <li><a class="dropdown-item" href="{% url 'aims_page' %}">Aims of the Project</a></li>
-                        <li><a class="dropdown-item" href="{% url 'fact_sheet' %}">Fact Sheet</a></li>
-                        <li><a class="dropdown-item" href="{% url 'management_page' %}">Management of the Project</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle {% if 'researchers/' in request.path %} active {% endif %}"
-                       id="dropdown-researchers" data-bs-toggle="dropdown"
-                       aria-expanded="false" role="button">Research</a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown-researchers">
-                        <li><a class="dropdown-item" href="{% url 'researchers_page' %}">For Researchers</a></li>
-                        <li><a class="dropdown-item" href="{% url 'access_to_materials' %}">Access to Materials</a></li>
-                        <li><a class="dropdown-item" href="{% url 'research_projects' %}">Research Projects Using CTB
-                            Materials</a></li>
-                        <li><a class="dropdown-item" href="{% url 'material_available' %}">Material Available</a></li>
-                    </ul>
-                </li>
-                {#                <li class="nav-item dropdown">#}
-                {#                    <a class="nav-link dropdown-toggle {% if 'resources/' in request.path %} active {% endif %}"#}
-                {#                       id="dropdown-resources" data-bs-toggle="dropdown"#}
-                {#                       aria-expanded="false">Resources</a>#}
-                {#                    <ul class="dropdown-menu" aria-labelledby="dropdown-resources">#}
-                {#                        <li><a class="dropdown-item" href="{% url 'bibliography' %}">Publications using CTB Samples and#}
-                {#                            Data</a></li>#}
-                {#                        <li><a class="dropdown-item" href="{% url 'useful_links' %}">Useful External Links</a></li>#}
-                {#                        <li><a class="dropdown-item" href="{% url 'podcasts_and_videos' %}">Useful Podcasts and#}
-                {#                            Videos</a></li>#}
-                {#                    </ul>#}
-                {#                </li>#}
-
-
-                {#                <li class="nav-item">#}
-                {#                    <a class="nav-link {% if 'news' in request.path %} active {% endif %}" href="{% url 'latest_news' %}">Latest#}
-                {#                        News</a>#}
-                {#                </li>#}
-                <li class="nav-item">
-                    <a class="nav-link {% if 'contact/' in request.path %} active {% endif %}"
-                       href="{% url 'contact' %}">Contact Us</a>
-                </li>
-            </ul>
-            <ul class="navbar-nav col-1">
-                {% if user.is_verified %}
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle {% if 'users/' in request.path or 'account' in request.path %} active {% endif %}"
-                           data-bs-toggle="dropdown" href="#" role="button"
-                           aria-expanded="false"><i class="fa-solid fa-user"></i><span class="sr-only">User Menu</span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="{% url 'user_detail' user.id %}"
-                                   class="dropdown-item"
-                                   title="My Profile">My Profile
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#logout-modal" class="dropdown-item" data-bs-toggle="modal"
-                                   data-bs-target="#logout-modal"
-                                   title="Sign Out">Sign Out <i class="fa fa-solid fa-sign-out"></i>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                {% else %}
+<div class="fixed-top bg-white shadow">
+    <nav id="ctb-main-navbar" class="navbar navbar-expand-xl navbar-light" aria-label="Main navigation">
+        <div class="container-lg my-2 justify-content-between">
+            <div class="d-none d-lg-inline-block">
+                <a class="navbar-brand ps-0" href="{% url 'landing_page' %}">
+                    <img class="me-2"
+                         src="{% static 'img/ctb-nci-logo.svg' %}"
+                         height="50px" alt="nci-logo"></a>
+            </div>
+            <div class="d-lg-none d-inline-block">
+                <a class="navbar-brand ps-0" href="{% url 'landing_page' %}"><img
+                        src="{% static 'img/ctb-nci-logo.svg' %}"
+                        height="35px" alt="nci-logo"></a>
+            </div>
+            <div class="d-xl-none d-inline-block">
+{#                <button class="d-xl-none d-inline-block btn me-3 collapsed" type="button" id="SearchBarCollapse"#}
+{#                        data-bs-toggle="collapse"#}
+{#                        data-bs-target=".ctb-search-bar-collapsible"#}
+{#                        aria-label="Toggle search bar">#}
+{#                    <i class="fas fa-search"></i>#}
+{#                </button>#}
+                <button class="navbar-toggler border-0 btn collapsed" type="button" id="navbarSideCollapse"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#ctb-collapsible-navbar"
+                        aria-label="Toggle navigation">
+                    <i class="fs-4 fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="collapse container px-0 d-xl-none ctb-search-bar-collapsible" id="ctb-search-bar">
+                <form action="{% url 'ctb_search' %}" method="get" role="search" class="d-flex">
+                    <div class="input-group my-3">
+                        <input type="text" class="form-control" name="q" placeholder=""
+                               aria-label="Search CTB" aria-describedby="button-search">
+                        <button class="btn btn-primary" type="submit" id="button-search">Search
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="navbar-collapse collapse justify-content-between ms-5" id="ctb-collapsible-navbar">
+                <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link"
-                           href="{% url 'two_factor:login' %}">
-                            <i class="fas fa-sign-in-alt"></i><span class="sr-only">Sign-In</span>
+                        <a class="nav-link {% if 'about/' in request.path %} active {% endif %}"
+                           href="{% url 'about' %}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'research/' in request.path %} active {% endif %}"
+                           href="{% url 'research' %}">Research and Data Access</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if 'search_facility' in request.path %} active {% endif %}"
+                           aria-current="page"
+                           href="{% url 'dashboard' %}">
+                            Search the Biorepository
                         </a>
                     </li>
-                {% endif %}
-            </ul>
+                </ul>
+                <div class="navbar-nav">
+{#                    <li class="nav-item d-none d-xl-inline-block">#}
+{#                        <a class="nav-link btn me-3 collapsed" type="button" id="SearchBarCollapse2"#}
+{#                           data-bs-toggle="collapse"#}
+{#                           data-bs-target=".ctb-search-bar-collapsible"#}
+{#                           aria-label="Toggle search bar">#}
+{#                            <i class="fas fa-search"></i>#}
+{#                        </a>#}
+{#                    </li>#}
+                    {% if user.is_authenticated %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle {% if 'users/' in request.path or 'account' in request.path %} active {% endif %}"
+                               data-bs-toggle="dropdown" href="#" role="button"
+                               aria-expanded="false"><i class="fa-solid fa-user"></i><span
+                                    class="sr-only">User Menu</span></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{% url 'user_detail' user.id %}"
+                                       class="dropdown-item"
+                                       title="My Profile">My Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#logout-modal" class="dropdown-item" data-bs-toggle="modal"
+                                       data-bs-target="#logout-modal"
+                                       title="Sign Out">Sign Out <i class="fa fa-solid fa-sign-out"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link {% if 'login/' in request.path %} active {% endif %}"
+                               href="{% url 'two_factor:login' %}">
+                                <i class="fas fa-sign-in-alt"></i><span class="sr-only">Sign-In</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="d-none d-xl-block">
+        <div class="collapse container ctb-search-bar-collapsible" id="ctb-search-bar2">
+            <div class="row justify-content-end">
+                <div class="col-lg-4 col-md-6 col">
+                    <form action="{% url 'ctb_search' %}" method="get" role="search" class="d-flex">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="q"
+                                   aria-label="Search by Keyword" aria-describedby="button-search">
+                            <button class="btn btn-primary" type="submit" id="button-search">Search
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-</nav>
+</div>
 {% if 'search_facility/' in request.path %}
-    <div id="ctb-secondary-navbar">
-        <div class="container pt-2">
+    <div id="ctb-secondary-navbar" class="d-flex">
+        <div class="container-md container-fluid pt-2">
             <nav class="nav navbar-ctb" aria-label="Secondary navigation">
                 {% if user.is_verified %}
                     <a class="nav-link {% if 'dashboard/' in request.path %} active {% endif %}"
@@ -114,12 +128,10 @@
                     </a>
                     <a class="nav-link {% if 'search_samples/' in request.path %} active {% endif %}"
                        href="{% url 'search_tissue_samples' %}">Search Samples</a>
-                    <a class="nav-link {% if 'saved_searches/' in request.path %} active {% endif %}"
+                    <a class="nav-link {% if 'saved_searches/' in request.path %} active {% endif %} d-sm-inline d-none"
                        href="{% url 'saved_searches' %}">My Saved Searches</a>
-
                 {% endif %}
             </nav>
-
         </div>
     </div>
 {% endif %}

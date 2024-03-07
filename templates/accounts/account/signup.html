@@ -20,7 +20,28 @@
                             <p>Already have an account? Please <a href="{% url 'two_factor:login' %}"><b>sign in</b></a>
                                 instead.</p>
                             {% csrf_token %}
-                            {{ form.as_p }}
+                            {% if form.non_field_errors %}
+                                <div role="alert" class="alert alert-primary">
+                                    {{ form.non_field_errors }}
+                                    <div class="small ms-2">Unable to register? Contact <a
+                                            href="mailto:ctb-support@isb-cgc.org">ctb-support@isb-cgc.org</a>
+                                        for help.
+                                    </div>
+                                </div>
+
+                            {% endif %}
+                            {% for field in form %}
+                                {% if field.errors %}
+                                    <div class="text-danger">
+                                    {{ field.errors }}
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                            {% for field in form %}
+                                <p>{{ field.label_tag }} {{ field }}</p>
+                            {% endfor %}
+
                             {% if redirect_field_value %}
                                 <input type="hidden" name="{{ redirect_field_name }}"
                                        value="{{ redirect_field_value }}"/>
@@ -32,7 +53,8 @@
                                 </label>
                             </div>
                             <div class="small fst-italic fw-light mt-2 bg-light p-2 rounded-2">
-                                This password must contain at least one each of the following:
+                                This password must be at least 16 characters and must contain at least one each of the
+                                following:
                                 <ul>
                                     <li>a lower-case letter</li>
                                     <li>an upper-case letter</li>

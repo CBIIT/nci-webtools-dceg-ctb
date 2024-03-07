@@ -2,7 +2,7 @@
 {% load static %}
 {% load donors_custom_tags %}
 {% block title %}
-    CTB | Clinical Search Facility Result
+    Chernobyl Tissue Bank | Clinical Search Facility Result
 {% endblock %}
 
 {% block description %}
@@ -14,25 +14,23 @@
 {% block page_class %}biosample_tab{% endblock %}
 
 {% block page_header %}
-    <div class="container">
-        <div class="pt-3">
-            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
-                    </li>
-                    <li class="breadcrumb-item active" aria-current="page">Refine by Clinical Parameters</li>
-                </ol>
-            </nav>
-        </div>
+    <div class="container-lg mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'search_tissue_samples' %}">Search Tissue Samples</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">Clinical Search Facility</li>
+            </ol>
+        </nav>
     </div>
 
 {% endblock %}
 
 {% block content %}
-    <div class="container py-2">
+    <div class="container-lg py-2">
         <div class="row">
             <div class="col">
-                <h5>Clinical Search Facility</h5>
+                <div class="fw-bold fs-5 mb-3">Clinical Search Facility</div>
                 <div id="general-message">
                     {% if title %}
                         <div role="alert" class="alert alert-primary alert-dismissible fade show fst-italic"><i
@@ -52,27 +50,58 @@
                         criteria.
                     </div>
                     <hr>
-                    <div class="mt-2 d-flex gap-1 justify-content-end">
-                            <a type="button" class="btn btn-secondary"
-                               href="{% url 'clinical_search_facility' %}"><i
-                                    class="fas fa-angle-double-left"></i> Back to Clinical Search
-                            </a>
-                            <a type="button" class="btn btn-secondary"
-                               href="{% url 'search_tissue_samples' %}"><i
-                                    class="fas fa-angle-double-left"></i> Back to Search Tissue Samples
-                            </a>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#saveModal"><i
-                                    class="fa-solid fa-floppy-disk"></i> Save
-                            </button>
-                            <a type="button" class="btn btn-primary" href="{% url 'make_application' %}"><i
-                                    class="fas fa-edit"></i> Make
-                                Application
-                            </a>
-                            <a type="button" class="btn btn-primary"
-                               href="{% url 'driver_search_facility' %}&{{ filter_encoded_url }}">Search by Driver Mutation <i
-                                    class="fas fa-angle-double-right"></i>
-                            </a>
+                    <div class="mt-2 d-none d-xl-block">
+                        <div class="justify-content-between d-flex d-block">
+                            <div class="d-xl-inline">
+                                <a type="button" class="btn btn-secondary"
+                                   href="{% url 'clinical_search_facility' %}"><i
+                                        class="fas fa-angle-double-left d-xl-none"></i> Back to Clinical Search
+                                </a>
+                                <a type="button" class="btn btn-secondary"
+                                   href="{% url 'search_tissue_samples' %}"><i
+                                        class="fas fa-angle-double-left d-xl-none"></i> Back to Search Tissue Samples
+                                </a>
+                            </div>
+                            <div class="d-xl-inline">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                        data-bs-target="#saveModal"><i
+                                        class="fa-solid fa-floppy-disk d-xl-none"></i> Save
+                                </button>
+                                <a type="button" class="btn btn-primary" href="{% url 'make_application' %}"><i
+                                        class="fas fa-edit d-xl-none"></i> Make Application
+                                </a>
+                                <a type="button" class="btn btn-primary"
+                                   href="{% url 'driver_search_facility' %}&{{ filter_encoded_url }}">Search by Driver
+                                    Mutation <i class="fas fa-angle-double-right d-xl-none"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-2 gap-2 d-xl-none d-block d-grid">
+                        <a type="button" class="btn btn-secondary"
+                           href="{% url 'clinical_search_facility' %}"><i
+                                class="fas fa-angle-double-left"></i> Back to Clinical Search
+                        </a>
+                        <a type="button" class="btn btn-secondary"
+                           href="{% url 'search_tissue_samples' %}"><i
+                                class="fas fa-angle-double-left"></i> Back to Search Tissue Samples
+                        </a>
+                        <a type="button" class="btn btn-primary"
+                           href="{% url 'driver_search_facility' %}&{{ filter_encoded_url }}">Search by Driver Mutation
+                            <i class="fas fa-angle-double-right"></i>
+                        </a>
+                        <hr>
+                    </div>
+                    <div class="mt-2 gap-2 d-xl-none d-block d-grid">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#saveModal"><i
+                                class="fa-solid fa-floppy-disk"></i> Save
+                        </button>
+                        <a type="button" class="btn btn-primary" href="{% url 'make_application' %}"><i
+                                class="fas fa-edit"></i> Make
+                            Application
+                        </a>
+
                     </div>
                 </div>
             </div>
@@ -103,7 +132,9 @@
                         <button id="close-btn" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close
                         </button>
                         <button id="search-save" data-formid="save-form" data-titleid="search-save-title"
-                                type="button" class="btn btn-primary"><i id="save-icon" class="fas fa-save"></i><i
+                                type="button"
+                                class="btn btn-primary"><i id="save-icon"
+                                                           class="fas fa-save"></i><i
                                 id="load-icon" class="d-none fas fa-circle-notch fa-spin"></i> Save
                         </button>
                     </div>

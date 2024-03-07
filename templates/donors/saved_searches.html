@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="{% static "css/dataTables.bootstrap.min.css" %}">{% endblock %}
 
 {% block title %}
-    CTB | My Saved Searches
+    Chernobyl Tissue Bank | My Saved Searches
 {% endblock %}
 
 {% block description %}
@@ -17,12 +17,12 @@
 
 {% block content %}
     <div class="container py-3">
-        <div class="row">
+        <div class="row pb-5">
             <div class="col">
                 <div class="border rounded bg-light p-3">
-                    <h5 class="fw-bold">
+                    <div class="fs-6 fw-bold">
                         My Saved Searches
-                    </h5>
+                    </div>
                     <hr>
                     <div>
                         {% include 'donors/filter_saved_searches.html' %}

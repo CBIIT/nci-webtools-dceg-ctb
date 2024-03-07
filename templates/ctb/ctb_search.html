@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Chernobyl Tissue Bank | Keyword Search Results
+{% endblock %}
+
+{% block description %}
+    Keyword Search Results
+{% endblock %}
+
+{% block page_name %}keyword_search_result{% endblock %}
+
+{% block page_header %}
+    <div class="container mt-4">
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Keyword Search Result</li>
+            </ol>
+        </nav>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col">
+                <div class="py-5">
+                    <h2 class="py-2">Search Result</h2>
+                    {% if q_keyword %}
+                        <div class="my-3"><span class="fw-bold">Results for</span>: <span
+                                class="fst-italic">{{ q_keyword }}</span></div>
+                    {% else %}
+                        <div>
+                        No search term was provided. Please revise your search.
+                        </div>
+                    {% endif %}
+                    <div class="my-3">
+                        <div class="gcse-searchresults-only"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block js_file %}
+    {{ block.super }}
+    <script async src="https://cse.google.com/cse.js?cx={{ google_se_id }}"></script>
+{% endblock %}
+
+
+

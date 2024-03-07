@@ -1,9 +1,9 @@
-{% extends 'ctb/research.html' %}
+{% extends 'base.html' %}
 
 {% load static %}
 
 {% block title %}
-    CTB | Research Projects Using CTB Materials
+    Chernobyl Tissue Bank | Research Projects Using CTB Materials
 {% endblock %}
 
 {% block description %}
@@ -13,11 +13,11 @@
 {% block page_name %}research_projects{% endblock %}
 
 {% block page_header %}
-    <div class="page-banner">Research Projects Using CTB Materials</div>
-    <div class="container mt-2">
+    <div class="container-lg mt-4">
         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">Research</li>
+                <li class="breadcrumb-item"><a href="{% url 'landing_page' %}">CTB</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'research' %}">Research and CTB Data Access</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Research Projects Using CTB Materials</li>
             </ol>
         </nav>
@@ -25,14 +25,1939 @@
 
 {% endblock %}
 
-{% block subcontent %}
-    <p>Please select one of the sections below to view a breakdown of the research projects:</p>
-    <div class="rounded bg-light p-3 mb-2 px-lg-5">
-        <div class="list-group">
-            <a href="{% url 'research_projects_2001_2009' %}" class="list-group-item list-group-item-action"><i
-                    class="fa-solid fa-circle-arrow-right me-2"></i>Research Projects: 2001 - 2009</a>
-            <a href="{% url 'research_projects_2010_2019' %}" class="list-group-item list-group-item-action"><i
-                    class="fa-solid fa-circle-arrow-right me-2"></i>Research Projects: 2010 - 2019</a>
+{% block content %}
+    <div class="container-lg">
+        <div class="row my-3 d-flex justify-content-center">
+            <div class="col-lg-10 px-md-4">
+                <div id="research_projects" class="pt-3">
+                    <h3 class="pt-3">Research Projects Using CTB Materials</h3>
+                </div>
+                <div class="mt-3">
+                    <p>Please select one of the sections below to view a breakdown of the research projects:</p>
+                    <div class="accordion accordion-flush" id="accordionFlushResearch">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseOne" aria-expanded="false"
+                                        aria-controls="flush-collapseOne">
+                                    Research Projects: 2001-2009
+                                </button>
+                            </h2>
+                            <div id="flush-collapseOne" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushResearch">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>[001/2001] Expression profiling of tyrosine kinase genes in malignant
+                                            tumors of the thyroid gland.
+                                            <div><span class="fw-light">Heinz-Ulrich Weier, LBNL,
+                                                University of California, Berkeley</span> <a class="ms-2"
+                                                                                             href="mailto:ugweier@lbl.gov"><i
+                                                    class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c01" aria-expanded="false"
+                                                        aria-controls="c01">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c01">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Abnormal
+                                                        expression of tyrosine kinase (tk)
+                                                        genes is a common phenomenon in papillary thyroid carcinomas
+                                                        (PTCs),
+                                                        where it is believed to alter
+                                                        cell growth and response to external signals such as growth
+                                                        factors,
+                                                        hormones etc. While the
+                                                        pathogenesis of radiation-induced PTC remains unclear, there is
+                                                        evidence
+                                                        that tk genes such as the
+                                                        receptor tyrosine kinases ret and NTRK-1 are abnormally
+                                                        expressed,
+                                                        and
+                                                        that the overexpression of
+                                                        some tk genes due to gene amplification or changes in gene
+                                                        regulation in
+                                                        the absence of structural
+                                                        alterations may lead to oncogenic transformation of cells. Using
+                                                        a
+                                                        DNA
+                                                        microarray based technique,
+                                                        we have identified several tk genes with abnormal expression in
+                                                        human
+                                                        tumor cell lines. We now
+                                                        propose to apply the technique to measure the relative
+                                                        expression
+                                                        levels
+                                                        of more than 50 tk genes in
+                                                        the PTC's that arose after the Chernobyl nuclear accident and to
+                                                        compare
+                                                        these expression profiles
+                                                        with the gene expression pattern found in sporadic PTC cases and
+                                                        tumors
+                                                        that arose following low
+                                                        level therapeutic irradiation of the thyroid. Results from this
+                                                        study
+                                                        may allow the identification
+                                                        of molecular markers that can be used to facilitate tumor
+                                                        diagnosis
+                                                        and
+                                                        staging, and, eventually,
+                                                        provide targets for therapeutic intervention.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2001] Chernobyl, an Integrated Pan-European Study, morphology,
+                                            oncogenes,
+                                            DNA repair and outcome in radiation carcinogenesis.
+                                            <div>
+                                            <span class="fw-light">GA Thomas, South West Wales Cancer Institute, University of Wales, Swansea,
+        UK.</span> <a href="mailto:gerry@mynydd-p.u-net.com" class="ms-2"><i class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c02" aria-expanded="false"
+                                                        aria-controls="c02">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c02">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        The objective of this study is to
+                                                        investigate the link between exposure of children to radiation,
+                                                        the
+                                                        subsequent development of
+                                                        tumors and how their morphology, molecular and cell biology
+                                                        influence
+                                                        clinical outcome. The project
+                                                        is an integrated approach involving 5 leading European centers.
+                                                        Samples
+                                                        of the same tumors will be
+                                                        studied by the 5 different centers to determibe tumor morphology
+                                                        and
+                                                        type; the degree of variation
+                                                        within the tumor, including the variation of the proportion of
+                                                        cells
+                                                        in
+                                                        cycle using antibodies to
+                                                        novel DNA replication associated peptides; the gene involved in
+                                                        the
+                                                        carcinogenic process, using DNA
+                                                        chip technology; specific studies of the pathways associated
+                                                        with
+                                                        one
+                                                        oncogene (ret) known to be
+                                                        linked to the tumor type involved; and studies of novel gene
+                                                        rearrangements using FISH technology.
+                                                        By using the same tumor/normal pairs in these studies,
+                                                        integrating
+                                                        the
+                                                        results from the different
+                                                        centers and studies and correlating these with detailed
+                                                        morphological
+                                                        analysis and patient details
+                                                        including evidence on tumor aggressiveness and recurrence, we
+                                                        will
+                                                        increase our understanding of
+                                                        the link between radiation exposure and cancer development, and
+                                                        provide
+                                                        evidence which will inform
+                                                        decisions on radiation protection and on clinical management of
+                                                        patients
+                                                        with radiation associated
+                                                        cancers.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[004/2001] RET proto-oncogene rearrangements and tyrosine kinase gene
+                                            expression
+                                            in radiation induced papillary thyroid carcinomas developed after the
+                                            Chernobyl
+                                            accident.
+                                            <div>
+                                                <span class="fw-light">Horst Zitzelsberger, GSF, Munich, Germany</span>
+                                                <a
+                                                        href="mailto:zitzelsberger@gsf.de" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c04" aria-expanded="false"
+                                                        aria-controls="c04">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c04">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        The papillary thyroid
+                                                        carcinoma oncogene (RET/PTC) is a rearranged version of the
+                                                        tyrosine
+                                                        kinase RET. It is know that the
+                                                        incidence of RET/PTC activation is increased in
+                                                        radiation-induced
+                                                        papillary thyroid carcinomas
+                                                        compared to papillary thyroid carcinomas without a radiation
+                                                        history.
+                                                        The prognostic value of
+                                                        RET/PTC rearrangements and its importance as a
+                                                        radiation-specific
+                                                        marker
+                                                        is still unclear. It is
+                                                        proposed to screen 70 childhood cases from Belarus and Ukraine
+                                                        with
+                                                        interphase FISH in conjunction
+                                                        with RT-PCR to confirm the presence and type of the chimeric
+                                                        transcripts. Cases with indications for
+                                                        atypical RET/PTC rearrangements will be further investigated
+                                                        using
+                                                        5'RACE for the presence of novel
+                                                        types of alteration. For this part of the proposal RNA samples
+                                                        as
+                                                        well
+                                                        as a limited number of
+                                                        paraffin-embedded sections would be needed. The RNA samples will
+                                                        be
+                                                        further investigated for
+                                                        expression profiles of other tyrosine kinase genes to identify
+                                                        other
+                                                        gene rearrangements which may
+                                                        occur as a sole abnormality or in addition to RET/PTC
+                                                        rearrangements.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[005/2001] Mitochondrial DNA deletions and mutations in post Chernobyl
+                                            thyroid
+                                            tumors and in the respective normal thyroid parenchyma.
+                                            <div>
+                                                <span class="fw-light">Manuel Sobrinho-Simoes, IPATIMUP, Porto, Portugal</span>
+                                                <a
+                                                        href="mailto:sobrinho.simoes@ipatimup.pt" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c05" aria-expanded="false"
+                                                        aria-controls="c05">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c05">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Mittochondrial DNA (mtDNA) is a likely hotspot for mutation in
+                                                        cancer as
+                                                        it is preferentially modified by many carcinogens. We have
+                                                        previously
+                                                        shown that there is a specific association between sequence
+                                                        variants
+                                                        of
+                                                        Complex I genes and ATPase6, one of the two mitochondrial genes
+                                                        of
+                                                        Complex V, and the occurrence of malignancy and of oxyphil
+                                                        features
+                                                        in
+                                                        thyroid tumors. We have also found a significant association
+                                                        between
+                                                        mitochondrial sequence variants and the occurrence (and degree)
+                                                        of
+                                                        the
+                                                        so-called mitochondrial common deletion. In an attempt to
+                                                        elucidate
+                                                        the
+                                                        role of post-Chernobyl irradiation in mtDNA alterations and to
+                                                        find
+                                                        out
+                                                        whether or not such alterations are involved in the
+                                                        etiopathogenesis
+                                                        of
+                                                        thyroid tumors we will search for the mtDNA common deletion and
+                                                        for
+                                                        somatic mutations and sequence variants in the D-loop region, in
+                                                        the
+                                                        13
+                                                        coding genes and in the 22 tRNAs genes of cases from which there
+                                                        are
+                                                        RNA
+                                                        and DNA samples extracted from blood (set without radiation),
+                                                        normal
+                                                        thyroid (set irradiation) and tumors (set irradiation and
+                                                        tumorigenesis). In a first step, we will study exhaustively 20
+                                                        cases.
+                                                        The results obtained in this first part will be used together
+                                                        with
+                                                        the
+                                                        data we and others have previously obtained to decide the most
+                                                        appropriate targets for the second part of the study. If
+                                                        possible we
+                                                        would like to correlate the results of our study on mtDNA
+                                                        deletions
+                                                        and
+                                                        mutations with those on ret oncogene. In case there are also
+                                                        clinico-pathyological data available, we would like to
+                                                        collaborate
+                                                        with
+                                                        the pathologists who have studied the cases in order to clarify
+                                                        the
+                                                        putative clinical significance of the mtDNA alterations.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[007/2001] Expression of the RET proto-oncogene in post-Chernobyl thyroid
+                                            tumors
+                                            and unirradiated controls: analysis of RET/PTC rearrangements, RET wild type
+                                            and
+                                            RET-TK domain, with quantitative assessment of mRNA and protein expression.
+                                            <div>
+                                                <span class="fw-light">Aldo Pinchera, University of Pisa, Italy</span>
+                                                <a
+                                                        href="mailto:a.pinchera@endoc.med.unipi.it" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c07" aria-expanded="false"
+                                                        aria-controls="c07">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c07">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Genetic alterations of the ret proto-oncogene play a critical
+                                                        role
+                                                        in
+                                                        the pathogenesis of papillary thyroid carcinomas both naturally
+                                                        occurring and radiation induced. We have recently found that
+                                                        classical
+                                                        RET/PTC rearrangements are present also in benign thyroid
+                                                        nodular
+                                                        disease. Furthermore, in several cases the independent
+                                                        expression of
+                                                        tyrosine kinase (TK) and extracellular (EC) domains of RET was
+                                                        found.
+                                                        This finding may be interpreted as RET wild type gene
+                                                        expression. In
+                                                        other cases, especially radiation exposed, the TK domain in the
+                                                        absence
+                                                        of EC was found and was interpreted as unknown RET/PTC
+                                                        rearrangements
+                                                        (PTCX). Aim of this project is to clarify the modality of
+                                                        expression
+                                                        of
+                                                        RET protooncogene in nodular thyroid diseases. In cases with EC
+                                                        and
+                                                        TK
+                                                        expression, we will search for RET wild type by an extralong PCR
+                                                        encompassing the TK and EC domains, followed by sequencing of
+                                                        the
+                                                        PCR
+                                                        product. In cases of TK positive expression only (but not
+                                                        classical
+                                                        PTC1, PTC2 and PTC3) we will identify the 5' domain rearranged
+                                                        with
+                                                        the
+                                                        TK domain. As for other unknown RET/PTC rearrangements will use
+                                                        the
+                                                        5'race approach.</p>
+                                                    <p>
+                                                        All samples positive for TK expression will be submitted to
+                                                        quantitative PCR (ABI Prism 7700 sequence detector, Perkin
+                                                        Elmer)
+                                                        for TK
+                                                        mRNA. The TK mRNA expression will be correlated with the
+                                                        histological
+                                                        characteristics of the analysed tissues, and the
+                                                        immunohistochemical
+                                                        pattern of RET protein expression, using an antibody to
+                                                        recognize
+                                                        the TK
+                                                        domain.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2002] Analysis of RET/PTC transforming ability in Thyroid cells using
+                                            Oligonucleotide DNA Micro Array.
+
+                                            <div>
+                                                <span class="fw-light">Giuliana Salvatore, University of Naples, Italy</span>
+                                                <a
+                                                        href="mailto:gsalvato@unina.it" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0102" aria-expanded="false"
+                                                        aria-controls="c0102">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0102">
+                                                <div class="card card-body">
+                                                    The expression of RET/PTC oncogenes in thyroid PC Cl 3 cells induces
+                                                    a
+                                                    complex phenotype with a block of the differentiation program,
+                                                    hormone-independent proliferation and increased apoptotic rate.
+                                                    Oligonucleotide GeneChips were used to analyse gene expression
+                                                    profiles
+                                                    of PC Cl 3 cells expressing either RET/PTC1 or RET/PTC3 oncogenes in
+                                                    comparison to parental cells. About 2,000 genes showing at least
+                                                    two-fold increase and 2,000 genes showing at least two-fold decrease
+                                                    were identified in RET/PTC-expressing thyrocytes. Virtually all the
+                                                    genes up-regulated by more than 5-folds (about 100) were confirmed
+                                                    by
+                                                    RT-PCR and some of them by immunoblot. Genes upregulated by RET/PTC
+                                                    could be functionally divided in genes involved in proliferation
+                                                    (such
+                                                    as D-type cyclins), apoptosis, proteolysis, inflammation, and
+                                                    metabolism. We plan to extend these studies on the identified genes
+                                                    up
+                                                    and on the downregulated by analyzing their expression in human
+                                                    thyroid
+                                                    tumors of different histotypes. We propose to study their expression
+                                                    by
+                                                    semiquantitative reverse transcriptase PCR and for selected genes by
+                                                    real time quantitative PCR. Immunohistochemical analysis will be use
+                                                    to
+                                                    verify protein expression.
+                                                    <br>
+                                                    <br>
+                                                    The findings of these studies can reveal clues to the molecular
+                                                    pathways
+                                                    involved in papillary thyroid carcinoma and may provide biomarkers
+                                                    for
+                                                    clinical use.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2002] A Comprehensive Molecular Profile of ChildhoodRadiation Induced
+                                            Papillary Thyroid Tumors Compared to Adult Sporadic Papillary Tumors.
+
+                                            <div>
+                                                <span class="fw-light">Lesleyann Hawthorn, Cancer Genetics, Roswell Park Cancer Institute, Buffalo, New York, USA</span>
+                                                <a href="mailto:lesleyann-hawthorn@roswellpark.org" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0202" aria-expanded="false"
+                                                        aria-controls="c0202">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0202">
+                                                <div class="card card-body">
+                                                    Papillary thyroid carcinoma (PTC) accounts for 80% of all thyroid
+                                                    malignancies. It has a variable disease course and to date no
+                                                    pathways
+                                                    or specific genes have been implicated as causative in this tumor.
+                                                    RET
+                                                    activation, through translocations involving several genes, have
+                                                    been
+                                                    noted in a high incidence of PTCs. However, the activation of this
+                                                    oncogene is found at all stages from benign through
+                                                    well-differentiated
+                                                    to undifferentiated carcinoma. This suggests that it represents an
+                                                    early
+                                                    event and that this defect is not in itself sufficient for
+                                                    carcinogenesis. It may also suggest that the classification of PTC
+                                                    covers more than one tumor subtype. The relationship between
+                                                    radiation
+                                                    exposure and PTC is well established. We plan to perform a genome
+                                                    wide
+                                                    scan using microarray analysis for alterations in tumors from
+                                                    children
+                                                    exposed to radiation and compare them to sporadic adult tumors to
+                                                    identify which genes are commonly altered and which genes are
+                                                    display
+                                                    differential alteration expression patterns. We plan to extend this
+                                                    study using high-resolution BAC-CGH to define a molecular pattern
+                                                    for
+                                                    these tumors and evaluate this approach for diagnostic applications.
+                                                    The
+                                                    study of molecular alterations which cause thyroid carcinoma is of
+                                                    importance since the identification of causative factors could lead
+                                                    to
+                                                    new approaches for treatment.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2003] A comprehensive analysis to find out molecular biomarker(s) of
+                                            radiation exposure and grade of malignancy in human post-Chernobyl PTC
+                                            <div>
+                                                <span class="fw-light">Hiroyuki Namba, Atomic Bomb Disease Institute, Nagasaki University, Nagasaki, Japan</span>
+                                                <a href="mailto:namba@net.nagasaki-u.ac.jp" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0103" aria-expanded="false"
+                                                        aria-controls="c0103">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0103">
+                                                <div class="card card-body">
+                                                    Development of papillary thyroid cancer (PTC), similarly to that of
+                                                    most
+                                                    of other human malignancies, is likely to comprise a multistep and
+                                                    multihit process. It is quite probable that mutational events
+                                                    initiating, promoting and/or driving the tumor progression are quite
+                                                    similar in the sporadic and radiation-induced PTC. Along with this,
+                                                    one
+                                                    may expect there may be unidentified to date molecular distinctive
+                                                    features peculiar to thyroid cancers of different etiology. Thus, a
+                                                    comparative study of various molecular characteristics in the two
+                                                    groups
+                                                    of PTC may provide additional information for the determination of
+                                                    the
+                                                    molecular signature of radiation-induced thyroid cancerogenesis.
+                                                    <br><br>
+                                                    In the proposed project we intend to study the following molecular
+                                                    characteristics of the DNA extractedfrom normal and tumor tissue of
+                                                    radiation-induced PTCs: i) relative content of mtDNA and number of
+                                                    large-scale deletions in mtDNA; ii) prevalence of gene mutations of
+                                                    MAPK
+                                                    signal molecules, including the Ras,BRAF, Raf-1 and MEK genes; and
+                                                    iii)
+                                                    distribution of the codon 72 allelic variants of theTP53.
+                                                    <br><br>
+                                                    After the data are obtained, we will perform a comprehensive
+                                                    univariate
+                                                    and multivariate statistical analysis against already available
+                                                    results
+                                                    of examination of sporadic PTC in order to identify molecular
+                                                    parameter(s) specific to radiation-induced PTC.
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2003] Molecular Change and Thyroid Cancer Risk after Chernobyl
+                                            <div>
+                                                <span class="fw-light">Scott Davis, Fred Hutchinson Cancer Centre, Seattle, USA</span>
+                                                <a href="mailto:sdavis@fhcrc.org" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0203" aria-expanded="false"
+                                                        aria-controls="c0203">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0203">
+                                                <div class="card card-body">
+                                                    This study investigates the occurrence and molecular characteristics
+                                                    of
+                                                    thyroid cancer in residents of the Bryansk Oblast of the Russian
+                                                    Federation, who were 0-50 years of age at the time of exposure to
+                                                    radiation from the Chernobyl Power Station accident (ATA) on April
+                                                    26,
+                                                    1986. The study has three primary purposes: 1) to characterize cases
+                                                    of
+                                                    thyroid cancer according to specific molecular markers of genetic
+                                                    change, and investigate whether the presence of such markers is
+                                                    associated with individual thyroid radiation dose from the Chernobyl
+                                                    accident; 2) to investigate whether age-at-exposure dependent
+                                                    radiation
+                                                    dose response for thyroid cancer differs between cancers that are
+                                                    positive versus negative for the molecular markers investigated; and
+                                                    3)
+                                                    to investigate whether the presence of these same molecular markers
+                                                    is
+                                                    associated with clinical outcomes. Included will be thyroid cancer
+                                                    cases
+                                                    diagnosed between April 1, 2001 and March 31, 2006 and confirmed by
+                                                    a
+                                                    panel of expert thyroid pathologists. An equal number of controls
+                                                    will
+                                                    be individually matched to cases by sex, age, type of settlement and
+                                                    raion of residence on April 26, 1986. Data collected will include
+                                                    in-person interviews for all participants, and for cases only,
+                                                    paraffin
+                                                    embedded tissue or fresh frozen tissue, clinical history and outcome
+                                                    information.
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2004] Analysis of Genetic and Epigenetic Abnormalities in
+                                            Radiation-induced
+                                            Thyroid Cancers
+                                            <div>
+                                                <span class="fw-light">Michael M Xing, John Hopkins University School of Medicine, Baltimore USA</span>
+                                                <a href="mailto:mxing1@jhmi.edu" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0104" aria-expanded="false"
+                                                        aria-controls="c0104">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0104">
+                                                <div class="card card-body">
+                                                    Thyroid cancers are the most common endocrine malignancies and the
+                                                    vast
+                                                    majority of them are papillary thyroid cancers (PTC). Several
+                                                    genetic
+                                                    abnormalities, including Ras mutations and RET/PTC rearrangements
+                                                    have
+                                                    been well characterized in these cancers. Recently, we and several
+                                                    other
+                                                    groups have reported the BRAF mutation in PTC with a high
+                                                    prevalence. We
+                                                    have also characterized aberrant DNA methylation in several genes in
+                                                    thyroid cancers, including novel tumor suppressor genes and some
+                                                    thyroid-specific genes. Except for the RET/PCT rearrangements, these
+                                                    genetic and epigenetic abnormalities have been studied mainly in
+                                                    sporadic thyroid cancers, and their role is unknown in the special
+                                                    group
+                                                    of thyroid cancers induced by radiation, the most common and
+                                                    well-established environmental risk factor for thyroid cancer.
+                                                    Chernobyl
+                                                    nuclear accident has been associated with a significant increase in
+                                                    the
+                                                    incidence of PTC, which represent an ideal thyroid tumor model for
+                                                    the
+                                                    study of radiation-induced thyroid tumorigenesis. In the present
+                                                    project, we propose to use such special thyroid cancer samples to
+                                                    study
+                                                    novel genetic and epigenetic abnormalities, their relationship, and
+                                                    their effects on the expression of key thyroid genes.
+                                                    Well-established
+                                                    experimental protocols and techniques, including RT-PCR,
+                                                    methylation-specific PCR, real-time quantitative PCR, and a recently
+                                                    established colorimetric mutation detection method will be used. The
+                                                    study is expected to result in important insights into
+                                                    radiation-induced
+                                                    thyroid tumorigenesis and provide novel clinical implications for
+                                                    this
+                                                    special group of thyroid cancers.
+
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2004] Investigation of molecular genetic abnormalities associated with
+                                            progression of human thyroid follicular neoplasms
+                                            <div>
+                                                <span class="fw-light">D Wynford-Thomas, University of Wales College of Medicine, Cardiff UK</span>
+                                                <a href="mailto:kingTD@cardiff.ac.uk" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0204" aria-expanded="false"
+                                                        aria-controls="c0204">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0204">
+                                                <div class="card card-body">
+                                                    Thyroid follicular carcinomas frequently exhibit RAS mutation, and
+                                                    closely resemble benign follicular adenomas with respect to
+                                                    morphology
+                                                    and differentiation. Cell culture studies suggest that at least one
+                                                    requirement for progression from an adenoma to a carcinoma is
+                                                    failure of
+                                                    an intrinsic mechanism that normally limits the proliferative
+                                                    lifespan
+                                                    of RAS-induced cell clones. One current candidate for over-riding
+                                                    the
+                                                    mechanism is the tumor suppressor gene p16 INK4a.
+                                                    <br><br>
+                                                    There is great clinical interest in this area, as currently there is
+                                                    no
+                                                    marker to distinguish between thyroid follicular adenoma and
+                                                    carcinoma
+                                                    when evaluating fine needle aspirates and biopsies of thyroid
+                                                    glands.
+                                                    This means that many people have unnecessary operations on the basis
+                                                    of
+                                                    presumed malignancy. We now therefore wish to carry out a
+                                                    comprehensive
+                                                    comparison between thyroid carcinoma and adenoma cells to identify
+                                                    differences that may confer an extended proliferative lifespan on
+                                                    carcinoma cells.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[003/2004] Molecular Definition of Gene Expression in Chernobyl Thyroid
+                                            Cancers
+                                            <div>
+                                                <span class="fw-light">Carine Maenhaut, ULB, Brussels</span>
+                                                <a href="mailto:cmaenhau@ulb.ac.be" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0304" aria-expanded="false"
+                                                        aria-controls="c0304">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0304">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Chernobyl thyroid cancers represent a unique resource in
+                                                        oncology
+                                                        and radiation biology. They appear in a cohort of patients
+                                                        irradiated at the same time and in which there is no doubt that
+                                                        the
+                                                        cancer originated from radiation exposure. The precise timing of
+                                                        the
+                                                        course allows to follow precisely the kinetics of appearance of
+                                                        the
+                                                        cancers. On the other hand study of the gene expression pattern
+                                                        of
+                                                        cancers by microarrays allows a precise molecular definition of
+                                                        each
+                                                        cancer. Using this methodology we were able to show that the
+                                                        clustering of gene patterns of Chernobyl cancers of the first
+                                                        wave
+                                                        and European and US sporadic cases could not separate them. This
+                                                        work should now be extended to a larger series of cases.
+                                                    <ol>
+                                                        <li>
+                                                            to try to distinguish subtypes of Chernobyl and sporadic
+                                                            papillary carcinomas and their signature.
+                                                        </li>
+                                                        <li>
+                                                            to relate patterns of gene expression with clinical
+                                                            variables
+                                                            such as the duration of the incubation period and with the
+                                                            genetic diagnosis.
+                                                        </li>
+                                                        <li>
+                                                            to validate data at the RNA level by PCR and at the protein
+                                                            level by Western and to define potential diagnostic markers
+                                                            and
+                                                            therapeutic targets.
+                                                        </li>
+                                                    </ol>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2005] Genomic Analysis of Gene Copy Number in Thyroid Cancer.
+                                            <div>
+                                                <span class="fw-light">PE Neiman, FHCRC, Seattle, USA</span>
+                                                <a href="mailto:pneiman@fhcrc.org" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0105" aria-expanded="false"
+                                                        aria-controls="c0105">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0105">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        High copy-number gene amplification is known to take place at a
+                                                        few
+                                                        genomic loci in numerous human cancers, but widespread low-level
+                                                        copy-number changes in genomic DNA have not been described. cDNA
+                                                        microarray-based comparative genome hybridization yields
+                                                        high-resolution copy-number profiles that enable the detection
+                                                        of
+                                                        low-level amplification events at individual gene loci. We have
+                                                        shown in a small pilot study that pediatric thyroid carcinoma in
+                                                        residents of a region contaminated by 131I from the Chernobyl
+                                                        accident (the Bryansk Oblast) exhibits gene amplification at a
+                                                        higher frequency than that seen in pediatric thyroid carcinoma
+                                                        in US
+                                                        children with no history of radiation exposure. This result
+                                                        suggests
+                                                        that exposure to ionizing radiation from the environment may be
+                                                        associated with an increased rate of gene amplification in a
+                                                        human
+                                                        cancer. The consistent amplification of many genes among cases
+                                                        of
+                                                        post-Chernobyl thyroid carcinoma from Bryansk suggests the
+                                                        existence
+                                                        of a target pool of radiation-sensitive genomic loci that
+                                                        respond to
+                                                        exposure by initiating local amplification events. The pattern
+                                                        of
+                                                        gene amplification may represent a radiation signature that
+                                                        could be
+                                                        used to map amplicons likely to harbor participating oncogenes.
+                                                        <br><br>
+                                                        Based upon these differences observed in the pilot study in
+                                                        apparent
+                                                        gene amplification between post-Chernobyl and spontaneous
+                                                        pediatric
+                                                        papillary thyroid carcinoma (PTC), we hypothesize that radiation
+                                                        exposure leaves a measurable genomic signature in the form of
+                                                        stable
+                                                        changes in gene amplification. Some chromosomal regions
+                                                        identified
+                                                        by this method are likely to harbor participating oncogenes, but
+                                                        it
+                                                        is unreasonable to expect that so many genes be directly
+                                                        involved in
+                                                        oncogenesis. We hypothesize the presence of genomic hot spots in
+                                                        human DNA that are susceptible to radiation-induced
+                                                        amplification.
+                                                        These genomic targets are unlikely to be saturated by the doses
+                                                        of
+                                                        radiation delivered to these patients. The number of targets hit
+                                                        in
+                                                        each case should therefore be directly proportional to radiation
+                                                        dose.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2005] The influence of genetic variation in DNA repair pathways on
+                                            cancer
+                                            risk following exposure to ionising radiation.
+                                            <div>
+                                                <span class="fw-light">S Forbes-Robertson, Swansea Medical School, Swansea UK</span>
+                                                <a href="mailto:gerry.thomas@imperial.ac.uk" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0205" aria-expanded="false"
+                                                        aria-controls="c0205">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0205">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Genetic damage following radiation exposure is subject to
+                                                        correction
+                                                        by the caretaker systems of DNA repair. Our interest is in the
+                                                        role
+                                                        that these systems may play in the molecular pathogenesis of
+                                                        cancer.
+                                                        We propose a pilot project to assess the influence of genetic
+                                                        variation on cancer risk following exposure to ionising
+                                                        radiation.
+                                                        This will be achieved by investigation of variation in the genes
+                                                        involved in the DNA repair pathways, in DNA derived from blood
+                                                        samples or normal tissue samples from patients with thyroid
+                                                        tumors
+                                                        of radiation-associated and non-radiation-associated etiology.
+                                                        There
+                                                        are two main justifications for such a study, first to identify
+                                                        SNPs
+                                                        which indicate possession of an at risk genotype, and secondly,
+                                                        to
+                                                        identify the genes in which genetic variation is a significant
+                                                        modulator of cancer risk. This has particular and wider
+                                                        relevance to
+                                                        the involvement of DNA repair-associated factors in the
+                                                        pathology of
+                                                        other cancers as well, such as breast cancer.
+                                                        <br><br>
+                                                        Genotyping of genes involved in double-strand break repair will
+                                                        be
+                                                        performed using a mass spectrometry-based SNPing platform which
+                                                        has
+                                                        been developed by our group at the University of Wales, Swansea.
+                                                        Data will be provided to the Chernobyl Tissue Bank for
+                                                        correlation
+                                                        with pathology and expression of oncogenes such as ret and BRAF.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2007] Array CGH analysis of RET/PTC-positive and RET/PTC-negative
+                                            post-Chernobyl thyroid tumors.
+                                            <div>
+                                                <span class="fw-light">H Zitzelsberger, Helmholtz Zentrum MÃ¼nchen, Neuherberg, Germany</span>
+                                                <a href="mailto:zitzelsberger@helmholtz-muenchen.de" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0107" aria-expanded="false"
+                                                        aria-controls="c0107">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0107">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        It is proposed to study chromosomal imbalances in post-Chernobyl
+                                                        papillary thyroid carcinomas (PTC) by means of array CGH using
+                                                        1Mb
+                                                        BAC arrays. As derived from interphase FISH experiments RET/PTC
+                                                        rearrangements are heterogeneously distributed within tumor
+                                                        tissues
+                                                        leading to the assumption that additional gene alterations may
+                                                        play
+                                                        an important role in these tumors. To address this question
+                                                        post-Chernobyl PTC, with and without RET/PTC rearrangements,
+                                                        will be
+                                                        analysed by array CGH. Altered candidate genes will be derived
+                                                        from
+                                                        recurrent regions of amplifications and deletions and will be
+                                                        confirmed by interphase FISH on paraffin sections and further
+                                                        studies by PCR-based approaches to investigate expression of
+                                                        these
+                                                        genes. In a first pilot study it is intended to compare 10
+                                                        RET/PTC-positive (RET/PTC3) and 10 RET/PTC-negative cases with
+                                                        similar histological features, a comparable age range of
+                                                        patients at
+                                                        time of exposure and a similar latency after exposure is a first
+                                                        study. The pilot study will use cases from the age-matched
+                                                        series
+                                                        with known RET/PTC status. If successful this study will be
+                                                        extended
+                                                        to a larger series of cases linked to the GENRISK-T project.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2007] Expression profiling of childhood thyroid cancer: a comparison of
+                                            those exposed to radioiodine and those exposed to low level radiocaesium.
+                                            <div>
+                                                <span class="fw-light">Carine Maenhaut, University of Brussels School of Medicine, Brussels, Belgium</span>
+                                                <a href="mailto:cmaenhau@ulb.ac.be" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0207" aria-expanded="false"
+                                                        aria-controls="c0207">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0207">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        The aim of this study is to investigate whether different
+                                                        transcriptomic profiles can be related to exposure to
+                                                        radioiodine in
+                                                        fallout from the Chernobyl accident and to lower level
+                                                        radiocaesium
+                                                        exposure present in the contaminated environment. We will use
+                                                        Affymetrix microarray technology to define transcriptomic
+                                                        profiles
+                                                        in two cohorts of children, matched on age, oblast and
+                                                        pathological
+                                                        type of tumor. The research will be carried out in two separate
+                                                        laboratories and cross-validated. This project is one of a
+                                                        series of
+                                                        projects that will study the transcriptomic and genetic profile
+                                                        of
+                                                        two well-defined cohorts to investigate the relative effects of
+                                                        radioiodine and radiocaesium exposure on the development of
+                                                        thyroid
+                                                        cancer.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[003/2007] Gene expression in normal and cancerous tissue in relation to
+                                            I-131
+                                            exposure.
+                                            <div>
+                                                <span class="fw-light">M Abend, Bundeswehr Institute of Radiobiology, Munich, Germany</span>
+                                                <a href="mailto:michaelabend@bundeswehr.org" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0307" aria-expanded="false"
+                                                        aria-controls="c0307">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0307">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Gene expression has received less attention than the role of
+                                                        germline polymorphisms or somatic mutations in studies of
+                                                        radiation
+                                                        and thyroid cancer. The increase in papillary thyroid cancers
+                                                        (PTC)
+                                                        in exposed children following the Chernobyl nuclear accident
+                                                        presents an opportunity to pursue the role of gene expression
+                                                        further. Recently, we reported on expression of seven genes,
+                                                        each of
+                                                        which was able to distinguish post-Chernobyl PTCs from sporadic
+                                                        PTCs
+                                                        (Port et al 2007). Our approach involved (i) a whole genome
+                                                        microarray used for screening purposes; and (ii) quantitative
+                                                        examination of the 92 target genes with a high throughput
+                                                        RTQ-PCR
+                                                        technique (LDA). The study had some limitations such as the
+                                                        origin
+                                                        of sporadic PTCs (Eastern Germany), their different age at
+                                                        diagnosis
+                                                        and a small number of cases (n=11). Subsequently another group
+                                                        has
+                                                        reported on expression of thirteen genes involved in homologous
+                                                        recombination suggesting a distinct radiation pattern of
+                                                        post-Chernobyl PTCs (Detours et al 2007). Using the already
+                                                        established 2-stage design, the purpose of the present
+                                                        application
+                                                        is to overcome limitations in the previous study and extend the
+                                                        findings (Port et al 1007) by evaluating a dose-dependent gene
+                                                        expression pattern in 74 post-Chernobyl PTCs with individual
+                                                        I-131
+                                                        dose estimates.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[004/2007] Genetic predisposition to radiation-induced carcinogenesis and to
+                                            specific genetic alterations in post-Chernobyl thyroid cancer.
+                                            <div>
+                                                <span class="fw-light">Y Nikiforov, University of Pittsburgh School of Medicine, Pittsburgh, USA</span>
+                                                <a href="mailto:nikiforovye@upmc.edu" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0407" aria-expanded="false"
+                                                        aria-controls="c0407">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0407">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Radiation exposure is a well established risk factor for thyroid
+                                                        cancer. Ionising radiation is known to cause extensive DNA
+                                                        damage
+                                                        including double strand breaks, which may lead to the generation
+                                                        of
+                                                        somatic mutations in thyroid cells and cancer initiation.
+                                                        However,
+                                                        environmental triggers cannot fully explain the inter-patient
+                                                        heterogeneity in the individual response to exposure to
+                                                        radiation,
+                                                        which points to the existence of genetic variations that define
+                                                        the
+                                                        individual susceptibility to radiation-related cancer. We
+                                                        propose to
+                                                        analyse several candidate DNA repair genes and perform a
+                                                        genome-wide
+                                                        analysis of single nucleotide polymorphisms (SNPs) in Ukrainian
+                                                        patients who developed thyroid cancer after Chernobyl and in
+                                                        control
+                                                        cancer-free individuals to identify mutations and SNPs that are
+                                                        involved in genetic predisposition and to identify the genes
+                                                        that
+                                                        are affected. We will then perform functional analysis to find
+                                                        whether these genetic variations alter gene function. We will
+                                                        also
+                                                        study the link between specific SNPs and known or new mutations
+                                                        found in these tumors. The overall goal of this study is to
+                                                        identify
+                                                        genes involved in genetic predisposition to radiation-associated
+                                                        thyroid carcinogenesis and a pattern of SNPs that can detect it.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2008] Genrisk-T - defining the risk of low dose radiation for thyroid
+                                            cancer - the role of germline SNPs.
+                                            <div>
+                                                <span class="fw-light">GA Thomas, Imperial College London, Hammersmith Hospital, London</span>
+                                                <a href="mailto:gerry.thomas@imperial.ac.uk" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0108" aria-expanded="false"
+                                                        aria-controls="c0108">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0108">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Cancer of the non-medullary (follicular epithelium) component of
+                                                        the
+                                                        thyroid is induced by external irradiation and by radionuclides
+                                                        deposited within the thyroid tissue. Estimates of the
+                                                        radiological
+                                                        risk of developing thyroid cancer are derived from
+                                                        epidemiological
+                                                        studies performed in. Populations receiving high doses where,
+                                                        according to Ron et al, the threshold in 100 mSv. Extrapolation
+                                                        of
+                                                        this risk to exposures at much lower doses is compromised by the
+                                                        lack of an accurate model of the dose response curve for thyroid
+                                                        cancer at low doses. Moreover, such population based estimates
+                                                        fail
+                                                        to take into account the contribution of individual genetic
+                                                        variability to the risk estimate. Individuals with an increased
+                                                        genetic predisposition to develop thyroid cancer are not
+                                                        identified,
+                                                        and it is precisely these individuals who will be at greatest
+                                                        risk
+                                                        at low doses. The GENRISK-T consortium is composed of thyroid
+                                                        cancer
+                                                        experts with experience in the fields of radiation biology,
+                                                        animal
+                                                        models of radiation-induced cancer, tumor banking, cancer
+                                                        biology,
+                                                        molecular genetics, histopathology, cyto genetics and risk
+                                                        modelling. We will use this interdisciplinary knowledge to
+                                                        define
+                                                        the genetic component influencing the risk of radiation-induced
+                                                        thyroid cancer. This will be achieved through a combination of
+                                                        studies using animal models and in human radiation-induced
+                                                        thyroid
+                                                        tumors. This new understanding of the genetic risk modifiers
+                                                        will be
+                                                        used to develop an animal model of thyroid cancer that is
+                                                        responsive
+                                                        to low dose radiation in the cGy range, thereby providing an
+                                                        experimental solution to resolving the uncertainties of the low
+                                                        dose-response curve. This EC collaborative project (PI Professor
+                                                        M
+                                                        Atkinson, Helmholtz Zentrum, Munich) combines the use of animal
+                                                        models and human studies. This particular application is to
+                                                        support
+                                                        the investigation of human germline SNPs that may predispose to
+                                                        radioiodine induced thyroid cancer in those exposed as children
+                                                        and
+                                                        adolescents.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2008] Expression profiling of childhood follicular tumors: a comparison
+                                            of
+                                            those exposed and not exposed to radiation. Defining the genetic component
+                                            of
+                                            thyroid cancer risk at low doses.
+                                            <div>
+                                                <span class="fw-light">B Jarzab, Maria Sklodowska-Curie Memorial Cancer Centre and Institute of Oncology, Gliwice, Poland</span>
+                                                <a href="mailto:bjarzab@io.gliwice.pl" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0208" aria-expanded="false"
+                                                        aria-controls="c0208">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0208">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        The aim of the study is to investigate transcriptomic profiles
+                                                        of
+                                                        follicular thyroid tumors (malignant and benign) that arose
+                                                        after
+                                                        expose to radioiodine fallout from Chernobyl power station and
+                                                        to
+                                                        low level radiocesium exposure present in the contaminated
+                                                        environment. Affimetrix microarray technology will be employed
+                                                        to
+                                                        define transcriptomic profiles in two cohorts of children
+                                                        matched on
+                                                        age, oblast and pathological type of tumor. This project is the
+                                                        continuation of a series of projects that are carry on to
+                                                        investigate the transcriptomic and genetic profile of radiation
+                                                        induced thyroid cancer.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[003/2008] Array CGH analysis of follicular post-Chernobyl thyroid tumors.
+                                            <div>
+                                                <span class="fw-light">H Zitzelsberger, Helmholtz Zentrum Muenchen, Neuherberg Germany</span>
+                                                <a href="mailto:zitzelsberger@helmholtz-muenchen.de" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0308" aria-expanded="false"
+                                                        aria-controls="c0308">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0308">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Follicular thyroid cancers are less frequent than papillary
+                                                        thyroid
+                                                        carcinomas (PTC), however, they are associated with a poorer
+                                                        survival outcome than PTC. Although several genetic changes have
+                                                        been identified so far, the molecular genetic mechanisms of
+                                                        tumor
+                                                        development in follicular thyroid neoplasms are still unclear.
+                                                        <br><br>
+                                                        To investigate novel gene alterations and potential radiation
+                                                        signatures in follicular thyroid adenomas (FA) and follicular
+                                                        thyroid carcinomas (FTC) it is proposed to investigate
+                                                        genome-wide
+                                                        copy number changes of 100 thyroid tissue samples by array CGH
+                                                        using
+                                                        1 Mb BAC arrays. For this purpose we want to compare genomic
+                                                        profiles of tumors (FA and FTC) developed pre- and post-fallout
+                                                        of
+                                                        the Chernobyl accident. The proposed study aims to identify gene
+                                                        alterations in follicular thyroid neoplasms from altered genomic
+                                                        regions and to determine aberrations patterns that correlate
+                                                        with
+                                                        the radiation history of patients as well as with any of the
+                                                        clinical phenotypes of the tumors.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2009] Defining the genetic component of thyroid cancer risk at low
+                                            doses
+                                            request for RNA aliquots for QPCR validation and for the exon arrays.
+                                            <span class="fw-light fst-italic">(This project is an expansion of project 002/2008)</span>
+                                            <div>
+                                                <span class="fw-light">B Jarzab, Maria Sklodowska-Curie Memorial Cancer Centre and Institute of Oncology, Gliwice, Poland</span>
+                                                <a href="mailto:bjarzab@io.gliwice.pl" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0109" aria-expanded="false"
+                                                        aria-controls="c0109">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0109">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        The aim of the study is to seek for differences in
+                                                        transcriptomic
+                                                        profiles of childhood papillary thyroid cancers that arose after
+                                                        radiation exposure from Chernobyl power station fallout and
+                                                        sporadic
+                                                        cancers. As the first step Affimetrix microarray technology was
+                                                        employed to define transcriptomic profiles in two cohorts of
+                                                        children matched on age, oblast and pathological type of tumor.
+                                                        The
+                                                        second step of the study is to validate microarray results with
+                                                        Q-PCR analysis. We also plan to extent the analysis to exon
+                                                        microarray study which allow to detect transcript isoforms,
+                                                        chromosomal deletions and amplifications.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2009] Identification of somatically acquired rearrangements in
+                                            post-Chernobyl paediatric thyroid cancers using genome-wide massively
+                                            parallel
+                                            paired-end sequencing
+                                            <div>
+                                                <span class="fw-light">JA Fagin, Memorial Sloan-Kettering Cancer Center, New York, USA</span>
+                                                <a href="mailto:faginj@mskcc.org" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0209" aria-expanded="false"
+                                                        aria-controls="c0209">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0209">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Post-Chernobyl pediatric thyroid cancers are associated with a
+                                                        high
+                                                        frequency of recombination events leading to the generation of
+                                                        fusion oncogenes, resulting in aberrant expression and
+                                                        activation of
+                                                        RET, and less frequently of NTRK and BRAF. Altogether, ~60% of
+                                                        PTC
+                                                        arising in this patient population harbor one of these
+                                                        abnormalities. The discovery of novel somatic rearrangements
+                                                        using
+                                                        conventional methods has low sensitivity and/or resolution. We
+                                                        propose to use genome-wide parallel paired-end sequencing to
+                                                        identify somatic rearrangements in childhood thyroid cancers
+                                                        induced
+                                                        by radiation, as compared to age-matched thyroid cancers without
+                                                        radiation exposure. Altogether we will select 6 samples of each
+                                                        population: 2 with a known rearrangement in RET, NTRK or BRAF
+                                                        (as
+                                                        positive controls), and 4 without. We will construct 3kb insert
+                                                        Illumina libraries from each tumor DNA sample, and ~35bp of
+                                                        sequence
+                                                        from both ends of each fragment will be obtained. Each end will
+                                                        be
+                                                        mapped back to the reference genome. Fragments for which the
+                                                        ends do
+                                                        not map back within 3kb of each other and/or are in
+                                                        inappropriate
+                                                        orientation will be further studied as they may represent
+                                                        rearrangements present in the thyroid cancer genome. We will
+                                                        acquire
+                                                        ~1 fold genome coverage (~3Gb) from each sample. This will
+                                                        approximate to 30-fold physical coverage, allowing detection of
+                                                        essentially all rearrangements present in the dominant clone of
+                                                        the
+                                                        cancer. Rearrangements will be processed using a suite of
+                                                        informatics tools to predict which may generate an in-frame
+                                                        fusion
+                                                        gene. RNA from each of the samples will then be tested by
+                                                        exon-exon
+                                                        PCR to determine whether the fusion is expressed, and based on
+                                                        its
+                                                        predicted function, whether it may correspond to a driver
+                                                        mutation.
+                                                        The number of rearrangements in each cancer and their
+                                                        architecture
+                                                        will then be compared between the two classes. Sequences at the
+                                                        rearrangement junctions will also be compared particularly to
+                                                        examine the complexity of the rearrangement, sequence contexts
+                                                        of
+                                                        breaks, presence of repeats and overlapping microhomology of the
+                                                        rearrangement. Each of these indices may provide clues to the
+                                                        way
+                                                        large radiation doses induce DNA double strand breaks and how
+                                                        they
+                                                        are repaired.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[003/2009] miRNA profiles in childhood thyroid cancer
+                                            <div>
+                                                <span class="fw-light">GA Thomas, Imperial College London, Hammersmith Hospital, London</span>
+                                                <a href="mailto:gerry.thomas@imperial.ac.uk" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0309" aria-expanded="false"
+                                                        aria-controls="c0309">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0309">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        MicroRNAs (miRNAs) are 21-23 nucleotide long non-coding RNA
+                                                        molecules that have been shown to regulate the stability or
+                                                        translational efficiency of target messenger RNAs. Dysregulation
+                                                        of
+                                                        miRNAs has been implicated in a variety of cancers, and in the
+                                                        thyroid germline SNPs in miRNA binding sites and in the coding
+                                                        sequence for miRNAs themselves, have been implicated in
+                                                        Papillary
+                                                        Thyroid carcinogenesis. The Human Cancer Studies Group is part
+                                                        of an
+                                                        EC sponsored consortium (Genrisk-T) that has intensively studied
+                                                        papillary carcinomas from a series of 100 patients, and is
+                                                        currently
+                                                        extending this approach to follicular tumors. Half of this group
+                                                        were exposed to radiation and half were born after 1/1/87 and
+                                                        not
+                                                        exposed to radioiodine in fallout. The cohort is carefully age
+                                                        and
+                                                        sex matched. The Genrisk-T project has provided data on RNA
+                                                        expression using Affymetrix technology, bac array CGH data on
+                                                        copy
+                                                        number variation in the tumors and SNP array data from normal
+                                                        tissue
+                                                        from these patients. We now seek to add miRNA data from this
+                                                        cohort
+                                                        and to correlate data on SNPs and copy number variation in the
+                                                        tumor, with changes in miRNA level, and miRNA expression levels
+                                                        with
+                                                        changes in RNA expression levels. The combination of this data
+                                                        will
+                                                        give us a thorough understanding of the regulation of a number
+                                                        of
+                                                        different growth control pathways involved in carcinogenesis of
+                                                        the
+                                                        thyroid follicular cell and their relationship to radiation
+                                                        exposure.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2007-1] Validation of statistical and bioinformatics technologies to
+                                            allow
+                                            integration of Next generation RNA Sequencing and microarray data.
+                                            <div>
+                                                <span class="fw-light">L van Zyl, ArrayXpress, Inc. Raleigh, North Carolina, USA</span>
+                                                <a href="mailto:lenvanzyl@arrayxpress.com" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0207-1" aria-expanded="false"
+                                                        aria-controls="c0207-1">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0207-1">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        We are a small biotech company developing statistical and
+                                                        bioinformatics methodology that would allow for the direct
+                                                        integration and co-analyses of RNA-seq and microarray data. As
+                                                        quantitative RNA-seq data is becoming the method of choice for
+                                                        gene
+                                                        expression analyses, we are developing the statistical and
+                                                        bioinformatics technology which that allow all previous
+                                                        published
+                                                        microarray data to be incorporated with new gene expression
+                                                        platform
+                                                        data, to ultimately provide more comprehensive data-sets for
+                                                        downstream applications/analyses.
+                                                        <br><br>
+                                                        We have been working with Dr C Maenhauts group to develop the
+                                                        methodology to integrate her published Affymetrix gene
+                                                        expression
+                                                        data with our own Illumina RNA-seq data from papillary thyroid
+                                                        cancers. We propose now to subject surplus material from the
+                                                        samples
+                                                        that Dr Maenhaut received from the CTB (project 002/2007) to
+                                                        RNA-seq
+                                                        in order to not only obtain additional expression data over and
+                                                        above that obtained by microarray but also to further validate
+                                                        our
+                                                        methodologies.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <a href="#"><i class="fas fa-arrow-up"></i> Go to top</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#flush-collapseTwo" aria-expanded="false"
+                                        aria-controls="flush-collapseTwo">
+                                    Research Projects: 2010-2019
+                                </button>
+                            </h2>
+                            <div id="flush-collapseTwo" class="accordion-collapse collapse"
+                                 data-bs-parent="#accordionFlushResearch">
+                                <div class="accordion-body">
+                                    <ul>
+                                        <li>[001/2011] EpiRadiBio
+                                            <div><span
+                                                    class="fw-light">K Unger, Helmholtz Centre, Munich, Germany</span>
+                                                <a class="ms-2"
+                                                   href="mailto:unger@helmholtz-muenchen.de"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0111" aria-expanded="false"
+                                                        aria-controls="c0111">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0111">
+                                                <div class="card card-body">
+                                                    <p>The EU funded project EpiRadBio project seeks to model the cancer
+                                                        of the lung, breast and the thyroid after exposure to radiation
+                                                        in the low-dose range (cumulative dose < 100 mGy). The
+                                                        formalin-fixed paraffin-embedded (FFPE) papillary thyroid cancer
+                                                        tissue sections we apply for will be used in a work package of
+                                                        EpiRadBio that focuses on the cancer risk of papillary thyroid
+                                                        cancer. In another, recently finished EU funded project on young
+                                                        onset childhood thyroid carcinomas that also used CTB material
+                                                        we found that a gain of the chromosome band 7q11 was associated
+                                                        with exposure to low-dose ionising radiation (He et al., PNAS,
+                                                        in press). The FFPE tumor sections from patients, which are part
+                                                        of the UkrAm cohort and which come with estimates on radiation
+                                                        dose the patients have received will be used for validation and
+                                                        further characterisation of this marker. The FFPE sections will
+                                                        be used for in situ hybridisation (FISH) using 7q11 specific
+                                                        probes. DNA and total RNA will also be extracted from the FFPE
+                                                        sections. The DNA will be used for high-resolution array CGH and
+                                                        the total RNA for qRT-PCR mRNA expression analysis of candidate
+                                                        genes from the gained region. The copy number data and qRT-PCR
+                                                        data will be integrated with the dose estimates in order to
+                                                        identify a potential relationship between the
+                                                        radiation-associated biomarker and radiation dose. The resulting
+                                                        data will be provided to the modellers of the project who will
+                                                        use this information to build and refine their models on
+                                                        radiation risk of papillary thyroid cancer after exposure to
+                                                        low-dose ionising radiation.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2011] Molecular specificities of radiation-induced thyroid tumors.
+                                            <div>
+                                            <span class="fw-light">C Ory, Commissariat Energie Atomique, Departement Sciences du vivant, Institut de radiobiologie cellulaire et moleculaire, Laboratoire de Cancerologie Experimentale (CEA), France
+        UK.</span> <a href="mailto:catherine.ory@cea.fr" class="ms-2"><i class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0211" aria-expanded="false"
+                                                        aria-controls="c0211">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0211">
+                                                <div class="card card-body">
+                                                    The constituted network to realise this program involved two teams
+                                                    well known in diagnosis and treatment of thyroid tumors and one team
+                                                    which were already implicated in the search of radiation-induced
+                                                    signatures in the thyroid and in the identification of the molecular
+                                                    mechanisms of radiation-induced tumorigenesis. To date, we focused
+                                                    our approach at the transcriptomic level. We wish now to analyse
+                                                    miRNA and mRNA deregulations in a series of post-Chernobyl thyroid
+                                                    tumors by microarray analysis: 1) to identify a radiation-induced
+                                                    miRNA and mRNA signatures. We will assess the robustness of these
+                                                    signatures for a potential use as a diagnostic tool alone or in
+                                                    combination. 2) to obtain an integrated miRNA/mRNA overview of
+                                                    radiation-induced tumorigenesis by taking advantage of the
+                                                    deregulated pathway identified by the transcriptomic approach. To
+                                                    date, no such integrated analysis has been performed as most of the
+                                                    studies focused on either transcriptome analysis or miRNA analysis
+                                                    separately. Ultimately, we will cross the obtained data with others
+                                                    results from analysis of post-radiotherapy tumors (Ory et al. 2011;
+                                                    Ugolin et al. PLosONE under revision).
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[003/2011] EpiRadBio - Validation of radiation-associated gain of chromosome
+                                            band 7q11.
+                                            <div>
+                                                <span class="fw-light">K Unger, Helmholtz Centre, Munich, Germany</span>
+                                                <a href="mailto:unger@helmholtz-muenchen.de" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0311" aria-expanded="false"
+                                                        aria-controls="c0311">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0311">
+                                                <div class="card card-body">
+                                                    The project using the applied biomaterial is an extension of the
+                                                    EU-funded GENRISK-T project and aims to validate a gain on
+                                                    chromosome band 7q11 that was found to be associated with papillary
+                                                    thyroid carcinomas from young patients (< 19 years) that were
+                                                    exposed to radiation from the Chernobyl fallout at very young age
+                                                    (median: 2 years). The validation set containing exposed and
+                                                    unexposed cases will be matched for age, morphology and residence -
+                                                    these criteria were already used for case selection of the GENRISK-T
+                                                    set. A high-definition array CGH platform will be used to validate
+                                                    the gain and to type for additional radiation-markers that are
+                                                    smaller in size and were therefore not detectable by 1Mb BAC array
+                                                    CGH that was used in GENRISK-T. Further, we will use RNA samples and
+                                                    paraffin sections for characterisation of expression candidate genes
+                                                    and proteins by qRT-PCR and immunohistochemistry. Fresh-frozen
+                                                    tissue from selected samples expressing the candidate gene CLIP2
+                                                    from the gained region on 7q11 and those that do not express the
+                                                    gene will be analysed using a whole proteomics approach (liquid
+                                                    chromatography-tandem mass spectrometry, LC-MS/MS). The results will
+                                                    be used to identify the dysregulation networks in which CLIP2 is
+                                                    specifically involved. The projects aims to validate the radiation
+                                                    marker on chromosome band 7q11, to identify the networks that are
+                                                    dysregulated in tumors harbouring the marker and to find new markers
+                                                    that are associated with exposure to radiation.
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[004/2011] A Sequence-based Approach to Identify Genetic Determinants of
+                                            Tumorigenesis in Radiation-Induced Pediatric Papillary Thyroid Carcinomas.
+                                            <div>
+                                                <span class="fw-light">L Hawthorn, Georgia Health Sciences University, USA</span>
+                                                <a
+                                                        href="mailto:lhawthorn@georgiahealth.edu" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0411" aria-expanded="false"
+                                                        aria-controls="c0411">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0411">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        Cancer is a genetic disease, a concept which has been
+                                                        consistently
+                                                        observed for all tumors. Our approach is to survey the entire
+                                                        genome
+                                                        of these tumors to look for mutations and other perturbations
+                                                        that
+                                                        are involved in radiation-induced papillary thyroid carcinoma
+                                                        (RI-PTC) and create a genomic profile of this tumor. A new
+                                                        technology, termed Next-generation sequencing allows sequencing
+                                                        of
+                                                        the entire human genome in 8 days. We will begin by sequencing
+                                                        the
+                                                        DNA of 50 individual RI-PTC tumors from Chernobyl pediatric
+                                                        patients
+                                                        to look for mutations in genes. We will correlate this data with
+                                                        RNA
+                                                        sequencing from the same patient samples. This data will provide
+                                                        information about events that are taking place at the level of
+                                                        gene
+                                                        expression, providing information about over and under expressed
+                                                        genes and the expression of aberrant genes, and gene fusion
+                                                        products. This data will be compared to RIP-PTC in age matched
+                                                        patients who were not exposed to radiation to develop a
+                                                        radiation-specific profile. We have bioinformatic specialists in
+                                                        the
+                                                        group who will integrate these various kinds of data. This study
+                                                        will provide a comprehensive profile of RIP-PTC.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2012] EpiRadBio integrative analysis of molecular data.
+
+                                            <div>
+                                                <span class="fw-light">W van Wieringen, VU University Medical Centre, Amsterdam, The Netherlands</span>
+                                                <a
+                                                        href="mailto:w.vanwieringen@vumc.nl" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0112" aria-expanded="false"
+                                                        aria-controls="c0112">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0112">
+                                                <div class="card card-body">
+                                                    <p>Within the scope of the EpiRadBio-project, Mark van de Wiel,
+                                                        Carel Peeters and Wessel van Wieringen from the department of
+                                                        Epidemiology & Biostatistics of the VU University Medical Center
+                                                        are responsible for integrative analysis of the molecular data
+                                                        from (radiation) exposed and non-exposed thyroid cancer samples.
+                                                        Integrative analysis combines heterogeneous biological data, be
+                                                        it experimental (e.g., copy number, gene expression, microRNA
+                                                        expression) or from the biological literature (e.g., gene
+                                                        annotation, pathway information). Integration of data from
+                                                        multiple sources is imperative for a mechanistic understanding
+                                                        of cancer. By putting together partial views of a complex
+                                                        process like tumorgenesis, we may obtain a more accurate and
+                                                        complete picture of the molecular mechanisms underlying it. No
+                                                        off-the-shelf methodology for the statistical analysis of the
+                                                        data is available. We therefore aim to develop statistical
+                                                        models from the experimental data of these biological processes.
+                                                        Such models will enhance our ability to identify biomarkers and
+                                                        therapeutic targets more unambiguously and to interpret genotype
+                                                        information. This should enhance the understanding of what
+                                                        distinguishes the exposed from the non-exposed thyroid cancers.
+                                                        In addition, the biological insight these models provide is
+                                                        likely to result in more targeted follow-up experiments and
+                                                        efficient use of available resources.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2012] Validation of the gene signature differentiating exposed from
+                                            non-exposed PTCs, obtained in the Genrisk-T project (no.: 036495) with an
+                                            independent QPCR method.
+                                            <div>
+                                                <span class="fw-light">B Jarzab, Maria Sklodowska-Curie Memorial Cancer Centre and Institute of Oncology, Gliwice, Poland</span>
+                                                <a
+                                                        href="mailto:bjarzab@io.gliwice.pl" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0102" aria-expanded="false"
+                                                        aria-controls="c0102">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0102">
+                                                <div class="card card-body">
+                                                    <p>The aim of the study is to investigate transcriptomic profiles of
+                                                        papillary thyroid carcinomas that arose after expose to
+                                                        radioiodine fallout from Chernobyl power station and to low
+                                                        level radiocesium exposure present in the contaminated
+                                                        environment. This project is the continuation of a series of
+                                                        projects that are carry on to investigate the transcriptomic and
+                                                        genetic profile of radiation induced thyroid cancer.
+                                                        As a first step of the study Affimetrix microarray technology
+                                                        was employed to define transcriptomic profiles in two cohorts of
+                                                        children matched on age, oblast and pathological type of tumor.
+                                                        At present we want to validate the results with qPCR.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2013] A detailed study of the somatic genomics of radiation induced
+                                            thyroid cancer.
+                                            <div>
+                                                <span class="fw-light">GA Thomas, Imperial College, London</span>
+                                                <a href="mailto:geraldine.thomas@imperial.ac.uk" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0113" aria-expanded="false"
+                                                        aria-controls="c0113">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0113">
+                                                <div class="card card-body">
+                                                    <p>
+                                                        It has long been accepted that cancers arise by the sequential
+                                                        accumulation of errors in the DNA of a clone of cells within a
+                                                        given tissue. This in part explains their long latency. However,
+                                                        recent studies using whole genome sequencing have suggested a
+                                                        different mechanism for some cancers, particularly those that
+                                                        arise in children. This mechanism is called chromothripsis and
+                                                        involves shattering of chromosomes and then restitching them
+                                                        together. This results in multiple small changes in the DNA that
+                                                        occur simultaneously rather than sequentially. The aim of this
+                                                        study is to use whole genome sequencing to identify novel
+                                                        mutations in radiation induced thyroid cancer, to identify
+                                                        changes in the mitochondrial genome and to investigate the
+                                                        frequency of chromothripsis in childhood thyroid cancer,
+                                                        especially with respect to radiation exposure.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2014] Assessing the impact of radiation exposure on the development of
+                                            medullary thyroid carcinoma.
+                                            <div>
+                                                <span class="fw-light">Elizabeth Grubbs, Department Surgical Oncology, MD Anderson Cancer Center, Houston, USA</span>
+                                                <a href="mailto:eggrubbs@mdanderson.org" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0114" aria-expanded="false"
+                                                        aria-controls="c0114">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0114">
+                                                <div class="card card-body">
+                                                    <p>Convincing epidemiologic data has established a strong causative
+                                                        association between ionizing radiation and the development of
+                                                        papillary thyroid cancer (PTC). This finding was due, in large
+                                                        part, to studying those affected by the Chernobyl accident. More
+                                                        recently other solid tumors, such as lung and breast, have been
+                                                        associated with radiation. Medullary thyroid cancer (MTC), a
+                                                        rarer but more lethal thyroid cancer than PTC, has not been
+                                                        associated with radiation exposure to date. However, there
+                                                        appears to be a higher number of MTC cases than would be
+                                                        expected in the Chernobyl population. We would like to determine
+                                                        if there is a link between radiation and MTC by studying this
+                                                        population to look for mutations that are associated with
+                                                        radiation exposure. Additionally, because MTC is a hereditary
+                                                        condition in 25% of cases, we would also like to assess whether
+                                                        there could be a hereditary cause to MTC in this small
+                                                        geographic region. Such data will give us an insight into the
+                                                        mechanisms in which tumors are formed in MTC and potentially
+                                                        help us target ways to stop these tumors.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[002/2014] Anaplastic lymphoma kinase (ALK) rearrangements in
+                                            radiation-induced papillary thyroid carcinomas: a study on post Chernobyl
+                                            tissue samples
+                                            <div>
+                                                <span class="fw-light">S Eder, Bundeswehr Institute of Radiobiology, Munich Germany</span>
+                                                <a href="mailto:stefanfriedricheder@bundeswehr.org" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0203" aria-expanded="false"
+                                                        aria-controls="c0203">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0203">
+                                                <div class="card card-body">
+                                                    <p>Previous analysis of data derived from the Chernobyl accident has
+                                                        shown strong correlation between absorbed doses of IR and the
+                                                        induction of papillary thyroid cancer (PTC). Specific genetic
+                                                        alterations, such as rearrangements of the RET oncogene, are
+                                                        linked to previous exposure to radioiodine. Recently,
+                                                        rearrangements of the anaplastic lymphoma kinase (ALK) gene have
+                                                        been found to be selectively expressed in papillary thyroid
+                                                        cancer (PTC) amongst atomic bomb survivors (ABS), but not in PTC
+                                                        patients lacking radiation exposure. In PTC, ALK rearrangements
+                                                        have been shown to be associated with tumor aggressiveness and,
+                                                        importantly, represent a possible pharmacologicaltarget for the
+                                                        compound Crizotinib. Interestingly, radiation-induced PTCs that
+                                                        show ALK rearrangements lack additional genetic alterations that
+                                                        are frequently found in sporadic thyroid cancer, such as RET,
+                                                        NTRK1, BRAF, or RAS; these findings underline the oncogenic
+                                                        potential of ALK rearrangements in radiation-induced PTC. We
+                                                        plan to investigate a possible correlation between radiation
+                                                        exposure and ALK rearrangements in PTC biospecimens from
+                                                        patients exposed to radioiodine in the context of the Chernobyl
+                                                        accident as well as in a control cohort of sporadic PTCs,
+                                                        performing fluorescence in situ hybridization (FISH) analyses.
+                                                        Furthermore, we intend to assess the mutation status of commonly
+                                                        altered oncogenes in PTC, such as BRAF or RAS, using
+                                                        pyrosequencing.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[003/2014] Comprehensive Genomic Characterization of Radiation-Related
+                                            Thyroid Cancer in Ukraine
+                                            <div>
+                                                <span class="fw-light">S Channock, Division of Cancer Epidemiology and Genetics, National Cancer Institute, USA</span>
+                                                <a href="mailto:chanocks@mail.nih.gov" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0314" aria-expanded="false"
+                                                        aria-controls="c0314">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0314">
+                                                <div class="card card-body">
+                                                    <p>New advances in genomic characterization technologies afford new
+                                                        opportunities to comprehensively investigate the genetic basis
+                                                        of the established association between childhood exposure to
+                                                        iodine-131 (I-131) from the Chernobyl Nuclear Power Plant
+                                                        accident and risk of thyroid cancer. The opportunity to analyze
+                                                        a large set of thyroid cancers and normal tissue/blood from the
+                                                        Chernobyl Tissue Bank (CTB) could further our understanding of
+                                                        the molecular mechanisms of radiation carcinogenesis in humans
+                                                        based on careful evaluation of epidemiological risk factors and
+                                                        genomic alterations. Previously, we had reported a preliminary
+                                                        study of dose-related alterations in gene expression and
+                                                        chromosomal translocations in approximately 70 cases drawn from
+                                                        the Ukrainian-American (UkrAm) cohort component of the CTB
+                                                        biorepository. Recently, we have completed a pilot study in
+                                                        which we have conducted a comprehensive genomic characterization
+                                                        of 12 UkrAm cases, including paired fresh frozen and
+                                                        formalin-fixed paraffin-embedded tissue samples using the
+                                                        infrastructure and analytical pipeline of the Cancer Genome
+                                                        Atlas (TCGA) of the U.S.A. National Cancer Institute (NCI). This
+                                                        includes whole genome sequence analysis of RNA, DNA and
+                                                        micro-RNAs as well SNP and methylation microarrays of the tumor
+                                                        tissue. SNP microarray and DNA analysis was performed on
+                                                        peripheral blood for comparison of germline to somatic
+                                                        alterations. The success of the feasibility study establishes a
+                                                        strong scientific basis for extending this approach to a
+                                                        substantially larger study of thyroid cancer cases drawn from
+                                                        the CTB. Here, we propose conducting a comprehensive genomic
+                                                        characterization study of 500 papillary thyroid cancers (PTC)
+                                                        from the Ukraine using biological samples, information on
+                                                        radiation exposure, and demographic characteristics. The main
+                                                        objective of the study is to provide comprehensive, integrated
+                                                        characterization of the genomic, transcriptomic, and epigenomic
+                                                        landscapes of radiation-related PTC for comparison across a
+                                                        spectrum of I-131 exposure as well as a comparison with
+                                                        approximately 500 sporadic PTCs available from The Cancer Genome
+                                                        Atlas recently published in Cell. The proposed study has the
+                                                        potential to provide unique insights into the mechanisms of
+                                                        radiation carcinogenesis and to generate a rich data resource
+                                                        accessible to other investigators.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li>[001/2018] Liquid biopsy in assessment of radio-induced thyroid cancer in
+                                            children and young adults
+                                            <div>
+                                                <span class="fw-light">Kirk Jensen, Department of Pediatrics, Uniformed Services University of the Health Sciences, Bethesda, Maryland, USA</span>
+                                                <a href="mailto:kirk.jensen@usuhs.edu" class="ms-2"><i
+                                                        class="far fa-envelope"></i> Email</a>
+                                            </div>
+                                            <p class="d-inline-flex gap-1">
+                                                <button class="btn btn-outline-secondary" type="button"
+                                                        data-bs-toggle="collapse"
+                                                        data-bs-target="#c0118" aria-expanded="false"
+                                                        aria-controls="c0118">
+                                                    View Summary
+                                                </button>
+                                            </p>
+                                            <div class="collapse" id="c0118">
+                                                <div class="card card-body">
+                                                    <p>In this study we plan to analyze samples from patients with
+                                                        papillary thyroid cancer. We will examine primary tumors and
+                                                        serum samples in 40 pediatric patients (aged ≤ 18 years in
+                                                        1986), and in 40 young adults (18-25 years in 1986). To
+                                                        determine a possible correlation between the presence of
+                                                        mutations/fusion in liquid biopsy and the extent of metastatic
+                                                        spread we plan to examine samples from patients presenting with
+                                                        lymph node metastases only and from patients with distant
+                                                        metastases.</p>
+                                                    <p>
+                                                        We will first identify driver mutations in the primary tumor by
+                                                        performing Ion Torrent Oncomine Pan-Cancer assay analysis using
+                                                        DNA/RNA extracted from tumor. Next, we will employ the same
+                                                        approach for analysis of DNA/RNA extracted from the serum sample
+                                                        of the same patient. We expect to show that in patients with
+                                                        metastatic thyroid cancers, results of NGS analysis in serum
+                                                        will recapitulate results of NGS analysis in primary tumors. We
+                                                        also plan to perform quantitative assessment of genomic
+                                                        abnormalities using the digital PCR technique. To do so, we will
+                                                        examine the presence of specific driver mutation(s) in primary
+                                                        tumor by dPCR, and determine the mutant/wild copy numbers in
+                                                        DNA/RNA samples extracted from the whole tumor. We also plan to
+                                                        complete the assessment of primary tumors through the detection
+                                                        of oncogenic proteins by immunohistochemistry, and by evaluation
+                                                        of mutant/wild copy numbers after performing laser captured
+                                                        microdissection. Serum from the same patient will be then
+                                                        examined by dPCR.</p>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                    <a href="#"><i class="fas fa-arrow-up"></i> Go to top</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

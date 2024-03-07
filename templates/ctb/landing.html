@@ -25,64 +25,110 @@
 {% block page_name %}landing{% endblock %}
 {% block body_class %}landing{% endblock %}
 {% block content %}
-    <div class="row">
+    <div class="row d-flex d-none d-lg-block">
         <div class="bg-aqua-green-theme text-center py-5">
-            <div class="d-flex justify-content-center">
-                <div class="col-lg-7 col-sm-10">
-                    <h1 class="fw-bold pt-4">
+            <div class="d-flex justify-content-center py-5">
+                <div class="col-8">
+                    <h1 class="pb-3">
                         Chernobyl Tissue Bank
                     </h1>
-                    <h2 class="py-3">
-                        The CTB is a research tissue bank that was established to collect, document, store, and issue to
-                        bona fide researchers, biological samples donated by patients with thyroid tumors who live in the
-                        vicinity of the site of the Chernobyl Nuclear Power Plant
-                    </h2>
+                    <div class="d-flex justify-content-center">
+                        <div style="font-size: 1.4rem;">
+                            The Chernobyl (<span class="fst-italic">Chornobyl</span> in Ukrainian) Tissue Bank (CTB) is
+                            a repository of samples donated by patients with thyroid tumors who live in the areas
+                            affected by the accident at the Chernobyl Nuclear Power Plant. The purpose of the CTB is to
+                            collect, document, and store these materials, and to facilitate access to these unique
+                            resources by bona fide researchers.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="bg-lightgrey-theme text-center py-5">
-            <div class="d-flex justify-content-center pb-3">
-                <div class="col-lg-2 text-end">
-                    <img class="me-2" src="{% static 'img/nci-logo.svg' %}" width="120px" alt="nci-logo">
-                </div>
-                <div class="col-lg-8 pt-1 ps-2 text-start">
-                    <h3>
-                        The Chernobyl Tissue Bank site is now hosted by the National Cancer Institute (NCI).
-                    </h3>
-                </div>
+        <div class="bg-lightgrey-theme d-flex text-center justify-content-center py-5">
+            <div class="col-10 pb-3 fs-5">The CTB website is hosted by the U.S. National Cancer Institute (NCI), <a
+                    href="https://dceg.cancer.gov/" target="_blank" rel="noopener noreferrer">Division of Cancer
+                Epidemiology and Genetics</a>.
             </div>
         </div>
-        <div class="bg-mustard-theme text-center pt-5 pb-4">
+        <div class="bg-mustard-theme text-center py-5">
             <div class="d-flex justify-content-center">
-                <div class="col-lg-8 mx-auto p-5">
+                <div class="col-10 col-xl-9 col-xxl-8 mx-auto p-md-5">
+{#                <div class="col-xl-6 col-lg-8 col-md-6 mx-auto p-5">#}
                     <div class="row">
                         <div class="col stat-card">
-                            <a href="{% if user.is_verified %} {% url 'dashboard' %} {% else %} {% url 'two_factor:login' %}" {% endif %}
-                               class="fill-div">
-                                <h4 class="fw-bold dark-aqua-text"><i class="fas fa-search"></i><br/>Biosample Search
-                                </h4>
-                                <div class="mt-3">Find your biological samples for your study</div>
-                            </a>
-                        </div>
-                        <div class="col stat-card">
-                            <a href="{% url 'about_project' %}" class="fill-div">
-                                <h4 class="fw-bold aqua-green-text"><i class="fas fa-radiation"></i><br/>About</h4>
+                            <a href="{% url 'about' %}" class="fill-div">
+                                <h5 class="fw-bold aqua-green-text"><i class="fas fa-radiation pb-2"></i><br/>About</h5>
                                 <div class="mt-3">An introduction to the CTB project</div>
                             </a>
                         </div>
                         <div class="col stat-card">
-                            <a href="{% url 'researchers_page' %}" class="fill-div">
-                                <h4 class="fw-bold orange-text"><i class="fas fa-atom"></i><br/>Research</h4>
+                            <a href="{% url 'research' %}" class="fill-div">
+                                <h5 class="fw-bold orange-text"><i class="fas fa-atom pb-2"></i><br>Research and Data
+                                    Access
+                                </h5>
                                 <div class="mt-3">Information to research into the Chernobyl accident</div>
                             </a>
                         </div>
                         <div class="col stat-card">
-                            <a href="{% url 'contact' %}" class="fill-div">
-                                <h4 class="fw-bold dark-aqua-text"><i class="fas fa-envelope"></i><br/>Contact Us</h4>
-                                <div class="mt-3">For any information or questions</div>
+                            <a href="{% if user.is_verified %} {% url 'dashboard' %} {% else %} {% url 'two_factor:login' %}" {% endif %}
+                               class="fill-div">
+                                <h5 class="fw-bold dark-aqua-text"><i class="fas fa-search pb-2"></i><br/>Search the
+                                    Biorepository
+                                </h5>
+                                <div class="mt-3">Find your biological samples for your study</div>
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex d-lg-none d-block">
+        <div class="bg-aqua-green-theme d-flex justify-content-center py-2">
+            <div class="col-10">
+                <h1 class="py-3">
+                    Chernobyl Tissue Bank
+                </h1>
+                <div class="pb-3">
+                    The Chernobyl (<span class="fst-italic">Chornobyl</span> in Ukrainian) Tissue Bank (CTB) is
+                    a repository of samples donated by patients with thyroid tumors who live in the areas
+                    affected by the accident at the Chernobyl Nuclear Power Plant. The purpose of the CTB is to
+                    collect, document, and store these materials, and to facilitate access to these unique
+                    resources by bona fide researchers.
+                </div>
+            </div>
+        </div>
+        <div class="bg-lightgrey-theme d-flex justify-content-center py-2">
+            <div class="col-10 py-3">
+                The CTB website is hosted by the U.S. National Cancer Institute (NCI), <a
+                    href="https://dceg.cancer.gov/" target="_blank" rel="noopener noreferrer">Division of Cancer
+                Epidemiology and Genetics</a>.
+            </div>
+        </div>
+        <div class="bg-mustard-theme d-flex justify-content-center py-2">
+            <div class="col-10 mx-auto py-3">
+                <div class="stat-card mb-4">
+                    <a href="{% url 'about' %}" class="fill-div">
+                        <h5 class="fw-bold aqua-green-text"><i class="fas fa-radiation pb-2"></i> About</h5>
+                        <div class="mt-3">An introduction to the CTB project</div>
+                    </a>
+                </div>
+                <div class="stat-card mb-4">
+                    <a href="{% url 'research' %}" class="fill-div">
+                        <h5 class="fw-bold orange-text"><i class="fas fa-atom pb-2"></i> Research & Data
+                            Access
+                        </h5>
+                        <div class="mt-3">Information to research into the Chernobyl accident</div>
+                    </a>
+                </div>
+                <div class="stat-card mb-4">
+                    <a href="{% if user.is_verified %} {% url 'dashboard' %} {% else %} {% url 'two_factor:login' %}" {% endif %}
+                       class="fill-div">
+                        <h5 class="fw-bold dark-aqua-text"><i class="fas fa-search pb-2"></i> Search the
+                            Biorepository
+                        </h5>
+                        <div class="mt-3">Find your biological samples for your study</div>
+                    </a>
                 </div>
             </div>
         </div>
