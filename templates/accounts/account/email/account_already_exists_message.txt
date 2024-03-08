@@ -1,5 +1,6 @@
 {% extends "account/email/base_message.txt" %}
 {% load i18n %}
+{% load custom_tags %}
 
 {% block content %}{% autoescape off %}{% blocktrans %}You are receiving this e-mail because you or someone else tried to signup for an
 account using e-mail address:
@@ -9,4 +10,4 @@ However, an account using that e-mail address already exists.  In case you have 
 your account:
 {{ password_reset_url }}
 
-If you did not request a password reset, please report to us.{% endblocktrans %}{% endautoescape %}{% endblock %}
+If you did not request a password reset, please report to {% endblocktrans %}{% help_email %}.{% endautoescape %}{% endblock %}
