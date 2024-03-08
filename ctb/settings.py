@@ -394,6 +394,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_FORMS = {'reset_password': 'accounts.forms.CustomResetPasswordForm'}
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_COOKIE_SECURE = bool(os.environ.get('CSRF_COOKIE_SECURE', 'True') == 'True')
@@ -549,6 +551,8 @@ ANYMAIL = {
 EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = NOTIFICATION_EMAIL_FROM_ADDRESS
 SERVER_EMAIL = "ctb-support@isb-cgc.org"
+
+SUPPORT_EMAIL = "ctb-support@isb-cgc.org"
 
 GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(
     'GOOGLE_APPLICATION_CREDENTIALS', '')))
