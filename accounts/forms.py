@@ -19,12 +19,7 @@ from allauth.account.adapter import get_adapter
 from allauth.account.utils import (
     filter_users_by_email,
 )
-from allauth.utils import (
-    build_absolute_uri
-)
 from django.contrib.sites.shortcuts import get_current_site
-from ctb.settings import SUPPORT_EMAIL
-from django.urls import reverse
 
 
 class CustomResetPasswordForm(ResetPasswordForm):
@@ -40,22 +35,11 @@ class CustomResetPasswordForm(ResetPasswordForm):
             self._send_password_reset_mail(request, email, self.users, **kwargs)
         return email
 
-    def _send_unknown_account_mail(self, request, email):
-        signup_url = build_absolute_uri(request, reverse("account_signup"))
-        context = {
-            "current_site": get_current_site(request),
-            "email": email,
-            "help_email": SUPPORT_EMAIL,
-            "request": request,
-            "signup_url": signup_url,
-        }
-        get_adapter(request).send_mail("account/email/unknown_account", email, context)
 
     def _send_inactive_account_mail(self, request, email):
         context = {
             "current_site": get_current_site(request),
             "email": email,
-            "help_email": SUPPORT_EMAIL,
             "request": request,
         }
         get_adapter(request).send_mail("account/email/inactive_account_reset", email, context)
