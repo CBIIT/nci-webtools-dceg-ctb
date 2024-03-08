@@ -17,11 +17,17 @@ from __future__ import division
 from django import template
 from functools import reduce
 from django.db.models import Q
+from ctb.settings import SUPPORT_EMAIL
 import logging
 
 register = template.Library()
 
 logger = logging.getLogger('main_logger')
+
+
+@register.simple_tag(name='help_email')
+def help_email():
+    return SUPPORT_EMAIL
 
 
 @register.simple_tag(takes_context=True)
