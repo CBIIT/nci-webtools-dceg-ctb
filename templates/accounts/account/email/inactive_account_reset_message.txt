@@ -1,0 +1,8 @@
+{% extends "account/email/base_message.txt" %}
+{% load i18n %}
+{% load custom_tags %}
+
+{% block content %}{% autoescape off %}You are receiving this e-mail because you or someone else has requested a password reset for your user account.
+However, the account {{ email }} was previously deactivated due to inactivity, and you will first need to contact {% help_email %} to activate your account.
+
+If you did not request a password reset, please report to {% help_email %}.{% endautoescape %}{% endblock %}
