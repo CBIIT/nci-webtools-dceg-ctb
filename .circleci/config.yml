@@ -24,23 +24,27 @@ commands:
             CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_DEV}
             PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_DEV}
             BUCKET=${DEPLOYMENT_BUCKET_CTB_DEV}
+            RUNTIME_SA_NAME=${RUNTIME_SA_NAME_DEV}
             if [[ ${TIER} == "PROD" ]]; then
               KEY=${DEPLOYMENT_KEY_CTB_PROD}
               CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_PROD}
               PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_PROD}
               BUCKET=${DEPLOYMENT_BUCKET_CTB_PROD}
+              RUNTIME_SA_NAME=${RUNTIME_SA_NAME_PROD}
               echo "Using production project and related deployment SA and bucket."
             elif [[ ${TIER} == "UAT" ]]; then
               KEY=${DEPLOYMENT_KEY_CTB_UAT}
               CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_UAT}
               PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_UAT}
               BUCKET=${DEPLOYMENT_BUCKET_CTB_UAT}
+              RUNTIME_SA_NAME=${RUNTIME_SA_NAME_UAT}
               echo "Using UAT project and related deployment SA and bucket."
             elif [[ ${TIER} == "TEST" ]]; then
               KEY=${DEPLOYMENT_KEY_CTB_TEST}
               CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_TEST}
               PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_TEST}
               BUCKET=${DEPLOYMENT_BUCKET_CTB_TEST}
+              RUNTIME_SA_NAME=${RUNTIME_SA_NAME_TEST}
               echo "Using test project and related deployment SA and bucket."
             elif [[ ${TIER} == "DEV" ]]; then
               echo "Using development/default project and related deployment SA and bucket."
@@ -59,6 +63,7 @@ commands:
             echo "Deployment client: ${CLIENT_EMAIL}"
             echo "Deployment project: ${PROJECT_ID}"
             echo "Deployment bucket: gs://${BUCKET}"
+            echo "export WEB_RUNTIME_SA_NAME=${RUNTIME_SA_NAME}" >> $BASH_ENV
 
   deployment_config:
     steps:
@@ -89,7 +94,7 @@ commands:
             echo "export CLOUDSDK_CORE_DISABLE_PROMPTS=1" >> $BASH_ENV
             sudo apt-get update -qq
             sudo apt-get install ca-certificates python3-distutils apt-transport-https gnupg
-            echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] http://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+            echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
             curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
             sudo apt-get update -qq
             sudo apt-get -y install google-cloud-sdk
@@ -197,7 +202,8 @@ jobs:
             sudo -E rm -rf ./lib
             sudo -E /bin/bash ./shell/unpack_for_deployment.sh
             sudo -E gcloud config set app/cloud_build_timeout 1800
-            sudo -E gcloud app deploy --verbosity=debug ./app.yaml --quiet
+            sudo -E gcloud app deploy --verbosity=debug ./app.yaml --service-account=${WEB_RUNTIME_SA_NAME} --quiet
+
 workflows:
   version: 2
   build_and_deploy:

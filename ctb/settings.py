@@ -394,6 +394,8 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+ACCOUNT_FORMS = {'reset_password': 'accounts.forms.CustomResetPasswordForm'}
+
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 CSRF_COOKIE_SECURE = bool(os.environ.get('CSRF_COOKIE_SECURE', 'True') == 'True')
@@ -550,15 +552,20 @@ EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 DEFAULT_FROM_EMAIL = NOTIFICATION_EMAIL_FROM_ADDRESS
 SERVER_EMAIL = "ctb-support@isb-cgc.org"
 
-GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(
-    'GOOGLE_APPLICATION_CREDENTIALS', '')))
+SUPPORT_EMAIL = "ctb-support@isb-cgc.org"
+
+if os.environ.get('IS_GAE_DEPLOYMENT', 'False') != 'True':
+    GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(
+        'GOOGLE_APPLICATION_CREDENTIALS', '')))
+    if not exists(GOOGLE_APPLICATION_CREDENTIALS):
+        print("[ERROR] Google application credentials file wasn't found! Provided path: {}".format(
+            GOOGLE_APPLICATION_CREDENTIALS))
+        exit(1)
+
 OAUTH2_CLIENT_ID = os.environ.get('OAUTH2_CLIENT_ID', '')
 OAUTH2_CLIENT_SECRET = os.environ.get('OAUTH2_CLIENT_SECRET', '')
 
-if not exists(GOOGLE_APPLICATION_CREDENTIALS):
-    print("[ERROR] Google application credentials file wasn't found! Provided path: {}".format(
-        GOOGLE_APPLICATION_CREDENTIALS))
-    exit(1)
+
 
 ##############################
 #   Start django-finalware   #
