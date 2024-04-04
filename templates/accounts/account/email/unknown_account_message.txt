@@ -1,0 +1,11 @@
+{% extends "account/email/base_message.txt" %}
+{% load i18n %}
+{% load custom_tags %}
+
+{% block content %}{% autoescape off %}{% blocktrans %}You are receiving this e-mail because you or someone else has requested a password reset for your user account.
+However, we do not have any record of a user with email {{ email }} in our database.
+
+If you want to create an account, you can sign up using the link below:
+{{ signup_url }}
+
+If you did not request a password reset, please report to {% endblocktrans %}{% help_email %}.{% endautoescape %}{% endblock %}
