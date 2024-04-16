@@ -554,15 +554,18 @@ SERVER_EMAIL = "ctb-support@isb-cgc.org"
 
 SUPPORT_EMAIL = "ctb-support@isb-cgc.org"
 
-GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(
-    'GOOGLE_APPLICATION_CREDENTIALS', '')))
+if os.environ.get('IS_GAE_DEPLOYMENT', 'False') != 'True':
+    GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(
+        'GOOGLE_APPLICATION_CREDENTIALS', '')))
+    if not exists(GOOGLE_APPLICATION_CREDENTIALS):
+        print("[ERROR] Google application credentials file wasn't found! Provided path: {}".format(
+            GOOGLE_APPLICATION_CREDENTIALS))
+        exit(1)
+
 OAUTH2_CLIENT_ID = os.environ.get('OAUTH2_CLIENT_ID', '')
 OAUTH2_CLIENT_SECRET = os.environ.get('OAUTH2_CLIENT_SECRET', '')
 
-if not exists(GOOGLE_APPLICATION_CREDENTIALS):
-    print("[ERROR] Google application credentials file wasn't found! Provided path: {}".format(
-        GOOGLE_APPLICATION_CREDENTIALS))
-    exit(1)
+
 
 ##############################
 #   Start django-finalware   #
