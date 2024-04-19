@@ -24,27 +24,23 @@ commands:
             CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_DEV}
             PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_DEV}
             BUCKET=${DEPLOYMENT_BUCKET_CTB_DEV}
-            RUNTIME_SA_NAME=${RUNTIME_SA_NAME_DEV}
             if [[ ${TIER} == "PROD" ]]; then
               KEY=${DEPLOYMENT_KEY_CTB_PROD}
               CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_PROD}
               PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_PROD}
               BUCKET=${DEPLOYMENT_BUCKET_CTB_PROD}
-              RUNTIME_SA_NAME=${RUNTIME_SA_NAME_PROD}
               echo "Using production project and related deployment SA and bucket."
             elif [[ ${TIER} == "UAT" ]]; then
               KEY=${DEPLOYMENT_KEY_CTB_UAT}
               CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_UAT}
               PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_UAT}
               BUCKET=${DEPLOYMENT_BUCKET_CTB_UAT}
-              RUNTIME_SA_NAME=${RUNTIME_SA_NAME_UAT}
               echo "Using UAT project and related deployment SA and bucket."
             elif [[ ${TIER} == "TEST" ]]; then
               KEY=${DEPLOYMENT_KEY_CTB_TEST}
               CLIENT_EMAIL=${DEPLOYMENT_CLIENT_EMAIL_CTB_TEST}
               PROJECT_ID=${DEPLOYMENT_PROJECT_ID_CTB_TEST}
               BUCKET=${DEPLOYMENT_BUCKET_CTB_TEST}
-              RUNTIME_SA_NAME=${RUNTIME_SA_NAME_TEST}
               echo "Using test project and related deployment SA and bucket."
             elif [[ ${TIER} == "DEV" ]]; then
               echo "Using development/default project and related deployment SA and bucket."
@@ -63,7 +59,6 @@ commands:
             echo "Deployment client: ${CLIENT_EMAIL}"
             echo "Deployment project: ${PROJECT_ID}"
             echo "Deployment bucket: gs://${BUCKET}"
-            echo "export WEB_RUNTIME_SA_NAME=${RUNTIME_SA_NAME}" >> $BASH_ENV
 
   deployment_config:
     steps:
