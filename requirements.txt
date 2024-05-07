@@ -24,7 +24,7 @@ jsonschema==2.6.0
 oauth2client==3.0.0
 pyjwt==2.4.0
 django-finalware==1.0.0
-cryptography==41.0.6
+cryptography==42.0.4
 future==0.18.3
 google-cloud-storage==2.9.0
 django-session-security==2.6.5
