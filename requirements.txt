@@ -1,7 +1,7 @@
 requests==2.31.0
 django==3.2.25
 PyYAML==6.0.1
-pyOpenSSL==23.2.0
+pyOpenSSL==24.1.0
 mysqlclient==2.0.1
 WebOb==1.5.0
 ecdsa==0.18.0
