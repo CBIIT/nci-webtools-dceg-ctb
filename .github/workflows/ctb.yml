@@ -109,21 +109,24 @@ jobs:
     - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
 
-    # Authenticate with Google Cloud
-    # - id: 'auth'
-    #   uses: 'google-github-actions/auth@v2'
-    #   with:
-    #     workload_identity_provider: 
-    #     service_account: 
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'
+          
+      with:
+        project_id: ${{ secrets.GCP_DEV_PROJECT_ID}}
+        workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER}}
+        service_account: ${{ secrets.SA_DEPLOYER}}
 
-    # # Deploy to App Engine
-    # - name: Deploy to App Engine
-    #   id: 'deploy'
-    #   uses: 'google-github-actions/deploy-appengine@v2'
-    #   with:
-    #     build_env_vars: |-
-    #       FOO=bar
-    #       ZIP=zap
-    #     env_vars: |-
-    #       FOO=bar
-    #       ZIP=zap
+
+    # Deploy to App Engine
+    - name: Deploy to App Engine
+      id: 'deploy'
+      uses: 'google-github-actions/deploy-appengine@v2'
+      with:
+        build_env_vars: |-
+          FOO=bar
+          ZIP=zap
+        env_vars: |-
+          FOO=bar
+          ZIP=zap
