@@ -87,6 +87,7 @@ jobs:
       with:
         project_id: ${{ secrets.GCP_DEV_PROJECT_ID}}
         workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER}}
+        service_account: ${{ secrets.SA_DEPLOYER}}
 
   deploy:
     permissions:
@@ -106,11 +107,11 @@ jobs:
       uses: google-github-actions/setup-gcloud@v1
 
     # Authenticate with Google Cloud
-    - id: 'auth'
-      uses: 'google-github-actions/auth@v2'
-      with:
-        workload_identity_provider: 
-        service_account: 
+    # - id: 'auth'
+    #   uses: 'google-github-actions/auth@v2'
+    #   with:
+    #     workload_identity_provider: 
+    #     service_account: 
 
     # # Deploy to App Engine
     # - name: Deploy to App Engine
