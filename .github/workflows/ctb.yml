@@ -132,7 +132,7 @@ jobs:
       with:
         project_id:  ${{ secrets.GCP_DEV_PROJECT_ID}}
         working_directory: ${{ github.workspace }}
-        deliverables: app-dev.yml
+        deliverables: app-dev.yaml
         
       
     
