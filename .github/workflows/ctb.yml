@@ -120,11 +120,13 @@ jobs:
 
     - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v2'
+      
       env:
         CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800 # 30 minutes
       with:
         project_id:  ${{ secrets.GCP_DEV_PROJECT_ID}}
-        deliverables: app.yml
+        working_directory: ${{ github.workspace }}
+        
       
     
        
