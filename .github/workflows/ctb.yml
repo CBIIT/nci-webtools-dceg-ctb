@@ -100,10 +100,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Download artifacts
-      uses: actions/download-artifact@v3
-      with:
-        name: webapp
+    # - name: Download artifacts
+    #   uses: actions/download-artifact@v3
+    #   with:
+    #     name: webapp
 
     # Set up Google Cloud SDK
     - name: Set up Google Cloud SDK
