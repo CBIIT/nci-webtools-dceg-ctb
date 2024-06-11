@@ -118,6 +118,11 @@ jobs:
         workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER}}
         service_account: ${{ secrets.SA_DEPLOYER}}
 
+    
+    - name: check working directory files
+      run: |
+        ls -l  ${{ github.workspace }}
+
     - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v2'
       
