@@ -122,3 +122,5 @@ secure_files
 secure_files/
 
 app.yaml
+
+venv
