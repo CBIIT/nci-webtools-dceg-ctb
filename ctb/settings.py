@@ -447,11 +447,11 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = 'static_collex'
+STATIC_ROOT = os.environ.get('STATIC_URL')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = os.environ.get('STATIC_URL', '/static/')
+STATIC_URL = '/static/'
 
 GCS_STORAGE_URI = os.environ.get('GCS_STORAGE_URI', 'https://storage.googleapis.com/')
 
@@ -487,19 +487,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #########################################
 
 if not IS_DEV:
-    CACHE_IP = os.environ.get("CACHE_IP", "127.0.0.1")
-    CACHE_PORT = os.environ.get("CACHE_PORT", "6379")
-    REDIS_AUTH = os.environ.get("REDIS_AUTH", "")
     CACHES = {
         "default": {
-            "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": "redis://{REDIS_IP}:{REDIS_PORT}/0".format(
-                REDIS_IP=CACHE_IP,
-                REDIS_PORT=CACHE_PORT
-            ),
-            "OPTIONS": {
-                "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            }
+            "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+            "LOCATION": "my_cache_table",
         }
     }
 else:
