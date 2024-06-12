@@ -128,7 +128,7 @@ jobs:
         project_id:  ${{ secrets.GCP_DEV_PROJECT_ID}}
         working_directory: ${{ github.workspace }}
         deliverables: app-dev.yaml
-        flags: "--service-account=${{secrets.SA_DEPLOYER}}"
+        # flags: "--service-account=${{secrets.SA_DEPLOYER}}"
       
       
     
