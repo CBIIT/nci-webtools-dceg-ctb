@@ -2,7 +2,7 @@ requests==2.32.2
 django==3.2.25
 PyYAML==6.0.1
 pyOpenSSL==24.1.0
-mysqlclient==2.0.1
+mysqlclient==2.2.4
 WebOb==1.5.0
 ecdsa==0.19.0
 httplib2==0.19.0
@@ -28,7 +28,7 @@ cryptography==42.0.4
 future==0.18.3
 google-cloud-storage==2.9.0
 django-session-security==2.6.5
-django-anymail[mailgun]==10.1
+django-anymail
 django-axes==5.20.0
 django-redis==5.0.0
 xhtml2pdf==0.2.15
