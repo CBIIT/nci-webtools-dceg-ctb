@@ -490,7 +490,7 @@ if not IS_DEV:
     CACHES = {
         "default": {
             "BACKEND": "django.core.cache.backends.db.DatabaseCache",
-            "LOCATION": "my_cache_table",
+            "LOCATION": "django_cache",
         }
     }
 else:
