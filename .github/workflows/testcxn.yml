@@ -25,7 +25,7 @@ jobs:
       uses: 'google-github-actions/auth@v1'
       with:
         token_format: 'access_token'
-        workload_identity_provider: projects/1073752893176/locations/global/workloadIdentityPools/dev-gh-wif-pool-sb
+        workload_identity_provider: projects/1073752893176/locations/global/workloadIdentityPools/dev-gh-wif-pool-sb/providers/github-provider
         service_account: dev-gh-access-sa@nih-nci-cbiit-ctb-dev.iam.gserviceaccount.com
 
     # List the instances in the project
