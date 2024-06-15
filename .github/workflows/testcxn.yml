@@ -1,4 +1,4 @@
-name: Connect to GCP and List Instances
+name: Connect to GCP and List buckets
 
 on:
   workflow_dispatch:
@@ -33,4 +33,4 @@ jobs:
     # List the instances in the project
     - name: List Instances
       run: |-
-        gcloud compute instances list --project $PROJECT_ID
+        gcloud storage ls --project $PROJECT_ID
