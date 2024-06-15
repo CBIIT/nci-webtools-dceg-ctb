@@ -1,4 +1,4 @@
-name: Connect to GCP and List buckets
+name: Connect to GCP and List instances
 
 on:
   workflow_dispatch:
