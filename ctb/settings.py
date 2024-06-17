@@ -555,9 +555,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_SERVICE_PASSWORD', '')
 
 DEFAULT_FROM_EMAIL=os.environ.get('FROM_EMAIL', '')
 NOTIFICATION_EMAIL_FROM_ADDRESS = DEFAULT_FROM_EMAIL
-SUPPORT_EMAIL = "nciwebtools@gmail.com"
-
-print(EMAIL_BACKEND,EMAIL_HOST,EMAIL_HOST_PASSWORD,EMAIL_HOST_USER  )
+SUPPORT_EMAIL = "ctbWebAdmin@mail.nih.gov" 
 
 
 if os.environ.get('IS_GAE_DEPLOYMENT', 'False') != 'True':
