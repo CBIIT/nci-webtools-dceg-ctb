@@ -32,3 +32,8 @@ jobs:
     - name: List Instances
       run: |-
         gcloud compute instances list --project $PROJECT_ID
+    
+    # List the buckets in the project
+    - name: List Buckets
+      run: |-
+        gcloud storage ls --project $PROJECT_ID
