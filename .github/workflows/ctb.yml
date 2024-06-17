@@ -118,6 +118,8 @@ jobs:
         workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER}}
         service_account: ${{ secrets.SA_DEPLOYER}}
 
+    - name: test auth
+      run: gcloud storage ls
 
     - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v2'
@@ -128,7 +130,7 @@ jobs:
         project_id:  ${{ secrets.GCP_DEV_PROJECT_ID}}
         working_directory: ${{ github.workspace }}
         deliverables: app-dev.yaml
-        #flags: "--service-account=${{secrets.SA_DEPLOYER}}"
+        flags: "--service-account=${{secrets.SA_DEPLOYER}}"
       
       
     
