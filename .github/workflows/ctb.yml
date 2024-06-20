@@ -106,6 +106,9 @@ jobs:
     #   with:
     #     name: webapp
 
+    
+   
+
     # Set up Google Cloud SDK
     - name: Set up Google Cloud SDK
       uses: google-github-actions/setup-gcloud@v1
@@ -120,8 +123,11 @@ jobs:
         # workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER}}
         # service_account: ${{ secrets.SA_DEPLOYER}}
 
-    - name: test auth
-      run: gcloud storage ls
+    - id: 'upload-file'
+      uses: 'google-github-actions/upload-cloud-storage@v2'
+      with:
+        path: static
+        destination: ${{secrets.CTB_DEV_STATIC_BUCKET}}
 
     - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v2'
