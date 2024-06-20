@@ -129,6 +129,13 @@ jobs:
         path: static
         destination: ${{secrets.CTB_DEV_STATIC_BUCKET}}
 
+    - name: generate .env file
+      uses: mobiledevops/secret-to-file-action@v1
+      with:
+        base64-encoded-secret: ${{ secrets.CTB_DEV_SETTINGS }}
+        filename: ".env"
+        working-directory: "ctb"
+
     - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v2'
       
