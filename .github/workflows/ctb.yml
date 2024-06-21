@@ -118,8 +118,6 @@ jobs:
       uses: 'google-github-actions/auth@v1'  
       with:
         project_id: ${{ secrets.GCP_DEV_PROJECT_ID}}
-        # workload_identity_provider: projects/1073752893176/locations/global/workloadIdentityPools/github-tf/providers/github-provider-tf
-        # service_account: github-actions-tf-sa@nih-nci-cbiit-ctb-dev.iam.gserviceaccount.com
         workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER}}
         service_account: ${{ secrets.SA_DEPLOYER}}
 
