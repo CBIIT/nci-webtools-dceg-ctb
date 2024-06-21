@@ -38,7 +38,6 @@ builtins:
 network:
   name: ctb-redis-network
   subnetwork_name: subnet-03
-  
 
 env_variables:
   DJANGO_SETTINGS_MODULE: 'ctb.settings'
