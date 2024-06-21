@@ -16,7 +16,7 @@
 
 runtime: custom
 env: flex
-service: ctb
+service: ctb-dev
 api_version: 1
 
 automatic_scaling:
