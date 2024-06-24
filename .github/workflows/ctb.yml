@@ -145,7 +145,3 @@ jobs:
         deliverables: app-dev.yaml
         version: ctb-dev-01
         flags: "--verbosity=debug --service-account=${{ secrets.SA_DEPLOYER}}"
-      
-      
-    
-       
