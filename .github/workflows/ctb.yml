@@ -10,7 +10,7 @@ on:
 
 
 env:
-  TZ: America/Los_Angeles
+  TZ: America/New_York
 
 jobs:
   # build:
