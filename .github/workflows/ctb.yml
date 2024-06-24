@@ -128,7 +128,7 @@ jobs:
         filename: ".env"
         working-directory: "."
 
-    - id: 'deploy-app'
+    - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v2'
       
       env:
