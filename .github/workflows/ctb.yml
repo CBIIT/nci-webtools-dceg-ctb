@@ -6,7 +6,7 @@ on:
       - isb-cgc-ctb-test
       - isb-cgc-ctb-uat
       - isb-cgc-ctb-prod
-      - actions
+      - ctb_1.0.0_actions
 
 
 env:
