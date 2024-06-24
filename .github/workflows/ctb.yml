@@ -1,0 +1,63 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+      - isb-cgc-ctb-test
+      - isb-cgc-ctb-uat
+      - isb-cgc-ctb-prod
+      - actions
+
+
+env:
+  TZ: America/New_York
+
+jobs:
+
+  deploy:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    # needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+  
+    # Set up Google Cloud SDK
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v1'  
+      with:
+        project_id: ${{ secrets.GCP_DEV_PROJECT_ID}}
+        workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER}}
+        service_account: ${{ secrets.SA_DEPLOYER}}
+
+    - id: 'upload-file'
+      uses: 'google-github-actions/upload-cloud-storage@v2'
+      with:
+        path: static
+        destination: ${{secrets.CTB_DEV_STATIC_BUCKET}}
+
+    - name: generate .env file
+      uses: mobiledevops/secret-to-file-action@v1
+      with:
+        base64-encoded-secret: ${{ secrets.CTB_DEV_SETTINGS }}
+        filename: ".env"
+        working-directory: "."
+
+    - id: 'deploy'
+      uses: 'google-github-actions/deploy-appengine@v2'
+      
+      env:
+        CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800 # 30 minutes
+      with:
+        project_id:  ${{ secrets.GCP_DEV_PROJECT_ID}}
+        working_directory: ${{ github.workspace }}
+        deliverables: app-dev.yaml
+        version: ctb-dev-01
+        flags: "--verbosity=debug --service-account=${{ secrets.SA_DEPLOYER}}"
