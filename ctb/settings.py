@@ -447,11 +447,17 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = 'static_collex'
+#STATIC_ROOT = 'static_collex'
+STATIC_ROOT = os.environ.get('STATIC_URL')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = os.environ.get('STATIC_URL', '/static/')
+#STATIC_URL = os.environ.get('STATIC_URL', '/static/')
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = '/static/'
+
 
 GCS_STORAGE_URI = os.environ.get('GCS_STORAGE_URI', 'https://storage.googleapis.com/')
 
