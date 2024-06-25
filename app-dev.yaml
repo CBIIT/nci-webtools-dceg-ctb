@@ -42,6 +42,11 @@ network:
 env_variables:
   DJANGO_SETTINGS_MODULE: 'ctb.settings'
 
+
+error_handlers:
+  - error_code: over_quota
+    file: over_quota.html
+
 skip_files:
 - python-su.sh
 - ^(.*/)?#.*#$
