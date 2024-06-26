@@ -137,5 +137,5 @@ jobs:
         project_id:  ${{ secrets.GCP_DEV_PROJECT_ID}}
         working_directory: ${{ github.workspace }}
         deliverables: app-dev.yaml
-        version: ctb-dev-02
+        version: ctb-dev-03
         flags: "--verbosity=debug --service-account=${{ secrets.SA_DEPLOYER}}"
