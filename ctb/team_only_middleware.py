@@ -43,11 +43,11 @@ class TeamOnly(object):
                         if not EmailAddress.objects.filter(
                                 user=request.user, verified=True
                         ).exists():
-                            message = "We have sent an e-mail to you for verification. Please <a href=\'#logout-modal\' data-bs-toggle=\'modal\' data-bs-target=\'#logout-modal\'>log out</a> and follow the link provided to finalize the signup process. If you have any questions, please email us at <a href='mailto:ctb-support@isb-cgc.org'>ctb-support@isb-cgc.org</a>"
+                            message = "We have sent an e-mail to you for verification. Please <a href=\'#logout-modal\' data-bs-toggle=\'modal\' data-bs-target=\'#logout-modal\'>log out</a> and follow the link provided to finalize the signup process. If you have any questions, please email us at <a href='mailto:nciwebtools@gmail.com'>nciwebtools@gmail.com</a>"
                         elif not request.user.groups.filter(
                                 reduce(lambda q, g: q | Q(name__icontains=g), settings.RESTRICTED_ACCESS_GROUPS,
                                        Q())).exists():
-                            message = "Your account application will need to be evaluated before an account can be approved. You will get an email about approval. If you have any questions, please email us at <a href='mailto:ctb-support@isb-cgc.org'>ctb-support@isb-cgc.org</a>"
+                            message = "Your account application will need to be evaluated before an account can be approved. You will get an email about approval. If you have any questions, please email us at <a href='mailto:nciwebtools@gmail.com'>nciwebtools@gmail.com</a>"
                     if message:
                         messages.warning(request, message)
                         return redirect('landing_page')

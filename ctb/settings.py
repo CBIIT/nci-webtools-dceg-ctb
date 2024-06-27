@@ -103,6 +103,7 @@ database_config = {
         'PASSWORD': os.environ.get('DATABASE_PASSWORD')
     }
 }
+#print(database_config)
 
 # On the build system, we need to use build-system specific database information
 if os.environ.get('CI', None) is not None:
@@ -447,17 +448,11 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-#STATIC_ROOT = 'static_collex'
 STATIC_ROOT = os.environ.get('STATIC_URL')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-#STATIC_URL = os.environ.get('STATIC_URL', '/static/')
-
-# URL prefix for static files.
-# Example: "http://media.lawrence.com/static/"
 STATIC_URL = '/static/'
-
 
 GCS_STORAGE_URI = os.environ.get('GCS_STORAGE_URI', 'https://storage.googleapis.com/')
 
@@ -493,19 +488,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #########################################
 
 if not IS_DEV:
-    CACHE_IP = os.environ.get("CACHE_IP", "127.0.0.1")
-    CACHE_PORT = os.environ.get("CACHE_PORT", "6379")
-    REDIS_AUTH = os.environ.get("REDIS_AUTH", "")
     CACHES = {
         "default": {
-            "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": "redis://{REDIS_IP}:{REDIS_PORT}/0".format(
-                REDIS_IP=CACHE_IP,
-                REDIS_PORT=CACHE_PORT
-            ),
-            "OPTIONS": {
-                "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            }
+            "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+            "LOCATION": "django_cache",
         }
     }
 else:
@@ -544,6 +530,7 @@ REQUEST_LOGGING_ENABLE_COLORIZE = bool(os.environ.get('REQUEST_LOGGING_ENABLE_CO
 #EMAIL_SERVICE_API_KEY = os.environ.get('EMAIL_SERVICE_API_KEY', '')
 
 #NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATION_EMAIL_FROM_ADDRESS', 'noreply@isb-cgc.org')
+<<<<<<< HEAD
 
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = os.environ.get('EMAIL_SMTP_SERVER', '')
@@ -555,10 +542,13 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_SERVICE_PASSWORD', '')
 DEFAULT_FROM_EMAIL=os.environ.get('FROM_EMAIL', '')
 NOTIFICATION_EMAIL_FROM_ADDRESS = DEFAULT_FROM_EMAIL
 SUPPORT_EMAIL = "ctbWebAdmin@mail.nih.gov"
+=======
+>>>>>>> ctb_1.0.0_dev
 
 #########################
 # django-anymail        #
 #########################
+<<<<<<< HEAD
 #
 # Anymail lets us use the Django mail system with mailgun (eg. in local account email verification)
 # ANYMAIL = {
@@ -568,8 +558,30 @@ SUPPORT_EMAIL = "ctbWebAdmin@mail.nih.gov"
 # EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 # DEFAULT_FROM_EMAIL = NOTIFICATION_EMAIL_FROM_ADDRESS
 # SERVER_EMAIL = "ctb-support@isb-cgc.org"
+=======
+>>>>>>> ctb_1.0.0_dev
 
-SUPPORT_EMAIL = "ctb-support@isb-cgc.org"
+#########################
+# django-smtp-email     #
+#########################
+#EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend",
+#EMAIL_HOST = os.environ.get('EMAIL_SMTP_SERVER', '')
+#EMAIL_PORT = os.environ.get('EMAIL_SERVICE_PORT', '')
+#EMAIL_USE_TLS=True
+#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_SERVICE_PASSWORD', '')
+#EMAIL_HOST_USERNAME = os.environ.get('EMAIL_SERVICE_USERNAME', '')
+
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.environ.get('EMAIL_SMTP_SERVER', '')
+EMAIL_PORT = os.environ.get('EMAIL_SERVICE_PORT', '')
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER = os.environ.get('EMAIL_SERVICE_USERNAME', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_SERVICE_PASSWORD', '')
+
+DEFAULT_FROM_EMAIL=os.environ.get('FROM_EMAIL', '')
+NOTIFICATION_EMAIL_FROM_ADDRESS = DEFAULT_FROM_EMAIL
+SUPPORT_EMAIL = "ctbWebAdmin@mail.nih.gov" 
+
 
 if os.environ.get('IS_GAE_DEPLOYMENT', 'False') != 'True':
     GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(
@@ -655,7 +667,7 @@ BLANK_TISSUE_FILTER_CASE_COUNT = {
 }
 
 GCP_APP_DOC_BUCKET = os.environ.get('GCP_APP_DOC_BUCKET', 'ctb-dev-app-doc-files')
-CTB_APPLICATION_RECEIVER_EMAIL = os.environ.get('CTB_APPLICATION_RECEIVER_EMAIL', 'ctb-support@isb-cgc.org')
+CTB_APPLICATION_RECEIVER_EMAIL = os.environ.get('CTB_APPLICATION_RECEIVER_EMAIL', 'nciwebtools@gmail.com')
 GOOGLE_SE_ID = os.environ.get('GOOGLE_SE_ID', None)
 # print(GOOGLE_SE_ID)
 if DEBUG and DEBUG_TOOLBAR:
@@ -689,4 +701,5 @@ MIDDLEWARE.append('django_otp.middleware.OTPMiddleware', )
 # REDIRECT_FIELD_NAME = 'bogus'
 
 # Log the version of our app
+#print(EMAIL_HOST)
 print("[STATUS] Application Version is {}".format(APP_VERSION))

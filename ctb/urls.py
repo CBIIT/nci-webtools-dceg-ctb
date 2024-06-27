@@ -71,9 +71,9 @@ urlpatterns = [
     url(r'^sitemap/', views.sitemap, name='sitemap')
 ]
 
-if settings.IS_DEV:
-    from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-    urlpatterns += staticfiles_urlpatterns()
+#if settings.IS_DEV:
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()
 
 if settings.DEBUG and settings.DEBUG_TOOLBAR:
     import debug_toolbar
