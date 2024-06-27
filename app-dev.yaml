@@ -61,7 +61,7 @@ handlers:
     upload: favicon\.ico
 
   - url: /static
-    static_dir: public
+    static_dir: static
 
   - url: /.*
     secure: always
