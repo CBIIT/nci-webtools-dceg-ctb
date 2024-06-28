@@ -448,7 +448,9 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.environ.get('STATIC_URL')
+
+STATIC_ROOT = os.environ.get('STATIC_ROOT', '')
+
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -461,7 +463,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, 'static'),
+    "static/",
 )
 
 # List of finder classes that know how to find static files in
@@ -555,7 +557,6 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_SERVICE_PASSWORD', '')
 DEFAULT_FROM_EMAIL=os.environ.get('FROM_EMAIL', '')
 NOTIFICATION_EMAIL_FROM_ADDRESS = DEFAULT_FROM_EMAIL
 SUPPORT_EMAIL = "ctbWebAdmin@mail.nih.gov" 
-
 
 if os.environ.get('IS_GAE_DEPLOYMENT', 'False') != 'True':
     GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(

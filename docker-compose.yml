@@ -1,0 +1,38 @@
+services:
+  app:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    environment:
+      PORT: 8080
+      DATABASE_HOST: database
+    env_file: .env
+    ports:
+      - "8080:8080"
+    # entrypoint: python3 manage.py runserver 0.0.0.0:8080
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+          ignore:
+            - .git/
+            - temp/
+        - action: rebuild
+          path: requirements.txt
+
+
+    volumes: 
+      - .:/app
+
+  database:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ctb
+      MYSQL_USER: ctb
+      MYSQL_PASSWORD: ctb
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./secure_files/database:/var/lib/mysql
