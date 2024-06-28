@@ -474,7 +474,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = (os.environ.get('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'True') == 'True')
 SECURE_HSTS_PRELOAD = (os.environ.get('SECURE_HSTS_PRELOAD', 'True') == 'True')
@@ -548,15 +548,15 @@ REQUEST_LOGGING_ENABLE_COLORIZE = bool(os.environ.get('REQUEST_LOGGING_ENABLE_CO
 #EMAIL_HOST_USERNAME = os.environ.get('EMAIL_SERVICE_USERNAME', '')
 
 EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = os.environ.get('EMAIL_SMTP_SERVER', '')
-EMAIL_PORT = os.environ.get('EMAIL_SERVICE_PORT', '')
+EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', '')
 EMAIL_USE_TLS=True
-EMAIL_HOST_USER = os.environ.get('EMAIL_SERVICE_USERNAME', '')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_SERVICE_PASSWORD', '')
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
 
-DEFAULT_FROM_EMAIL=os.environ.get('FROM_EMAIL', '')
+DEFAULT_FROM_EMAIL=os.environ.get('DEFAULT_FROM_EMAIL', '')
 NOTIFICATION_EMAIL_FROM_ADDRESS = DEFAULT_FROM_EMAIL
-SUPPORT_EMAIL = "ctbWebAdmin@mail.nih.gov" 
+SUPPORT_EMAIL = os.environ.get('SUPPORT_EMAIL', '')
 
 if os.environ.get('IS_GAE_DEPLOYMENT', 'False') != 'True':
     GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(
@@ -583,9 +583,9 @@ if (IS_DEV and CONNECTION_IS_LOCAL) or IS_CIRCLE:
     INSTALLED_APPS += (
         'finalware',)
 
-    SITE_SUPERUSER_USERNAME = os.environ.get('SUPERUSER_USERNAME', '')
+    SITE_SUPERUSER_USERNAME = os.environ.get('SITE_SUPERUSER_USERNAME', '')
     SITE_SUPERUSER_EMAIL = ''
-    SITE_SUPERUSER_PASSWORD = os.environ.get('SUPERUSER_PASSWORD')
+    SITE_SUPERUSER_PASSWORD = os.environ.get('SITE_SUPERUSER_PASSWORD')
 #
 ############################
 #   End django-finalware   #
@@ -596,7 +596,7 @@ CONN_MAX_AGE = 60
 ############################
 #   METRICS SETTINGS
 ############################
-SITE_GOOGLE_ANALYTICS = bool(os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', None) is not None)
+SITE_GOOGLE_ANALYTICS = bool(os.environ.get('SITE_GOOGLE_ANALYTICS', None) is not None)
 SITE_GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', '')
 GOOGLE_SITE_VERIFICATION_CODE = os.environ.get('GOOGLE_SITE_VERIFICATION_CODE', '')
 ADOBE_DTM_PATH = os.environ.get('ADOBE_DTM_PATH', None)
@@ -663,7 +663,7 @@ if DEBUG and DEBUG_TOOLBAR:
         'debug_toolbar.panels.redirects.RedirectsPanel',
     ]
     SHOW_TOOLBAR_CALLBACK = True
-    INTERNAL_IPS = (os.environ.get('INTERNAL_IP', ''),)
+    INTERNAL_IP = (os.environ.get('INTERNAL_IP', ''),)
 
 # AxesMiddleware should be the last middleware in the MIDDLEWARE list.
 # It only formats user lockout messages and renders Axes lockout responses
