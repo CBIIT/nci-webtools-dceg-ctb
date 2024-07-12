@@ -34,7 +34,7 @@ jobs:
         service_account: ${{ secrets.SERVICE_ACCOUNT }}
 
     - name: generate .env file
-      run: echo ${{ secrets.ENV_FILE }} > .env
+      run: echo "${{ secrets.ENV_FILE }}" > .env
 
     - id: 'deploy'
       uses: 'google-github-actions/deploy-appengine@v2'
