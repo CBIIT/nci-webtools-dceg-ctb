@@ -59,7 +59,7 @@ Chernobyl Tissue Bank Team''',
 This is an email to inform you that your Chernobyl Tissue Bank account was created, but not yet approved. Please note that your account will need to be evaluated before it can be approved.
 We will send you an email about approval soon.
 
-If you have any questions, please send us an email to nciwebtools@gmail.com, and we will get back to you as soon as we can.
+If you have any questions, please send us an email to ctbWebAdmin@mail.nih.gov, and we will get back to you as soon as we can.
 
 
 Sincerely,

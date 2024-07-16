@@ -279,7 +279,7 @@ def application_submit(request):
             
             A Chernobyl tissue bank application has been submitted.
             A copy of the application is attached to this email for you to review.
-            Please contact nciwebtools@gmail.com if you have any questions or concerns.
+            Please contact ctbWebAdmin@mail.nih.gov if you have any questions or concerns.
             
             ISB-CGC Team''',
                 settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
