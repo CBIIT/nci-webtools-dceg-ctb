@@ -10,39 +10,44 @@ env:
   TZ: America/New_York
 
 jobs:
-  deploy:
+  Deploy:
     permissions:
-      contents: 'read'
-      id-token: 'write'
+      contents: "read"
+      id-token: "write"
     # needs: build
     runs-on: ubuntu-latest
-    environment: dev
+#    environment: dev
+    environment: ${{ (endsWith(github.ref, '_dev') && 'dev') || (endsWith(github.ref, '_qa') && 'qa') || '' }}
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: "actions/checkout@v4"
   
     # Set up Google Cloud SDK
-    - name: Set up Google Cloud SDK
-      uses: google-github-actions/setup-gcloud@v1
+    - name: "Set up Google Cloud SDK"
+      uses: "google-github-actions/setup-gcloud@v2"
 
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v1'  
+    - id: "auth"
+      name: "Authenticate to Google Cloud"
+      uses: "google-github-actions/auth@v2"  
       with:
         project_id: ${{ secrets.PROJECT_ID }}
         workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
         service_account: ${{ secrets.SERVICE_ACCOUNT }}
 
+    - id: "generate_app_yaml"
+      name: "Generate app.yaml"
+      run: envsubst < app.template.yaml > app.yaml
+
     - name: generate .env file
       run: echo "${{ secrets.ENV_FILE }}" > .env
 
-    - id: 'deploy'
+    - id: "deploy"
       uses: 'google-github-actions/deploy-appengine@v2'
       env:
         CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800 # 30 minutes
       with:
         project_id:  ${{ secrets.PROJECT_ID }}
         working_directory: ${{ github.workspace }}
-        deliverables: app-dev.yaml
-        version: ctb-dev-08
+        deliverables: app.yaml
+#        version: ctb-dev-08
         flags: "--verbosity=debug --service-account=${{ secrets.SERVICE_ACCOUNT }}"
