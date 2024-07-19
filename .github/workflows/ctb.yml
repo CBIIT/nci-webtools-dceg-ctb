@@ -42,7 +42,7 @@ jobs:
       run: echo "${{ secrets.ENV_FILE }}" > .env
 
     - name: Verify .env file
-      run: '[ "$(cat .env)" = "$ENV1" ] && echo "Verified" || echo "Verification failed"'
+      run: '[ "$(cat .env)" = "${{ secrets.ENV_FILE }}" ] && echo "Verified" || echo "Verification failed"'
 
     - id: "deploy"
       uses: 'google-github-actions/deploy-appengine@v2'
