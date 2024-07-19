@@ -6,4 +6,3 @@ __pycache__/
 .svn/
 secure_files/
 static_collex/
-**/.env
