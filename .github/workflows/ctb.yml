@@ -50,4 +50,4 @@ jobs:
         working_directory: ${{ github.workspace }}
         deliverables: app.yaml
 #        version: ctb-dev-08
-        flags: "--verbosity=debug --service-account=${{ secrets.SERVICE_ACCOUNT }}"
+        flags: "--verbosity=debug --service-account=${{ secrets.APP_SERVICE_ACCOUNT }}"
