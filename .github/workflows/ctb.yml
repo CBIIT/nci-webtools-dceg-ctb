@@ -38,8 +38,11 @@ jobs:
       name: "Generate app.yaml"
       run: envsubst < app.template.yaml > app.yaml
 
-    - name: generate .env file
+    - name: Generate .env file
       run: echo "${{ secrets.ENV_FILE }}" > .env
+
+    - name: Verify .env file
+      run: '[ "$(cat .env)" = "$ENV1" ] && echo "Verified" || echo "Verification failed"'
 
     - id: "deploy"
       uses: 'google-github-actions/deploy-appengine@v2'
