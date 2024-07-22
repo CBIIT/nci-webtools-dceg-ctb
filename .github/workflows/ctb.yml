@@ -36,12 +36,12 @@ jobs:
     - id: "generate_app_yaml"
       name: "Generate app.yaml"
       run: envsubst < app.template.yaml > app.yaml
-
-    - name: Generate .env file
-      run: echo "${{ secrets.ENV_FILE }}" > .env
       env:
         VPC: ${{ secrets.VPC }}
         SUBNET: ${{ secrets.SUBNET }}
+        
+    - name: Generate .env file
+      run: echo "${{ secrets.ENV_FILE }}" > .env
 
     - id: "deploy"
       uses: 'google-github-actions/deploy-appengine@v2'
