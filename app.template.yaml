@@ -36,8 +36,8 @@ builtins:
 #    cloud_sql_instances: nih-nci-cbiit-ctb-dev:us-east4:ctb-dev-v1
 
 network:
-  name: ctb-redis-network
-  subnetwork_name: subnet-03
+  name: $VPC
+  subnetwork_name: $SUBNET
 
 #env_variables:
 #  DJANGO_SETTINGS_MODULE: 'ctb.settings'
