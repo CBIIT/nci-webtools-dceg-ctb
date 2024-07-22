@@ -16,7 +16,6 @@ jobs:
       id-token: "write"
     # needs: build
     runs-on: ubuntu-latest
-#    environment: dev
     environment: ${{ (endsWith(github.ref, '_dev') && 'dev') || (endsWith(github.ref, '_qa') && 'qa') || '' }}
 
     steps:
@@ -41,9 +40,6 @@ jobs:
     - name: Generate .env file
       run: echo "${{ secrets.ENV_FILE }}" > .env
 
-    - name: Verify .env file
-      run: '[ "$(cat .env)" = "${{ secrets.ENV_FILE }}" ] && echo "Verified" || echo "Verification failed"'
-
     - id: "deploy"
       uses: 'google-github-actions/deploy-appengine@v2'
       env:
@@ -52,5 +48,4 @@ jobs:
         project_id:  ${{ secrets.PROJECT_ID }}
         working_directory: ${{ github.workspace }}
         deliverables: app.yaml
-#        version: ctb-dev-08
         flags: "--verbosity=debug --service-account=${{ secrets.APP_SERVICE_ACCOUNT }}"
