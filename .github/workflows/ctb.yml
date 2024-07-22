@@ -39,6 +39,9 @@ jobs:
 
     - name: Generate .env file
       run: echo "${{ secrets.ENV_FILE }}" > .env
+      env:
+        VPC: ${{ secrets.VPC }}
+        SUBNET: ${{ secrets.SUBNET }}
 
     - id: "deploy"
       uses: 'google-github-actions/deploy-appengine@v2'
