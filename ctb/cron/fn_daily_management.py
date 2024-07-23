@@ -312,6 +312,7 @@ def manage_applications(request):
 
 
 def daily_management(request):
+    print('== calling daily_management() ==')
     try:
         manage_accounts(None)
         manage_applications(None)

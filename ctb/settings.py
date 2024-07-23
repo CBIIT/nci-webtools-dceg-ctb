@@ -709,9 +709,9 @@ INSTALLED_APPS += (
     'django_cron',
 )
 
-CRON_CLASSES = [
-    'ctb.cron_jobs.DailyManagementCronJob',  # 
-    # other cron job classes...
+CRONJOBS = [
+     ('0 1 * * *', 'ctb.cron.cron_jobs.DailyManagementCronJob'),
+    #'ctb.cron.cron_jobs.DailyManagementCronJob',  # 
 ]
 
 #mysql_config_for_cloud_functions = {

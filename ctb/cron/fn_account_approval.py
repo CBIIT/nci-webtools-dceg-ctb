@@ -102,6 +102,7 @@ def set_account_approval_stat(user_email=None, is_approved=None):
 
 
 def account_approval(request):
+    print("trying to run account approval")
     try:
         request_json = request.get_json(silent=True)
         request_args = request.args

@@ -13,7 +13,9 @@ class DailyManagementCronJob(CronJobBase):
     def do(self):
         # Assuming daily_management is a standalone function you can call
         # If it's part of a class, you'll need to instantiate that class first
+
         try:
+            print("trying to run daily management")
             account_approval()
             daily_management()
             print("[STATUS] Functions [fn_daily_management] and [fn_account_approval] have been run successfully")
