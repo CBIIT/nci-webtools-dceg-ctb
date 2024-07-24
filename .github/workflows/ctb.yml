@@ -43,12 +43,16 @@ jobs:
     - name: Generate .env file
       run: echo "${{ secrets.ENV_FILE }}" > .env
 
-    - id: "deploy"
-      uses: 'google-github-actions/deploy-appengine@v2'
-      env:
-        CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800 # 30 minutes
-      with:
-        project_id:  ${{ secrets.PROJECT_ID }}
-        working_directory: ${{ github.workspace }}
-        deliverables: app.yaml
-        flags: "--verbosity=debug --service-account=${{ secrets.APP_SERVICE_ACCOUNT }}"
+    - id: deploy
+      name: "Deploy App"
+      run: gcloud app deploy app.yaml --project ${{ secrets.PROJECT_ID }} --promote --verbosity debug --service-account=${{ secrets.APP_SERVICE_ACCOUNT }}
+
+    # - id: "deploy"
+    #   uses: 'google-github-actions/deploy-appengine@v2'
+    #   env:
+    #     CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800 # 30 minutes
+    #   with:
+    #     project_id:  ${{ secrets.PROJECT_ID }}
+    #     working_directory: ${{ github.workspace }}
+    #     deliverables: app.yaml
+    #     flags: "--verbosity=debug --service-account=${{ secrets.APP_SERVICE_ACCOUNT }}"
