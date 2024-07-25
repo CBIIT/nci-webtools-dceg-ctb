@@ -19,7 +19,7 @@ def schedule_task(interval, task):
     scheduler_thread.start()
  
 # execute every day
-schedule_task(60 * 60 * 24, daily_task) 
+#schedule_task(60 * 60 * 24, daily_task) 
 
 
 
