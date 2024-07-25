@@ -72,7 +72,7 @@ else:
 ALLOWED_HOSTS = list(
     set(os.environ.get('ALLOWED_HOST', 'localhost').split(',') + ['localhost', '127.0.0.1', '[::1]', gethostname(),
                                                                   gethostbyname(gethostname()), ]))
-# ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 SSL_DIR = os.path.abspath(os.path.dirname(__file__)) + os.sep
 
