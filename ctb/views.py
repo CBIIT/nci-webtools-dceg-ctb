@@ -149,22 +149,10 @@ def approve_account(request):
     data = json.loads(request.body)
     user_email = data.get('user_email')
     is_approved = data.get('is_approved')
-    admin_id = data.get('admin_id')
-    print("admin_id: ", admin_id)
-   # Check if admin_id is correct
-    if admin_id != 123:
-     return HttpResponse("You do not have permission.", status=403)
-        
-        # Perform the approval
-    request_data = {'ctb_cl_fn_type': 1, 'user_email': user_email, 'is_approved': is_approved}
+    admin_token = data.get('admin_token')
+    request_data = {'admin_token': admin_token, 'user_email': user_email, 'is_approved': is_approved}
     account_approval(request_data)
-    return HttpResponse("Your account has been approved.")
-  #print("admin_id: ", admin_id)
-  #if admin_id != '123':
-  #  return HttpResponse("You do not have permission.")
-  #else:
-  #  request = {'ctb_cl_fn_type': 1,'user_email': user_email, 'is_approved': is_approved}
-  #  account_approval(request)
-  #  return HttpResponse("Your account has been approved.")
-  # if admin, call account_approval()
-  # render success template
+    if is_approved:
+        return HttpResponse("The account has been approved.")
+    else:
+        return HttpResponse("The account has been disapproved.")

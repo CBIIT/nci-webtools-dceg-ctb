@@ -111,27 +111,23 @@ def set_account_approval_stat(user_email=None, is_approved=None):
 
 def account_approval(request):
     print("trying to run account approval", request)
-
+       
     try:
-        #request_json = request.get_json(silent=True)
-        #request_args = request.args
-        print("request_json: ", request)
-        ctb_cl_fn_type = request['ctb_cl_fn_type']
+        connection = pymysql.connect(**mysql_config_for_cloud_functions)
+        admin_token = request['admin_token']
         user_email = request['user_email']
         is_approved = request['is_approved']
-        #
-        # arguments: (user_email, is_approved)
-        # user_email: user email account
-        # is_approved: 1 for approved account, 0 for disapproved
-        #if request_json and 'user_email' in request_json:
-        #    user_email = request_json['user_email']
-        #elif request_args and 'user_email' in request_args:
-        #    user_email = request_args['user_email']
-
-        #if request_json and 'is_approved' in request_json:
-        #    is_approved = request_json['is_approved']
-        #elif request_args and 'is_approved' in request_args:
-        #    is_approved = request_args['is_approved']
-        return set_account_approval_stat(user_email=user_email, is_approved=is_approved)
+        print("cursor: ", admin_token)
+        with connection.cursor() as cursor:
+            select_query = f'''
+                    SELECT token
+                    FROM django_token AS t 
+                    where t.token = '{admin_token}' ;'''
+            cursor.execute(select_query)
+            print("cursor: ", cursor.rowcount)
+            if cursor.rowcount == 0:
+                return {"code": 500, "message": f"Function [account_approval] failed to run: admin token not found"}
+            else:
+                return set_account_approval_stat(user_email=user_email, is_approved=is_approved)
     except Exception as e:
         return {"code": 500, "message": f"Function [account_approval] failed to run: {e}"}
