@@ -2,7 +2,8 @@ import pymysql
 from os import getenv
 from datetime import datetime, timezone, timedelta
 from google.cloud import storage
-from settings import CTB_LOGIN_URL, SUPPORT_EMAIL, CTB_REVIEWER_EMAIL, mysql_config_for_cloud_functions, send_ctb_email
+from ..settings import CTB_LOGIN_URL, SUPPORT_EMAIL, CTB_APPLICATION_RECEIVER_EMAIL, mysql_config_for_cloud_functions, send_ctb_email
+
 
 # expirations and warning days
 MAX_INACTIVE_PERIOD_DAYS = int(getenv("MAX_INACTIVE_PERIOD_DAYS", '60'))
@@ -11,24 +12,29 @@ SECOND_WARNING_EXPIRATION_BEFORE_DAYS = int(getenv("SECOND_WARNING_EXPIRATION_BE
 PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS = int(getenv("PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS", '14'))
 SECOND_PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS = int(getenv("SECOND_PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS", '2'))
 APPLICATION_EXPIRATION_DAYS = int(getenv("APPLICATION_EXPIRATION_DAYS", '365'))
-GCP_APP_DOC_BUCKET = getenv("GCP_APP_DOC_BUCKET", 'ctb-dev-app-doc-files')
+GCP_APP_DOC_BUCKET = getenv("GCP_APP_DOC_BUCKET", 'nci-cbiit-ctb-dev-app-doc-files')
+GCLOUD_PROJECT_ID= getenv("GCLOUD_PROJECT_ID", "dev")
+TIER = GCLOUD_PROJECT_ID.replace('nih-nci-cbiit-ctb-', '')
 
 
 def warn_expiration_date_utc(expiration_in_days):
-    return (datetime.now(timezone.utc) + timedelta(days=expiration_in_days)).date()
+    return datetime.now(timezone.utc).date()
+    #return (datetime.now(timezone.utc) + timedelta(days=expiration_in_days)).date()
 
 
 def warning_last_login_date_utc(expiration_in_days):
-    return (datetime.now(timezone.utc) - timedelta(
-        days=(MAX_INACTIVE_PERIOD_DAYS - expiration_in_days))).date()
+    return datetime.now(timezone.utc).date()
+    #return (datetime.now(timezone.utc) - timedelta(days=(MAX_INACTIVE_PERIOD_DAYS - expiration_in_days))).date()
 
 
 # today's password expiration dates: calculate what date needs to be warned currently for the password expiration
 def warning_password_expiration_date_utc(days_before_expiration):
+    return datetime.now(timezone.utc).date()
     return (datetime.now(timezone.utc) + timedelta(days=days_before_expiration)).date()
 
 
 def application_expiration_date_utc_strftime():
+    return datetime.now(timezone.utc).date()
     return (datetime.now(timezone.utc) - timedelta(days=APPLICATION_EXPIRATION_DAYS)).date().strftime('%Y-%m-%d')
 
 
@@ -68,6 +74,7 @@ PASSWORD_EXPIRATION_NOTIFICATION = 6
 
 
 def send_notification_email(user_email, email_type):
+    print(f"[STATUS] Sending a notification email to {user_email} of type {email_type}")
     if email_type == DEACTIVE_ACCOUNT_WARNING or email_type == SECOND_DEACTIVE_ACCOUNT_WARNING:
         if email_type == DEACTIVE_ACCOUNT_WARNING:
             expiration_date = warn_expiration_date_utc(WARNING_EXPIRATION_BEFORE_DAYS)
@@ -75,7 +82,7 @@ def send_notification_email(user_email, email_type):
         else:
             expiration_date = warn_expiration_date_utc(SECOND_WARNING_EXPIRATION_BEFORE_DAYS)
             warning_period = SECOND_WARNING_EXPIRATION_BEFORE_DAYS
-        subject = f"[Chernobyl Tissue Bank] Your account will become deactivated in {warning_period} days"
+        subject = f"{TIER}[Chernobyl Tissue Bank] Your account will become deactivated in {warning_period} days"
         mail_content = '''
             Dear {user_email},<br><br>
             Your CTB account shows that you had no activity for a long time, and will expire on {expiration_date} ({warning_period} days from today).<br>
@@ -93,7 +100,7 @@ def send_notification_email(user_email, email_type):
         print(
             f"[STATUS] Sending a notification to {user_email} of the account deactivation in {warning_period} days.")
     elif email_type == DEACTIVE_ACCOUNT_NOTIFICATION:
-        subject = "[Chernobyl Tissue Bank] Your account has been deactivated"
+        subject = "{TIER}[Chernobyl Tissue Bank] Your account has been deactivated"
         mail_content = '''
             Dear {user_email},<br><br>
             Your CTB account has been deactivated due to {max_inactive_period} days of inactivity.<br>
@@ -111,7 +118,7 @@ def send_notification_email(user_email, email_type):
         else:
             expiration_date = warning_password_expiration_date_utc(SECOND_WARNING_EXPIRATION_BEFORE_DAYS)
             warning_period = SECOND_PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS
-        subject = f"[Chernobyl Tissue Bank] Your password is expiring in {warning_period} days"
+        subject = f"{TIER}[Chernobyl Tissue Bank] Your password is expiring in {warning_period} days"
 
         mail_content = '''
             Dear {user_email},<br><br>
@@ -128,7 +135,7 @@ def send_notification_email(user_email, email_type):
         print(
             f"[STATUS] Sending a notification to {user_email} of the password expiration in {warning_period} days.")
     else:  # PASSWORD_EXPIRATION_NOTIFICATION
-        subject = "[Chernobyl Tissue Bank] Your account password has expired."
+        subject = "{TIER}[Chernobyl Tissue Bank] Your account password has expired."
         mail_content = '''
             Dear {user_email},<br><br>
             Your CTB account password has been expired.<br>
@@ -158,13 +165,14 @@ def sync_password_expiration_date_time(user_id):
 def manage_accounts(request):
     print('== calling manage_accounts() ==')
     connection = pymysql.connect(**mysql_config_for_cloud_functions)
+    #print("connection:",connection)
     warn_password_expiration_user_list = []
     second_warn_password_expiration_user_list = []
     password_expiration_user_list = []
     warn_inactivation_user_list = []
     second_warn_inactivation_user_list = []
     inactivate_user_list = []
-
+  
     with connection.cursor() as cursor:
         # retrieve user info
         select_user_sql = '''
@@ -175,7 +183,7 @@ def manage_accounts(request):
         WHERE u.is_active=True AND u.is_staff=False'''
         cursor.execute(select_user_sql)
         user_list = cursor.fetchall()
-
+        print('== calling manage_accounts() ==',user_list)
         approval_pending_user_list = []
         if datetime.today().weekday() < 4 or datetime.today().weekday() == 6:     # Sun - Thur
             select_user_group_sql = '''
@@ -196,6 +204,7 @@ def manage_accounts(request):
         user_last_access = user_item.get("last_login") or user_item.get("date_joined")
         if user_last_access:
             user_last_access_date = user_last_access.date()
+            print('== calling manage_accounts() ==',user_last_access_date, warning_last_login_date_utc(WARNING_EXPIRATION_BEFORE_DAYS))
             if user_last_access_date == warning_last_login_date_utc(WARNING_EXPIRATION_BEFORE_DAYS):
                 warn_inactivation_user_list.append(user_item)
             elif user_last_access_date == warning_last_login_date_utc(SECOND_WARNING_EXPIRATION_BEFORE_DAYS):
@@ -249,19 +258,19 @@ def manage_accounts(request):
         is_plural = "s" if pending_account_count > 1 else ""
         it_or_them = "them" if pending_account_count > 1 else "it"
         html_pending_user_list = "<ul><li>" + "</li><li>".join(pending_account_list) + "</li></ul>"
-        subject = f"[Chernobyl Tissue Bank] Approval pending account{is_plural}"
+        subject = f"{TIER}[Chernobyl Tissue Bank] Approval pending account{is_plural}"
         mail_content = f'''
         This is an email to inform you that there {is_or_are} {pending_account_count} new CTB account{is_plural}
         which {is_or_are} in pending status:<br/><br/>
         User account email:<br/>
         {html_pending_user_list}
         <br/><br/>
-        Please evaluate the account{is_plural} above and inform the ISB-CGC team whether to approve or disapprove {it_or_them}.<br/>
+        Please evaluate the account{is_plural} above and inform the CTB Web team whether to approve or disapprove {it_or_them}.<br/>
         A user will not be able to access the biorepository until the account is approved.<br/>
         A disapproved account will be deactivated, and cannot be reused again without an admin's assistance.<br/><br/>
-        ISB-CGC Team
+        CTB Web Team
         '''
-        send_ctb_email(to_list=[CTB_REVIEWER_EMAIL], subject=subject, mail_content=mail_content,
+        send_ctb_email(to_list=[CTB_APPLICATION_RECEIVER_EMAIL], subject=subject, mail_content=mail_content,
                        bcc_ctb_reviewer=False)
 
 
@@ -288,13 +297,13 @@ def manage_applications(request):
             entry_form_path = submission_item.get("entry_form_path")
             bucket_name = GCP_APP_DOC_BUCKET
             if entry_form_path:
-                print(f"[STATUS] Deleting an expired application from bucket: {bucket_name}/{entry_form_path}")
+                print(f"{TIER}[STATUS] Deleting an expired application from bucket: {bucket_name}/{entry_form_path}")
                 delete_blob(bucket_name, entry_form_path)
 
             summary_file_path = submission_item.get("summary_file_path")
             if summary_file_path:
                 print(
-                    f"[STATUS] Deleting an expired application summary from bucket: {bucket_name}/{summary_file_path}")
+                    f"{TIER}[STATUS] Deleting an expired application summary from bucket: {bucket_name}/{summary_file_path}")
                 delete_blob(bucket_name, summary_file_path)
 
         # deactivate records in DB
@@ -308,7 +317,7 @@ def manage_applications(request):
             cursor.execute(update_statement)
             connection.commit()
             print(
-                f"[STATUS] Inactivating expired application(s) from the DB: donors_submissions_id:[{submission_id_list}]")
+                f"{TIER}[STATUS] Inactivating expired application(s) from the DB: donors_submissions_id:[{submission_id_list}]")
 
 
 def daily_management(request):

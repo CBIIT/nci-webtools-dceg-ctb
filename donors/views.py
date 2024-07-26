@@ -281,7 +281,7 @@ def application_submit(request):
             A copy of the application is attached to this email for you to review.
             Please contact ctbWebAdmin@mail.nih.gov if you have any questions or concerns.
             
-            ISB-CGC Team''',
+            CTB Web Team''',
                 settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
                 [settings.CTB_APPLICATION_RECEIVER_EMAIL, user_email])
             # attach a copy of the application in pdf to the email after rewinding result (ByteIO)

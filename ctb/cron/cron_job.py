@@ -1,6 +1,6 @@
 from django_cron import CronJobBase, Schedule
-from fn_daily_management import daily_management
-from fn_account_approval import account_approval
+from .fn_daily_management import daily_management
+from .fn_account_approval import account_approval
 
 import threading
 import time
@@ -33,9 +33,9 @@ class DailyManagementCronJob(CronJobBase):
     def do(self):
         try:
             print("trying to run daily management")
-            account_approval()
-            daily_management()
-            print("[STATUS] Functions [fn_daily_management] and [fn_account_approval] have been run successfully")
+            #account_approval(None)
+            daily_management(None)
+            print("[STATUS] Function [fn_daily_management] have been run successfully")
         except Exception as e:
             print(f'[Error] {e}')
 

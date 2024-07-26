@@ -17,8 +17,8 @@ NOTIFICATION_EMAIL_FROM_ADDRESS = getenv("NOTIFICATION_EMAIL_FROM_ADDRESS")
 
 # website login url
 CTB_LOGIN_URL = getenv("CTB_LOGIN_URL")
-SUPPORT_EMAIL = getenv("SUPPORT_EMAIL", "ctb-support@isb-cgc.org")
-CTB_REVIEWER_EMAIL = getenv("CTB_REVIEWER_EMAIL", "elee@isb-cgc.org")
+SUPPORT_EMAIL = getenv("SUPPORT_EMAIL", "ctbWebAdmin@mail.nih.gov")
+CTB_REVIEWER_EMAIL = getenv("CTB_REVIEWER_EMAIL", "ctbWebAdmin@mail.nih.gov")
 
 INSTALLED_APPS = [
     # other Django apps...

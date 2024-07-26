@@ -29,6 +29,7 @@ import requests
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import pymysql
 
 APP_ENGINE_FLEX = 'aef-'
 APP_ENGINE = 'Google App Engine/'
@@ -91,7 +92,7 @@ BIGQUERY_USER_MANIFEST_TIMEOUT = int(os.environ.get('BIGQUERY_USER_MANIFEST_TIME
 # WEBAPP_LOGIN_LOG_NAME         = os.environ.get('WEBAPP_LOGIN_LOG_NAME', 'local_dev_logging')
 # COHORT_CREATION_LOG_NAME      = os.environ.get('COHORT_CREATION_LOG_NAME', 'local_dev_logging')
 
-BASE_URL = os.environ.get('BASE_URL', 'https://isb-cgc-ctb-dev.appspot.com')
+BASE_URL = os.environ.get('BASE_URL', 'https://chernobyltissuebank-dev.cancer.gov')
 
 # BigQuery cohort storage settings
 BIGQUERY_COHORT_DATASET_ID = os.environ.get('BIGQUERY_COHORT_DATASET_ID', 'cohort_dataset')
@@ -736,7 +737,14 @@ CRONJOBS = [
 #              "html": mail_content})
 
 
-mysql_config_for_cloud_functions = database_config 
+mysql_config_for_cloud_functions = {
+    'host': os.environ.get('DATABASE_HOST', 'localhost'),
+    'user': os.environ.get('DATABASE_USER', 'django-user'),
+    'password':  os.environ.get('DATABASE_PASSWORD'),
+    'db':os.environ.get('DATABASE_NAME', 'ctb'),
+    'charset': 'utf8mb4',
+    'cursorclass': pymysql.cursors.DictCursor,
+}
 
 
 def send_ctb_email(to_list, subject, mail_content, bcc_ctb_reviewer=False):

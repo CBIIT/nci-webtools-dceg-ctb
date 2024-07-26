@@ -1,8 +1,11 @@
 import pymysql
 from os import getenv
-from settings import mysql_config_for_cloud_functions, send_ctb_email, SUPPORT_EMAIL, CTB_LOGIN_URL
+from ..settings import mysql_config_for_cloud_functions, send_ctb_email, SUPPORT_EMAIL, CTB_LOGIN_URL
 
 GROUP_NAME = getenv("GROUP_NAME", "ctb_team")
+GCLOUD_PROJECT_ID= getenv("GCLOUD_PROJECT_ID", "dev")
+TIER = GCLOUD_PROJECT_ID.replace('nih-nci-cbiit-ctb-', '')
+
 
 
 def set_account_approval_stat(user_email=None, is_approved=None):
@@ -72,7 +75,7 @@ def set_account_approval_stat(user_email=None, is_approved=None):
                             "message": f"Function [set_account_approval_stat] user group '{GROUP_NAME}' was not found."}
 
                 if is_approved:
-                    mail_subject = '[Chernobyl Tissue Bank] Your account is approved'
+                    mail_subject = '{TIER}[Chernobyl Tissue Bank] Your account is approved'
                     mail_content = f'''
                         Dear {user_email},<br><br>
                         Your CTB account has been approved.<br>
@@ -81,7 +84,7 @@ def set_account_approval_stat(user_email=None, is_approved=None):
                         Sincerely,<br><br>
                         Chernobyl Tissue Bank Team'''
                 else:
-                    mail_subject = '[Chernobyl Tissue Bank] Your account was disapproved'
+                    mail_subject = '{TIER}[Chernobyl Tissue Bank] Your account was disapproved'
                     mail_content = f'''
                         Dear {user_email},<br><br>
                         We are sorry to inform you that we were not able to approve your account.<br>
