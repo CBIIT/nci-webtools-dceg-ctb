@@ -9,6 +9,7 @@ TIER = GCLOUD_PROJECT_ID.replace('nih-nci-cbiit-ctb-', '')
 
 
 def set_account_approval_stat(user_email=None, is_approved=None):
+    print("trying to run set_account_approval_stat", user_email, is_approved)
     if user_email is None:
         return {"code": 500,
                 "message": f"Function [set_account_approval_stat] failed to run: account email is not provided"}
@@ -17,6 +18,7 @@ def set_account_approval_stat(user_email=None, is_approved=None):
                 "message": f"Function [set_account_approval_stat] failed to run: approved status is not provided"}
     try:
         connection = pymysql.connect(**mysql_config_for_cloud_functions)
+        print("connection: ", connection)
         with connection.cursor() as cursor:
             select_user_id_query = f'''
                 SELECT id FROM auth_user
@@ -27,7 +29,9 @@ def set_account_approval_stat(user_email=None, is_approved=None):
                 WHERE name =  '{GROUP_NAME}';
             '''
             cursor.execute(select_user_id_query)
+            
             user_list = cursor.fetchall()
+            print("user_list: ", user_list)
             if len(user_list) == 1:
                 # success
                 user_id = user_list[0].get('id')
@@ -75,7 +79,8 @@ def set_account_approval_stat(user_email=None, is_approved=None):
                             "message": f"Function [set_account_approval_stat] user group '{GROUP_NAME}' was not found."}
 
                 if is_approved:
-                    mail_subject = '{TIER}[Chernobyl Tissue Bank] Your account is approved'
+                    print("sending email")
+                    mail_subject = f'{TIER}[Chernobyl Tissue Bank] Your account is approved'
                     mail_content = f'''
                         Dear {user_email},<br><br>
                         Your CTB account has been approved.<br>
@@ -84,7 +89,7 @@ def set_account_approval_stat(user_email=None, is_approved=None):
                         Sincerely,<br><br>
                         Chernobyl Tissue Bank Team'''
                 else:
-                    mail_subject = '{TIER}[Chernobyl Tissue Bank] Your account was disapproved'
+                    mail_subject = f'{TIER}[Chernobyl Tissue Bank] Your account was disapproved'
                     mail_content = f'''
                         Dear {user_email},<br><br>
                         We are sorry to inform you that we were not able to approve your account.<br>
@@ -105,23 +110,28 @@ def set_account_approval_stat(user_email=None, is_approved=None):
 
 
 def account_approval(request):
-    print("trying to run account approval")
+    print("trying to run account approval", request)
+
     try:
-        request_json = request.get_json(silent=True)
-        request_args = request.args
+        #request_json = request.get_json(silent=True)
+        #request_args = request.args
+        print("request_json: ", request)
+        ctb_cl_fn_type = request['ctb_cl_fn_type']
+        user_email = request['user_email']
+        is_approved = request['is_approved']
         #
         # arguments: (user_email, is_approved)
         # user_email: user email account
         # is_approved: 1 for approved account, 0 for disapproved
-        if request_json and 'user_email' in request_json:
-            user_email = request_json['user_email']
-        elif request_args and 'user_email' in request_args:
-            user_email = request_args['user_email']
+        #if request_json and 'user_email' in request_json:
+        #    user_email = request_json['user_email']
+        #elif request_args and 'user_email' in request_args:
+        #    user_email = request_args['user_email']
 
-        if request_json and 'is_approved' in request_json:
-            is_approved = request_json['is_approved']
-        elif request_args and 'is_approved' in request_args:
-            is_approved = request_args['is_approved']
+        #if request_json and 'is_approved' in request_json:
+        #    is_approved = request_json['is_approved']
+        #elif request_args and 'is_approved' in request_args:
+        #    is_approved = request_args['is_approved']
         return set_account_approval_stat(user_email=user_email, is_approved=is_approved)
     except Exception as e:
         return {"code": 500, "message": f"Function [account_approval] failed to run: {e}"}

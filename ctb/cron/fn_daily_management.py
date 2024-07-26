@@ -18,23 +18,23 @@ TIER = GCLOUD_PROJECT_ID.replace('nih-nci-cbiit-ctb-', '')
 
 
 def warn_expiration_date_utc(expiration_in_days):
-    return datetime.now(timezone.utc).date()
-    #return (datetime.now(timezone.utc) + timedelta(days=expiration_in_days)).date()
+    #return datetime.now(timezone.utc).date()
+    return (datetime.now(timezone.utc) + timedelta(days=expiration_in_days)).date()
 
 
 def warning_last_login_date_utc(expiration_in_days):
-    return datetime.now(timezone.utc).date()
-    #return (datetime.now(timezone.utc) - timedelta(days=(MAX_INACTIVE_PERIOD_DAYS - expiration_in_days))).date()
+    #return datetime.now(timezone.utc).date()
+    return (datetime.now(timezone.utc) - timedelta(days=(MAX_INACTIVE_PERIOD_DAYS - expiration_in_days))).date()
 
 
 # today's password expiration dates: calculate what date needs to be warned currently for the password expiration
 def warning_password_expiration_date_utc(days_before_expiration):
-    return datetime.now(timezone.utc).date()
+    #return datetime.now(timezone.utc).date()
     return (datetime.now(timezone.utc) + timedelta(days=days_before_expiration)).date()
 
 
 def application_expiration_date_utc_strftime():
-    return datetime.now(timezone.utc).date()
+    #return datetime.now(timezone.utc).date()
     return (datetime.now(timezone.utc) - timedelta(days=APPLICATION_EXPIRATION_DAYS)).date().strftime('%Y-%m-%d')
 
 
@@ -100,7 +100,7 @@ def send_notification_email(user_email, email_type):
         print(
             f"[STATUS] Sending a notification to {user_email} of the account deactivation in {warning_period} days.")
     elif email_type == DEACTIVE_ACCOUNT_NOTIFICATION:
-        subject = "{TIER}[Chernobyl Tissue Bank] Your account has been deactivated"
+        subject = f"{TIER}[Chernobyl Tissue Bank] Your account has been deactivated"
         mail_content = '''
             Dear {user_email},<br><br>
             Your CTB account has been deactivated due to {max_inactive_period} days of inactivity.<br>
@@ -135,7 +135,7 @@ def send_notification_email(user_email, email_type):
         print(
             f"[STATUS] Sending a notification to {user_email} of the password expiration in {warning_period} days.")
     else:  # PASSWORD_EXPIRATION_NOTIFICATION
-        subject = "{TIER}[Chernobyl Tissue Bank] Your account password has expired."
+        subject = f"{TIER}[Chernobyl Tissue Bank] Your account password has expired."
         mail_content = '''
             Dear {user_email},<br><br>
             Your CTB account password has been expired.<br>
@@ -213,6 +213,7 @@ def manage_accounts(request):
                 inactivate_user_list.append(user_item)
         password_expiration = user_item.get("expiration_date")
         if password_expiration:
+            print('== calling manage_accounts() ==',password_expiration,warning_password_expiration_date_utc(PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS))
             password_expiration_date = password_expiration.date()
             if password_expiration_date == warning_password_expiration_date_utc(
                     PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS):

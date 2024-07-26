@@ -25,6 +25,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponse, JsonResponse, FileResponse, Http404
 from accounts.decorators import password_change_required
+from .cron.fn_account_approval import account_approval
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+import json
 
 debug = settings.DEBUG
 logger = logging.getLogger('main_logger')
@@ -135,3 +139,32 @@ def sitemap(request):
         return FileResponse(open('static/sitemap.xml', 'rb'), content_type='text/xml')
     except FileNotFoundError:
         raise Http404()
+    
+
+# User details page
+@csrf_exempt
+@require_POST
+def approve_account(request):
+  # check if user_id is admin
+    data = json.loads(request.body)
+    user_email = data.get('user_email')
+    is_approved = data.get('is_approved')
+    admin_id = data.get('admin_id')
+    print("admin_id: ", admin_id)
+   # Check if admin_id is correct
+    if admin_id != 123:
+     return HttpResponse("You do not have permission.", status=403)
+        
+        # Perform the approval
+    request_data = {'ctb_cl_fn_type': 1, 'user_email': user_email, 'is_approved': is_approved}
+    account_approval(request_data)
+    return HttpResponse("Your account has been approved.")
+  #print("admin_id: ", admin_id)
+  #if admin_id != '123':
+  #  return HttpResponse("You do not have permission.")
+  #else:
+  #  request = {'ctb_cl_fn_type': 1,'user_email': user_email, 'is_approved': is_approved}
+  #  account_approval(request)
+  #  return HttpResponse("Your account has been approved.")
+  # if admin, call account_approval()
+  # render success template
