@@ -16,6 +16,7 @@ jobs:
       id-token: "write"
     # needs: build
     runs-on: ubuntu-latest
+#    environment: dev
     environment: ${{ (endsWith(github.ref, '_dev') && 'dev') || (endsWith(github.ref, '_qa') && 'qa') || '' }}
 
     steps:
@@ -39,20 +40,21 @@ jobs:
       env:
         VPC: ${{ secrets.VPC }}
         SUBNET: ${{ secrets.SUBNET }}
-        
+        VPC_ACCESS_CONNECTOR: ${{ secrets.VPC_ACCESS_CONNECTOR }}
+
     - name: Generate .env file
       run: echo "${{ secrets.ENV_FILE }}" > .env
 
-    - id: deploy
-      name: "Deploy App"
-      run: gcloud app deploy app.yaml --project ${{ secrets.PROJECT_ID }} --promote --verbosity debug --service-account=${{ secrets.APP_SERVICE_ACCOUNT }}
+    - name: Verify .env file
+      run: '[ "$(cat .env)" = "${{ secrets.ENV_FILE }}" ] && echo "Verified" || echo "Verification failed"'
 
-    # - id: "deploy"
-    #   uses: 'google-github-actions/deploy-appengine@v2'
-    #   env:
-    #     CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800 # 30 minutes
-    #   with:
-    #     project_id:  ${{ secrets.PROJECT_ID }}
-    #     working_directory: ${{ github.workspace }}
-    #     deliverables: app.yaml
-    #     flags: "--verbosity=debug --service-account=${{ secrets.APP_SERVICE_ACCOUNT }}"
+    - id: "deploy"
+      uses: 'google-github-actions/deploy-appengine@v2'
+      env:
+        CLOUDSDK_APP_CLOUD_BUILD_TIMEOUT: 1800 # 30 minutes
+      with:
+        project_id:  ${{ secrets.PROJECT_ID }}
+        working_directory: ${{ github.workspace }}
+        deliverables: app.yaml
+#        version: ctb-dev-08
+        flags: "--verbosity=debug --service-account=${{ secrets.APP_SERVICE_ACCOUNT }}"
