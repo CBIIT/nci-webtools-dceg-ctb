@@ -39,8 +39,8 @@ network:
   name: $VPC
   subnetwork_name: $SUBNET
 
-vpc_access_connector:
-  name: $VPC_ACCESS_CONNECTOR
+# vpc_access_connector:
+#   name: $VPC_ACCESS_CONNECTOR
 
 #env_variables:
 #  DJANGO_SETTINGS_MODULE: 'ctb.settings'
