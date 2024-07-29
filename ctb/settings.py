@@ -25,6 +25,11 @@ from pathlib import Path
 import sys
 import dotenv
 from socket import gethostname, gethostbyname
+import requests
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import pymysql
 
 APP_ENGINE_FLEX = 'aef-'
 APP_ENGINE = 'Google App Engine/'
@@ -68,7 +73,7 @@ else:
 ALLOWED_HOSTS = list(
     set(os.environ.get('ALLOWED_HOST', 'localhost').split(',') + ['localhost', '127.0.0.1', '[::1]', gethostname(),
                                                                   gethostbyname(gethostname()), ]))
-# ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 SSL_DIR = os.path.abspath(os.path.dirname(__file__)) + os.sep
 
@@ -87,7 +92,7 @@ BIGQUERY_USER_MANIFEST_TIMEOUT = int(os.environ.get('BIGQUERY_USER_MANIFEST_TIME
 # WEBAPP_LOGIN_LOG_NAME         = os.environ.get('WEBAPP_LOGIN_LOG_NAME', 'local_dev_logging')
 # COHORT_CREATION_LOG_NAME      = os.environ.get('COHORT_CREATION_LOG_NAME', 'local_dev_logging')
 
-BASE_URL = os.environ.get('BASE_URL', 'https://isb-cgc-ctb-dev.appspot.com')
+BASE_URL = os.environ.get('BASE_URL', 'https://chernobyltissuebank-dev.cancer.gov')
 
 # BigQuery cohort storage settings
 BIGQUERY_COHORT_DATASET_ID = os.environ.get('BIGQUERY_COHORT_DATASET_ID', 'cohort_dataset')
@@ -678,3 +683,92 @@ MIDDLEWARE.append('django_otp.middleware.OTPMiddleware', )
 # Log the version of our app
 #print(EMAIL_HOST)
 print("[STATUS] Application Version is {}".format(APP_VERSION))
+
+###############################################################################333
+# Cron job settings
+###############################################################################333
+#CONNECTION_NAME = os.environ.get('DATABASE_HOST', '127.0.0.1'),
+#DB_USER = os.environ.get('DATABASE_USER', 'django-user'),
+#DB_PASSWORD = os.environ.get('DATABASE_PASSWORD')
+#DB_NAME = os.environ.get('DATABASE_NAME', 'dev'),
+
+
+# mailgun api
+#EMAIL_SERVICE_API_KEY = getenv("EMAIL_SERVICE_API_KEY")
+#EMAIL_SERVICE_API_URL = getenv("EMAIL_SERVICE_API_URL")
+#NOTIFICATION_EMAIL_FROM_ADDRESS = getenv("NOTIFICATION_EMAIL_FROM_ADDRESS")
+
+#EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+
+# website login url
+CTB_LOGIN_URL = os.environ.get("CTB_LOGIN_URL")
+#SUPPORT_EMAIL = getenv("SUPPORT_EMAIL", "ctb-support@isb-cgc.org")
+#CTB_REVIEWER_EMAIL = getenv("CTB_REVIEWER_EMAIL", "elee@isb-cgc.org")
+
+INSTALLED_APPS += (
+    'django_cron',
+)
+
+CRONJOBS = [
+     ('0 1 * * *', 'ctb.cron.cron_jobs.DailyManagementCronJob'),
+    #'ctb.cron.cron_jobs.DailyManagementCronJob',  # 
+]
+
+#mysql_config_for_cloud_functions = {
+    #'unix_socket': f'/cloudsql/{CONNECTION_NAME}',
+    #'user': DB_USER,
+    #'password': DB_PASSWORD,
+    #'db': DB_NAME,
+    #'charset': 'utf8mb4',
+    #'cursorclass': pymysql.cursors.DictCursor
+#}
+
+
+#def send_ctb_email(to_list, subject, mail_content, bcc_ctb_reviewer=False):
+#    bcc_list = ([CTB_APPLICATION_RECEIVER_EMAIL ] if bcc_ctb_reviewer else [])
+#    return requests.post(
+#        EMAIL_HOST_USER , #EMAIL_SERVICE_API_URL,
+#        auth=("api", EMAIL_HOST_PASSWORD), ##EMAIL_SERVICE_API_KEY
+#        data={"from": f"Chernobyl Tissue Bank no-reply <{NOTIFICATION_EMAIL_FROM_ADDRESS}>",
+#              "to": to_list,
+#              "bcc": bcc_list,
+#              "subject": subject,
+#              "html": mail_content})
+
+
+mysql_config_for_cloud_functions = {
+    'host': os.environ.get('DATABASE_HOST', 'localhost'),
+    'user': os.environ.get('DATABASE_USER', 'django-user'),
+    'password':  os.environ.get('DATABASE_PASSWORD'),
+    'db':os.environ.get('DATABASE_NAME', 'ctb'),
+    'charset': 'utf8mb4',
+    'cursorclass': pymysql.cursors.DictCursor,
+}
+
+
+def send_ctb_email(to_list, subject, mail_content, bcc_ctb_reviewer=False):
+    bcc_list = ([CTB_APPLICATION_RECEIVER_EMAIL ] if bcc_ctb_reviewer else [])
+
+    msg = MIMEMultipart()
+    msg['From'] = f"Chernobyl Tissue Bank no-reply <{SUPPORT_EMAIL}>"
+    msg['To'] = ", ".join(to_list)
+    msg['Bcc'] = ", ".join(bcc_list)  # Bcc recipients are added to the headers to be included in the send
+    msg['Subject'] = subject
+
+    # Attach the HTML content
+    msg.attach(MIMEText(mail_content, 'html'))
+    # Convert the message to a string
+    email_text = msg.as_string()
+
+    # Send the email
+    try:
+        server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
+        server.starttls()
+        server.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD) 
+        server.sendmail(SUPPORT_EMAIL, to_list + bcc_list, email_text)
+        server.close()
+  
+    except Exception as e:
+        print(f"Error: {e}")
+

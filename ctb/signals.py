@@ -41,7 +41,7 @@ def email_confirmed_callback(sender, email_address, **kwargs):
     User account email: {email_address}
     Time of Application: {timestamp}
         
-Please evaluate the account above and inform the ISB-CGC team whether to approve or disapprove it.
+Please evaluate the account above and inform the CTB Web team whether to approve or disapprove it.
 The user will not be able to access the biorepository until the account is approved.
 A disapproved account will be deactivated, and cannot be reused again without an admin's assistance.
         
