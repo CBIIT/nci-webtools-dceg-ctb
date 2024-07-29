@@ -41,6 +41,7 @@ jobs:
         VPC: ${{ secrets.VPC }}
         SUBNET: ${{ secrets.SUBNET }}
         VPC_ACCESS_CONNECTOR: ${{ secrets.VPC_ACCESS_CONNECTOR }}
+        CLOUD_SQL_INSTANCES: ${{ secrets.CLOUD_SQL_INSTANCES }}
 
     - name: Generate .env file
       run: echo "${{ secrets.ENV_FILE }}" > .env
