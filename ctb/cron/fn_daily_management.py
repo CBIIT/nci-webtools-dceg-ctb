@@ -282,12 +282,8 @@ def manage_applications(request):
     with connection.cursor() as cursor:
         select_query = '''
                 SELECT s.id, s.entry_form_path, s.summary_file_path
-                FROM auth_user AS u
-                LEFT JOIN donors_submissions AS s
-                ON u.id = s.owner_id
-                WHERE u.is_active=True 
-                AND u.is_staff=False 
-                AND s.active=True 
+                FROM donors_submissions AS s
+                WHERE s.active=True 
                 AND s.submitted_date <= \'{application_expiration_date_utc_strftime}\''''.format(
             application_expiration_date_utc_strftime=application_expiration_date_utc_strftime())
 
