@@ -60,7 +60,7 @@ def add_password_history(sender, user, **kwargs):
         pwd_history = PasswordHistory.objects.filter(user=user).order_by('-date_added')
         # We only store a limited number of old passwords to prevent re-use; check to see
         # if we're at the limit and if so, delete the oldest and add in this one
-        if len(pwd_history) >= settings.ACCOUNTS_PASSWORD_HISTORY:
+        if len(pwd_history) >= int(settings.ACCOUNTS_PASSWORD_HISTORY):
             pwd_history.last().delete()
         PasswordHistory.objects.update_or_create(user=user, password_hash=user.password)
         logger.info("[STATUS] Added password history entry for user {}".format(user.email))
