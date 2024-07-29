@@ -151,8 +151,19 @@ def approve_account(request):
     is_approved = data.get('is_approved')
     admin_token = data.get('admin_token')
     request_data = {'admin_token': admin_token, 'user_email': user_email, 'is_approved': is_approved}
-    account_approval(request_data)
-    if is_approved:
-        return HttpResponse("The account has been approved.")
+    approval_status = account_approval(request_data)
+    status =approval_status.get('code')
+    msg= approval_status.get('message')
+    print(status,msg)
+
+    if status == 200:
+        if is_approved:
+           return JsonResponse({'message':"The account has been approved"})
+        else:
+           return JsonResponse({'message':"The account has been disapproved"})
     else:
-        return HttpResponse("The account has been disapproved.")
+        return JsonResponse({'status': status, 'message': msg}, status=status)
+
+    
+
+ 
