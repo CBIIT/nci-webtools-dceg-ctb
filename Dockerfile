@@ -29,6 +29,4 @@ ENV PORT=8080
 
 ENV DJANGO_SETTINGS_MODULE=ctb.settings
 
-CMD gunicorn --bind 0.0.0.0:$PORT ctb.wsgi
-
-
+CMD touch .env && cat .env && gunicorn --bind 0.0.0.0:$PORT ctb.wsgi
