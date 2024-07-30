@@ -32,27 +32,12 @@ builtins:
 - appstats: on
 - deferred: on
 
-beta_settings:
-  cloud_sql_instances: nih-nci-cbiit-ctb-qa:us-east4:ctb-v1
-
 network:
   name: $VPC
   subnetwork_name: $SUBNET
 
 #env_variables:
 #  DJANGO_SETTINGS_MODULE: 'ctb.settings'
-
-#skip_files:
-#- python-su.sh
-#- ^(.*/)?#.*#$
-#- ^(.*/)?.*~$
-#- ^(.*/)?.*\.py[co]$
-#- ^(.*/)?.*/RCS/.*$
-#- ^(.*/)?\.(?!env).*$
-#- ^google-cloud-sdk/.*$
-#- ^google_appengine\.zip$
-#- ^(.*/)?.*\.sql$
-#- ^venv/.*$
 
 #handlers:
 #  - url: /favicon\.ico
