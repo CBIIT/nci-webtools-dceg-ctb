@@ -32,8 +32,8 @@ builtins:
 - appstats: on
 - deferred: on
 
-beta_settings:
-  cloud_sql_instances: nih-nci-cbiit-ctb-dev:us-east4:ctb-db
+# beta_settings:
+#   cloud_sql_instances: $CLOUD_SQL_INSTANCES
 
 network:
   name: $VPC
