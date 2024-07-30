@@ -741,7 +741,7 @@ DB_connection =  os.environ.get('DATABASE_HOST', 'localhost')
 DB_SOCKET= f'/{DB_connection}' 
 mysql_config_for_cloud_functions = {
     #'host': os.environ.get('DATABASE_HOST', 'localhost'),
-    'unix_socket:': DB_SOCKET,
+    'unix_socket': DB_SOCKET,
     'user': os.environ.get('DATABASE_USER', 'django-user'),
     'password':  os.environ.get('DATABASE_PASSWORD'),
     'db':os.environ.get('DATABASE_NAME', 'ctb'),
