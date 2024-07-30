@@ -204,7 +204,8 @@ def manage_accounts(request):
         user_last_access = user_item.get("last_login") or user_item.get("date_joined")
         if user_last_access:
             user_last_access_date = user_last_access.date()
-            print('== calling manage_accounts() ==',user_last_access_date, warning_last_login_date_utc(WARNING_EXPIRATION_BEFORE_DAYS))
+            print('== calling manage_accounts() account ==',user_last_access_date, warning_last_login_date_utc(WARNING_EXPIRATION_BEFORE_DAYS), 
+                  warning_last_login_date_utc(SECOND_WARNING_EXPIRATION_BEFORE_DAYS), warning_last_login_date_utc(0))
             if user_last_access_date == warning_last_login_date_utc(WARNING_EXPIRATION_BEFORE_DAYS):
                 warn_inactivation_user_list.append(user_item)
             elif user_last_access_date == warning_last_login_date_utc(SECOND_WARNING_EXPIRATION_BEFORE_DAYS):
@@ -213,7 +214,8 @@ def manage_accounts(request):
                 inactivate_user_list.append(user_item)
         password_expiration = user_item.get("expiration_date")
         if password_expiration:
-            print('== calling manage_accounts() ==',password_expiration,warning_password_expiration_date_utc(PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS))
+            print('== calling manage_accounts() passward ==',password_expiration,warning_password_expiration_date_utc(PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS),warning_password_expiration_date_utc(
+                    SECOND_WARNING_EXPIRATION_BEFORE_DAYS),warning_password_expiration_date_utc(0))
             password_expiration_date = password_expiration.date()
             if password_expiration_date == warning_password_expiration_date_utc(
                     PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS):
