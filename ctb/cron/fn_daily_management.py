@@ -19,7 +19,7 @@ TIER = GCLOUD_PROJECT_ID.replace('nih-nci-cbiit-ctb-', '')
 if TIER == 'prod':
     TIER = ''
 else :
-    TIER = f'[{TIER.capitalize()}] '
+    TIER = f'[{TIER.upper()}] '
 
 def warn_expiration_date_utc(expiration_in_days):
     #return datetime.now(timezone.utc).date()
