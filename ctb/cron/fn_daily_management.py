@@ -214,9 +214,9 @@ def manage_accounts(request):
                 inactivate_user_list.append(user_item)
         password_expiration = user_item.get("expiration_date")
         if password_expiration:
-            print('== calling manage_accounts() passward ==',password_expiration,warning_password_expiration_date_utc(PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS),warning_password_expiration_date_utc(
-                    SECOND_WARNING_EXPIRATION_BEFORE_DAYS),warning_password_expiration_date_utc(0))
             password_expiration_date = password_expiration.date()
+            print('== calling manage_accounts() passward ==',password_expiration_date,warning_password_expiration_date_utc(PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS),warning_password_expiration_date_utc(
+                    SECOND_WARNING_EXPIRATION_BEFORE_DAYS),warning_password_expiration_date_utc(0))
             if password_expiration_date == warning_password_expiration_date_utc(
                     PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS):
                 warn_password_expiration_user_list.append(user_item)
