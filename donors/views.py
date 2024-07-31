@@ -30,9 +30,9 @@ from xhtml2pdf import pisa
 from datetime import datetime
 import logging
 from accounts.decorators import password_change_required
+from ctb.settings import TIER,ACCOUNT_EMAIL_SUBJECT_PREFIX 
 
 logger = logging.getLogger('main_logger')
-
 
 @otp_required
 @password_change_required
@@ -274,14 +274,14 @@ def application_submit(request):
                             content_type=uploaded_blob.content_type)
             # notification email set up
             mail = EmailMessage(
-                '[Chernobyl Tissue Bank] Application Submitted',
+                f'{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Application Submitted',
                 '''
             
             A Chernobyl tissue bank application has been submitted.
             A copy of the application is attached to this email for you to review.
-            Please contact ctb-support@isb-cgc.org if you have any questions or concerns.
+            Please contact ctbWebAdmin@mail.nih.gov if you have any questions or concerns.
             
-            ISB-CGC Team''',
+            CTB Web Team''',
                 settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
                 [settings.CTB_APPLICATION_RECEIVER_EMAIL, user_email])
             # attach a copy of the application in pdf to the email after rewinding result (ByteIO)

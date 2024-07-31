@@ -1,5 +1,8 @@
-.dockerignore
-Dockerfile
-.git
-.hg
-.svn
+__pycache__/
+.circleci/
+.git/
+.github/
+.hg/
+.svn/
+secure_files/
+static_collex/

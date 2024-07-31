@@ -40,7 +40,7 @@ def extended_logout_view(request):
         logger.error("[ERROR] While attempting to log out:")
         logger.exception(e)
         messages.error(request,
-                       "There was an error while attempting to log out - please contact ctb-support@isb-cgc.org")
+                       "There was an error while attempting to log out - please contact ctbWebAdmin@mail.nih.gov")
         return redirect(reverse('user_detail', args=[request.user.id]))
 
     logger.info("[CTB LOGOUT] User {} logged out from the web application at {}".format(user.email,

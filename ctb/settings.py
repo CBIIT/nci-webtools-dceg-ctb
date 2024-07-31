@@ -25,6 +25,11 @@ from pathlib import Path
 import sys
 import dotenv
 from socket import gethostname, gethostbyname
+import requests
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import pymysql
 
 APP_ENGINE_FLEX = 'aef-'
 APP_ENGINE = 'Google App Engine/'
@@ -68,7 +73,7 @@ else:
 ALLOWED_HOSTS = list(
     set(os.environ.get('ALLOWED_HOST', 'localhost').split(',') + ['localhost', '127.0.0.1', '[::1]', gethostname(),
                                                                   gethostbyname(gethostname()), ]))
-# ALLOWED_HOSTS = ['*']
+#ALLOWED_HOSTS = ['localhost','127.0.0.1']
 
 SSL_DIR = os.path.abspath(os.path.dirname(__file__)) + os.sep
 
@@ -87,7 +92,7 @@ BIGQUERY_USER_MANIFEST_TIMEOUT = int(os.environ.get('BIGQUERY_USER_MANIFEST_TIME
 # WEBAPP_LOGIN_LOG_NAME         = os.environ.get('WEBAPP_LOGIN_LOG_NAME', 'local_dev_logging')
 # COHORT_CREATION_LOG_NAME      = os.environ.get('COHORT_CREATION_LOG_NAME', 'local_dev_logging')
 
-BASE_URL = os.environ.get('BASE_URL', 'https://isb-cgc-ctb-dev.appspot.com')
+BASE_URL = os.environ.get('BASE_URL', 'https://chernobyltissuebank-dev.cancer.gov')
 
 # BigQuery cohort storage settings
 BIGQUERY_COHORT_DATASET_ID = os.environ.get('BIGQUERY_COHORT_DATASET_ID', 'cohort_dataset')
@@ -103,6 +108,7 @@ database_config = {
         'PASSWORD': os.environ.get('DATABASE_PASSWORD')
     }
 }
+#print(database_config)
 
 # On the build system, we need to use build-system specific database information
 if os.environ.get('CI', None) is not None:
@@ -352,11 +358,16 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = bool(os.environ.get('ACCOUNT_USERNAME_REQUIRED', 'False') == 'True')
 ACCOUNT_EMAIL_VERIFICATION = os.environ.get('ACCOUNT_EMAIL_VERIFICATION', 'mandatory').lower()
 
-ACCOUNT_EMAIL_SUBJECT_PREFIX = "[Chernobyl Tissue Bank] "
-ACCOUNTS_PASSWORD_EXPIRATION = os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION', 120)  # Max password age in days
-ACCOUNTS_PASSWORD_HISTORY = os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5)  # Max password history kept
+ACCOUNT_EMAIL_SUBJECT_PREFIX = "Chernobyl Tissue Bank:"
+ACCOUNTS_PASSWORD_EXPIRATION = int(os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION', 120) ) # Max password age in days
+ACCOUNTS_PASSWORD_HISTORY = int(os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5))  # Max password history kept
 ACCOUNTS_ALLOWANCES = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
 
+TIER = GCLOUD_PROJECT_ID.replace('nih-nci-cbiit-ctb-', '')
+if TIER == 'prod':
+    TIER = ''
+else :
+    TIER = f'[{TIER.upper()}] '
 ##########################
 #   End django-allauth   #
 ##########################
@@ -447,11 +458,13 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = 'static_collex'
+
+STATIC_ROOT = os.environ.get('STATIC_ROOT', '')
+
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = os.environ.get('STATIC_URL', '/static/')
+STATIC_URL = '/static/'
 
 GCS_STORAGE_URI = os.environ.get('GCS_STORAGE_URI', 'https://storage.googleapis.com/')
 
@@ -460,7 +473,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    os.path.join(BASE_DIR, 'static'),
+    "static/",
 )
 
 # List of finder classes that know how to find static files in
@@ -471,7 +484,7 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
+SECRET_KEY = os.environ.get('SECRET_KEY', '')
 
 SECURE_HSTS_INCLUDE_SUBDOMAINS = (os.environ.get('SECURE_HSTS_INCLUDE_SUBDOMAINS', 'True') == 'True')
 SECURE_HSTS_PRELOAD = (os.environ.get('SECURE_HSTS_PRELOAD', 'True') == 'True')
@@ -487,19 +500,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #########################################
 
 if not IS_DEV:
-    CACHE_IP = os.environ.get("CACHE_IP", "127.0.0.1")
-    CACHE_PORT = os.environ.get("CACHE_PORT", "6379")
-    REDIS_AUTH = os.environ.get("REDIS_AUTH", "")
     CACHES = {
         "default": {
-            "BACKEND": "django_redis.cache.RedisCache",
-            "LOCATION": "redis://{REDIS_IP}:{REDIS_PORT}/0".format(
-                REDIS_IP=CACHE_IP,
-                REDIS_PORT=CACHE_PORT
-            ),
-            "OPTIONS": {
-                "CLIENT_CLASS": "django_redis.client.DefaultClient",
-            }
+            "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+            "LOCATION": "django_cache",
         }
     }
 else:
@@ -533,26 +537,36 @@ REQUEST_LOGGING_ENABLE_COLORIZE = bool(os.environ.get('REQUEST_LOGGING_ENABLE_CO
 #########################################
 #
 # These settings allow use of MailGun as a simple API call
-EMAIL_SERVICE_API_URL = os.environ.get('EMAIL_SERVICE_API_URL', '')
+#EMAIL_SERVICE_API_URL = os.environ.get('EMAIL_SERVICE_API_URL', '')
 
-EMAIL_SERVICE_API_KEY = os.environ.get('EMAIL_SERVICE_API_KEY', '')
+#EMAIL_SERVICE_API_KEY = os.environ.get('EMAIL_SERVICE_API_KEY', '')
 
-NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATION_EMAIL_FROM_ADDRESS', 'noreply@isb-cgc.org')
+#NOTIFICATION_EMAIL_FROM_ADDRESS = os.environ.get('NOTIFICATION_EMAIL_FROM_ADDRESS', 'noreply@isb-cgc.org')
 
 #########################
 # django-anymail        #
 #########################
-#
-# Anymail lets us use the Django mail system with mailgun (eg. in local account email verification)
-ANYMAIL = {
-    "MAILGUN_API_KEY": EMAIL_SERVICE_API_KEY,
-    "MAILGUN_SENDER_DOMAIN": 'isb-cgc.org',  # your Mailgun domain, if needed
-}
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
-DEFAULT_FROM_EMAIL = NOTIFICATION_EMAIL_FROM_ADDRESS
-SERVER_EMAIL = "ctb-support@isb-cgc.org"
 
-SUPPORT_EMAIL = "ctb-support@isb-cgc.org"
+#########################
+# django-smtp-email     #
+#########################
+#EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend",
+#EMAIL_HOST = os.environ.get('EMAIL_SMTP_SERVER', '')
+#EMAIL_PORT = os.environ.get('EMAIL_SERVICE_PORT', '')
+#EMAIL_USE_TLS=True
+#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_SERVICE_PASSWORD', '')
+#EMAIL_HOST_USERNAME = os.environ.get('EMAIL_SERVICE_USERNAME', '')
+
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.environ.get('EMAIL_HOST', '')
+EMAIL_PORT = os.environ.get('EMAIL_PORT', '')
+EMAIL_USE_TLS=True
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+
+DEFAULT_FROM_EMAIL=os.environ.get('DEFAULT_FROM_EMAIL', '')
+NOTIFICATION_EMAIL_FROM_ADDRESS = DEFAULT_FROM_EMAIL
+SUPPORT_EMAIL = os.environ.get('SUPPORT_EMAIL', '')
 
 if os.environ.get('IS_GAE_DEPLOYMENT', 'False') != 'True':
     GOOGLE_APPLICATION_CREDENTIALS = join(dirname(__file__), '../{}{}'.format(SECURE_LOCAL_PATH, os.environ.get(
@@ -579,9 +593,9 @@ if (IS_DEV and CONNECTION_IS_LOCAL) or IS_CIRCLE:
     INSTALLED_APPS += (
         'finalware',)
 
-    SITE_SUPERUSER_USERNAME = os.environ.get('SUPERUSER_USERNAME', '')
+    SITE_SUPERUSER_USERNAME = os.environ.get('SITE_SUPERUSER_USERNAME', '')
     SITE_SUPERUSER_EMAIL = ''
-    SITE_SUPERUSER_PASSWORD = os.environ.get('SUPERUSER_PASSWORD')
+    SITE_SUPERUSER_PASSWORD = os.environ.get('SITE_SUPERUSER_PASSWORD')
 #
 ############################
 #   End django-finalware   #
@@ -592,7 +606,7 @@ CONN_MAX_AGE = 60
 ############################
 #   METRICS SETTINGS
 ############################
-SITE_GOOGLE_ANALYTICS = bool(os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', None) is not None)
+SITE_GOOGLE_ANALYTICS = bool(os.environ.get('SITE_GOOGLE_ANALYTICS', None) is not None)
 SITE_GOOGLE_ANALYTICS_TRACKING_ID = os.environ.get('SITE_GOOGLE_ANALYTICS_TRACKING_ID', '')
 GOOGLE_SITE_VERIFICATION_CODE = os.environ.get('GOOGLE_SITE_VERIFICATION_CODE', '')
 ADOBE_DTM_PATH = os.environ.get('ADOBE_DTM_PATH', None)
@@ -638,7 +652,7 @@ BLANK_TISSUE_FILTER_CASE_COUNT = {
 }
 
 GCP_APP_DOC_BUCKET = os.environ.get('GCP_APP_DOC_BUCKET', 'ctb-dev-app-doc-files')
-CTB_APPLICATION_RECEIVER_EMAIL = os.environ.get('CTB_APPLICATION_RECEIVER_EMAIL', 'ctb-support@isb-cgc.org')
+CTB_APPLICATION_RECEIVER_EMAIL = os.environ.get('CTB_APPLICATION_RECEIVER_EMAIL', 'ctbWebAdmin@mail.nih.gov')
 GOOGLE_SE_ID = os.environ.get('GOOGLE_SE_ID', None)
 # print(GOOGLE_SE_ID)
 if DEBUG and DEBUG_TOOLBAR:
@@ -659,7 +673,7 @@ if DEBUG and DEBUG_TOOLBAR:
         'debug_toolbar.panels.redirects.RedirectsPanel',
     ]
     SHOW_TOOLBAR_CALLBACK = True
-    INTERNAL_IPS = (os.environ.get('INTERNAL_IP', ''),)
+    INTERNAL_IP = (os.environ.get('INTERNAL_IP', ''),)
 
 # AxesMiddleware should be the last middleware in the MIDDLEWARE list.
 # It only formats user lockout messages and renders Axes lockout responses
@@ -672,4 +686,97 @@ MIDDLEWARE.append('django_otp.middleware.OTPMiddleware', )
 # REDIRECT_FIELD_NAME = 'bogus'
 
 # Log the version of our app
+#print(EMAIL_HOST)
 print("[STATUS] Application Version is {}".format(APP_VERSION))
+
+###############################################################################333
+# Cron job settings
+###############################################################################333
+#CONNECTION_NAME = os.environ.get('DATABASE_HOST', '127.0.0.1'),
+#DB_USER = os.environ.get('DATABASE_USER', 'django-user'),
+#DB_PASSWORD = os.environ.get('DATABASE_PASSWORD')
+#DB_NAME = os.environ.get('DATABASE_NAME', 'dev'),
+
+
+# mailgun api
+#EMAIL_SERVICE_API_KEY = getenv("EMAIL_SERVICE_API_KEY")
+#EMAIL_SERVICE_API_URL = getenv("EMAIL_SERVICE_API_URL")
+#NOTIFICATION_EMAIL_FROM_ADDRESS = getenv("NOTIFICATION_EMAIL_FROM_ADDRESS")
+
+#EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
+#EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
+
+# website login url
+CTB_LOGIN_URL = os.environ.get("CTB_LOGIN_URL")
+#SUPPORT_EMAIL = getenv("SUPPORT_EMAIL", "ctb-support@isb-cgc.org")
+#CTB_REVIEWER_EMAIL = getenv("CTB_REVIEWER_EMAIL", "elee@isb-cgc.org")
+
+INSTALLED_APPS += (
+    'django_cron',
+)
+
+CRONJOBS = [
+     ('0 1 * * *', 'ctb.cron.cron_jobs.DailyManagementCronJob'),
+    #'ctb.cron.cron_jobs.DailyManagementCronJob',  # 
+]
+
+#mysql_config_for_cloud_functions = {
+    #'unix_socket': f'/cloudsql/{CONNECTION_NAME}',
+    #'user': DB_USER,
+    #'password': DB_PASSWORD,
+    #'db': DB_NAME,
+    #'charset': 'utf8mb4',
+    #'cursorclass': pymysql.cursors.DictCursor
+#}
+
+
+#def send_ctb_email(to_list, subject, mail_content, bcc_ctb_reviewer=False):
+#    bcc_list = ([CTB_APPLICATION_RECEIVER_EMAIL ] if bcc_ctb_reviewer else [])
+#    return requests.post(
+#        EMAIL_HOST_USER , #EMAIL_SERVICE_API_URL,
+#        auth=("api", EMAIL_HOST_PASSWORD), ##EMAIL_SERVICE_API_KEY
+#        data={"from": f"Chernobyl Tissue Bank no-reply <{NOTIFICATION_EMAIL_FROM_ADDRESS}>",
+#              "to": to_list,
+#              "bcc": bcc_list,
+#              "subject": subject,
+#              "html": mail_content})
+
+
+DB_connection =  os.environ.get('DATABASE_HOST', 'localhost')
+DB_SOCKET= f'/{DB_connection}' 
+mysql_config_for_cloud_functions = {
+    #'host': os.environ.get('DATABASE_HOST', 'localhost'),
+    'unix_socket': DB_SOCKET,
+    'user': os.environ.get('DATABASE_USER', 'django-user'),
+    'password':  os.environ.get('DATABASE_PASSWORD'),
+    'db':os.environ.get('DATABASE_NAME', 'ctb'),
+    'charset': 'utf8mb4',
+    'cursorclass': pymysql.cursors.DictCursor,
+}
+
+
+def send_ctb_email(to_list, subject, mail_content, bcc_ctb_reviewer=False):
+    bcc_list = ([CTB_APPLICATION_RECEIVER_EMAIL ] if bcc_ctb_reviewer else [])
+
+    msg = MIMEMultipart()
+    msg['From'] = f"Chernobyl Tissue Bank no-reply <{SUPPORT_EMAIL}>"
+    msg['To'] = ", ".join(to_list)
+    msg['Bcc'] = ", ".join(bcc_list)  # Bcc recipients are added to the headers to be included in the send
+    msg['Subject'] = subject
+
+    # Attach the HTML content
+    msg.attach(MIMEText(mail_content, 'html'))
+    # Convert the message to a string
+    email_text = msg.as_string()
+
+    # Send the email
+    try:
+        server = smtplib.SMTP(EMAIL_HOST, EMAIL_PORT)
+        server.starttls()
+        server.login(EMAIL_HOST_USER, EMAIL_HOST_PASSWORD) 
+        server.sendmail(SUPPORT_EMAIL, to_list + bcc_list, email_text)
+        server.close()
+  
+    except Exception as e:
+        print(f"Error: {e}")
+

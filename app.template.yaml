@@ -1,0 +1,23 @@
+runtime: custom
+env: flex
+api_version: 1
+
+automatic_scaling:
+  min_num_instances: 1
+  max_num_instances: 1
+  
+resources:
+  cpu: 1
+  memory_gb: 3.5
+  disk_size_gb: 10
+
+builtins:
+- appstats: on
+- deferred: on
+
+network:
+  name: $VPC
+  subnetwork_name: $SUBNET
+
+beta_settings:
+  cloud_sql_instances: $CLOUD_SQL_INSTANCES

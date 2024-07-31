@@ -112,6 +112,7 @@ static/js/visualizations/mock_histogram_data.js
 # ignore Windows-related things
 .npmignore
 
+
 IDC-API
 IDC-API/
 
@@ -122,3 +123,9 @@ secure_files
 secure_files/
 
 app.yaml
+app*.yaml
+
+venv
+venv/
+
+
