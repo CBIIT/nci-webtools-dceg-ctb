@@ -38,6 +38,7 @@ Werkzeug==2.0.3
 functions-framework==3.8.0
 PyMySQL==1.0.2
 python-bidi==0.4.2
+whitenoise==6.7.0
 
 # If you are seeing an error about django-debug-toolbar not being installed,
 # the problem is almost certainly that your developer .env wasn't found

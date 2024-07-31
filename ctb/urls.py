@@ -15,21 +15,16 @@
 ###
 
 from __future__ import absolute_import
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path
 from two_factor.urls import urlpatterns as tf_urls
 from django.conf.urls import include, url
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-from django.urls import re_path
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
-
-from django.urls import path
-from django.contrib import admin
-from django.conf import settings
-from . import views
 
 admin.autodiscover()
 
@@ -73,7 +68,8 @@ urlpatterns = [
     url(r'^sitemap/', views.sitemap, name='sitemap'),
     # Approval
     path('approval/', views.approve_account),
-] + staticfiles_urlpatterns("/static/")
+]
+
 
 if settings.DEBUG and settings.DEBUG_TOOLBAR:
     import debug_toolbar
