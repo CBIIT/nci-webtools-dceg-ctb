@@ -30,9 +30,9 @@ from xhtml2pdf import pisa
 from datetime import datetime
 import logging
 from accounts.decorators import password_change_required
+from ctb.settings import TIER,ACCOUNT_EMAIL_SUBJECT_PREFIX 
 
 logger = logging.getLogger('main_logger')
-
 
 @otp_required
 @password_change_required
@@ -274,7 +274,7 @@ def application_submit(request):
                             content_type=uploaded_blob.content_type)
             # notification email set up
             mail = EmailMessage(
-                '[Chernobyl Tissue Bank] Application Submitted',
+                f'{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Application Submitted',
                 '''
             
             A Chernobyl tissue bank application has been submitted.

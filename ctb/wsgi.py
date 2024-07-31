@@ -15,6 +15,6 @@ from django.core.wsgi import get_wsgi_application
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ctb.settings')
 
-schedule_task(60*20, daily_task)
+schedule_task(60*10, daily_task)
 
 application = get_wsgi_application()

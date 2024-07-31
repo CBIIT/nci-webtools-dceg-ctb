@@ -2,7 +2,7 @@ import pymysql
 from os import getenv
 from datetime import datetime, timezone, timedelta
 from google.cloud import storage
-from ..settings import CTB_LOGIN_URL, SUPPORT_EMAIL, CTB_APPLICATION_RECEIVER_EMAIL, mysql_config_for_cloud_functions, send_ctb_email
+from ..settings import TIER,ACCOUNT_EMAIL_SUBJECT_PREFIX, CTB_LOGIN_URL, SUPPORT_EMAIL, CTB_APPLICATION_RECEIVER_EMAIL, mysql_config_for_cloud_functions, send_ctb_email
 
 
 # expirations and warning days
@@ -13,13 +13,7 @@ PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS = int(getenv("PASSWORD_WARNING_EXPIRATIO
 SECOND_PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS = int(getenv("SECOND_PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS", '2'))
 APPLICATION_EXPIRATION_DAYS = int(getenv("APPLICATION_EXPIRATION_DAYS", '365'))
 GCP_APP_DOC_BUCKET = getenv("GCP_APP_DOC_BUCKET", 'nci-cbiit-ctb-dev-app-doc-files')
-GCLOUD_PROJECT_ID= getenv("GCLOUD_PROJECT_ID", "dev")
 
-TIER = GCLOUD_PROJECT_ID.replace('nih-nci-cbiit-ctb-', '')
-if TIER == 'prod':
-    TIER = ''
-else :
-    TIER = f'[{TIER.upper()}] '
 
 def warn_expiration_date_utc(expiration_in_days):
     #return datetime.now(timezone.utc).date()
@@ -86,7 +80,7 @@ def send_notification_email(user_email, email_type):
         else:
             expiration_date = warn_expiration_date_utc(SECOND_WARNING_EXPIRATION_BEFORE_DAYS)
             warning_period = SECOND_WARNING_EXPIRATION_BEFORE_DAYS
-        subject = f"{TIER} Chernobyl Tissue Bank Your account will become deactivated in {warning_period} days"
+        subject = f"{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Your account will become deactivated in {warning_period} days"
         mail_content = '''
             Dear {user_email},<br><br>
             Your CTB account shows that you had no activity for a long time, and will expire on {expiration_date} ({warning_period} days from today).<br>
@@ -104,7 +98,7 @@ def send_notification_email(user_email, email_type):
         print(
             f"[STATUS] Sending a notification to {user_email} of the account deactivation in {warning_period} days.")
     elif email_type == DEACTIVE_ACCOUNT_NOTIFICATION:
-        subject = f"{TIER} Chernobyl Tissue Bank Your account has been deactivated"
+        subject = f"{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Your account has been deactivated"
         mail_content = '''
             Dear {user_email},<br><br>
             Your CTB account has been deactivated due to {max_inactive_period} days of inactivity.<br>
@@ -122,7 +116,7 @@ def send_notification_email(user_email, email_type):
         else:
             expiration_date = warning_password_expiration_date_utc(SECOND_WARNING_EXPIRATION_BEFORE_DAYS)
             warning_period = SECOND_PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS
-        subject = f"{TIER} Chernobyl Tissue Bank Your password is expiring in {warning_period} days"
+        subject = f"{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Your password is expiring in {warning_period} days"
 
         mail_content = '''
             Dear {user_email},<br><br>
@@ -139,7 +133,7 @@ def send_notification_email(user_email, email_type):
         print(
             f"[STATUS] Sending a notification to {user_email} of the password expiration in {warning_period} days.")
     else:  # PASSWORD_EXPIRATION_NOTIFICATION
-        subject = f"{TIER} Chernobyl Tissue Bank Your account password has expired."
+        subject = f"{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Your account password has expired."
         mail_content = '''
             Dear {user_email},<br><br>
             Your CTB account password has been expired.<br>
@@ -265,7 +259,7 @@ def manage_accounts(request):
         is_plural = "s" if pending_account_count > 1 else ""
         it_or_them = "them" if pending_account_count > 1 else "it"
         html_pending_user_list = "<ul><li>" + "</li><li>".join(pending_account_list) + "</li></ul>"
-        subject = f"{TIER} Chernobyl Tissue Bank Approval pending account{is_plural}"
+        subject = f"{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Approval pending account{is_plural}"
         mail_content = f'''
         This is an email to inform you that there {is_or_are} {pending_account_count} new CTB account{is_plural}
         which {is_or_are} in pending status:<br/><br/>
@@ -292,7 +286,8 @@ def manage_applications(request):
                 WHERE s.active=True 
                 AND s.submitted_date <= \'{application_expiration_date_utc_strftime}\''''.format(
             application_expiration_date_utc_strftime=application_expiration_date_utc_strftime())
-
+        
+        print(f"{TIER}[STATUS] Selecting expired applications from the DB: {select_query}")
         cursor.execute(select_query)
         submission_list = cursor.fetchall()
         for submission_item in submission_list:
@@ -317,6 +312,8 @@ def manage_applications(request):
                     SET active = 0
                     WHERE id IN ({submission_id_list_str})'''.format(
                 submission_id_list_str=submission_id_list_str)
+            
+            print(f"update submition: {update_statement}")
             cursor.execute(update_statement)
             connection.commit()
             print(
