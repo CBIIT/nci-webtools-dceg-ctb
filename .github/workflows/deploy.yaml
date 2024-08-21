@@ -46,5 +46,5 @@ jobs:
       run: echo "${{ secrets.ENV_FILE }}" > .env
 
     - id: "deploy"
-      name: "Deploy App"
+      name: "Deploy App - ${{ github.event.inputs.env }}"
       run: gcloud app deploy app.yaml --project ${{ secrets.PROJECT_ID }} --promote --verbosity debug --service-account=${{ secrets.APP_SERVICE_ACCOUNT }}
