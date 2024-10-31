@@ -14,7 +14,7 @@ class RedirectMiddleware:
             "127.0.0.1",
             "[::1]",
             gethostname(),
-            gethostbyname(gethostname),
+            gethostbyname(gethostname()),
         }
 
     def __call__(self, request):
