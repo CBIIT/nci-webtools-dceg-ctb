@@ -179,8 +179,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'ctb.redirect_middleware.RedirectMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'ctb.redirect_middleware.RedirectMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'ctb.checkreqsize_middleware.CheckReqSize',
@@ -491,6 +491,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '')
 # SECURE_HSTS_PRELOAD = (os.environ.get('SECURE_HSTS_PRELOAD', 'True') == 'True')
 #SECURE_HSTS_SECONDS = int(os.environ.get('SECURE_HSTS_SECONDS', '31556926'))
 SECURE_HSTS_SECONDS = 31556926
+SECURE_HSTS_SECONDS = 31536000
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
