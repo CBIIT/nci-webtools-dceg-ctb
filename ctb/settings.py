@@ -179,6 +179,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'ctb.redirect_middleware.RedirectMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
