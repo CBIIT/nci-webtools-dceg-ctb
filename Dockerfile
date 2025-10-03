@@ -11,6 +11,10 @@ RUN dnf -y update && \
     python3-pip \
     python3-setuptools \
     python3-wheel \
+    cairo-devel \
+    cairo-gobject-devel \
+    gobject-introspection-devel \
+    pkg-config \
     && dnf clean all
 
 RUN mkdir /app
@@ -19,6 +23,7 @@ WORKDIR /app
 
 COPY requirements.txt .
 
+RUN python3 -m pip install --upgrade pip setuptools wheel
 RUN python3 -m pip install -r requirements.txt
 
 COPY . .
