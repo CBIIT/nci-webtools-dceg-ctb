@@ -250,6 +250,12 @@ main a:hover {
     margin-top: 75px;
 }
 
+/* Darken muted text on the Search Samples page so it meets WCAG AA 4.5:1
+   contrast (Bootstrap's default .text-muted #6c757d sits at the threshold). */
+.biosample_tab .text-muted {
+    color: #616970 !important;
+}
+
 .hover-grey-button {
     background-color: transparent;
     border-width: 0;
