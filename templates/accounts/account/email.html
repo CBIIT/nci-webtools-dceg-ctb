@@ -12,7 +12,7 @@
                 <div class="panel panel-default">
                     <form action="/accounts/email/" class="email_list" method="post">
                     {% csrf_token %}
-                        <div class="panel-heading"><h3>{% trans "E-mail Account" %}</h3></div>
+                        <div class="panel-heading"><h1 class="fs-5">{% trans "E-mail Account" %}</h1></div>
                         <div class="panel-body">
                             {% if user.emailaddress_set.all %}
                                 <p>{% trans 'The following e-mail address is associated with your account:' %}</p>
