@@ -62,8 +62,10 @@
                         <button class="nav-link btn me-3 collapsed" type="button" id="SearchBarCollapse2"
                            data-bs-toggle="collapse"
                            data-bs-target=".ctb-search-bar-collapsible"
+                           aria-controls="ctb-search-bar ctb-search-bar2"
+                           aria-expanded="false"
                            aria-label="Toggle search bar">
-                            <i class="fas fa-search"></i>
+                            <i class="fas fa-search" aria-hidden="true"></i>
                         </button>
                     </li>
                     {% if user.is_authenticated %}
