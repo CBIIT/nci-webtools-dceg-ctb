@@ -11,7 +11,7 @@
         <div class="row justify-content-center py-5">
             <div class="col-lg-4">
                 <div class="card">
-                    <div class="card-header"><h4>{% trans "Confirm E-mail Address" %}</h4></div>
+                    <div class="card-header"><h1 class="fs-4">{% trans "Confirm E-mail Address" %}</h1></div>
                     <div class="card-body p-5">
                         {% user_display confirmation.email_address.user as user_display %}
                         <p>{% blocktrans with confirmation.email_address.email as email %}You have confirmed that
@@ -21,7 +21,7 @@
                         <div class="mt-3"><b>
                             Please Note: Your account application will need to be evaluated before an account can be approved. You will get an email about approval.
                             If you have any questions, please email us at <a
-                                    href='mailto:ctbWebAdmin@mail.nih.gov'>ctbWebAdmin@mail.nih.gov.</a></b></div>
+                                    href='mailto:ctbWebAdmin@mail.nih.gov' class='text-decoration-underline'>ctbWebAdmin@mail.nih.gov.</a></b></div>
                     </div>
                 </div>
             </div>

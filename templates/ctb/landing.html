@@ -57,24 +57,24 @@
                     <div class="row">
                         <div class="col stat-card">
                             <a href="{% url 'about' %}" class="fill-div">
-                                <h5 class="fw-bold aqua-green-text"><i class="fas fa-radiation pb-2"></i><br/>About</h5>
+                                <h2 class="fs-5 fw-bold aqua-green-text"><i class="fas fa-radiation pb-2"></i><br/>About</h2>
                                 <div class="mt-3">An introduction to the CTB project</div>
                             </a>
                         </div>
                         <div class="col stat-card">
                             <a href="{% url 'research' %}" class="fill-div">
-                                <h5 class="fw-bold orange-text"><i class="fas fa-atom pb-2"></i><br>Research and Data
+                                <h2 class="fs-5 fw-bold orange-text"><i class="fas fa-atom pb-2"></i><br>Research and Data
                                     Access
-                                </h5>
+                                </h2>
                                 <div class="mt-3">Information to research into the Chernobyl accident</div>
                             </a>
                         </div>
                         <div class="col stat-card">
                             <a href="{% if user.is_verified %} {% url 'dashboard' %} {% else %} {% url 'two_factor:login' %}" {% endif %}
                                class="fill-div">
-                                <h5 class="fw-bold dark-aqua-text"><i class="fas fa-search pb-2"></i><br/>Search the
+                                <h2 class="fs-5 fw-bold dark-aqua-text"><i class="fas fa-search pb-2"></i><br/>Search the
                                     Biorepository
-                                </h5>
+                                </h2>
                                 <div class="mt-3">Find your biological samples for your study</div>
                             </a>
                         </div>
@@ -109,24 +109,24 @@
             <div class="col-10 mx-auto py-3">
                 <div class="stat-card mb-4">
                     <a href="{% url 'about' %}" class="fill-div">
-                        <h5 class="fw-bold aqua-green-text"><i class="fas fa-radiation pb-2"></i> About</h5>
+                        <h2 class="fs-5 fw-bold aqua-green-text"><i class="fas fa-radiation pb-2"></i> About</h2>
                         <div class="mt-3">An introduction to the CTB project</div>
                     </a>
                 </div>
                 <div class="stat-card mb-4">
                     <a href="{% url 'research' %}" class="fill-div">
-                        <h5 class="fw-bold orange-text"><i class="fas fa-atom pb-2"></i> Research & Data
+                        <h2 class="fs-5 fw-bold orange-text"><i class="fas fa-atom pb-2"></i> Research & Data
                             Access
-                        </h5>
+                        </h2>
                         <div class="mt-3">Information to research into the Chernobyl accident</div>
                     </a>
                 </div>
                 <div class="stat-card mb-4">
                     <a href="{% if user.is_verified %} {% url 'dashboard' %} {% else %} {% url 'two_factor:login' %}" {% endif %}
                        class="fill-div">
-                        <h5 class="fw-bold dark-aqua-text"><i class="fas fa-search pb-2"></i> Search the
+                        <h2 class="fs-5 fw-bold dark-aqua-text"><i class="fas fa-search pb-2"></i> Search the
                             Biorepository
-                        </h5>
+                        </h2>
                         <div class="mt-3">Find your biological samples for your study</div>
                     </a>
                 </div>

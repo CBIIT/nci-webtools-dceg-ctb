@@ -250,6 +250,24 @@ main a:hover {
     margin-top: 75px;
 }
 
+/* Darken muted text on the Search Samples page so it meets WCAG AA 4.5:1
+   contrast (Bootstrap's default .text-muted #6c757d sits at the threshold). */
+.biosample_tab .text-muted {
+    color: #616970 !important;
+}
+
+/* Darken Reset buttons so text/border meet WCAG AA 4.5:1 contrast on
+   light card backgrounds (#6c757d = 4.37:1 fail → #5a6268 = 5.9:1 pass). */
+.btn-reset.btn-outline-secondary {
+    color: #5a6268;
+    border-color: #5a6268;
+}
+.btn-reset.btn-outline-secondary:hover {
+    color: #fff;
+    background-color: #5a6268;
+    border-color: #5a6268;
+}
+
 .hover-grey-button {
     background-color: transparent;
     border-width: 0;
@@ -354,7 +372,7 @@ td.date-col {
 .clinical-step {
     position: relative;
     min-height: 1em;
-    color: #868686;
+    color: #696969;
 }
 
 .title {
@@ -498,5 +516,12 @@ table.loading tbody:after {
 
 /*overwrite bootstrap text color*/
 .text-danger{
+    color: #bb0e3e !important;
+}
+
+/* overwrite bootstrap invalid form-check-label color to meet 4.5:1 contrast */
+.was-validated .form-check-input:invalid ~ .form-check-label,
+.form-check-input.is-invalid ~ .form-check-label,
+.form-check-input:invalid ~ .form-check-label {
     color: #bb0e3e !important;
 }

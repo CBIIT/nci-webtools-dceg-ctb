@@ -17,7 +17,7 @@
 {% block content %}
     <div class="container py-3">
         <div class="row">
-            <div class="col-lg-4"><div class="fw-bold fs-5">Search Tissue Samples</div></div>
+            <div class="col-lg-4"><h1 class="fw-bold fs-5 mb-0">Search Tissue Samples</h1></div>
             <div class="col-lg-8">
                 <div role="group" aria-label="action buttons" class="gap-1 mb-2 justify-content-end d-lg-flex d-none">
                     <button id="search-save-btn" type="button" class="btn btn-primary"
@@ -106,11 +106,11 @@
                                             <label class="form-check-label" for="diag-nodule">Nodule</label>
                                         </div>
                                         <div class="fw-light text-muted small">
-                                            <i class="fa-solid fa-circle-question info-color" data-bs-toggle="tooltip"
+                                            <i class="fa-solid fa-circle-question info-color" aria-hidden="true" data-bs-toggle="tooltip"
                                                data-bs-html="true"
                                                data-bs-placement="right"
                                                title="<div class='text-start'> There are small numbers of other tumors that are categorised by the Pathology Panel in the following way:<br><ol><li>Well differentiated carcinoma not otherwise specified<li>Poorly differentiated carcinoma<li>Two synchronous tumors sampled from the same patient<li>Other</ol>If you wish to request any of these please email us at <a href='mailto:ctbWebAdmin@mail.nih.gov'>ctbWebAdmin@mail.nih.gov</a>.</div>">
-                                            </i>
+                                            </i><span class="visually-hidden"> - Other special tumor types include well differentiated, poorly differentiated, synchronous, and other carcinomas. Contact ctbWebAdmin@mail.nih.gov to request these.</span>
                                             Other special tumors
                                         </div>
                                     </div>
@@ -152,10 +152,10 @@
                                 </div>
                                 <div id="sample-origin-card" class="card mb-2">
                                     <div class="card-header">Sample Origin
-                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                        <i class="fa-solid fa-circle-question info-color small" aria-hidden="true" data-bs-toggle="tooltip"
                                            data-bs-html="true"
                                            data-bs-placement="right"
-                                           title="<div class='text-start'> Only DNA and serum are available from blood samples</div>"></i>
+                                           title="<div class='text-start'> Only DNA and serum are available from blood samples</div>"></i><span class="visually-hidden"> - Only DNA and serum are available from blood samples</span>
                                         <button type="button"
                                                 class="btn btn-reset btn-sm btn-outline-secondary float-end"
                                                 data-target="#sample-origin-card">Reset
@@ -192,11 +192,11 @@
                                 </div>
                                 <div id="dosemetry-card" class="card my-2">
                                     <div class="card-header">Dosemetry
-                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                        <i class="fa-solid fa-circle-question info-color small" aria-hidden="true" data-bs-toggle="tooltip"
                                            data-bs-html="true"
                                            data-bs-placement="right"
                                            title="<div class='text-start'>The donors in the CTB are currently operated in Ukraine. For patients operated in Ukraine, the thyroid dose is calculated by Professor Ilya Likhtarev's group at the Institute of Radiation Protection in Kiev. Direct measurement of thyroid dose was carried out in only a few donors in Ukraine. The majority of the dose estimation is therefore made retrospectively. The thyroid dose given in this portal is the arithmetic mean and is in mGy.</div>">
-                                        </i>
+                                        </i><span class="visually-hidden"> - Dosimetry: thyroid dose is calculated retrospectively for most donors; the value shown is the arithmetic mean in mGy.</span>
                                         <button type="button"
                                                 class="btn btn-reset btn-sm btn-outline-secondary float-end"
                                                 data-target="#dosemetry-card">Reset
@@ -231,10 +231,10 @@
                             <div class="col-lg">
                                 <div id="residency-card" class="card mb-2">
                                     <div class="card-header">Patient Residency
-                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                        <i class="fa-solid fa-circle-question info-color small" aria-hidden="true" data-bs-toggle="tooltip"
                                            data-bs-html="true"
                                            data-bs-placement="right"
-                                           title="<div class='text-start'>Residency refers to residence at the time of the accident.<br>Exposed oblasts include:<ul><li>Kaluga</li><li>Tula</li><li>Orel</li><li>Bryansk</li><li>Kiev</li><li>Rovno</li><li>Chercassy</li><li>Zhytomyr</li><li>Chernigov</li><li>Sumy</li><li>Pripyat</li></ul></div>"></i>
+                                           title="<div class='text-start'>Residency refers to residence at the time of the accident.<br>Exposed oblasts include:<ul><li>Kaluga</li><li>Tula</li><li>Orel</li><li>Bryansk</li><li>Kiev</li><li>Rovno</li><li>Chercassy</li><li>Zhytomyr</li><li>Chernigov</li><li>Sumy</li><li>Pripyat</li></ul></div>"></i><span class="visually-hidden"> - Residency at time of accident. Exposed oblasts include: Kaluga, Tula, Orel, Bryansk, Kiev, Rovno, Chercassy, Zhytomyr, Chernigov, Sumy, Pripyat.</span>
                                         <button type="button"
                                                 class="btn btn-reset btn-sm btn-outline-secondary float-end"
                                                 data-target="#residency-card">Reset
@@ -266,10 +266,10 @@
                                 </div>
                                 <div id="dob-card" class="card my-2">
                                     <div class="card-header">Date of Birth
-                                        <i class="fa-solid fa-circle-question info-color small" data-bs-toggle="tooltip"
+                                        <i class="fa-solid fa-circle-question info-color small" aria-hidden="true" data-bs-toggle="tooltip"
                                            data-bs-html="true"
                                            data-bs-placement="right"
-                                           title="<div class='text-start'>Tissue and blood samples in the CTB have been collected from patients classified by their date of birth into one of three groups: <br><br>Those born between 04/26/67 and 04/26/86, i.e. aged 19 years or younger at the time of the accident on 26th April 1986 <br>Those in utero at the time of the accident<br><br>Those born after 1st January 1987 by which time the radioiodine emitted during accident had decayed to background levels.<br><br>The majority of cases are from Group (i) with much smaller numbers in Groups (ii) and (iii).</div>"></i>
+                                           title="<div class='text-start'>Tissue and blood samples in the CTB have been collected from patients classified by their date of birth into one of three groups: <br><br>Those born between 04/26/67 and 04/26/86, i.e. aged 19 years or younger at the time of the accident on 26th April 1986 <br>Those in utero at the time of the accident<br><br>Those born after 1st January 1987 by which time the radioiodine emitted during accident had decayed to background levels.<br><br>The majority of cases are from Group (i) with much smaller numbers in Groups (ii) and (iii).</div>"></i><span class="visually-hidden"> - Patients are grouped by date of birth: born 04/26/67–04/26/86 (aged under 19 at accident), in utero at time of accident, or born after 01/01/1987.</span>
 
                                         <button type="button"
                                                 class="btn btn-reset btn-sm btn-outline-secondary float-end"
@@ -336,12 +336,12 @@
                                     <div class="card-body">
                                         <div>
                                             <div for="bslider-0" class="form-label">Age at First Operation (Range in
-                                                Years) <i class="fa-solid fa-circle-question info-color"
+                                                Years) <i class="fa-solid fa-circle-question info-color" aria-hidden="true"
                                                           data-bs-toggle="tooltip"
                                                           data-bs-html="true"
                                                           data-bs-placement="right"
                                                           title="<div class='text-start'>The selector gives the current maximum age of cases in the CTB cohort (aged under 19 at the time of the accident + time since the accident). By this age the incidence of thyroid cancers is increasing irrespective of any contributing effect of radiation. Samples are becoming available for this older cohort, who were in their late teens at the time of the accident, but applicants should be aware that any effects of radiation will be diluted by the increasing incidence of spontaneous thyroid cancers in this particular age group.</div>">
-                                                </i>:
+                                                </i><span class="visually-hidden"> - This maximum age reflects the CTB cohort (under 19 at accident + years since). Radiation effects may be diluted by spontaneous thyroid cancer incidence in this older age group.</span>:
                                             </div>
                                         </div>
                                         <div class="row">
@@ -368,12 +368,12 @@
                                         </div>
                                         <div>
                                             <div for="bslider-0" class="form-label">Age at Exposure (Range in
-                                                Years) <i class="fa-solid fa-circle-question info-color"
+                                                Years) <i class="fa-solid fa-circle-question info-color" aria-hidden="true"
                                                           data-bs-toggle="tooltip"
                                                           data-bs-html="true"
                                                           data-bs-placement="right"
                                                           title="<div class='text-start'>Age at exposure for cases in Group: Researchers wishing to study the cohort that were in utero at the time of the accident should contact the secretariat for more information about the gestational age of the cases in the CTB.</div>">
-                                                </i>:
+                                                </i><span class="visually-hidden"> - Age at exposure for in-utero cases. Contact the secretariat for more information about gestational age.</span>:
                                             </div>
                                         </div>
                                         <div class="row">
@@ -416,7 +416,7 @@
                     </div>
                     <div class="border rounded p-2 my-2">
                         <div class="fw-bold">Tissue Origin</div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" tabindex="0">
                             <table id="tissue-table" class="table table-striped tissue-samples-table">
                                 <thead>
                                 <tr>
@@ -496,7 +496,7 @@
                     </div>
                     <div class="border rounded p-2 my-2">
                         <div class="fw-bold">Blood Origin</div>
-                        <div class="table-responsive">
+                        <div class="table-responsive" tabindex="0">
                             <table id="blood-table" class="table table-striped tissue-samples-table">
                                 <thead>
                                 <tr>
