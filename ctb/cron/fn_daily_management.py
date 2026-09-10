@@ -72,7 +72,7 @@ PASSWORD_EXPIRATION_NOTIFICATION = 6
 
 
 def send_notification_email(user_email, email_type):
-    print(f"[STATUS] Sending a notification email to {user_email} of type {email_type}")
+    print("[STATUS] Sending a notification email")
     if email_type == DEACTIVE_ACCOUNT_WARNING or email_type == SECOND_DEACTIVE_ACCOUNT_WARNING:
         if email_type == DEACTIVE_ACCOUNT_WARNING:
             expiration_date = warn_expiration_date_utc(WARNING_EXPIRATION_BEFORE_DAYS)
@@ -95,8 +95,7 @@ def send_notification_email(user_email, email_type):
             warning_period=warning_period,
             max_inactive_period=MAX_INACTIVE_PERIOD_DAYS,
             website=CTB_LOGIN_URL, support_email=SUPPORT_EMAIL)
-        print(
-            f"[STATUS] Sending a notification to {user_email} of the account deactivation in {warning_period} days.")
+        print("[STATUS] Sending an account deactivation warning notification.")
     elif email_type == DEACTIVE_ACCOUNT_NOTIFICATION:
         subject = f"{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Your account has been deactivated"
         mail_content = '''
@@ -108,7 +107,7 @@ def send_notification_email(user_email, email_type):
             Chernobyl Tissue Bank Team'''.format(
             user_email=user_email, max_inactive_period=MAX_INACTIVE_PERIOD_DAYS,
             support_email=SUPPORT_EMAIL)
-        print(f"[STATUS] Sending a notification to {user_email} of the account deactivation.")
+        print("[STATUS] Sending an account deactivation notification.")
     elif email_type == PASSWORD_EXPIRATION_WARNING or email_type == SECOND_PASSWORD_EXPIRATION_WARNING:
         if email_type == PASSWORD_EXPIRATION_WARNING:
             expiration_date = warning_password_expiration_date_utc(PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS)
@@ -130,8 +129,7 @@ def send_notification_email(user_email, email_type):
             user_email=user_email, expiration_date=expiration_date,
             warning_period=warning_period,
             website=CTB_LOGIN_URL, support_email=SUPPORT_EMAIL)
-        print(
-            f"[STATUS] Sending a notification to {user_email} of the password expiration in {warning_period} days.")
+        print("[STATUS] Sending a password expiration warning notification.")
     else:  # PASSWORD_EXPIRATION_NOTIFICATION
         subject = f"{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Your account password has expired."
         mail_content = '''
@@ -145,7 +143,7 @@ def send_notification_email(user_email, email_type):
             user_email=user_email,
             website=CTB_LOGIN_URL,
             support_email=SUPPORT_EMAIL)
-        print(f"[STATUS] Sending a notification to {user_email} of the password expiration.")
+        print("[STATUS] Sending a password expiration notification.")
     send_ctb_email(to_list=[user_email], subject=subject, mail_content=mail_content, bcc_ctb_reviewer=False)
 
 
@@ -181,7 +179,6 @@ def manage_accounts(request):
         WHERE u.is_active=True AND u.is_staff=False'''
         cursor.execute(select_user_sql)
         user_list = cursor.fetchall()
-        print('== calling manage_accounts() ==',user_list)
         approval_pending_user_list = []
         if datetime.today().weekday() < 4 or datetime.today().weekday() == 6:     # Sun - Thur
             select_user_group_sql = '''
@@ -202,8 +199,6 @@ def manage_accounts(request):
         user_last_access = user_item.get("last_login") or user_item.get("date_joined")
         if user_last_access:
             user_last_access_date = user_last_access.date()
-            print('== calling manage_accounts() account ==',user_last_access_date, warning_last_login_date_utc(WARNING_EXPIRATION_BEFORE_DAYS), 
-                  warning_last_login_date_utc(SECOND_WARNING_EXPIRATION_BEFORE_DAYS), warning_last_login_date_utc(0))
             if user_last_access_date == warning_last_login_date_utc(WARNING_EXPIRATION_BEFORE_DAYS):
                 warn_inactivation_user_list.append(user_item)
             elif user_last_access_date == warning_last_login_date_utc(SECOND_WARNING_EXPIRATION_BEFORE_DAYS):
@@ -213,8 +208,6 @@ def manage_accounts(request):
         password_expiration = user_item.get("expiration_date")
         if password_expiration:
             password_expiration_date = password_expiration.date()
-            print('== calling manage_accounts() passward ==',password_expiration_date,warning_password_expiration_date_utc(PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS),warning_password_expiration_date_utc(
-                    SECOND_WARNING_EXPIRATION_BEFORE_DAYS),warning_password_expiration_date_utc(0))
             if password_expiration_date == warning_password_expiration_date_utc(
                     PASSWORD_WARNING_EXPIRATION_BEFORE_DAYS):
                 warn_password_expiration_user_list.append(user_item)
