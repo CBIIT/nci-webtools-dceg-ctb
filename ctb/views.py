@@ -162,7 +162,8 @@ def approve_account(request):
         else:
            return JsonResponse({'message':"The account has been disapproved"})
     else:
-        return JsonResponse({'status': status, 'message': msg}, status=status)
+        logger.error(msg)
+        return JsonResponse({'status': status, 'message': "An internal error occurred. Please try again."}, status=status)
 
     
 
