@@ -7,7 +7,8 @@ GROUP_NAME = getenv("GROUP_NAME", "ctb_team")
 
 
 def set_account_approval_stat(user_email=None, is_approved=None):
-    print("trying to run set_account_approval_stat", user_email, is_approved)
+    # Account identifiers stay out of cron logs; log the event, not the values.
+    print("trying to run set_account_approval_stat")
     if user_email is None:
         return {"code": 500,
                 "message": f"Function [set_account_approval_stat] failed to run: account email is not provided"}
@@ -16,7 +17,7 @@ def set_account_approval_stat(user_email=None, is_approved=None):
                 "message": f"Function [set_account_approval_stat] failed to run: approved status is not provided"}
     try:
         connection = pymysql.connect(**mysql_config_for_cloud_functions)
-        print("connection: ", connection)
+        print("db connection established")
         with connection.cursor() as cursor:
             select_user_id_query = '''
                 SELECT id FROM auth_user
@@ -29,7 +30,7 @@ def set_account_approval_stat(user_email=None, is_approved=None):
             cursor.execute(select_user_id_query, (user_email,))
             
             user_list = cursor.fetchall()
-            print("user_list: ", user_list)
+            print("user_list rows: ", len(user_list))
             if len(user_list) == 1:
                 # success
                 user_id = user_list[0].get('id')
@@ -108,14 +109,14 @@ def set_account_approval_stat(user_email=None, is_approved=None):
 
 
 def account_approval(request):
-    print("trying to run account approval", request)
+    # The request carries the admin token and account email; do not log it.
+    print("trying to run account approval")
        
     try:
         connection = pymysql.connect(**mysql_config_for_cloud_functions)
         admin_token = request['admin_token']
         user_email = request['user_email']
         is_approved = request['is_approved']
-        print("cursor: ", admin_token)
         with connection.cursor() as cursor:
             select_query = '''
                     SELECT token
