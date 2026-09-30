@@ -58,9 +58,9 @@ def delete_blob(bucket_name, blob_name):
         blob.reload()  # Fetch blob metadata to use in generation_match_precondition.
         generation_match_precondition = blob.generation
         blob.delete(if_generation_match=generation_match_precondition)
-        print(f"[STATUS] {bucket_name}/{blob_name} deleted.")
+        print(f"[STATUS] Blob deleted from {bucket_name}.")
     else:
-        print(f"[STATUS] {bucket_name}/{blob_name} not found.")
+        print(f"[STATUS] Blob not found in {bucket_name}.")
 
 
 DEACTIVE_ACCOUNT_WARNING = 1
@@ -269,6 +269,7 @@ def manage_accounts(request):
 
 
 def manage_applications(request):
+    # Application identifiers and file paths stay out of cron logs; log the event, not the values.
     print('== calling manage_applications() ==')
     connection = pymysql.connect(**mysql_config_for_cloud_functions)
     submission_id_list = []
@@ -280,7 +281,7 @@ def manage_applications(request):
                 AND s.submitted_date <= \'{application_expiration_date_utc_strftime}\''''.format(
             application_expiration_date_utc_strftime=application_expiration_date_utc_strftime())
         
-        print(f"{TIER}[STATUS] Selecting expired applications from the DB: {select_query}")
+        print(f"{TIER}[STATUS] Selecting expired applications from the DB")
         cursor.execute(select_query)
         submission_list = cursor.fetchall()
         for submission_item in submission_list:
@@ -288,13 +289,12 @@ def manage_applications(request):
             entry_form_path = submission_item.get("entry_form_path")
             bucket_name = GCP_APP_DOC_BUCKET
             if entry_form_path:
-                print(f"{TIER}[STATUS] Deleting an expired application from bucket: {bucket_name}/{entry_form_path}")
+                print(f"{TIER}[STATUS] Deleting an expired application document from the bucket")
                 delete_blob(bucket_name, entry_form_path)
 
             summary_file_path = submission_item.get("summary_file_path")
             if summary_file_path:
-                print(
-                    f"{TIER}[STATUS] Deleting an expired application summary from bucket: {bucket_name}/{summary_file_path}")
+                print(f"{TIER}[STATUS] Deleting an expired application summary from the bucket")
                 delete_blob(bucket_name, summary_file_path)
 
         # deactivate records in DB
@@ -305,12 +305,10 @@ def manage_applications(request):
                     SET active = 0
                     WHERE id IN ({submission_id_list_str})'''.format(
                 submission_id_list_str=submission_id_list_str)
-            
-            print(f"update submition: {update_statement}")
+
             cursor.execute(update_statement)
             connection.commit()
-            print(
-                f"{TIER}[STATUS] Inactivating expired application(s) from the DB: donors_submissions_id:[{submission_id_list}]")
+            print(f"{TIER}[STATUS] Inactivated {len(submission_id_list)} expired application(s) in the DB")
 
 
 def daily_management(request):
