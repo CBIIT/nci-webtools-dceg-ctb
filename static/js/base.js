@@ -202,7 +202,8 @@ let is_input_valid = function (search_title, e) {
     let invalid_chars = search_title.match(/[^\w]/g);
     if (invalid_chars) {
         let invalid_chars_list_str = Array.from(new Set(invalid_chars)).join(', ')
-        $('#alert_message').html('<i class="fa-solid fa-circle-exclamation"></i> ' + 'Your search title contains invalid characters (<span class="fw-bold">' + invalid_chars_list_str + '</span>). Please choose another search title.');
+        $('#alert_message').html('<i class="fa-solid fa-circle-exclamation"></i> ' + 'Your search title contains invalid characters (<span class="fw-bold"></span>). Please choose another search title.');
+        $('#alert_message').find('span.fw-bold').text(invalid_chars_list_str);
         e.preventDefault();
         return false;
     }
