@@ -30,7 +30,6 @@ def set_account_approval_stat(user_email=None, is_approved=None):
             cursor.execute(select_user_id_query, (user_email,))
             
             user_list = cursor.fetchall()
-            print("user_list rows: ", len(user_list))
             if len(user_list) == 1:
                 # success
                 user_id = user_list[0].get('id')
@@ -123,7 +122,6 @@ def account_approval(request):
                     FROM django_token AS t
                     where t.token = %s ;'''
             cursor.execute(select_query, (admin_token,))
-            print("cursor: ", cursor.rowcount)
             if cursor.rowcount == 0:
                 return {"code": 500, "message": f"Function [account_approval] failed to run: admin token not found"}
             else:
