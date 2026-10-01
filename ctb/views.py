@@ -153,8 +153,6 @@ def approve_account(request):
     request_data = {'admin_token': admin_token, 'user_email': user_email, 'is_approved': is_approved}
     approval_status = account_approval(request_data)
     status =approval_status.get('code')
-    msg= approval_status.get('message')
-    print(status,msg)
 
     if status == 200:
         if is_approved:
@@ -162,7 +160,7 @@ def approve_account(request):
         else:
            return JsonResponse({'message':"The account has been disapproved"})
     else:
-        logger.error(msg)
+        logger.error("[ERROR] Account approval failed with status {}".format(status))
         return JsonResponse({'status': status, 'message': "An internal error occurred. Please try again."}, status=status)
 
     

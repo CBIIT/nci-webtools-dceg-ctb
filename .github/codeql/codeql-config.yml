@@ -1,0 +1,5 @@
+name: "CodeQL config"
+
+paths-ignore:
+  # Vendored Django admin static assets (third-party, not maintained in this repo)
+  - static/admin
