@@ -153,7 +153,6 @@ def approve_account(request):
     request_data = {'admin_token': admin_token, 'user_email': user_email, 'is_approved': is_approved}
     approval_status = account_approval(request_data)
     status =approval_status.get('code')
-    print(status)
 
     if status == 200:
         if is_approved:
