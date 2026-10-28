@@ -7,15 +7,17 @@ RUN dnf -y update && \
     mariadb105-devel \
     pkgconf \
     pkgconf-pkg-config \
-    python3-devel \
-    python3-pip \
-    python3-setuptools \
-    python3-wheel \
+    python3.12-devel \
+    python3.12-pip \
     cairo-devel \
     cairo-gobject-devel \
     gobject-introspection-devel \
     pkg-config \
     && dnf clean all
+
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3.12 -m venv "$VIRTUAL_ENV"
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 RUN mkdir /app
 
@@ -33,4 +35,4 @@ ENV PORT=8080
 
 ENV DJANGO_SETTINGS_MODULE=ctb.settings
 
-CMD touch .env && cat .env && gunicorn --bind 0.0.0.0:$PORT ctb.wsgi
+CMD gunicorn --bind 0.0.0.0:$PORT ctb.wsgi

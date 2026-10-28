@@ -14,13 +14,13 @@
 # limitations under the License.
 # 
 
-from django.conf.urls import url, include
+from django.urls import include, path
 from allauth import urls as allauth_urls
 from . import views
 
 
 urlpatterns = [
-    url(r'^login', views.redirect_login_view, name='account_login'),
-    url(r'^', include(allauth_urls)),
-    url(r'^logout', views.extended_logout_view, name='account_logout'),
+    path('login/', views.redirect_login_view, name='account_login'),
+    path('logout/', views.extended_logout_view, name='account_logout'),
+    path('', include(allauth_urls)),
 ]

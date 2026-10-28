@@ -17,9 +17,8 @@
 from __future__ import absolute_import
 from django.conf import settings
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path, re_path
 from two_factor.urls import urlpatterns as tf_urls
-from django.conf.urls import include, url
 from . import views
 
 urlpatterns = [
@@ -29,43 +28,43 @@ urlpatterns = [
 admin.autodiscover()
 
 urlpatterns = [
-    url(r'^$', views.landing_page, name='landing_page'),
+    re_path(r'^$', views.landing_page, name='landing_page'),
 
     # About
-    url(r'^about/$', views.about, name='about'),
+    re_path(r'^about/$', views.about, name='about'),
 
     # For Research
-    url(r'^research/$', views.research, name='research'),
-    url(r'^research/research_projects/$', views.research_projects, name='research_projects'),
+    re_path(r'^research/$', views.research, name='research'),
+    re_path(r'^research/research_projects/$', views.research_projects, name='research_projects'),
 
     # Contact Us
-    url(r'^contact/', views.contact, name='contact'),
+    re_path(r'^contact/', views.contact, name='contact'),
 
     # CTB keyword search
-    url(r'^ctb_search', views.ctb_search, name='ctb_search'),
+    re_path(r'^ctb_search', views.ctb_search, name='ctb_search'),
 
     # Search Facility
-    url(r'^search_facility/', include('donors.urls')),
+    re_path(r'^search_facility/', include('donors.urls')),
 
     # User Details
-    url(r'^users/(?P<user_id>\d+)/$', views.user_detail, name='user_detail'),
+    re_path(r'^users/(?P<user_id>\d+)/$', views.user_detail, name='user_detail'),
 
     # Account Settings
-    url(r'^accounts/', include('accounts.urls')),
+    re_path(r'^accounts/', include('accounts.urls')),
 
     # Privacy
-    url(r'^privacy/', views.privacy_policy, name='privacy'),
+    re_path(r'^privacy/', views.privacy_policy, name='privacy'),
 
     path('admin/', admin.site.urls),
-    url(r'session_security/', include('session_security.urls')),
-    url(r'^_ah/(vm_)?health$', views.health_check),
-    url(r'^warning/', views.warn_page, name='warn'),
-    url(r'^searcg/', views.search, name='search'),
-    url(r'^extended_login/$', views.extended_login_view, name='extended_login'),
+    re_path(r'session_security/', include('session_security.urls')),
+    re_path(r'^_ah/(vm_)?health$', views.health_check),
+    re_path(r'^warning/', views.warn_page, name='warn'),
+    re_path(r'^searcg/', views.search, name='search'),
+    re_path(r'^extended_login/$', views.extended_login_view, name='extended_login'),
     path('', include(tf_urls)),
 
     # sitemap
-    url(r'^sitemap/', views.sitemap, name='sitemap'),
+    re_path(r'^sitemap/', views.sitemap, name='sitemap'),
     # Approval
     path('approval/', views.approve_account),
 ]
@@ -74,5 +73,5 @@ urlpatterns = [
 if settings.DEBUG and settings.DEBUG_TOOLBAR:
     import debug_toolbar
     urlpatterns += [
-        url(r'^__debug__/', include(debug_toolbar.urls)),
+        re_path(r'^__debug__/', include(debug_toolbar.urls)),
     ]
