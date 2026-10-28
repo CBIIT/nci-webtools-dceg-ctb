@@ -42,13 +42,14 @@ class PasswordComplexityValidator:
     def __init__(self, min_length=16, special_char_list="@#$%^&*+~?;"):
         self.min_length = min_length
         self.special_char_list = special_char_list
-        self.complexity = ('^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[%s])' % self.special_char_list) + ('.{%s,}$' % self.min_length)
-        self.allowances_complexity = '^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])' + ('.{%s,}$' % 35)
+        self.complexity = (r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[%s])' % self.special_char_list) + ('.{%s,}$' % self.min_length)
+        self.allowances_complexity = r'^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])' + ('.{%s,}$' % 35)
 
     def check_for_complexity(self, password, user):
         complexity_re = re.compile(self.complexity)
 
-        if user.username not in settings.ACCOUNTS_ALLOWANCES:
+        username = getattr(user, 'username', None)
+        if not username or username not in settings.ACCOUNTS_ALLOWANCES:
             if not re.match(complexity_re, password):
                 raise ValidationError(
                     _(

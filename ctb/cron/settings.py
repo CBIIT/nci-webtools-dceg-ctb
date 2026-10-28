@@ -20,12 +20,6 @@ CTB_LOGIN_URL = getenv("CTB_LOGIN_URL")
 SUPPORT_EMAIL = getenv("SUPPORT_EMAIL", "ctbWebAdmin@mail.nih.gov")
 CTB_REVIEWER_EMAIL = getenv("CTB_REVIEWER_EMAIL", "ctbWebAdmin@mail.nih.gov")
 
-INSTALLED_APPS = [
-    # other Django apps...
-    'django_cron',
-]
-
-
 mysql_config_for_cloud_functions = {
     'unix_socket': f'/cloudsql/{CONNECTION_NAME}',
     'user': DB_USER,
@@ -46,7 +40,6 @@ def send_ctb_email(to_list, subject, mail_content, bcc_ctb_reviewer=False):
               "bcc": bcc_list,
               "subject": subject,
               "html": mail_content})
-
 
 
 
