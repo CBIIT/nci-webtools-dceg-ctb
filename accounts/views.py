@@ -15,12 +15,9 @@
 #
 from __future__ import absolute_import
 from allauth.account import views as account_views
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.urls import reverse
-from .models import *
 import datetime
+import logging
 from axes.helpers import get_failure_limit, get_client_username, get_cool_off, get_cool_off_iso8601
 
 logger = logging.getLogger('main_logger')
@@ -31,20 +28,12 @@ def redirect_login_view(request):
     return response
 
 
-@login_required
 def extended_logout_view(request):
-    try:
-        user = User.objects.get(id=request.user.id)
-        response = account_views.logout(request)
-    except Exception as e:
-        logger.error("[ERROR] While attempting to log out:")
-        logger.exception(e)
-        messages.error(request,
-                       "There was an error while attempting to log out - please contact ctbWebAdmin@mail.nih.gov")
-        return redirect(reverse('user_detail', args=[request.user.id]))
-
-    logger.info("[CTB LOGOUT] User {} logged out from the web application at {}".format(user.email,
-                                                                                        datetime.datetime.utcnow()))
+    user = request.user
+    response = account_views.logout(request)
+    if request.method == 'POST' and user.is_authenticated:
+        logger.info("[CTB LOGOUT] User {} logged out from the web application at {}".format(
+            user.email, datetime.datetime.utcnow()))
     return response
 
 
@@ -55,7 +44,7 @@ def lockout(request, credentials, *args, **kwargs):
         "username": get_client_username(request, credentials) or "",
     }
 
-    cool_off = get_cool_off()
+    cool_off = get_cool_off(request)
     if cool_off:
         context.update(
             {

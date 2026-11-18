@@ -36,14 +36,13 @@ APP_ENGINE = 'Google App Engine/'
 
 SECURE_LOCAL_PATH = os.environ.get('SECURE_LOCAL_PATH', '')
 
-if not exists(join(dirname(__file__), '../{}.env'.format(SECURE_LOCAL_PATH))):
-    print("[ERROR] Couldn't open .env file expected at {}!".format(
-        join(dirname(__file__), '../{}.env'.format(SECURE_LOCAL_PATH)))
-    )
+ENV_FILE = os.environ.get('CTB_ENV_FILE', join(dirname(__file__), '../{}.env'.format(SECURE_LOCAL_PATH)))
+if not exists(ENV_FILE):
+    print("[ERROR] Couldn't open environment file expected at {}!".format(ENV_FILE))
     print("[ERROR] Exiting settings.py load - check your Pycharm settings and secure_path.env file.")
     exit(1)
 
-dotenv.read_dotenv(join(dirname(__file__), '../{}.env'.format(SECURE_LOCAL_PATH)))
+dotenv.read_dotenv(ENV_FILE)
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir)) + os.sep
 
 SHARED_SOURCE_DIRECTORIES = []
@@ -186,6 +185,7 @@ MIDDLEWARE = [
     'ctb.checkreqsize_middleware.CheckReqSize',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'allauth.account.middleware.AccountMiddleware',
     'adminrestrict.middleware.AdminPagesRestrictMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'ctb.team_only_middleware.TeamOnly',
@@ -354,15 +354,16 @@ AUTHENTICATION_BACKENDS = (
     # "allauth.account.auth_backends.AuthenticationBackend",
 )
 
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_USERNAME_REQUIRED = bool(os.environ.get('ACCOUNT_USERNAME_REQUIRED', 'False') == 'True')
+ACCOUNT_LOGIN_METHODS = {'email'}
+ACCOUNT_SIGNUP_FIELDS = ['email*', 'password1*', 'password2*']
+if os.environ.get('ACCOUNT_USERNAME_REQUIRED', 'False') == 'True':
+    ACCOUNT_SIGNUP_FIELDS.insert(0, 'username*')
 ACCOUNT_EMAIL_VERIFICATION = os.environ.get('ACCOUNT_EMAIL_VERIFICATION', 'mandatory').lower()
 
 ACCOUNT_EMAIL_SUBJECT_PREFIX = "Chernobyl Tissue Bank:"
 ACCOUNTS_PASSWORD_EXPIRATION = int(os.environ.get('ACCOUNTS_PASSWORD_EXPIRATION', 120) ) # Max password age in days
 ACCOUNTS_PASSWORD_HISTORY = int(os.environ.get('ACCOUNTS_PASSWORD_HISTORY', 5))  # Max password history kept
-ACCOUNTS_ALLOWANCES = list(set(os.environ.get('ACCOUNTS_ALLOWANCES', '').split(',')))
+ACCOUNTS_ALLOWANCES = list(set(filter(None, os.environ.get('ACCOUNTS_ALLOWANCES', '').split(','))))
 
 TIER = GCLOUD_PROJECT_ID.replace('nih-nci-cbiit-ctb-', '')
 if TIER == 'prod':
@@ -436,10 +437,6 @@ LANGUAGE_CODE = 'en-us'
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
 USE_I18N = True
-
-# If you set this to False, Django will not format dates, numbers and
-# calendars according to the current locale.
-USE_L10N = True
 
 # If you set this to False, Django will not use timezone-aware datetimes.
 USE_TZ = True
@@ -521,12 +518,12 @@ else:
 #########################################
 # Axes Settings
 #########################################
-AXES_HANDLER = 'axes.handlers.cache.AxesCacheHandler' if not IS_DEV else 'axes.handlers.dummy.AxesDummyHandler'
-AXES_META_PRECEDENCE_ORDER = [
+AXES_HANDLER = 'axes.handlers.database.AxesDatabaseHandler' if not IS_DEV else 'axes.handlers.dummy.AxesDummyHandler'
+AXES_IPWARE_META_PRECEDENCE_ORDER = [
     'HTTP_X_FORWARDED_FOR',
     'REMOTE_ADDR',
 ]
-AXES_PROXY_COUNT = 1
+AXES_IPWARE_PROXY_COUNT = 1
 AXES_COOLOFF_TIME = int(os.environ.get('AXES_COOLOFF_TIME', '5'))
 AXES_USERNAME_FORM_FIELD = "email"
 AXES_LOCKOUT_CALLABLE = "accounts.views.lockout"
@@ -623,7 +620,7 @@ CTB_FORM_FILE_SIZE_UPLOAD_MAX = 65536
 # DATA_UPLOAD_MAX_MEMORY_SIZE = 131072
 # REQUEST_LOGGING_MAX_BODY_LENGTH = 5242880
 # Explicitly check for known problems in descrpitions and names provided by users
-BLACKLIST_RE = r'((?i)<script>|(?i)</script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|(?i)<iframe>|(?i)</iframe>)'
+BLACKLIST_RE = r'(?i)(<script>|</script>|!\[\]|!!\[\]|\[\]\[\".*\"\]|<iframe>|</iframe>)'
 BLANK_TISSUE_FILTERS = {'country': 'ukraine', 'patient_residency': 'both', 'patient_gender': 'both', 'dob': 'both'}
 # ,
 #                     'age_at_operation_min': '',
@@ -716,14 +713,7 @@ CTB_LOGIN_URL = os.environ.get("CTB_LOGIN_URL")
 #SUPPORT_EMAIL = getenv("SUPPORT_EMAIL", "ctb-support@isb-cgc.org")
 #CTB_REVIEWER_EMAIL = getenv("CTB_REVIEWER_EMAIL", "elee@isb-cgc.org")
 
-INSTALLED_APPS += (
-    'django_cron',
-)
-
-CRONJOBS = [
-     ('0 1 * * *', 'ctb.cron.cron_jobs.DailyManagementCronJob'),
-    #'ctb.cron.cron_jobs.DailyManagementCronJob',  # 
-]
+DAILY_MANAGEMENT_ENABLED = os.environ.get('DAILY_MANAGEMENT_ENABLED', 'True') == 'True'
 
 #mysql_config_for_cloud_functions = {
     #'unix_socket': f'/cloudsql/{CONNECTION_NAME}',
@@ -784,4 +774,3 @@ def send_ctb_email(to_list, subject, mail_content, bcc_ctb_reviewer=False):
   
     except Exception as e:
         print(f"Error: {e}")
-

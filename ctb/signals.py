@@ -22,13 +22,8 @@ from django.core.mail import EmailMessage
 from django.contrib.auth.signals import user_login_failed, user_logged_in
 from allauth.account.signals import email_confirmed, user_signed_up
 from django.dispatch import receiver
-from allauth.account.decorators import verified_email_required
-from .settings import TIER
 
 logger = logging.getLogger('main_logger')
-
-from .settings import ACCOUNT_EMAIL_SUBJECT_PREFIX
-
 
 @receiver(email_confirmed)
 def email_confirmed_callback(sender, email_address, **kwargs):
@@ -38,7 +33,7 @@ def email_confirmed_callback(sender, email_address, **kwargs):
 
         # send out a notification email to CTB_APPLICATION_RECEIVER team about the new account
         notification_mail_to_ctb_team = EmailMessage(
-            f'{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} A new account was created',
+            f'{settings.TIER}{settings.ACCOUNT_EMAIL_SUBJECT_PREFIX} A new account was created',
             f'''This is an email to inform you that a new user account was created for CTB:
         
     User account email: {email_address}
@@ -56,7 +51,7 @@ Chernobyl Tissue Bank Team''',
         notification_mail_to_ctb_team.send()
 
         notification_mail_to_user = EmailMessage(
-            f'{TIER}{ACCOUNT_EMAIL_SUBJECT_PREFIX} Your account was created',
+            f'{settings.TIER}{settings.ACCOUNT_EMAIL_SUBJECT_PREFIX} Your account was created',
             f'''Hello {email_address},
 
 This is an email to inform you that your Chernobyl Tissue Bank account was created, but not yet approved. Please note that your account will need to be evaluated before it can be approved.
@@ -68,7 +63,7 @@ If you have any questions, please send us an email to ctbWebAdmin@mail.nih.gov, 
 Sincerely,
 Chernobyl Tissue Bank Team''',
             settings.NOTIFICATION_EMAIL_FROM_ADDRESS,
-            [email_address])
+            [email_address.email])
         notification_mail_to_user.send()
     except Exception as e:
         logger.error("[ERROR] While attempting to send a new account notification email")
@@ -76,7 +71,6 @@ Chernobyl Tissue Bank Team''',
 
 
 @receiver(user_logged_in)
-@verified_email_required
 def user_logged_in_callback(*args, **kwargs):
     try:
         logger.info(f"[CTB LOGIN] user_logged_in_callback")

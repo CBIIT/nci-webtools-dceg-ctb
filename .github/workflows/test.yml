@@ -1,0 +1,59 @@
+name: Container regression tests
+
+on:
+  pull_request:
+    branches: [dev]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: ctb-ci-only
+          MYSQL_DATABASE: ctb_upgrade
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -pctb-ci-only"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=12
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build deployment image
+        run: docker build --tag ctb-upgrade-ci .
+
+      - name: Check runtime and dependencies
+        run: |
+          docker run --rm ctb-upgrade-ci python --version
+          docker run --rm ctb-upgrade-ci python -m pip check
+
+      - name: Run isolated SQLite regressions
+        run: >-
+          docker run --rm ctb-upgrade-ci
+          python manage.py test accounts ctb adminrestrict
+          --settings=ctb.test_settings --verbosity=2 --noinput
+
+      - name: Rehearse migrations and regressions on disposable MySQL
+        run: |
+          docker run --rm --network host \
+            -e CTB_TEST_MYSQL_PORT=3306 -e CTB_TEST_MYSQL_PASSWORD=ctb-ci-only \
+            ctb-upgrade-ci python manage.py migrate --plan --settings=ctb.test_settings
+          docker run --rm --network host \
+            -e CTB_TEST_MYSQL_PORT=3306 -e CTB_TEST_MYSQL_PASSWORD=ctb-ci-only \
+            ctb-upgrade-ci python manage.py migrate --noinput --settings=ctb.test_settings
+          docker run --rm --network host \
+            -e CTB_TEST_MYSQL_PORT=3306 -e CTB_TEST_MYSQL_PASSWORD=ctb-ci-only \
+            ctb-upgrade-ci python manage.py migrate --check --settings=ctb.test_settings
+          docker run --rm --network host \
+            -e CTB_TEST_MYSQL_PORT=3306 -e CTB_TEST_MYSQL_PASSWORD=ctb-ci-only \
+            ctb-upgrade-ci python manage.py test accounts ctb adminrestrict \
+              --settings=ctb.test_settings --verbosity=2 --noinput

@@ -25,16 +25,10 @@ from django.contrib.sites.shortcuts import get_current_site
 class CustomResetPasswordForm(ResetPasswordForm):
     def save(self, request, **kwargs):
         email = self.cleaned_data["email"]
-        if not self.users:
-            inactive_users = filter_users_by_email(email, is_active=False)
-            if inactive_users:
-                self._send_inactive_account_mail(request, email)
-            else:
-                self._send_unknown_account_mail(request, email)
-        else:
-            self._send_password_reset_mail(request, email, self.users, **kwargs)
-        return email
-
+        if not self.users and filter_users_by_email(email, is_active=False):
+            self._send_inactive_account_mail(request, email)
+            return email
+        return super().save(request, **kwargs)
 
     def _send_inactive_account_mail(self, request, email):
         context = {
