@@ -115,35 +115,13 @@ digest and a link to the job executions. No backup, clone, deployment or
 migration is performed. Publishing the image and updating/executing the
 dedicated plan job are the only intended GCP changes.
 
-**One-time setup (requires existing provisioning authority):**
+**First run:** Assume the dev APIs, resources and permissions are already in
+place. The run tests that assumption; there is no need to audit every API or
+recreate resources beforehand. Do not guess the target: the workflow updates
+`PLAN_JOB` before the database checks, so use only the approved, dedicated
+planner job, never a shared job or one with a write-capable identity.
 
-1. In the dev app project, enable Cloud Run, Artifact Registry and App Engine
-   Admin APIs; enable Cloud SQL Admin, Secret Manager, and WIF/IAM Credentials
-   APIs in the relevant projects. Provision a regional Docker repository and
-   a dedicated, **single-container** Cloud Run Job in that same region. Use a
-   private network route as required by the SQL instance, attach the approved
-   Cloud SQL connection, and set the job's working directory to `/app`.
-   Only the trusted dispatcher should update this job; never point it at the
-   deployed web service or a job with a write-capable identity.
-2. Create a dedicated MySQL account with direct `SELECT` on the CTB dev
-   schema only. The plan rejects roles, write privileges and grant options.
-   Put its password in a dedicated Secret Manager CTB config, **not** the
-   deployment `ENV_FILE`. Mount the secret in the job and set `CTB_ENV_FILE`
-   to its absolute path. Set `DATABASE_ENGINE=django.db.backends.mysql`,
-   `DATABASE_HOST=/cloudsql/<approved-connection-name>`, `DATABASE_NAME`,
-   `DATABASE_USER`, `DATABASE_PASSWORD` and CTB's required `SECRET_KEY` there.
-   Do not define `CI`, `IS_DEV=True`, or `DAILY_MANAGEMENT_ENABLED=True`.
-   Give the job's runtime service account Cloud SQL Client in the SQL project
-   and Secret Accessor on this secret only. Do not grant backup or restore.
-3. Configure GitHub OIDC/WIF to impersonate a dedicated dispatcher, restricted
-   to this repository, the trusted workflow on `refs/heads/dev`, and the
-   protected environment. Grant it App Engine service/version read access,
-   Artifact Registry read/write on the dedicated repository, permission to
-   get/update/run the dedicated job and wait for its operations/executions,
-   and `iam.serviceAccounts.actAs` on **only** its runtime account. The
-   dispatcher does not need MySQL credentials. Give authorized operators
-   private access to job executions and logs.
-4. The workflow reads two existing **repository Actions secrets**:
+1. The workflow reads two existing **repository Actions secrets**:
    `GCP_DEV_PROJECT_ID` (the dev App Engine project ID) and
    `WORKLOAD_IDENTITY_PROVIDER` (the full provider resource name).
    In **Settings → Environments**, create `ctb-dev-plan`, restrict deployment
@@ -158,15 +136,44 @@ dedicated plan job are the only intended GCP changes.
    | `SQL_CONNECTION_NAME`, `SQL_DATABASE` | Approved `project:region:instance` (may belong to a different project) and CTB database name |
    | `SQL_READONLY_ACCOUNT` | Exact result of MySQL `CURRENT_USER()` for the approved planner, including its host, e.g. `ctb_plan@%` |
 
-5. GitHub requires the `workflow_dispatch` file to be present on the repository's
+2. GitHub requires the `workflow_dispatch` file to be present on the repository's
    **default branch (`main`)** to register the workflow. Landing this PR on
    `dev` alone is not enough: include the workflow on `main` through the
-   normal release/review process. Then go to **Actions → Plan CTB dev database
+   normal release/review process.
+3. Go to **Actions → Plan CTB dev database
    migration → Run workflow → Branch: dev**. Other branches are skipped.
    Open the private executions link in the run summary with the CTB dev app
    project selected in the Cloud Console, then open the matching execution's
-   logs to read the plan. A successful run with pending migrations is
-   expected; it does not authorize applying them.
+   logs. Confirm the verified instance and database and read Django's plan.
+   Pending migrations are a valid result, not authorization to apply them.
+
+**If the run fails:** Start with the first error in Actions or, if the job
+started, in its execution logs. Fix only the reported issue and rerun step 3.
+Use these requirements to diagnose the failure, not as a pre-run checklist:
+
+- **API disabled or resource missing:** Check the project named in the error.
+  Cloud Run, Artifact Registry and App Engine Admin are used in the dev app
+  project; Cloud SQL Admin, Secret Manager and WIF/IAM Credentials may involve
+  other projects. Check the configured name, project and region before asking
+  an authorized owner to enable the missing API or provision a missing resource.
+  The Docker repository and dedicated, single-container job must share a region.
+- **Authentication or permission denied:** The WIF binding must allow the
+  trusted workflow on `refs/heads/dev` in `ctb-dev-plan` to impersonate the
+  dispatcher. It needs App Engine service/version read access, read/write on
+  the planner repository, access to get/update/run the planner job and wait
+  for its operations/executions, and `iam.serviceAccounts.actAs` on only its
+  runtime account. Operators also need access to private executions and logs.
+- **Job connection, configuration or grant check failed:** Stop on a target
+  mismatch; do not change the expected target just to pass. Check the approved
+  Cloud SQL attachment, private route, and job working directory (`/app`).
+  The runtime account needs Cloud SQL Client in the SQL project and Secret
+  Accessor on the planner secret only. `CTB_ENV_FILE` must point to that
+  mounted secret, not the deployment `ENV_FILE`. It must supply
+  `DATABASE_ENGINE=django.db.backends.mysql`, `DATABASE_HOST=/cloudsql/<approved-connection-name>`,
+  `DATABASE_NAME`, `DATABASE_USER`, `DATABASE_PASSWORD`, and `SECRET_KEY`.
+  Do not enable `CI`, `IS_DEV`, or `DAILY_MANAGEMENT_ENABLED`. The MySQL
+  account needs direct `SELECT` on the CTB dev schema only: no roles, write
+  grants, or grant options.
 
 Container checks are not permission to migrate or deploy a shared tier. First
 obtain approval, inspect its actual pending migration plan, check account-data
