@@ -1,0 +1,67 @@
+name: Run Django Migrations
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to migrate"
+        type: environment
+        required: true
+
+env:
+  TZ: America/New_York
+  CLOUD_SQL_PROXY_VERSION: v2.14.1
+
+jobs:
+  Migrate:
+    permissions:
+      contents: "read"
+      id-token: "write"
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    steps:
+      - uses: "actions/checkout@v4"
+
+      - id: "auth"
+        name: "Authenticate to Google Cloud"
+        uses: "google-github-actions/auth@v2"
+        with:
+          project_id: ${{ secrets.PROJECT_ID }}
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+
+      - name: "Set up Google Cloud SDK"
+        uses: "google-github-actions/setup-gcloud@v2"
+
+      - name: Generate .env file
+        run: echo "${{ secrets.ENV_FILE }}" > .env
+
+      - name: Start Cloud SQL Auth Proxy
+        env:
+          INSTANCE: ${{ secrets.CLOUD_SQL_INSTANCES }}
+        run: |
+          curl -sSfL -o cloud-sql-proxy "https://storage.googleapis.com/cloud-sql-connectors/cloud-sql-proxy/${CLOUD_SQL_PROXY_VERSION}/cloud-sql-proxy.linux.amd64"
+          chmod +x cloud-sql-proxy
+          sudo mkdir -p /cloudsql && sudo chown "$(id -u):$(id -g)" /cloudsql
+          ./cloud-sql-proxy --unix-socket /cloudsql "$INSTANCE" > proxy.log 2>&1 &
+          for i in $(seq 1 30); do
+            [ -S "/cloudsql/$INSTANCE" ] && exit 0
+            sleep 1
+          done
+          cat proxy.log
+          exit 1
+
+      - name: Build image
+        run: docker build -t ctb-migrate .
+
+      - name: Run migrations
+        run: |
+          docker run --rm \
+            -v /cloudsql:/cloudsql \
+            -v "$PWD/.env:/app/.env:ro" \
+            ctb-migrate \
+            sh -c "python3 manage.py migrate --noinput --settings=ctb.settings && python3 manage.py showmigrations --settings=ctb.settings"
+
+      - name: Cloud SQL Auth Proxy logs
+        if: always()
+        run: cat proxy.log || true
