@@ -103,6 +103,66 @@ cloud credentials, real accounts, or live database.
 
 ## Shared-tier migration gate
 
+### Run a read-only dev plan from GitHub Actions
+
+**Plan CTB dev database migration** is a manual workflow with no inputs and no
+apply mode. It builds the selected `dev` commit, verifies the serving App Engine
+service's SQL attachment, and runs the image **by digest** in a private Cloud
+Run Job. The job checks the effective Django settings, database, authenticated
+MySQL account and grants before running `showmigrations --plan` and `migrate
+--plan`. The plan stays in Cloud Logging; the Actions summary records the commit,
+digest and a link to the job executions. No backup, clone, deployment or
+migration is performed. Publishing the image and updating/executing the
+dedicated plan job are the only intended GCP changes.
+
+**One-time setup (requires existing provisioning authority):**
+
+1. In the dev app project, enable Cloud Run, Artifact Registry and App Engine
+   Admin APIs; enable Cloud SQL Admin, Secret Manager, and WIF/IAM Credentials
+   APIs in the relevant projects. Provision a regional Docker repository and
+   a dedicated, **single-container** Cloud Run Job in that same region. Use a
+   private network route as required by the SQL instance, attach the approved
+   Cloud SQL connection, and set the job's working directory to `/app`.
+   Only the trusted dispatcher should update this job; never point it at the
+   deployed web service or a job with a write-capable identity.
+2. Create a dedicated MySQL account with direct `SELECT` on the CTB dev
+   schema only. The plan rejects roles, write privileges and grant options.
+   Put its password in a dedicated Secret Manager CTB config, **not** the
+   deployment `ENV_FILE`. Mount the secret in the job and set `CTB_ENV_FILE`
+   to its absolute path. Set `DATABASE_ENGINE=django.db.backends.mysql`,
+   `DATABASE_HOST=/cloudsql/<approved-connection-name>`, `DATABASE_NAME`,
+   `DATABASE_USER`, `DATABASE_PASSWORD` and CTB's required `SECRET_KEY` there.
+   Do not define `CI`, `IS_DEV=True`, or `DAILY_MANAGEMENT_ENABLED=True`.
+   Give the job's runtime service account Cloud SQL Client in the SQL project
+   and Secret Accessor on this secret only. Do not grant backup or restore.
+3. Configure GitHub OIDC/WIF to impersonate a dedicated dispatcher, restricted
+   to this repository, the trusted workflow on `refs/heads/dev`, and the
+   protected environment. Grant it App Engine service/version read access,
+   Artifact Registry read/write on the dedicated repository, permission to
+   get/update/run the dedicated job and wait for its operations/executions,
+   and `iam.serviceAccounts.actAs` on **only** its runtime account. The
+   dispatcher does not need MySQL credentials. Give authorized operators
+   private access to job executions and logs.
+4. In **Settings → Environments**, create `ctb-dev-plan`, restrict deployment
+   branches to `dev`, and set these **environment variables** (no DB passwords):
+
+   | Variables | Values |
+   |---|---|
+   | `WIF_PROVIDER`, `PLAN_DISPATCHER_SA` | Full WIF provider resource name and dispatcher service-account email |
+   | `APP_PROJECT_ID`, `GAE_SERVICE` | Verified dev App Engine project ID and serving service name |
+   | `RUN_REGION`, `AR_REPOSITORY`, `PLAN_JOB` | Region, Docker repository ID and Cloud Run Job name (not URLs) |
+   | `SQL_CONNECTION_NAME`, `SQL_DATABASE` | Approved `project:region:instance` (may belong to a different project) and CTB database name |
+   | `SQL_READONLY_ACCOUNT` | Exact result of MySQL `CURRENT_USER()` for the approved planner, including its host, e.g. `ctb_plan@%` |
+
+5. GitHub requires the `workflow_dispatch` file to be present on the repository's
+   **default branch (`main`)** to register the workflow. Landing this PR on
+   `dev` alone is not enough: include the workflow on `main` through the
+   normal release/review process. Then go to **Actions → Plan CTB dev database
+   migration → Run workflow → Branch: dev**. Other branches are skipped.
+   Open the private executions link in the run summary and select the matching
+   execution to read the plan. A successful run with pending migrations is
+   expected; it does not authorize applying them.
+
 Container checks are not permission to migrate or deploy a shared tier. First
 obtain approval, inspect its actual pending migration plan, check account-data
 conflicts and existing JSON validity, verify a protected backup/recovery path,
