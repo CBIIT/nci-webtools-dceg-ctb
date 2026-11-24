@@ -18,7 +18,6 @@ jobs:
       contents: read
       id-token: write
     env:
-      APP_PROJECT: ${{ vars.APP_PROJECT_ID }}
       REGION: ${{ vars.RUN_REGION }}
       REPOSITORY: ${{ vars.AR_REPOSITORY }}
       JOB: ${{ vars.PLAN_JOB }}
@@ -39,14 +38,16 @@ jobs:
 
       - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
         with:
-          project_id: ${{ vars.APP_PROJECT_ID }}
-          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          project_id: ${{ secrets.GCP_DEV_PROJECT_ID }}
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.PLAN_DISPATCHER_SA }}
 
       - uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3
 
       - name: Verify serving dev target, publish image and execute private plan job
         shell: bash
+        env:
+          APP_PROJECT: ${{ secrets.GCP_DEV_PROJECT_ID }}
         run: |
           set -euo pipefail
           : "${APP_PROJECT:?}" "${REGION:?}" "${REPOSITORY:?}" "${JOB:?}" "${SERVICE:?}"
@@ -78,8 +79,8 @@ jobs:
           docker push "$tag"
           digest="$(gcloud artifacts docker images describe "$tag" --format='value(image_summary.digest)')"
           [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]] || { echo 'Missing image digest.' >&2; exit 1; }
-          printf 'Commit: `%s`  \nImage digest: `%s`  \n[Private plan job executions](https://console.cloud.google.com/run/jobs/details/%s/%s/executions?project=%s)\n' \
-            "$GITHUB_SHA" "$digest" "$REGION" "$JOB" "$APP_PROJECT" >> "$GITHUB_STEP_SUMMARY"
+          printf 'Commit: `%s`  \nImage digest: `%s`  \n[Private plan job executions](https://console.cloud.google.com/run/jobs/details/%s/%s/executions) (select the CTB dev app project)\n' \
+            "$GITHUB_SHA" "$digest" "$REGION" "$JOB" >> "$GITHUB_STEP_SUMMARY"
           gcloud run jobs update "$JOB" --project="$APP_PROJECT" --region="$REGION" \
             --image="$image@$digest" --command=python \
             --args="-m,ctb.dev_migration_plan,$CONNECTION,$DATABASE,$ACCOUNT" \

@@ -143,13 +143,17 @@ dedicated plan job are the only intended GCP changes.
    and `iam.serviceAccounts.actAs` on **only** its runtime account. The
    dispatcher does not need MySQL credentials. Give authorized operators
    private access to job executions and logs.
-4. In **Settings → Environments**, create `ctb-dev-plan`, restrict deployment
-   branches to `dev`, and set these **environment variables** (no DB passwords):
+4. The workflow reads two existing **repository Actions secrets**:
+   `GCP_DEV_PROJECT_ID` (the dev App Engine project ID) and
+   `WORKLOAD_IDENTITY_PROVIDER` (the full provider resource name).
+   In **Settings → Environments**, create `ctb-dev-plan`, restrict deployment
+   branches to `dev`, and set these eight **environment variables**. Do not
+   copy the `dev` deployment secrets or add a database password to GitHub.
 
    | Variables | Values |
    |---|---|
-   | `WIF_PROVIDER`, `PLAN_DISPATCHER_SA` | Full WIF provider resource name and dispatcher service-account email |
-   | `APP_PROJECT_ID`, `GAE_SERVICE` | Verified dev App Engine project ID and serving service name |
+   | `PLAN_DISPATCHER_SA` | Dedicated dispatcher service-account email |
+   | `GAE_SERVICE` | Serving App Engine service name in the dev app project |
    | `RUN_REGION`, `AR_REPOSITORY`, `PLAN_JOB` | Region, Docker repository ID and Cloud Run Job name (not URLs) |
    | `SQL_CONNECTION_NAME`, `SQL_DATABASE` | Approved `project:region:instance` (may belong to a different project) and CTB database name |
    | `SQL_READONLY_ACCOUNT` | Exact result of MySQL `CURRENT_USER()` for the approved planner, including its host, e.g. `ctb_plan@%` |
@@ -159,8 +163,9 @@ dedicated plan job are the only intended GCP changes.
    `dev` alone is not enough: include the workflow on `main` through the
    normal release/review process. Then go to **Actions → Plan CTB dev database
    migration → Run workflow → Branch: dev**. Other branches are skipped.
-   Open the private executions link in the run summary and select the matching
-   execution to read the plan. A successful run with pending migrations is
+   Open the private executions link in the run summary with the CTB dev app
+   project selected in the Cloud Console, then open the matching execution's
+   logs to read the plan. A successful run with pending migrations is
    expected; it does not authorize applying them.
 
 Container checks are not permission to migrate or deploy a shared tier. First
