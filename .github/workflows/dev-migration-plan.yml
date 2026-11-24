@@ -1,0 +1,87 @@
+name: Plan CTB dev database migration
+
+on: workflow_dispatch
+
+permissions: {}
+
+concurrency:
+  group: ctb-dev-migration-plan
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    environment: ctb-dev-plan
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      REGION: ${{ vars.RUN_REGION }}
+      REPOSITORY: ${{ vars.AR_REPOSITORY }}
+      JOB: ${{ vars.PLAN_JOB }}
+      SERVICE: ${{ vars.GAE_SERVICE }}
+      CONNECTION: ${{ vars.SQL_CONNECTION_NAME }}
+      DATABASE: ${{ vars.SQL_DATABASE }}
+      ACCOUNT: ${{ vars.SQL_READONLY_ACCOUNT }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Build the selected commit without runner credentials
+        run: |
+          git archive --format=tar "$GITHUB_SHA" | docker build --tag ctb-plan:local -
+          docker run --rm ctb-plan:local python -m pip check
+          docker run --rm ctb-plan:local python -m unittest ctb.test_dev_migration_plan
+
+      - uses: google-github-actions/auth@7c6bc770dae815cd3e89ee6cdf493a5fab2cc093 # v3
+        with:
+          project_id: ${{ secrets.GCP_DEV_PROJECT_ID }}
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.PLAN_DISPATCHER_SA }}
+
+      - uses: google-github-actions/setup-gcloud@aa5489c8933f4cc7a4f7d45035b3b1440c9c10db # v3
+
+      - name: Verify serving dev target, publish image and execute private plan job
+        shell: bash
+        env:
+          APP_PROJECT: ${{ secrets.GCP_DEV_PROJECT_ID }}
+        run: |
+          set -euo pipefail
+          : "${APP_PROJECT:?}" "${REGION:?}" "${REPOSITORY:?}" "${JOB:?}" "${SERVICE:?}"
+          : "${CONNECTION:?}" "${DATABASE:?}" "${ACCOUNT:?}"
+          # gcloud's --args is comma-delimited; only accept plain target identifiers.
+          [[ "$CONNECTION" =~ ^[a-z0-9.:-]+:[a-z0-9-]+:[a-z0-9-]+$ &&
+             "$DATABASE" =~ ^[A-Za-z0-9_-]+$ &&
+             "$ACCOUNT" =~ ^[A-Za-z0-9_.-]+@[A-Za-z0-9_.%/-]+$ ]] ||
+            { echo 'Invalid target identifiers in ctb-dev-plan.' >&2; exit 1; }
+          versions="$(gcloud app versions list --project="$APP_PROJECT" --service="$SERVICE" \
+            --hide-no-traffic --format='value(version.id)')"
+          [[ -n "$versions" ]] || { echo 'No serving version found.' >&2; exit 1; }
+          while IFS= read -r version; do
+            attached="$(gcloud app versions describe "$version" --project="$APP_PROJECT" --service="$SERVICE" \
+              --format='value(betaSettings.cloud_sql_instances)')"
+            IFS=',' read -r -a connections <<< "$attached"
+            matched=false
+            for entry in "${connections[@]}"; do
+              [[ "${entry%%=*}" != "$CONNECTION" ]] || matched=true
+            done
+            if [[ "$matched" != true ]]; then echo 'Serving Cloud SQL attachment mismatch.' >&2; exit 1; fi
+          done <<< "$versions"
+
+          host="$REGION-docker.pkg.dev"
+          image="$host/$APP_PROJECT/$REPOSITORY/ctb-plan"
+          tag="$image:$GITHUB_SHA-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+          gcloud auth configure-docker "$host" --quiet
+          docker tag ctb-plan:local "$tag"
+          docker push "$tag"
+          digest="$(gcloud artifacts docker images describe "$tag" --format='value(image_summary.digest)')"
+          [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]] || { echo 'Missing image digest.' >&2; exit 1; }
+          printf 'Commit: `%s`  \nImage digest: `%s`  \n[Private plan job executions](https://console.cloud.google.com/run/jobs/details/%s/%s/executions) (select the CTB dev app project)\n' \
+            "$GITHUB_SHA" "$digest" "$REGION" "$JOB" >> "$GITHUB_STEP_SUMMARY"
+          gcloud run jobs update "$JOB" --project="$APP_PROJECT" --region="$REGION" \
+            --image="$image@$digest" --command=python \
+            --args="-m,ctb.dev_migration_plan,$CONNECTION,$DATABASE,$ACCOUNT" \
+            --tasks=1 --parallelism=1 --max-retries=0 --task-timeout=10m --execute-now --wait --quiet
