@@ -128,13 +128,21 @@ planner job, never a shared job or one with a write-capable identity.
    branches to `dev`, and set these eight **environment variables**. Do not
    copy the `dev` deployment secrets or add a database password to GitHub.
 
-   | Variables | Values |
-   |---|---|
-   | `PLAN_DISPATCHER_SA` | Dedicated dispatcher service-account email |
-   | `GAE_SERVICE` | Serving App Engine service name in the dev app project |
-   | `RUN_REGION`, `AR_REPOSITORY`, `PLAN_JOB` | Region, Docker repository ID and Cloud Run Job name (not URLs) |
-   | `SQL_CONNECTION_NAME`, `SQL_DATABASE` | Approved `project:region:instance` (may belong to a different project) and CTB database name |
-   | `SQL_READONLY_ACCOUNT` | Exact result of MySQL `CURRENT_USER()` for the approved planner, including its host, e.g. `ctb_plan@%` |
+   | Environment variable | Where to get the value | Does another CTB workflow already supply it? |
+   |---|---|---|
+   | `GAE_SERVICE` | **App Engine → Services** in the dev app project: use the service receiving CTB dev traffic. | Implicit, not a variable: `app.template.yaml` omits `service:`, so the deployment targets `default`. Confirm it is the serving service. |
+   | `SQL_CONNECTION_NAME` | On that service's serving version, identify its Cloud SQL attachment. In **Cloud SQL → instance → Overview**, copy the **Connection name** (`project:region:instance`). | Closest match: the `dev` secret `CLOUD_SQL_INSTANCES` supplies the attachments. The planner needs **one** approved connection, not the whole list. |
+   | `SQL_DATABASE` | Ask the dev config owner for the effective CTB `DATABASE_NAME` on that instance. Enter the schema name only, not the instance or project ID. | The deployment writes `secrets.ENV_FILE` to `.env`; CTB reads `DATABASE_NAME`. It is not a standalone Actions variable. Do not copy or print the file. |
+   | `PLAN_JOB` | **Cloud Run → Jobs** in the dev app project: use the exact name of the dedicated CTB planner job, not a service name or URL. | No equivalent; the deploy workflow targets an App Engine service, not a Cloud Run Job. |
+   | `RUN_REGION` | Use the **Region** shown for that `PLAN_JOB` in **Cloud Run → Jobs**. | No equivalent; do not infer it from the Cloud SQL connection or App Engine location. |
+   | `AR_REPOSITORY` | **Artifact Registry → Repositories** in the dev app project: use the approved Docker repository's name in `RUN_REGION`, not the image URL. | No equivalent in the deploy workflow. |
+   | `PLAN_DISPATCHER_SA` | **IAM & Admin → Service Accounts**: use the email of the dedicated dispatcher that the planner's GitHub WIF identity is allowed to impersonate. | `SERVICE_ACCOUNT` is the deployer; `APP_SERVICE_ACCOUNT` runs the web app. Neither is the planner dispatcher. |
+   | `SQL_READONLY_ACCOUNT` | Have the DB owner connect as the approved planner MySQL login and run `SELECT CURRENT_USER();`. Enter its exact `user@host` result, not a password. | No equivalent. The web app's `DATABASE_USER` and GCP service accounts are not this login. |
+
+   The `ctb-dev-plan` environment does not inherit `dev` environment secrets.
+   GitHub does not reveal their saved values. If a planner-specific resource
+   cannot be identified, ask its owner rather than substituting a deployment
+   resource.
 
 2. GitHub requires the `workflow_dispatch` file to be present on the repository's
    **default branch (`main`)** to register the workflow. Landing this PR on
