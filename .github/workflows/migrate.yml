@@ -54,14 +54,71 @@ jobs:
       - name: Build image
         run: docker build -t ctb-migrate .
 
-      - name: Run migrations
+      - id: backup
+        name: Back up database
+        env:
+          INSTANCE: ${{ secrets.CLOUD_SQL_INSTANCES }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
         run: |
+          DESCRIPTION="pre-migrate run ${{ github.run_id }} (${GITHUB_SHA::7})"
+          echo "description=$DESCRIPTION" >> "$GITHUB_OUTPUT"
+          gcloud sql backups create \
+            --instance="${INSTANCE##*:}" \
+            --project="$PROJECT_ID" \
+            --description="$DESCRIPTION"
+          BACKUP_ID=$(gcloud sql backups list \
+            --instance="${INSTANCE##*:}" \
+            --project="$PROJECT_ID" \
+            --filter="description='$DESCRIPTION'" \
+            --limit=1 \
+            --format="value(id)")
+          echo "id=$BACKUP_ID" >> "$GITHUB_OUTPUT"
+
+      - id: migrate
+        name: Run migrations
+        run: |
+          set -o pipefail
           docker run --rm \
             -v /cloudsql:/cloudsql \
             -v "$PWD/.env:/app/.env:ro" \
             ctb-migrate \
-            sh -c "python3 manage.py migrate --noinput --settings=ctb.settings && python3 manage.py showmigrations --settings=ctb.settings"
+            sh -c "python3 manage.py migrate --noinput --settings=ctb.settings && python3 manage.py showmigrations --settings=ctb.settings" \
+            2>&1 | tee migrate.log
 
       - name: Cloud SQL Auth Proxy logs
         if: always()
         run: cat proxy.log || true
+
+      - name: Summary
+        if: always()
+        env:
+          BACKUP_ID: ${{ steps.backup.outputs.id }}
+          BACKUP_DESCRIPTION: ${{ steps.backup.outputs.description }}
+          BACKUP_OUTCOME: ${{ steps.backup.outcome }}
+          MIGRATE_OUTCOME: ${{ steps.migrate.outcome }}
+          TARGET_ENV: ${{ inputs.environment }}
+        run: |
+          {
+            echo "## Django migrations"
+            echo "| | |"
+            echo "|---|---|"
+            echo "| Environment | \`${TARGET_ENV}\` |"
+            echo "| Branch | \`${GITHUB_REF_NAME}\` |"
+            echo "| Commit | \`${GITHUB_SHA::7}\` |"
+            echo "| Triggered by | @${GITHUB_ACTOR} |"
+            echo "| Cloud SQL Proxy | \`${CLOUD_SQL_PROXY_VERSION}\` |"
+            echo "| Backup | ${BACKUP_OUTCOME:-not run} |"
+            echo "| Backup ID | \`${BACKUP_ID:-n/a}\` |"
+            echo "| Backup description | ${BACKUP_DESCRIPTION:-n/a} |"
+            echo "| Migration result | ${MIGRATE_OUTCOME:-not run} |"
+            echo "| Finished | $(date '+%Y-%m-%d %H:%M:%S %Z') |"
+            if [ -f migrate.log ]; then
+              echo
+              echo "<details><summary>Migration output</summary>"
+              echo
+              echo '```'
+              cat migrate.log
+              echo '```'
+              echo "</details>"
+            fi
+          } >> "$GITHUB_STEP_SUMMARY"
